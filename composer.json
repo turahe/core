@@ -1,0 +1,20 @@
+{
+    "name": "turahe/core",
+    "description": "",
+    "require": {
+        "soundasleep/html2text": "~1.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": ""
+        }
+    }
+}

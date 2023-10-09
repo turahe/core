@@ -1,0 +1,17 @@
+{
+    "name": "Core",
+    "alias": "core",
+    "description": "CORE MODULE - DO NOT DISABLE",
+    "keywords": [],
+    "priority": 10000,
+    "providers": [
+        "Modules\\Core\\Providers\\CoreServiceProvider",
+        "Modules\\Core\\Providers\\UpdaterServiceProvider",
+        "Modules\\Core\\Providers\\SettingsServiceProvider",
+        "Modules\\Core\\Providers\\PurifierServiceProvider",
+        "Modules\\Core\\Providers\\OAuthServiceProvider",
+        "Modules\\Core\\Providers\\VoIPServiceProvider",
+        "Modules\\Core\\Providers\\ReCaptchaServiceProvider"
+    ],
+    "files": []
+}
