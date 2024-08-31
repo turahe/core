@@ -67,7 +67,7 @@ class DomainExtractTest extends TestCase
         $this->assertEquals($totalMatchesWithSubfolder, $totalTlds);
 
         // Without https test
-        $this->assertEquals(Domain::extractFromUrl('http://crm.concordcrm.com'), 'concordcrm.com');
-        $this->assertEquals(Domain::extractFromUrl('crm.concordcrm.com'), 'concordcrm.com');
+        $this->assertEquals(Domain::extractFromUrl('http://crm.wach.id'), 'wach.id');
+        $this->assertEquals(Domain::extractFromUrl('crm.wach.id'), 'wach.id');
     }
 }

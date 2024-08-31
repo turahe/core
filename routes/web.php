@@ -10,22 +10,22 @@
  *
  */
 
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\VerifyCsrfToken;
-use Modules\Core\Http\Controllers\PrivacyPolicy;
-use Modules\Core\Http\Controllers\OAuthController;
-use Modules\Core\Http\Controllers\StyleController;
-use Modules\Core\Http\Controllers\ScriptController;
-use Modules\Core\Http\Controllers\MigrateController;
-use Modules\Core\Http\Controllers\MediaViewController;
-use Modules\Core\Http\Controllers\FilePermissionsError;
-use Modules\Core\Http\Controllers\ApplicationController;
-use Modules\Core\Http\Controllers\FinalizeUpdateController;
-use Modules\Core\Http\Controllers\UpdateDownloadController;
+use Turahe\Core\Http\Controllers\PrivacyPolicy;
+use Turahe\Core\Http\Controllers\OAuthController;
+use Turahe\Core\Http\Controllers\StyleController;
+use Turahe\Core\Http\Controllers\ScriptController;
+use Turahe\Core\Http\Controllers\MigrateController;
+use Turahe\Core\Http\Controllers\MediaViewController;
+use Turahe\Core\Http\Controllers\FilePermissionsError;
+use Turahe\Core\Http\Controllers\ApplicationController;
+use Turahe\Core\Http\Controllers\FinalizeUpdateController;
+use Turahe\Core\Http\Controllers\UpdateDownloadController;
 use Illuminate\Http\Middleware\CheckResponseForModifications;
-use Modules\Core\Http\Middleware\PreventRequestsWhenMigrationNeeded;
-use Modules\Core\Http\Middleware\PreventRequestsWhenUpdateNotFinished;
-use Modules\Core\Http\Controllers\SynchronizationGoogleWebhookController;
+use Turahe\Core\Http\Middleware\PreventRequestsWhenMigrationNeeded;
+use Turahe\Core\Http\Middleware\PreventRequestsWhenUpdateNotFinished;
+use Turahe\Core\Http\Controllers\SynchronizationGoogleWebhookController;
 
 Route::withoutMiddleware(CheckResponseForModifications::class)->group(function () {
     Route::get('/scripts/{script}', [ScriptController::class, 'show']);

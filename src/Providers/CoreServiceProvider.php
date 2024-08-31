@@ -54,7 +54,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->loadMigrationsFrom(__DIR__. './../Database/Migrations');
 
         $this->app['events']->subscribe(WorkflowEventsSubscriber::class);
         $this->app['events']->listen(RequestHandled::class, Workflows::processQueue(...));
@@ -102,13 +102,13 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'config/config.php'),
+            __DIR__. './../config/config.php',
             $this->moduleNameLower
         );
 
         foreach (['html_purifier', 'fields', 'settings', 'updater', 'synchronization'] as $config) {
             $this->mergeConfigFrom(
-                module_path($this->moduleName, "config/$config.php"),
+                __DIR__. './../config/$config.php',
                 $config
             );
         }
@@ -121,7 +121,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
 
-        $sourcePath = module_path($this->moduleName, 'resources/views');
+        $sourcePath = __DIR__. './../resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -135,7 +135,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $this->loadTranslationsFrom(module_path($this->moduleName, 'resources/lang'), $this->moduleNameLower);
+        $this->loadTranslationsFrom(__DIR__. './../resources/lang', $this->moduleNameLower);
     }
 
     /**

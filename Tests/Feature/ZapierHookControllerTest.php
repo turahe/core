@@ -27,7 +27,7 @@ class ZapierHookControllerTest extends TestCase
         $user = $this->signIn();
 
         $this->postJson('/api/zapier/hooks/events/create', [
-            'targetUrl' => $url = 'https://concordcrm.com',
+            'targetUrl' => $url = 'https://wach.id',
             'zapId'     => 123,
             'data'      => ['dummy-data' => 'dummy-value'],
         ])->assertCreated()
@@ -44,7 +44,7 @@ class ZapierHookControllerTest extends TestCase
         $this->signIn();
 
         $id = $this->postJson('/api/zapier/hooks/events/create', [
-            'targetUrl' => 'https://concordcrm.com',
+            'targetUrl' => 'https://wach.id',
             'zapId'     => 123,
             'data'      => ['dummy-data' => 'dummy-value'],
         ])->getData()->id;

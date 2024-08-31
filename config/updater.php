@@ -19,7 +19,7 @@ return [
     | Application current installed version.
     */
 
-    'version_installed' => \Modules\Core\Application::VERSION,
+    'version_installed' => \Turahe\Core\Application::VERSION,
 
     /*
     |--------------------------------------------------------------------------
@@ -27,8 +27,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'archive_url'         => env('UPDATER_ARCHIVE_URL', 'https://archive.concordcrm.com'),
-    'patches_archive_url' => env('PATCHES_ARCHIVE_URL', 'https://archive.concordcrm.com/patches'),
+    'archive_url'         => env('UPDATER_ARCHIVE_URL', 'https://archive.wach.id'),
+    'patches_archive_url' => env('PATCHES_ARCHIVE_URL', 'https://archive.wach.id/patches'),
     'purchase_key'        => env('PURCHASE_KEY', ''),
     'download_path'       => env('UPDATER_DOWNLOAD_PATH', storage_path('updater')),
 

@@ -373,7 +373,7 @@ return [
     | the favicons via https://realfavicongenerator.net/ and upload the .zip file
     | contents in /public/favicons.
     |
-    | More info: https://www.concordcrm.com/docs/favicon
+    | More info: https://www.wach.id/docs/favicon
     |
     */
     'favicon_enabled' => env('ENABLE_FAVICON', false),

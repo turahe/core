@@ -19,17 +19,17 @@ class ClickableUrlsTest extends TestCase
 {
     public function test_it_makes_urls_clickable()
     {
-        $formatted = Str::clickable('Test https://concordcrm.com Test');
+        $formatted = Str::clickable('Test https://wach.id Test');
 
-        $this->assertStringContainsString('<a href="https://concordcrm.com" rel="nofollow" target=\'_blank\'>https://concordcrm.com</a>', $formatted);
+        $this->assertStringContainsString('<a href="https://wach.id" rel="nofollow" target=\'_blank\'>https://wach.id</a>', $formatted);
     }
 
     public function test_it_makes_multiple_urls_clickable()
     {
-        $formatted = Str::clickable('Test https://concordcrm.com Test http://concordcrm.com');
+        $formatted = Str::clickable('Test https://wach.id Test http://wach.id');
 
-        $this->assertStringContainsString('<a href="https://concordcrm.com" rel="nofollow" target=\'_blank\'>https://concordcrm.com</a>', $formatted);
-        $this->assertStringContainsString('<a href="http://concordcrm.com" rel="nofollow" target=\'_blank\'>http://concordcrm.com</a>', $formatted);
+        $this->assertStringContainsString('<a href="https://wach.id" rel="nofollow" target=\'_blank\'>https://wach.id</a>', $formatted);
+        $this->assertStringContainsString('<a href="http://wach.id" rel="nofollow" target=\'_blank\'>http://wach.id</a>', $formatted);
     }
 
     public function test_it_makes_ftp_clickable()

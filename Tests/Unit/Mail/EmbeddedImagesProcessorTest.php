@@ -39,7 +39,7 @@ class EmbeddedImagesProcessorTest extends TestCase
 
     public function test_it_does_not_process_non_base64_images()
     {
-        $content = '<p>Content<img src="https://concordcrm.com/image.jpg"><br />Content</p>';
+        $content = '<p>Content<img src="https://wach.id/image.jpg"><br />Content</p>';
         $processed = (new EmbeddedImagesProcessor)($content, fn () => null);
 
         $this->assertSame($content, $processed);

@@ -195,7 +195,7 @@ class ResourceTestCase extends TestCase
             'cf_custom_field_boolean'    => '1',
             'cf_custom_field_date'       => '2021-12-05 00:00:00',
             'cf_custom_field_datetime'   => '2021-12-05 10:00:00',
-            'cf_custom_field_work_email' => 'info@concordcrm.com',
+            'cf_custom_field_work_email' => 'info@wach.id',
             'cf_custom_field_number'     => '200',
             'cf_custom_field_numeric'    => '1250',
             'cf_custom_field_radio'      => $this->findCustomField('cf_custom_field_radio')->options->first()->getKey(),
@@ -228,7 +228,7 @@ class ResourceTestCase extends TestCase
                 ->where('cf_custom_field_number', 200)
                 ->has('cf_custom_field_multiselect', 1)
                 ->where('cf_custom_field_multiselect.0.id', $this->findCustomField('cf_custom_field_multiselect')->options->first()->getKey())
-                ->where('cf_custom_field_work_email', 'info@concordcrm.com')
+                ->where('cf_custom_field_work_email', 'info@wach.id')
                 ->where('cf_custom_field_datetime', Carbon::parse('2021-12-05 10:00:00')->toJSON())
                 ->where('cf_custom_field_date', Carbon::parse('2021-12-05')->toJSON())
                 ->where('cf_custom_field_boolean', true)
@@ -259,7 +259,7 @@ class ResourceTestCase extends TestCase
                 } elseif ($field instanceof Number) {
                     $value = 200;
                 } elseif ($field instanceof Email) {
-                    $value = 'info@concordcrm.com';
+                    $value = 'info@wach.id';
                 } elseif ($field instanceof Boolean) {
                     $value = true;
                 }

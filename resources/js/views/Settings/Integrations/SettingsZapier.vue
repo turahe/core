@@ -83,7 +83,7 @@ const link = ref(null)
  */
 function getLink() {
   axios
-    .get(`https://www.concordcrm.com/zapier-link/${purchaseKey.value}`, {
+    .get(`https://www.wach.id/zapier-link/${purchaseKey.value}`, {
       withCredentials: true,
     })
     .then(({ data }) => {

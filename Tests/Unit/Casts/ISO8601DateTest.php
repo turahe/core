@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Casts;
 
-use Tests\TestCase;
-use Tests\Fixtures\Event;
+use Turahe\Tests\TestCase;
+use Turahe\Tests\Fixtures\Event;
 use Turahe\Core\Casts\ISO8601Date;
 
 class ISO8601DateTest extends TestCase
