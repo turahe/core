@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Company;
-use Modules\Contacts\Models\Contact;
-use Modules\Core\Database\Seeders\PermissionsSeeder;
+use Turahe\Contacts\Models\Company;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Database\Seeders\PermissionsSeeder;
 
 class AssociationsSyncControllerTest extends TestCase
 {

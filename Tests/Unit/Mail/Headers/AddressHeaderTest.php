@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Mail\Headers;
+namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Tests\TestCase;
-use Modules\Core\Mail\Headers\AddressHeader;
+use Turahe\Core\Mail\Headers\AddressHeader;
 
 class AddressHeaderTest extends TestCase
 {

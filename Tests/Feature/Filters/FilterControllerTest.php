@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Filters;
+namespace Turahe\Core\Tests\Feature\Filters;
 
 use Tests\TestCase;
-use Modules\Core\Models\Filter;
+use Turahe\Core\Models\Filter;
 
 class FilterControllerTest extends TestCase
 {

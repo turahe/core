@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Fields;
+namespace Turahe\Core\Tests\Feature\Fields;
 
 use Tests\TestCase;
-use Modules\Core\Facades\Fields;
-use Modules\Core\Fields\CustomFieldService;
-use Modules\Core\Tests\Concerns\TestsCustomFields;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\CustomFieldService;
+use Turahe\Core\Tests\Concerns\TestsCustomFields;
 
 class CustomFieldControllerTest extends TestCase
 {

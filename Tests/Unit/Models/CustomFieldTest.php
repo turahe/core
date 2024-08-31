@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;
-use Modules\Core\Fields\Text;
-use Modules\Contacts\Models\Contact;
-use Modules\Core\Models\CustomField;
+use Turahe\Core\Fields\Text;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Models\CustomField;
 
 class CustomFieldTest extends TestCase
 {

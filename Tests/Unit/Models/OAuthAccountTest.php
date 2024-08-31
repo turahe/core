@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Crypt;
-use Modules\Core\Models\OAuthAccount;
-use Modules\Core\OAuth\AccessTokenProvider;
+use Turahe\Core\Models\OAuthAccount;
+use Turahe\Core\OAuth\AccessTokenProvider;
 
 class OAuthAccountTest extends TestCase
 {

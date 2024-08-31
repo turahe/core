@@ -10,21 +10,21 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Updater;
+namespace Turahe\Core\Tests\Feature\Updater;
 
 use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Modules\Core\Updater\Updater;
+use Turahe\Core\Updater\Updater;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Schema;
-use Modules\Core\Updater\Exceptions\PurchaseKeyUsedException;
-use Modules\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Modules\Core\Updater\Exceptions\InvalidPurchaseKeyException;
-use Modules\Core\Updater\Exceptions\HasWrongPermissionsException;
-use Modules\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
-use Modules\Core\Updater\Exceptions\MinPHPVersionRequirementException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyUsedException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
+use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
+use Turahe\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
+use Turahe\Core\Updater\Exceptions\MinPHPVersionRequirementException;
 
 /**
  * @group updater

@@ -10,14 +10,14 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Mail\Headers;
+namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Tests\TestCase;
-use Modules\Core\Mail\Headers\Header;
-use Modules\Core\Mail\Headers\IdHeader;
-use Modules\Core\Mail\Headers\DateHeader;
-use Modules\Core\Mail\Headers\AddressHeader;
-use Modules\Core\Mail\Headers\HeadersCollection;
+use Turahe\Core\Mail\Headers\Header;
+use Turahe\Core\Mail\Headers\IdHeader;
+use Turahe\Core\Mail\Headers\DateHeader;
+use Turahe\Core\Mail\Headers\AddressHeader;
+use Turahe\Core\Mail\Headers\HeadersCollection;
 
 class HeadersCollectionTest extends TestCase
 {

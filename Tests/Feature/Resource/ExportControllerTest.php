@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Modules\Core\Database\Seeders\PermissionsSeeder;
-use Modules\Core\Tests\Concerns\TestsImportAndExport;
+use Turahe\Core\Database\Seeders\PermissionsSeeder;
+use Turahe\Core\Tests\Concerns\TestsImportAndExport;
 
 class ExportControllerTest extends TestCase
 {

@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Resources;
+namespace Turahe\Core\Tests\Unit\Resources;
 
 use Tests\TestCase;
 use Tests\Fixtures\EventResource;
-use Modules\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Innoclapps;
 
 class ResourceTest extends TestCase
 {

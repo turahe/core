@@ -10,15 +10,15 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Criteria;
+namespace Turahe\Core\Tests\Unit\Criteria;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Source;
-use Modules\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Source;
+use Turahe\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Request;
-use Modules\Core\Criteria\RequestCriteria;
+use Turahe\Core\Criteria\RequestCriteria;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Modules\Core\Criteria\SearchByFirstNameAndLastNameCriteria;
+use Turahe\Core\Criteria\SearchByFirstNameAndLastNameCriteria;
 
 class RequestCriteriaTest extends TestCase
 {

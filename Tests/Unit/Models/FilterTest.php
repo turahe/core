@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
-use Modules\Users\Models\User;
-use Modules\Core\Models\Filter;
+use Turahe\Users\Models\User;
+use Turahe\Core\Models\Filter;
 use Illuminate\Support\Facades\Lang;
 
 class FilterTest extends TestCase

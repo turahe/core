@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Table;
+namespace Turahe\Core\Tests\Unit\Table;
 
 use Tests\TestCase;
 use Tests\Fixtures\EventTable;
-use Modules\Core\Resource\Http\ResourceRequest;
-use Modules\Core\Table\Exceptions\OrderByNonExistingColumnException;
+use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\Exceptions\OrderByNonExistingColumnException;
 
 class TableTest extends TestCase
 {

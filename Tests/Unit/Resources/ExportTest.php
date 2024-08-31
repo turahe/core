@@ -10,16 +10,16 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Resources;
+namespace Turahe\Core\Tests\Unit\Resources;
 
 use Tests\TestCase;
-use Modules\Core\Fields\Text;
-use Modules\Core\Facades\Fields;
-use Modules\Core\Fields\DateTime;
-use Modules\Core\Resource\Export;
-use Modules\Contacts\Models\Contact;
-use Modules\Core\Facades\Innoclapps;
-use Modules\Core\Export\Exceptions\InvalidExportTypeException;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\DateTime;
+use Turahe\Core\Resource\Export;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Export\Exceptions\InvalidExportTypeException;
 
 class ExportTest extends TestCase
 {

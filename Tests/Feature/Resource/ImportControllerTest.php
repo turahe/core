@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Core\Models\Import;
+use Turahe\Core\Models\Import;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Modules\Core\Database\Seeders\CountriesSeeder;
+use Turahe\Core\Database\Seeders\CountriesSeeder;
 
 class ImportControllerTest extends TestCase
 {

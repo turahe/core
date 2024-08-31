@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
-use Modules\Users\Models\User;
-use Modules\Core\Models\Import;
+use Turahe\Users\Models\User;
+use Turahe\Core\Models\Import;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 

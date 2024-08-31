@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Modules\Core\Database\Seeders\PermissionsSeeder;
-use Modules\Contacts\Resource\Contact\Contact as ContactResource;
+use Turahe\Core\Database\Seeders\PermissionsSeeder;
+use Turahe\Contacts\Resource\Contact\Contact as ContactResource;
 
 class SearchControllerTest extends TestCase
 {

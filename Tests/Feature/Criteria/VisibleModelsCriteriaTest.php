@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Criteria;
+namespace Turahe\Core\Tests\Feature\Criteria;
 
 use Tests\TestCase;
-use Modules\Users\Models\User;
-use Modules\Users\Models\Organization;
-use Modules\Core\Models\ModelVisibilityGroup;
-use Modules\Core\Criteria\VisibleModelsCriteria;
+use Turahe\Users\Models\User;
+use Turahe\Users\Models\Organization;
+use Turahe\Core\Models\ModelVisibilityGroup;
+use Turahe\Core\Criteria\VisibleModelsCriteria;
 
 class VisibleModelsCriteriaTest extends TestCase
 {

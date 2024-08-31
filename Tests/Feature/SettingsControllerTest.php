@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature;
+namespace Turahe\Core\Tests\Feature;
 
 use Tests\TestCase;
-use Modules\Core\Settings\DefaultSettings;
+use Turahe\Core\Settings\DefaultSettings;
 
 class SettingsControllerTest extends TestCase
 {

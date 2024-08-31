@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Tests\TestCase;
-use Modules\Core\ReCaptcha;
+use Turahe\Core\ReCaptcha;
 
 class ReCaptchaTest extends TestCase
 {

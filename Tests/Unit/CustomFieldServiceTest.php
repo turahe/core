@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Tests\TestCase;
-use Modules\Core\Facades\Fields;
+use Turahe\Core\Facades\Fields;
 use Illuminate\Support\Facades\Schema;
-use Modules\Core\Fields\CustomFieldService;
-use Modules\Core\Tests\Concerns\TestsCustomFields;
+use Turahe\Core\Fields\CustomFieldService;
+use Turahe\Core\Tests\Concerns\TestsCustomFields;
 
 class CustomFieldServiceTest extends TestCase
 {

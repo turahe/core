@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Workflow;
+namespace Turahe\Core\Tests\Feature\Workflow;
 
 use Tests\TestCase;
-use Modules\Core\Workflow\Workflows;
-use Modules\Activities\Models\ActivityType;
+use Turahe\Core\Workflow\Workflows;
+use Turahe\Activities\Models\ActivityType;
 
 class WorkflowTriggersControllerTest extends TestCase
 {

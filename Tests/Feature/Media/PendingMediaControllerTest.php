@@ -10,7 +10,7 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Media;
+namespace Turahe\Core\Tests\Feature\Media;
 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;

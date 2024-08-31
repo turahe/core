@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Contact;
-use Modules\Core\Database\Seeders\PermissionsSeeder;
-use Modules\Contacts\Resource\Contact\Contact as ContactResource;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Database\Seeders\PermissionsSeeder;
+use Turahe\Contacts\Resource\Contact\Contact as ContactResource;
 
 class GlobalSearchControllerTest extends TestCase
 {

@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Modules\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Contact;
 
 class TrashedControllerTest extends TestCase
 {

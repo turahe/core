@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Updater;
+namespace Turahe\Core\Tests\Feature\Updater;
 
 use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Modules\Core\Updater\Updater;
+use Turahe\Core\Updater\Updater;
 use Illuminate\Support\Facades\App;
 
 /**

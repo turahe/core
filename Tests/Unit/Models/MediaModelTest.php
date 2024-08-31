@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
 use Tests\Fixtures\Event;
-use Modules\Core\Models\Media;
+use Turahe\Core\Models\Media;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 

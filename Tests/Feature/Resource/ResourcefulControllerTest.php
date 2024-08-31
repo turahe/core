@@ -10,17 +10,17 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
 use Tests\Fixtures\Event;
-use Modules\Core\Fields\Text;
-use Modules\Core\Fields\Email;
-use Modules\Deals\Models\Deal;
-use Modules\Core\Facades\Fields;
-use Modules\Contacts\Models\Source;
-use Modules\Contacts\Models\Company;
-use Modules\Contacts\Models\Contact;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Fields\Email;
+use Turahe\Deals\Models\Deal;
+use Turahe\Core\Facades\Fields;
+use Turahe\Contacts\Models\Source;
+use Turahe\Contacts\Models\Company;
+use Turahe\Contacts\Models\Contact;
 
 class ResourcefulControllerTest extends TestCase
 {

@@ -10,14 +10,14 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\MailableTemplate;
+namespace Turahe\Core\Tests\Feature\MailableTemplate;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\File;
-use Modules\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Innoclapps;
 use Tests\Fixtures\SampleMailTemplate;
-use Modules\Core\Models\MailableTemplate;
-use Modules\Core\Facades\MailableTemplates;
+use Turahe\Core\Models\MailableTemplate;
+use Turahe\Core\Facades\MailableTemplates;
 
 class MailableControllerTest extends TestCase
 {

@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature;
+namespace Turahe\Core\Tests\Feature;
 
 use Tests\TestCase;
-use Modules\Core\Models\Dashboard;
+use Turahe\Core\Models\Dashboard;
 
 class DashboardControllerTest extends TestCase
 {

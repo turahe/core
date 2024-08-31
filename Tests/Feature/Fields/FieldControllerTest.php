@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Fields;
+namespace Turahe\Core\Tests\Feature\Fields;
 
 use Tests\TestCase;
-use Modules\Core\Fields\Text;
-use Modules\Core\Facades\Fields;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Facades\Fields;
 
 class FieldControllerTest extends TestCase
 {

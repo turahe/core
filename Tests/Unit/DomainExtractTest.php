@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Tests\TestCase;
-use Modules\Core\Domain;
+use Turahe\Core\Domain;
 
 class DomainExtractTest extends TestCase
 {

@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Carbon\Carbon;
 use Tests\TestCase;
-use Modules\Core\ProvidesBetweenArgumentsViaString;
+use Turahe\Core\ProvidesBetweenArgumentsViaString;
 
 class ProvidesBetweenArgumentsViaStringTest extends TestCase
 {

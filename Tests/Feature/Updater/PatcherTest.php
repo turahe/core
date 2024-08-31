@@ -10,17 +10,17 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Updater;
+namespace Turahe\Core\Tests\Feature\Updater;
 
 use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Modules\Core\Updater\Patch;
-use Modules\Core\Updater\Patcher;
+use Turahe\Core\Updater\Patch;
+use Turahe\Core\Updater\Patcher;
 use Symfony\Component\Finder\Finder;
-use Modules\Core\Updater\Exceptions\UpdaterException;
-use Modules\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Modules\Core\Updater\Exceptions\InvalidPurchaseKeyException;
-use Modules\Core\Updater\Exceptions\HasWrongPermissionsException;
+use Turahe\Core\Updater\Exceptions\UpdaterException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
+use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 
 /**
  * @group updater

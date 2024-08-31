@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
-use Modules\Core\Models\CustomField;
-use Modules\Core\Models\CustomFieldOption;
+use Turahe\Core\Models\CustomField;
+use Turahe\Core\Models\CustomFieldOption;
 
 class CustomFieldOptionTest extends TestCase
 {

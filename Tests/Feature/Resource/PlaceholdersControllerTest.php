@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
 use Illuminate\Support\Carbon;
-use Modules\Core\Facades\Format;
-use Modules\Contacts\Models\Company;
-use Modules\Contacts\Models\Contact;
+use Turahe\Core\Facades\Format;
+use Turahe\Contacts\Models\Company;
+use Turahe\Contacts\Models\Contact;
 
 class PlaceholdersControllerTest extends TestCase
 {

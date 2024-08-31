@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Updater;
+namespace Turahe\Core\Tests\Feature\Updater;
 
 use Tests\TestCase;
 use Illuminate\Support\Carbon;
-use Modules\Core\Updater\Patch;
+use Turahe\Core\Updater\Patch;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**

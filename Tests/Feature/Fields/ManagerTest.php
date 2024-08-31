@@ -10,18 +10,18 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Fields;
+namespace Turahe\Core\Tests\Feature\Fields;
 
 use Tests\TestCase;
-use Modules\Core\Fields\Text;
-use Modules\Core\Fields\User;
-use Modules\Core\Table\Column;
-use Modules\Core\Facades\Fields;
-use Modules\Contacts\Models\Contact;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Fields\User;
+use Turahe\Core\Table\Column;
+use Turahe\Core\Facades\Fields;
+use Turahe\Contacts\Models\Contact;
 use Tests\Fixtures\SampleTableColumn;
 use Illuminate\Support\Facades\Notification;
 use Tests\Fixtures\SampleDatabaseNotification;
-use Modules\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class ManagerTest extends TestCase
 {

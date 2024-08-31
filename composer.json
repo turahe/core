@@ -62,5 +62,10 @@
         "psr-4": {
             "Turahe\\Core\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Turahe\\Core\\Tests\\": "Tests"
+        }
     }
 }

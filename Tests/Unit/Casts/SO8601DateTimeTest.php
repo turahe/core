@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Casts;
+namespace Turahe\Core\Tests\Unit\Casts;
 
 use Tests\TestCase;
 use Tests\Fixtures\Event;
-use Modules\Core\Casts\ISO8601DateTime;
+use Turahe\Core\Casts\ISO8601DateTime;
 
 class SO8601DateTimeTest extends TestCase
 {

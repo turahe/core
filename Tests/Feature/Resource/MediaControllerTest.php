@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Resource;
+namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
-use Modules\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Storage;
 
 class MediaControllerTest extends TestCase

@@ -10,14 +10,14 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Zapier;
+namespace Turahe\Core\Tests\Unit\Zapier;
 
 use Tests\TestCase;
 use Illuminate\Http\Client\Request;
-use Modules\Core\Models\ZapierHook;
+use Turahe\Core\Models\ZapierHook;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
-use Modules\Core\Zapier\ProcessZapHookAction;
+use Turahe\Core\Zapier\ProcessZapHookAction;
 
 class ProcessZapHookActionTest extends TestCase
 {

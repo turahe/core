@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Updater;
+namespace Turahe\Core\Tests\Feature\Updater;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use GuzzleHttp\HandlerStack;
-use Modules\Core\Updater\Patcher;
-use Modules\Core\Updater\Updater;
+use Turahe\Core\Updater\Patcher;
+use Turahe\Core\Updater\Updater;
 use GuzzleHttp\Handler\MockHandler;
 use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;

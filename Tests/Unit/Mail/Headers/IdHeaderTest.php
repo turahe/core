@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Mail\Headers;
+namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Tests\TestCase;
-use Modules\Core\Mail\Headers\IdHeader;
+use Turahe\Core\Mail\Headers\IdHeader;
 
 class IdHeaderTest extends TestCase
 {

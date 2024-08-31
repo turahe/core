@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Tests\TestCase;
-use Modules\Core\LogReader;
+use Turahe\Core\LogReader;
 use Illuminate\Support\Facades\Log;
 
 class LogReaderTest extends TestCase

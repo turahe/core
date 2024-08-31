@@ -10,7 +10,7 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Macros\Str;
+namespace Turahe\Core\Tests\Unit\Macros\Str;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;

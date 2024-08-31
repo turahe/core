@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Filters;
+namespace Turahe\Core\Tests\Feature\Filters;
 
 use Tests\TestCase;
 use Tests\Fixtures\Event;
-use Modules\Core\Filters\Select;
-use Modules\Core\Tests\Concerns\TestsFilters;
+use Turahe\Core\Filters\Select;
+use Turahe\Core\Tests\Concerns\TestsFilters;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class SelectFilterTest extends TestCase

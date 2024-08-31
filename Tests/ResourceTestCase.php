@@ -10,30 +10,30 @@
  *
  */
 
-namespace Modules\Core\Tests;
+namespace Turahe\Core\Tests;
 
 use Tests\TestCase;
-use Modules\Core\Fields\Date;
+use Turahe\Core\Fields\Date;
 use Illuminate\Support\Carbon;
-use Modules\Core\Fields\Email;
-use Modules\Core\Models\Model;
-use Modules\Core\Table\Column;
-use Modules\Core\Fields\Number;
-use Modules\Core\Models\Import;
-use Modules\Core\Facades\Fields;
-use Modules\Core\Fields\Boolean;
-use Modules\Core\Fields\Numeric;
+use Turahe\Core\Fields\Email;
+use Turahe\Core\Models\Model;
+use Turahe\Core\Table\Column;
+use Turahe\Core\Fields\Number;
+use Turahe\Core\Models\Import;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\Boolean;
+use Turahe\Core\Fields\Numeric;
 use Illuminate\Http\Testing\File;
-use Modules\Core\Fields\DateTime;
-use Modules\Core\Fields\Timezone;
-use Modules\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\DateTime;
+use Turahe\Core\Fields\Timezone;
+use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Support\Facades\Storage;
 use Database\Seeders\CustomFieldsSeeder;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Modules\Core\Resource\Http\ResourceRequest;
-use Modules\Core\Tests\Concerns\TestsCustomFields;
-use Modules\Core\Tests\Concerns\TestsImportAndExport;
-use Modules\Core\Contracts\Resources\AcceptsCustomFields;
+use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Tests\Concerns\TestsCustomFields;
+use Turahe\Core\Tests\Concerns\TestsImportAndExport;
+use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
 
 class ResourceTestCase extends TestCase
 {

@@ -10,7 +10,7 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Macros\Arr;
+namespace Turahe\Core\Tests\Unit\Macros\Arr;
 
 use Tests\TestCase;
 use Illuminate\Support\Arr;

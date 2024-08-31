@@ -10,10 +10,10 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Mail;
+namespace Turahe\Core\Tests\Unit\Mail;
 
 use Tests\TestCase;
-use Modules\Core\Mail\EmbeddedImagesProcessor;
+use Turahe\Core\Mail\EmbeddedImagesProcessor;
 
 class EmbeddedImagesProcessorTest extends TestCase
 {

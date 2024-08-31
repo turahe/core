@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Concerns;
+namespace Turahe\Core\Tests\Concerns;
 
 use Tests\Fixtures\Event;
 use Illuminate\Support\Facades\Request;
-use Modules\Core\Criteria\FilterRulesCriteria;
+use Turahe\Core\Criteria\FilterRulesCriteria;
 
 trait TestsFilters
 {

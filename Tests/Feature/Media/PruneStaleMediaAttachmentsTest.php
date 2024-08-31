@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Media;
+namespace Turahe\Core\Tests\Feature\Media;
 
 use Tests\TestCase;
 use Illuminate\Support\Carbon;
-use Modules\Core\Models\Media;
-use Modules\Core\Media\PruneStaleMediaAttachments;
+use Turahe\Core\Models\Media;
+use Turahe\Core\Media\PruneStaleMediaAttachments;
 
 class PruneStaleMediaAttachmentsTest extends TestCase
 {

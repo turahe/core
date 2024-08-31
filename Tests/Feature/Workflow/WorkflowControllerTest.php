@@ -10,14 +10,14 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Workflow;
+namespace Turahe\Core\Tests\Feature\Workflow;
 
 use Tests\TestCase;
-use Modules\Users\Models\User;
-use Modules\Core\Models\Workflow;
-use Modules\Deals\Models\Pipeline;
+use Turahe\Users\Models\User;
+use Turahe\Core\Models\Workflow;
+use Turahe\Deals\Models\Pipeline;
 use Illuminate\Support\Facades\Auth;
-use Modules\Core\Workflow\Workflows;
+use Turahe\Core\Workflow\Workflows;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\Fixtures\Workflows\CreateDealAction;
 use Tests\Fixtures\Workflows\ContactCreatedTrigger;

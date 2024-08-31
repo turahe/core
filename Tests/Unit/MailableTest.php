@@ -10,13 +10,13 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\File;
 use Tests\Fixtures\SampleMailTemplate;
-use Modules\Core\Models\MailableTemplate;
-use Modules\Core\Facades\MailableTemplates;
+use Turahe\Core\Models\MailableTemplate;
+use Turahe\Core\Facades\MailableTemplates;
 
 class MailableTest extends TestCase
 {

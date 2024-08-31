@@ -10,7 +10,7 @@
  *
  */
 
-namespace Modules\Core\Tests\Concerns;
+namespace Turahe\Core\Tests\Concerns;
 
 trait TestsImportAndExport
 {

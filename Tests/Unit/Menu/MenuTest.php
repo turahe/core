@@ -10,12 +10,12 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Menu;
+namespace Turahe\Core\Tests\Unit\Menu;
 
 use Tests\TestCase;
-use Modules\Core\Facades\Menu;
-use Modules\Core\Menu\MenuItem;
-use Modules\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Menu;
+use Turahe\Core\Menu\MenuItem;
+use Turahe\Core\Facades\Innoclapps;
 
 class MenuTest extends TestCase
 {

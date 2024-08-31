@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Models;
+namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
-use Modules\Users\Models\User;
-use Modules\Core\Models\ZapierHook;
+use Turahe\Users\Models\User;
+use Turahe\Core\Models\ZapierHook;
 
 class ZapierHookTest extends TestCase
 {

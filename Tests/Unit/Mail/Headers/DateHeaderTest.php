@@ -10,11 +10,11 @@
  *
  */
 
-namespace Modules\Core\Tests\Unit\Mail\Headers;
+namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Carbon\Carbon;
 use Tests\TestCase;
-use Modules\Core\Mail\Headers\DateHeader;
+use Turahe\Core\Mail\Headers\DateHeader;
 
 class DateHeaderTest extends TestCase
 {

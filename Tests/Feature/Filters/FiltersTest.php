@@ -10,15 +10,15 @@
  *
  */
 
-namespace Modules\Core\Tests\Feature\Filters;
+namespace Turahe\Core\Tests\Feature\Filters;
 
 use Tests\TestCase;
-use Modules\Core\Filters\Date;
+use Turahe\Core\Filters\Date;
 use Tests\Fixtures\EventTable;
-use Modules\Core\Table\TableSettings;
+use Turahe\Core\Table\TableSettings;
 use Illuminate\Support\Facades\Request;
-use Modules\Core\Tests\Concerns\TestsFilters;
-use Modules\Core\QueryBuilder\Exceptions\FieldValueMustBeArrayException;
+use Turahe\Core\Tests\Concerns\TestsFilters;
+use Turahe\Core\QueryBuilder\Exceptions\FieldValueMustBeArrayException;
 
 class FiltersTest extends TestCase
 {

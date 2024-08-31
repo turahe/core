@@ -10,9 +10,9 @@
  *
  */
 
-namespace Modules\Core\Tests\Concerns;
+namespace Turahe\Core\Tests\Concerns;
 
-use Modules\Core\Facades\Fields;
+use Turahe\Core\Facades\Fields;
 
 trait TestsCustomFields
 {
