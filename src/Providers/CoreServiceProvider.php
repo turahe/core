@@ -52,9 +52,9 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerTranslations();
-        $this->registerConfig();
-        $this->registerViews();
-        $this->loadMigrationsFrom(__DIR__. './../Database/Migrations');
+//        $this->registerConfig();
+//        $this->registerViews();
+//        $this->loadMigrationsFrom(__DIR__. './../Database/Migrations');
 
         $this->app['events']->subscribe(WorkflowEventsSubscriber::class);
         $this->app['events']->listen(RequestHandled::class, Workflows::processQueue(...));
@@ -92,8 +92,8 @@ class CoreServiceProvider extends ServiceProvider
         ]);
 
         $this->app->singleton('timezone', \Turahe\Core\Timezone::class);
-        $this->app->when(Migration::class)->needs(Migrator::class)->give(fn () => $this->app['migrator']);
-        $this->app->register(RouteServiceProvider::class);
+//        $this->app->when(Migration::class)->needs(Migrator::class)->give(fn () => $this->app['migrator']);
+//        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -102,13 +102,13 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            __DIR__. './../config/config.php',
+            __DIR__. './../../../config/config.php',
             $this->moduleNameLower
         );
 
         foreach (['html_purifier', 'fields', 'settings', 'updater', 'synchronization'] as $config) {
             $this->mergeConfigFrom(
-                __DIR__. './../config/$config.php',
+                __DIR__. './../../../config/$config.php',
                 $config
             );
         }
