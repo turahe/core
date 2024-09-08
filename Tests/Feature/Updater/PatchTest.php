@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Updater;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Updater\Patch;
 
 /**

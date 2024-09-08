@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\MailableTemplate;
 
 use Illuminate\Support\Facades\File;
 use Tests\Fixtures\SampleMailTemplate;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Facades\MailableTemplates;
 use Turahe\Core\Models\MailableTemplate;

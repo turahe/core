@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Unit;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Domain;
 
 class DomainExtractTest extends TestCase

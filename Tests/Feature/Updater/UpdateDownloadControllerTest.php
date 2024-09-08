@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Updater;
 
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\App;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Updater\Patcher;
 
 /**

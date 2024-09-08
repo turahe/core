@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Models;
 
 use Illuminate\Support\Facades\Lang;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Filter;
 use Turahe\Users\Models\User;
 

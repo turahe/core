@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Macros\Str;
 
 use Illuminate\Support\Str;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 
 class IsBase64EncodedTest extends TestCase
 {

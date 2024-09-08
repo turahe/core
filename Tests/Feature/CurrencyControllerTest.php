@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 
 class CurrencyControllerTest extends TestCase
 {

@@ -13,9 +13,9 @@
 namespace Turahe\Core\Tests\Feature\Fields;
 
 use Illuminate\Support\Facades\Notification;
-use Tests\Fixtures\SampleDatabaseNotification;
-use Tests\Fixtures\SampleTableColumn;
-use Tests\TestCase;
+use Turahe\Core\Fixtures\SampleDatabaseNotification;
+use Turahe\Core\Fixtures\SampleTableColumn;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Core\Facades\Fields;
 use Turahe\Core\Fields\Text;

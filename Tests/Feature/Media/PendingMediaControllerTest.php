@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Media;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 
 class PendingMediaControllerTest extends TestCase
 {

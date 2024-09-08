@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Models;
 
 use Illuminate\Support\Str;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Core\Fields\Text;
 use Turahe\Core\Models\CustomField;

@@ -17,7 +17,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\Fixtures\Workflows\ContactCreatedTrigger;
 use Tests\Fixtures\Workflows\ContactUserChangedTrigger;
 use Tests\Fixtures\Workflows\CreateDealAction;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Workflow;
 use Turahe\Core\Workflow\Workflows;
 use Turahe\Deals\Models\Pipeline;

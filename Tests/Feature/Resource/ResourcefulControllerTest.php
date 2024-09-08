@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\Fixtures\Event;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Company;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Contacts\Models\Source;

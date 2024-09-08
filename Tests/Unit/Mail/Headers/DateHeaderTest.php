@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Carbon\Carbon;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\Headers\DateHeader;
 
 class DateHeaderTest extends TestCase

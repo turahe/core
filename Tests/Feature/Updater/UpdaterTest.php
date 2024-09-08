@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Finder\Finder;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
 use Turahe\Core\Updater\Exceptions\MinPHPVersionRequirementException;

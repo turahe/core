@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Filters;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Tests\Fixtures\Event;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Filters\Number;
 use Turahe\Core\Tests\Concerns\TestsFilters;
 

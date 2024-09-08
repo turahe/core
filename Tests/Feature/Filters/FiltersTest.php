@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Filters;
 
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\EventTable;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Filters\Date;
 use Turahe\Core\QueryBuilder\Exceptions\FieldValueMustBeArrayException;
 use Turahe\Core\Table\TableSettings;

@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\CustomField;
 use Turahe\Core\Models\CustomFieldOption;
 

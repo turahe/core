@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature\Criteria;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Criteria\VisibleModelsCriteria;
 use Turahe\Core\Models\ModelVisibilityGroup;
 use Turahe\Users\Models\Organization;

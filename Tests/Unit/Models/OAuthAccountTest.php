@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Models;
 
 use Illuminate\Support\Facades\Crypt;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\OAuthAccount;
 use Turahe\Core\OAuth\AccessTokenProvider;
 

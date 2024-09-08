@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Macros\Arr;
 
 use Illuminate\Support\Arr;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 
 class CastValuesAsStringTest extends TestCase
 {

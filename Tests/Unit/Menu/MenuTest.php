@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Unit\Menu;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Facades\Menu;
 use Turahe\Core\Menu\MenuItem;

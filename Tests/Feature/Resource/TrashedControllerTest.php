@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 
 class TrashedControllerTest extends TestCase

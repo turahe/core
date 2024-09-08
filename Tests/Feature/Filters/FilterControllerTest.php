@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature\Filters;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Filter;
 
 class FilterControllerTest extends TestCase

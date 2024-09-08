@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Unit\Mail;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\EmbeddedImagesProcessor;
 
 class EmbeddedImagesProcessorTest extends TestCase

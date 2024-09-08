@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Feature\Resource;
 
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Company;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Core\Facades\Format;

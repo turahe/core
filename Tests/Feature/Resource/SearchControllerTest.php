@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Feature\Resource;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Contacts\Resource\Contact\Contact as ContactResource;
 use Turahe\Core\Database\Seeders\PermissionsSeeder;

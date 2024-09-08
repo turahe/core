@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit;
 
 use Illuminate\Support\Facades\Log;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\LogReader;
 
 class LogReaderTest extends TestCase

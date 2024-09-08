@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Settings\DefaultSettings;
 
 class SettingsControllerTest extends TestCase

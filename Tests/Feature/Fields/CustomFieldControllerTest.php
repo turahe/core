@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature\Fields;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Facades\Fields;
 use Turahe\Core\Fields\CustomFieldService;
 use Turahe\Core\Tests\Concerns\TestsCustomFields;

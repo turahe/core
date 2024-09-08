@@ -14,7 +14,7 @@ namespace Turahe\Core\Tests\Feature\Updater;
 
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\Finder\Finder;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
 use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;

@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Feature\Media;
 
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Media\PruneStaleMediaAttachments;
 use Turahe\Core\Models\Media;
 

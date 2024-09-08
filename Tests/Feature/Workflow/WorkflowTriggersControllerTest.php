@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Feature\Workflow;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Activities\Models\ActivityType;
 use Turahe\Core\Workflow\Workflows;
 

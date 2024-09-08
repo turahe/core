@@ -12,7 +12,7 @@
 
 namespace Turahe\Core\Tests\Unit\Resources;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Core\Export\Exceptions\InvalidExportTypeException;
 use Turahe\Core\Facades\Fields;

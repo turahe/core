@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Feature;
 
-use Tests\TestCase;
+use Turahe\Core\Tests\TestCase;
 
-class ApplicationControllerTest extends TestCase
+class ApplicationControllerTest extends \Orchestra\Testbench\TestCase
 {
     public function test_it_always_uses_the_default_app_view()
     {

@@ -17,7 +17,6 @@ use Illuminate\Http\Testing\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\TestCase;
 use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
 use Turahe\Core\Facades\Fields;
 use Turahe\Core\Facades\Innoclapps;
