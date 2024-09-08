@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\Models;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Fields\Field;
-use Illuminate\Support\Collection;
-use Turahe\Core\Resource\Resource;
-use Illuminate\Support\Facades\Lang;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Fields\CustomFieldFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\CustomFieldFactory;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Resource\Resource;
 
 /**
  * Turahe\Core\Models\CustomField
@@ -198,8 +198,8 @@ class CustomField extends Model
     {
         return ($options ?? $this->options)->map(
             fn (CustomFieldOption $option) => [
-                'id'           => $option->id,
-                'label'        => $option->name,
+                'id' => $option->id,
+                'label' => $option->name,
                 'swatch_color' => $option->swatch_color,
             ]
         )->all();

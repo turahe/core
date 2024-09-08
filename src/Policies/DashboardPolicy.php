@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Policies;
 
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Dashboard;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Turahe\Core\Models\Dashboard;
+use Turahe\Users\Models\User;
 
 class DashboardPolicy
 {

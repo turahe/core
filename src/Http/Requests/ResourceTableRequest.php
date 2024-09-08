@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Requests;
 
-use Turahe\Core\Table\Table;
-use Turahe\Core\Resource\Resource;
 use Turahe\Core\Contracts\Resources\Tableable;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Resource\Resource;
+use Turahe\Core\Table\Table;
 
 class ResourceTableRequest extends ResourceRequest
 {

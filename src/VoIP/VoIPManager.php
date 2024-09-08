@@ -13,8 +13,8 @@
 namespace Turahe\Core\VoIP;
 
 use Illuminate\Support\Manager;
-use Turahe\Core\VoIP\Clients\Twilio;
 use Turahe\Core\Contracts\VoIP\ReceivesEvents;
+use Turahe\Core\VoIP\Clients\Twilio;
 
 class VoIPManager extends Manager
 {

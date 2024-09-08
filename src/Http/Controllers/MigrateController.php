@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\View\View;
+use Turahe\Core\Facades\Innoclapps;
 
 class MigrateController extends Controller
 {

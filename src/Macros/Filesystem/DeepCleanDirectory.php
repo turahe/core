@@ -34,7 +34,7 @@ class DeepCleanDirectory
 
         foreach ($items as $item) {
             if (is_dir($item)) {
-                (new static())($item);
+                (new static)($item);
             } else {
                 unlink($item);
             }

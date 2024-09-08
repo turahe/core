@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Tests\Feature\MailableTemplate;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\File;
-use Turahe\Core\Facades\Innoclapps;
 use Tests\Fixtures\SampleMailTemplate;
-use Turahe\Core\Models\MailableTemplate;
+use Tests\TestCase;
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Facades\MailableTemplates;
+use Turahe\Core\Models\MailableTemplate;
 
 class MailableControllerTest extends TestCase
 {
@@ -87,7 +87,7 @@ class MailableControllerTest extends TestCase
         $template = MailableTemplate::forMailable(SampleMailTemplate::class)->forLocale('en')->first();
 
         $this->putJson('/api/mailables/'.$template->id, $data = [
-            'subject'       => 'Changed Subject',
+            'subject' => 'Changed Subject',
             'html_template' => 'Changed HTML Template',
             'text_template' => 'Changed Text Template',
         ])->assertJson($data);

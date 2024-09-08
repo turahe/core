@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\VoIP\Events;
 
-use Turahe\Core\VoIP\Call;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Turahe\Core\VoIP\Call;
 
 class IncomingCallMissed
 {
@@ -24,7 +24,5 @@ class IncomingCallMissed
     /**
      * Create new instance of IncomingCallMissed.
      */
-    public function __construct(public Call $call)
-    {
-    }
+    public function __construct(public Call $call) {}
 }

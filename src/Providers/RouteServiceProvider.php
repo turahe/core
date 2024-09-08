@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(__DIR__. './../../routes/web.php');
+            ->group(__DIR__.'./../../routes/web.php');
     }
 
     /**
@@ -54,6 +54,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix(\Turahe\Core\Application::API_PREFIX)
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(__DIR__. './../../routes/api.php');
+            ->group(__DIR__.'./../../routes/api.php');
     }
 }

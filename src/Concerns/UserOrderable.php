@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Concerns;
 
-use Illuminate\Support\Str;
-use Turahe\Users\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Models\UserOrderedModel;
 use Illuminate\Contracts\Database\Query\Expression;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Turahe\Core\Models\UserOrderedModel;
+use Turahe\Users\Models\User;
 
 /** @mixin \Turahe\Core\Models\Model */
 trait UserOrderable
@@ -46,7 +46,7 @@ trait UserOrderable
             $this->userOrder()->save(
                 new UserOrderedModel([
                     'display_order' => $displayOrder,
-                    'user_id'       => is_int($user) ? $user : $user->id,
+                    'user_id' => is_int($user) ? $user : $user->id,
                 ])
             );
         }

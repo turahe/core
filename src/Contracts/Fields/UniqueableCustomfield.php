@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Contracts\Fields;
 
-interface UniqueableCustomfield
-{
-}
+interface UniqueableCustomfield {}

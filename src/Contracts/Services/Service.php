@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Contracts\Services;
 
-interface Service
-{
-}
+interface Service {}

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Turahe\Core\Models\Tag;
 use Illuminate\Http\JsonResponse;
+use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Requests\TagRequest;
 use Turahe\Core\Http\Resources\TagResource;
-use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\Tag;
 
 class TagController extends ApiController
 {
@@ -39,8 +39,8 @@ class TagController extends ApiController
     public function update(Tag $tag, TagRequest $request): JsonResponse
     {
         $tag->fill([
-            'name'          => $request->name,
-            'swatch_color'  => $request->swatch_color,
+            'name' => $request->name,
+            'swatch_color' => $request->swatch_color,
             'display_order' => $request->input('display_order', $tag->display_order),
         ])->save();
 

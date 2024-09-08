@@ -15,8 +15,8 @@ namespace Turahe\Core\Http\Controllers\Api\Resource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
-use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class AssociationsSyncController extends ApiController
 {

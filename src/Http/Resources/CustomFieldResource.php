@@ -27,12 +27,12 @@ class CustomFieldResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'field_type'    => $this->field_type,
+            'field_type' => $this->field_type,
             'resource_name' => $this->resource_name,
-            'field_id'      => $this->field_id,
-            'label'         => $this->label,
-            'options'       => $this->when($this->options->isNotEmpty(), $this->options),
-            'is_unique'     => $this->is_unique,
+            'field_id' => $this->field_id,
+            'label' => $this->label,
+            'options' => $this->when($this->options->isNotEmpty(), $this->options),
+            'is_unique' => $this->is_unique,
         ], $request);
     }
 }

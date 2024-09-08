@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Table;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Turahe\Core\Contracts\Countable;
-use Illuminate\Database\Eloquent\Builder;
 
 class BelongsToManyColumn extends RelationshipColumn implements Countable
 {

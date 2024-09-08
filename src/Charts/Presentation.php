@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Charts;
 
-use Turahe\Core\Date\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Turahe\Core\Date\Carbon;
 
 abstract class Presentation extends Chart
 {
@@ -89,7 +89,7 @@ abstract class Presentation extends Chart
      * @param  \Illuminate\Database\Eloquent\Builder|class-string<\Illuminate\Database\Eloquent\Model>  $model
      * @param  string  $groupBy
      * @param  string|null  $column
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     public function count($request, $model, $groupBy, $column = null, $callback = null)
@@ -104,7 +104,7 @@ abstract class Presentation extends Chart
      * @param  \Illuminate\Database\Eloquent\Builder|class-string<\Illuminate\Database\Eloquent\Model>  $model
      * @param  string|null  $column
      * @param  string  $groupBy
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     public function average($request, $model, $column, $groupBy, $callback = null)
@@ -119,7 +119,7 @@ abstract class Presentation extends Chart
      * @param  \Illuminate\Database\Eloquent\Builder|class-string<\Illuminate\Database\Eloquent\Model>  $model
      * @param  string|null  $column
      * @param  string  $groupBy
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     public function sum($request, $model, $column, $groupBy, $callback = null)
@@ -134,7 +134,7 @@ abstract class Presentation extends Chart
      * @param  \Illuminate\Database\Eloquent\Builder|class-string<\Illuminate\Database\Eloquent\Model>  $model
      * @param  string|null  $column
      * @param  string  $groupBy
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     public function max($request, $model, $column, $groupBy, $callback = null)
@@ -149,7 +149,7 @@ abstract class Presentation extends Chart
      * @param  \Illuminate\Database\Eloquent\Builder|class-string<\Illuminate\Database\Eloquent\Model>  $model
      * @param  string|null  $column
      * @param  string  $groupBy
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     public function min($request, $model, $column, $groupBy, $callback = null)
@@ -165,7 +165,7 @@ abstract class Presentation extends Chart
      * @param  string  $function
      * @param  string  $column
      * @param  string  $groupBy
-     * @param  \Closure  $callback query callback
+     * @param  \Closure  $callback  query callback
      * @return \Turahe\Core\Charts\ChartResult
      */
     protected function aggregate($request, $model, $function, $column, $groupBy, $callback)
@@ -242,7 +242,7 @@ abstract class Presentation extends Chart
         return array_merge(
             parent::jsonSerialize(),
             [
-                'horizontal'  => $this->horizontal,
+                'horizontal' => $this->horizontal,
                 'onlyInteger' => $this->onlyInteger,
                 'axisYOffset' => $this->axisYOffset,
                 'axisXOffset' => $this->axisXOffset,

@@ -13,15 +13,15 @@
 namespace Turahe\Core\Table;
 
 use Closure;
-use JsonSerializable;
-use Turahe\Core\Makeable;
-use Turahe\Core\HasHelpText;
-use Turahe\Core\Authorizeable;
-use Turahe\Core\MetableElement;
-use Turahe\Core\Contracts\Countable;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
-use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
+use Turahe\Core\Authorizeable;
+use Turahe\Core\Contracts\Countable;
+use Turahe\Core\HasHelpText;
+use Turahe\Core\Makeable;
+use Turahe\Core\MetableElement;
 
 class Column implements Arrayable, JsonSerializable
 {
@@ -105,9 +105,7 @@ class Column implements Arrayable, JsonSerializable
     /**
      * Initialize new Column instance.
      */
-    public function __construct(public string $attribute, public ?string $label = null)
-    {
-    }
+    public function __construct(public string $attribute, public ?string $label = null) {}
 
     /**
      * Custom query for this column.
@@ -371,18 +369,18 @@ class Column implements Arrayable, JsonSerializable
     public function toArray()
     {
         return array_merge([
-            'attribute'     => $this->attribute,
-            'label'         => $this->label,
-            'sortable'      => $this->isSortable(),
-            'asHtml'        => $this->asHtml,
-            'hidden'        => $this->isHidden(),
-            'primary'       => $this->isPrimary(),
-            'component'     => $this->component(),
-            'minWidth'      => $this->minWidth,
-            'order'         => $this->order,
-            'helpText'      => $this->helpText,
+            'attribute' => $this->attribute,
+            'label' => $this->label,
+            'sortable' => $this->isSortable(),
+            'asHtml' => $this->asHtml,
+            'hidden' => $this->isHidden(),
+            'primary' => $this->isPrimary(),
+            'component' => $this->component(),
+            'minWidth' => $this->minWidth,
+            'order' => $this->order,
+            'helpText' => $this->helpText,
             'customizeable' => $this->customizeable,
-            'newlineable'   => $this->newlineable,
+            'newlineable' => $this->newlineable,
             // 'isCountable' => $this->isCountable(),
         ], $this->meta());
     }

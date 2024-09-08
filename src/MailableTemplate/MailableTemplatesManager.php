@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\MailableTemplate;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
-use Illuminate\Support\Collection;
 use Turahe\Core\Facades\Innoclapps;
-use Illuminate\Filesystem\Filesystem;
 use Turahe\Core\Models\MailableTemplate as MailableTemplateModel;
 
 class MailableTemplatesManager

@@ -22,7 +22,7 @@ class Timeline
     /**
      * Register pinable subject
      *
-     * @param  array  $subject List of the models that are pinable
+     * @param  array  $subject  List of the models that are pinable
      */
     public static function acceptsPinsFrom(array $subject): void
     {

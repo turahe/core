@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Unit;
 
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 use Turahe\Core\LogReader;
-use Illuminate\Support\Facades\Log;
 
 class LogReaderTest extends TestCase
 {
@@ -39,7 +39,7 @@ class LogReaderTest extends TestCase
 
     public function test_it_uses_the_first_log_date_if_no_date_provided()
     {
-        $reader = new LogReader();
+        $reader = new LogReader;
         Log::debug('Test log');
 
         $logs = $reader->get();
@@ -50,7 +50,7 @@ class LogReaderTest extends TestCase
     public function test_it_can_determine_when_there_are_no_logs_available()
     {
         LogReader::glob(storage_path('logs/fake/laravel-*.log'));
-        $reader = new LogReader();
+        $reader = new LogReader;
 
         $logs = $reader->get();
 

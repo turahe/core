@@ -13,18 +13,18 @@
 namespace Turahe\Core\Updater;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use Illuminate\Filesystem\Filesystem;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use Turahe\Core\Updater\Exceptions\UpdaterException;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
-use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 use Turahe\Core\Updater\Exceptions\CannotOpenZipArchiveException;
+use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\UpdaterException;
 
 class Patcher
 {

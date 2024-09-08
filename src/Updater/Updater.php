@@ -13,22 +13,22 @@
 namespace Turahe\Core\Updater;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Str;
-use InvalidArgumentException;
-use Illuminate\Support\Collection;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Artisan;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Turahe\Core\Updater\Events\UpdateSucceeded;
-use Turahe\Core\Updater\Exceptions\UpdaterException;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyUsedException;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
-use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 use Turahe\Core\Updater\Exceptions\CannotOpenZipArchiveException;
-use Turahe\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
+use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
 use Turahe\Core\Updater\Exceptions\MinPHPVersionRequirementException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyUsedException;
+use Turahe\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
+use Turahe\Core\Updater\Exceptions\UpdaterException;
 
 class Updater
 {
@@ -263,16 +263,16 @@ class Updater
     public static function createInternalRequestUrl(string $endpoint, array $extra = []): string
     {
         return $endpoint.'?'.http_build_query(array_merge([
-            'identification_key'      => config('core.key'),
-            'app_url'                 => config('app.url'),
-            'installed_version'       => \Turahe\Core\Application::VERSION,
-            'server_ip'               => settings('_server_ip'),
-            'installed_date'          => settings('_installed_date'),
-            'last_updated_date'       => settings('_last_updated_date'),
-            'php_version'             => PHP_VERSION,
-            'locale'                  => app()->getLocale(),
+            'identification_key' => config('core.key'),
+            'app_url' => config('app.url'),
+            'installed_version' => \Turahe\Core\Application::VERSION,
+            'server_ip' => settings('_server_ip'),
+            'installed_date' => settings('_installed_date'),
+            'last_updated_date' => settings('_last_updated_date'),
+            'php_version' => PHP_VERSION,
+            'locale' => app()->getLocale(),
             'database_driver_version' => settings('_db_driver_version'),
-            'database_driver'         => settings('_db_driver'),
+            'database_driver' => settings('_db_driver'),
         ], $extra));
     }
 

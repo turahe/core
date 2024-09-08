@@ -80,10 +80,10 @@ trait HasOptions
     public function meta(): array
     {
         return array_merge([
-            'valueKey'           => $this->valueKey,
-            'labelKey'           => $this->labelKey,
+            'valueKey' => $this->valueKey,
+            'labelKey' => $this->labelKey,
             'optionsViaResource' => $this->options instanceof Resource ? $this->options->name() : null,
-            'options'            => $this->resolveOptions(),
+            'options' => $this->resolveOptions(),
         ], $this->meta);
     }
 }

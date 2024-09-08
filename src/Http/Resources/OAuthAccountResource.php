@@ -27,9 +27,9 @@ class OAuthAccountResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'user_id'       => $this->user_id,
-            'type'          => $this->type,
-            'email'         => $this->email,
+            'user_id' => $this->user_id,
+            'type' => $this->type,
+            'email' => $this->email,
             'requires_auth' => $this->requires_auth,
         ], $request);
     }

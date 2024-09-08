@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Microsoft;
 
-use Microsoft\Graph\Graph;
-use Turahe\Core\OAuth\OAuthManager;
 use Illuminate\Contracts\Support\Arrayable;
-use Turahe\Core\OAuth\AccessTokenProvider;
+use Microsoft\Graph\Graph;
 use Microsoft\Graph\Http\GraphCollectionRequest;
 use Turahe\Core\Microsoft\Services\Batch\BatchRequests;
 use Turahe\Core\Microsoft\Services\Batch\Request as BatchRequest;
+use Turahe\Core\OAuth\AccessTokenProvider;
+use Turahe\Core\OAuth\OAuthManager;
 
 class Client
 {
@@ -135,8 +135,8 @@ class Client
     /**
      * Create request
      *
-     * @param  string  $requestType Request type ('get', 'post', 'patch', 'put', 'delete')
-     * @param  string  $endpoint Graph endpoint
+     * @param  string  $requestType  Request type ('get', 'post', 'patch', 'put', 'delete')
+     * @param  string  $endpoint  Graph endpoint
      * @return \Microsoft\Graph\Http\GraphRequest
      */
     public function createRequest($requestType, $endpoint)
@@ -225,8 +225,8 @@ class Client
     /**
      * Create collection request
      *
-     * @param  string  $requestType Request type ('get', 'post', 'patch', 'put', 'delete')
-     * @param  string  $endpoint Graph endpoint
+     * @param  string  $requestType  Request type ('get', 'post', 'patch', 'put', 'delete')
+     * @param  string  $endpoint  Graph endpoint
      * @return \Microsoft\Graph\Http\GraphCollectionRequest
      */
     public function createCollectionRequest($requestType, $endpoint)

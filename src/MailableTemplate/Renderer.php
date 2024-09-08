@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\MailableTemplate;
 
-use Mustache_Engine;
 use Illuminate\Support\Str;
-use Turahe\Core\Placeholders\Placeholders;
+use Mustache_Engine;
 use Turahe\Core\MailableTemplate\Exceptions\CannotRenderMailableTemplate;
+use Turahe\Core\Placeholders\Placeholders;
 
 class Renderer
 {
@@ -30,8 +30,7 @@ class Renderer
         protected ?string $htmlLayout = null,
         protected ?string $textTemplate = null,
         protected ?string $textLayout = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Render mail template HTML layout

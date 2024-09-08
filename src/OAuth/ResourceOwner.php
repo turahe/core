@@ -16,9 +16,7 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class ResourceOwner implements ResourceOwnerInterface
 {
-    public function __construct(protected array $response)
-    {
-    }
+    public function __construct(protected array $response) {}
 
     /**
      * Get the owner identifier

@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Feature\Media;
 
-use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class PendingMediaControllerTest extends TestCase
 {
@@ -27,11 +27,11 @@ class PendingMediaControllerTest extends TestCase
         $this->postJson('/api/media/pending/testDraftId', [
             'file' => UploadedFile::fake()->image('photo1.jpg'),
         ])->assertJson([
-            'file_name'            => 'photo1.jpg',
-            'extension'            => 'jpg',
-            'disk_path'            => 'pending-attachments/photo1.jpg',
+            'file_name' => 'photo1.jpg',
+            'extension' => 'jpg',
+            'disk_path' => 'pending-attachments/photo1.jpg',
             'was_recently_created' => true,
-            'pending_data'         => ['draft_id' => 'testDraftId'],
+            'pending_data' => ['draft_id' => 'testDraftId'],
         ]);
     }
 

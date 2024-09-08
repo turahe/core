@@ -15,14 +15,14 @@ namespace Turahe\Core\Google\Services\Message;
 use Exception;
 use Google\Client;
 use Google\Service\Gmail;
-use Illuminate\Support\Carbon;
 use Google\Service\Gmail\Message;
-use Illuminate\Support\Collection;
 use Google\Service\Gmail\MessagePart;
-use Turahe\Core\Google\Concerns\HasParts;
-use Turahe\Core\Google\Concerns\HasHeaders;
-use Turahe\Core\Mail\Headers\HeadersCollection;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Turahe\Core\Google\Concerns\HasDecodeableBody;
+use Turahe\Core\Google\Concerns\HasHeaders;
+use Turahe\Core\Google\Concerns\HasParts;
+use Turahe\Core\Mail\Headers\HeadersCollection;
 
 class Mail
 {

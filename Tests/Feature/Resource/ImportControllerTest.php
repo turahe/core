@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
-use Tests\TestCase;
-use Turahe\Core\Models\Import;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 use Turahe\Core\Database\Seeders\CountriesSeeder;
+use Turahe\Core\Models\Import;
 
 class ImportControllerTest extends TestCase
 {
@@ -39,13 +39,13 @@ class ImportControllerTest extends TestCase
             ->assertJsonCount(1)
             ->assertJson([
                 [
-                    'file_name'     => 'file.csv',
+                    'file_name' => 'file.csv',
                     'resource_name' => 'contacts',
-                    'status'        => 'mapping',
-                    'imported'      => 0,
-                    'skipped'       => 0,
-                    'duplicates'    => 0,
-                    'user_id'       => $user->id,
+                    'status' => 'mapping',
+                    'imported' => 0,
+                    'skipped' => 0,
+                    'duplicates' => 0,
+                    'user_id' => $user->id,
                 ],
             ]);
     }
@@ -59,33 +59,33 @@ class ImportControllerTest extends TestCase
         $this->postJson('/api/contacts/import/upload', [
             'file' => $this->createFakeImportFile(),
         ])->assertJson([
-            'file_name'     => 'test.csv',
+            'file_name' => 'test.csv',
             'resource_name' => 'contacts',
-            'status'        => 'mapping',
-            'mappings'      => [
+            'status' => 'mapping',
+            'mappings' => [
                 [
-                    'original'           => 'First Name',
+                    'original' => 'First Name',
                     'detected_attribute' => 'first_name',
-                    'attribute'          => 'first_name',
-                    'preview'            => 'John, Jane',
-                    'skip'               => false,
-                    'auto_detected'      => true,
+                    'attribute' => 'first_name',
+                    'preview' => 'John, Jane',
+                    'skip' => false,
+                    'auto_detected' => true,
                 ],
                 [
-                    'original'           => 'E-Mail Address',
+                    'original' => 'E-Mail Address',
                     'detected_attribute' => 'email',
-                    'attribute'          => 'email',
-                    'preview'            => 'john@example.com, jane@example.com',
-                    'skip'               => false,
-                    'auto_detected'      => true,
+                    'attribute' => 'email',
+                    'preview' => 'john@example.com, jane@example.com',
+                    'skip' => false,
+                    'auto_detected' => true,
                 ],
                 [
-                    'original'           => 'NonExistent Field',
+                    'original' => 'NonExistent Field',
                     'detected_attribute' => null,
-                    'attribute'          => null,
-                    'preview'            => '',
-                    'skip'               => true,
-                    'auto_detected'      => false,
+                    'attribute' => null,
+                    'preview' => '',
+                    'skip' => true,
+                    'auto_detected' => false,
                 ],
             ],
         ])->assertJsonStructure(['fields']);
@@ -110,28 +110,28 @@ class ImportControllerTest extends TestCase
         $this->postJson("/api/contacts/import/{$import->id}", [
             'mappings' => $mappings = [
                 [
-                    'original'           => 'First Name',
+                    'original' => 'First Name',
                     'detected_attribute' => 'first_name',
-                    'attribute'          => 'last_name',
-                    'preview'            => 'John, Jane',
-                    'skip'               => false,
-                    'auto_detected'      => true,
+                    'attribute' => 'last_name',
+                    'preview' => 'John, Jane',
+                    'skip' => false,
+                    'auto_detected' => true,
                 ],
                 [
-                    'original'           => 'E-Mail Address',
+                    'original' => 'E-Mail Address',
                     'detected_attribute' => 'email',
-                    'attribute'          => 'first_name',
-                    'preview'            => 'john@example.com, jane@example.com',
-                    'skip'               => false,
-                    'auto_detected'      => true,
+                    'attribute' => 'first_name',
+                    'preview' => 'john@example.com, jane@example.com',
+                    'skip' => false,
+                    'auto_detected' => true,
                 ],
                 [
-                    'original'           => 'NonExistent Field',
+                    'original' => 'NonExistent Field',
                     'detected_attribute' => null,
-                    'attribute'          => 'email',
-                    'preview'            => '',
-                    'skip'               => true,
-                    'auto_detected'      => false,
+                    'attribute' => 'email',
+                    'preview' => '',
+                    'skip' => true,
+                    'auto_detected' => false,
                 ],
             ],
         ]);
@@ -159,10 +159,10 @@ class ImportControllerTest extends TestCase
         $this->postJson("/api/contacts/import/{$import->id}", [
             'mappings' => [
                 [
-                    'original'           => 'E-Mail Address',
+                    'original' => 'E-Mail Address',
                     'detected_attribute' => 'email',
-                    'attribute'          => 'email',
-                    'skip'               => false,
+                    'attribute' => 'email',
+                    'skip' => false,
                 ],
             ],
         ])->assertJsonValidationErrorFor('mappings.0.auto_detected');
@@ -178,9 +178,9 @@ class ImportControllerTest extends TestCase
             'mappings' => [
                 [
                     'detected_attribute' => 'email',
-                    'attribute'          => 'email',
-                    'skip'               => false,
-                    'auto_detected'      => true,
+                    'attribute' => 'email',
+                    'skip' => false,
+                    'auto_detected' => true,
                 ],
             ],
         ])->assertJsonValidationErrorFor('mappings.0.original');
@@ -195,10 +195,10 @@ class ImportControllerTest extends TestCase
         $this->postJson("/api/contacts/import/{$import->id}", [
             'mappings' => [
                 [
-                    'original'           => 'E-Mail Address',
+                    'original' => 'E-Mail Address',
                     'detected_attribute' => 'email',
-                    'attribute'          => 'email',
-                    'auto_detected'      => true,
+                    'attribute' => 'email',
+                    'auto_detected' => true,
                 ],
             ],
         ])->assertJsonValidationErrorFor('mappings.0.skip');
@@ -213,9 +213,9 @@ class ImportControllerTest extends TestCase
         $this->postJson("/api/contacts/import/{$import->id}", [
             'mappings' => [
                 [
-                    'original'      => 'E-Mail Address',
-                    'attribute'     => 'email',
-                    'skip'          => false,
+                    'original' => 'E-Mail Address',
+                    'attribute' => 'email',
+                    'skip' => false,
                     'auto_detected' => true,
                 ],
             ],
@@ -252,15 +252,15 @@ class ImportControllerTest extends TestCase
     protected function createFakeImport($attributes = [])
     {
         return tap(new Import(array_merge([
-            'file_path'     => 'fake/path/file.csv',
+            'file_path' => 'fake/path/file.csv',
             'resource_name' => 'contacts',
-            'status'        => 'mapping',
-            'imported'      => 0,
-            'skipped'       => 0,
-            'duplicates'    => 0,
-            'user_id'       => 1,
-            'completed_at'  => null,
-            'data'          => ['mappings' => []],
+            'status' => 'mapping',
+            'imported' => 0,
+            'skipped' => 0,
+            'duplicates' => 0,
+            'user_id' => 1,
+            'completed_at' => null,
+            'data' => ['mappings' => []],
         ], $attributes)))->save();
     }
 

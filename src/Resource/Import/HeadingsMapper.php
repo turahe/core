@@ -12,15 +12,15 @@
 
 namespace Turahe\Core\Resource\Import;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Fields\Field;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Facades\Excel;
-use Maatwebsite\Excel\Concerns\WithLimit;
-use Turahe\Core\Fields\FieldsCollection;
-use Turahe\Core\Contracts\Fields\Dateable;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithLimit;
+use Maatwebsite\Excel\Facades\Excel;
+use Turahe\Core\Contracts\Fields\Dateable;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\FieldsCollection;
 
 class HeadingsMapper implements ToCollection, WithHeadingRow, WithLimit
 {
@@ -60,12 +60,12 @@ class HeadingsMapper implements ToCollection, WithHeadingRow, WithLimit
         $field = $this->detectFieldFromHeading($originalHeadingKey, $index);
 
         return [
-            'original'           => $originalHeadingKey,
+            'original' => $originalHeadingKey,
             'detected_attribute' => $attribute = $field?->attribute,
             // User-selected attribute, default the detected one
-            'attribute'     => $attribute,
-            'preview'       => $this->previewRecords($originalHeadingKey)->implode(', '),
-            'skip'          => ! (bool) $attribute,
+            'attribute' => $attribute,
+            'preview' => $this->previewRecords($originalHeadingKey)->implode(', '),
+            'skip' => ! (bool) $attribute,
             'auto_detected' => (bool) $attribute,
         ];
     }

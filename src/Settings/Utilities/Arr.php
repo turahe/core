@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Settings\Utilities;
 
-use UnexpectedValueException;
 use Illuminate\Support\Arr as BaseArr;
+use UnexpectedValueException;
 
 class Arr extends BaseArr
 {

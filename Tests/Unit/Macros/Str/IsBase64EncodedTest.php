@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Macros\Str;
 
-use Tests\TestCase;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class IsBase64EncodedTest extends TestCase
 {

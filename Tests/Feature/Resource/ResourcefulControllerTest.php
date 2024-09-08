@@ -12,15 +12,15 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
-use Tests\TestCase;
 use Tests\Fixtures\Event;
-use Turahe\Core\Fields\Text;
-use Turahe\Core\Fields\Email;
-use Turahe\Deals\Models\Deal;
-use Turahe\Core\Facades\Fields;
-use Turahe\Contacts\Models\Source;
+use Tests\TestCase;
 use Turahe\Contacts\Models\Company;
 use Turahe\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Source;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\Email;
+use Turahe\Core\Fields\Text;
+use Turahe\Deals\Models\Deal;
 
 class ResourcefulControllerTest extends TestCase
 {
@@ -41,10 +41,10 @@ class ResourcefulControllerTest extends TestCase
         $deal = Deal::factory()->create();
 
         $this->postJson('/api/contacts', [
-            'first_name'   => 'John',
+            'first_name' => 'John',
             'associations' => [
                 'companies' => [$company->id],
-                'deals'     => [$deal->id],
+                'deals' => [$deal->id],
             ],
         ]);
 
@@ -62,7 +62,7 @@ class ResourcefulControllerTest extends TestCase
         $company = Company::factory()->for($user1)->create();
 
         $this->postJson('/api/contacts', [
-            'first_name'   => 'John',
+            'first_name' => 'John',
             'associations' => [
                 'companies' => [$company->id],
             ],
@@ -78,7 +78,7 @@ class ResourcefulControllerTest extends TestCase
 
         $this->postJson('/api/contacts', [
             'first_name' => 'John',
-            'source_id'  => $source->name,
+            'source_id' => $source->name,
         ]);
 
         $this->assertDatabaseHas('contacts', ['source_id' => $source->id]);
@@ -98,8 +98,8 @@ class ResourcefulControllerTest extends TestCase
 
         $this->postJson('/api/contacts', [
             'first_name' => 'John',
-            'last_name'  => 'Doe',
-            'email'      => 'john@example.com',
+            'last_name' => 'Doe',
+            'email' => 'john@example.com',
         ])->assertJsonMissing(['last_name', 'email']);
 
         $contact = Contact::first();
@@ -118,7 +118,7 @@ class ResourcefulControllerTest extends TestCase
 
         $this->postJson('/api/contacts', [
             'first_name' => 'John',
-            'last_name'  => 'Doe',
+            'last_name' => 'Doe',
         ]);
 
         $this->assertDatabaseHas('contacts', ['last_name' => 'Doe']);
@@ -130,7 +130,7 @@ class ResourcefulControllerTest extends TestCase
 
         $this->postJson('/api/contacts', [
             'first_name' => 'John',
-            'last_name'  => 'Doe',
+            'last_name' => 'Doe',
         ]);
 
         $this->assertDatabaseHas('contacts', ['last_name' => 'Doe']);
@@ -141,7 +141,7 @@ class ResourcefulControllerTest extends TestCase
         $this->signIn();
 
         $this->postJson('/api/events', [
-            'title'     => 'Event Title',
+            'title' => 'Event Title',
             'locations' => $locations = [
                 ['display_name' => 'Avenue Park', 'location_type' => 'default'],
                 ['display_name' => 'Facebook', 'location_type' => 'Remote'],

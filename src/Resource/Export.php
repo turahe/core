@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Resource;
 
-use Turahe\Core\Export\ExportViaFields;
 use Illuminate\Database\Eloquent\Builder;
+use Turahe\Core\Export\ExportViaFields;
 use Turahe\Core\Fields\FieldsCollection;
 
 class Export extends ExportViaFields
@@ -26,9 +26,7 @@ class Export extends ExportViaFields
     /**
      * Create new Export instance.
      */
-    public function __construct(protected Resource $resource, protected Builder $query)
-    {
-    }
+    public function __construct(protected Resource $resource, protected Builder $query) {}
 
     /**
      * Provides the export data.

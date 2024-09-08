@@ -13,10 +13,10 @@
 namespace Turahe\Core\Calendar;
 
 use InvalidArgumentException;
-use Turahe\Core\OAuth\AccessTokenProvider;
-use Turahe\Core\Contracts\OAuth\Calendarable;
 use Turahe\Core\Calendar\Google\GoogleCalendar;
 use Turahe\Core\Calendar\Outlook\OutlookCalendar;
+use Turahe\Core\Contracts\OAuth\Calendarable;
+use Turahe\Core\OAuth\AccessTokenProvider;
 
 class CalendarManager
 {

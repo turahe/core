@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Tests\Unit\Criteria;
 
-use Tests\TestCase;
-use Turahe\Contacts\Models\Source;
-use Turahe\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Request;
-use Turahe\Core\Criteria\RequestCriteria;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tests\TestCase;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Contacts\Models\Source;
+use Turahe\Core\Criteria\RequestCriteria;
 use Turahe\Core\Criteria\SearchByFirstNameAndLastNameCriteria;
 
 class RequestCriteriaTest extends TestCase
@@ -27,12 +27,12 @@ class RequestCriteriaTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->searchFields = (new Contact())->getSearchableColumns();
+        $this->searchFields = (new Contact)->getSearchableColumns();
     }
 
     protected function tearDown(): void
     {
-        (new Contact())->setSearchableColumns($this->searchFields);
+        (new Contact)->setSearchableColumns($this->searchFields);
         unset($this->searchFields);
         parent::tearDown();
     }
@@ -49,7 +49,7 @@ class RequestCriteriaTest extends TestCase
 
     protected function query($params, $fields = [])
     {
-        $model = new Contact();
+        $model = new Contact;
 
         if ($fields) {
             $model->setSearchableColumns($fields);
@@ -164,7 +164,7 @@ class RequestCriteriaTest extends TestCase
     {
         Contact::factory()->create(['first_name' => 'full', 'last_name' => 'last']);
 
-        $model = new Contact();
+        $model = new Contact;
 
         $criteria = (new RequestCriteria(
             $this->createCriteriaRequest('q=full name'),

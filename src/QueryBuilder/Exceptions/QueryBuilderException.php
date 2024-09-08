@@ -14,6 +14,4 @@ namespace Turahe\Core\QueryBuilder\Exceptions;
 
 use Exception;
 
-class QueryBuilderException extends Exception
-{
-}
+class QueryBuilderException extends Exception {}

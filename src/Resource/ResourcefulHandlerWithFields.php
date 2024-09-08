@@ -14,16 +14,16 @@ namespace Turahe\Core\Resource;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Turahe\Core\Fields\Field;
-use Turahe\Core\Models\Model;
-use Turahe\Core\Fields\MorphMany;
+use Turahe\Core\Contracts\Fields\HandlesChangedMorphManyAttributes;
+use Turahe\Core\Contracts\Fields\TracksMorphManyModelAttributes;
+use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
 use Turahe\Core\Contracts\Services\CreateService;
 use Turahe\Core\Contracts\Services\UpdateService;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\MorphMany;
+use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Events\ResourceRecordCreated;
 use Turahe\Core\Resource\Events\ResourceRecordUpdated;
-use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
-use Turahe\Core\Contracts\Fields\TracksMorphManyModelAttributes;
-use Turahe\Core\Contracts\Fields\HandlesChangedMorphManyAttributes;
 
 class ResourcefulHandlerWithFields extends ResourcefulHandler implements ResourcefulRequestHandler
 {
@@ -136,8 +136,8 @@ class ResourcefulHandlerWithFields extends ResourcefulHandler implements Resourc
 
                 return [
                     $attribute => [
-                        'field'      => $field,
-                        'value'      => $value,
+                        'field' => $field,
+                        'value' => $value,
                         'attributes' => $attributes,
                     ],
                 ];

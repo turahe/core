@@ -13,8 +13,8 @@
 namespace Turahe\Core;
 
 use Closure;
-use Turahe\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Turahe\Users\Models\User;
 
 trait Authorizeable
 {
@@ -41,7 +41,7 @@ trait Authorizeable
     /**
      * canSeeWhen, the same signature like user()->can().
      *
-     * @param  string  $ability the ability
+     * @param  string  $ability  the ability
      * @return Authorizeable
      */
     public function canSeeWhen(string $ability, array $arguments = []): static

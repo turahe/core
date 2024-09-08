@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Fields;
 
+use Turahe\Core\Contracts\Fields\Customfieldable;
+use Turahe\Core\Contracts\Fields\Dateable;
 use Turahe\Core\Facades\Format;
 use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Table\DateTimeColumn;
-use Turahe\Core\Contracts\Fields\Dateable;
-use Turahe\Core\Resource\Http\ResourceRequest;
-use Turahe\Core\Contracts\Fields\Customfieldable;
 use Turahe\Core\Fields\Dateable as DateableTrait;
 use Turahe\Core\Placeholders\DateTimePlaceholder;
+use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\DateTimeColumn;
 
 class DateTime extends Field implements Customfieldable, Dateable
 {

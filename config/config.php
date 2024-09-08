@@ -21,7 +21,7 @@ return [
     */
     'logo' => [
         'light' => env('LIGHT_LOGO_URL'),
-        'dark'  => env('DARK_LOGO_URL'),
+        'dark' => env('DARK_LOGO_URL'),
     ],
 
     /*
@@ -74,8 +74,8 @@ return [
     |
     */
     'recaptcha' => [
-        'site_key'    => env('RECAPTCHA_SITE_KEY', null),
-        'secret_key'  => env('RECAPTCHA_SECRET_KEY', null),
+        'site_key' => env('RECAPTCHA_SITE_KEY', null),
+        'secret_key' => env('RECAPTCHA_SECRET_KEY', null),
         'ignored_ips' => env('RECAPTCHA_IGNORED_IPS', []),
     ],
 
@@ -278,7 +278,7 @@ return [
         'client' => env('VOIP_CLIENT'),
         // Route names
         'endpoints' => [
-            'call'   => 'voip.call',
+            'call' => 'voip.call',
             'events' => 'voip.events',
         ],
     ],
@@ -294,9 +294,9 @@ return [
     'services' => [
         'twilio' => [
             'applicationSid' => env('TWILIO_APP_SID'),
-            'accountSid'     => env('TWILIO_ACCOUNT_SID'),
-            'authToken'      => env('TWILIO_AUTH_TOKEN'),
-            'number'         => env('TWILIO_NUMBER'),
+            'accountSid' => env('TWILIO_ACCOUNT_SID'),
+            'authToken' => env('TWILIO_AUTH_TOKEN'),
+            'number' => env('TWILIO_NUMBER'),
         ],
     ],
 

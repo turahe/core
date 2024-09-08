@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Google\Services\Message;
 
-class SendMail extends Compose
-{
-}
+class SendMail extends Compose {}

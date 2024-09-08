@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Contracts\Resources;
 
-interface AcceptsCustomFields
-{
-}
+interface AcceptsCustomFields {}

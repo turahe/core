@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Workflow;
 
-use Turahe\Core\Models\Workflow;
-use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Contracts\Workflow\EventTrigger;
 use Turahe\Core\Contracts\Workflow\FieldChangeTrigger;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Models\Workflow;
 
 trait HasWorkflowTriggers
 {
@@ -32,7 +32,7 @@ trait HasWorkflowTriggers
                     // this will allow any associations or data added to the model
                     // after the model event to be available to the workflow action
                     Workflows::addToQueue($workflow, [
-                        'model'    => $model,
+                        'model' => $model,
                         'resource' => Innoclapps::resourceByModel($model),
                     ]);
                 }
@@ -44,7 +44,7 @@ trait HasWorkflowTriggers
                 foreach (static::getTriggerWorkflows($trigger::identifier()) as $workflow) {
                     if (static::hasWorkflowFieldChanged($workflow, $model, $trigger)) {
                         Workflows::process($workflow, [
-                            'model'    => $model,
+                            'model' => $model,
                             'resource' => Innoclapps::resourceByModel($model),
                         ]);
                     }

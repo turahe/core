@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Models;
 
-use Turahe\Core\Date\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Turahe\Core\Date\Carbon;
 
 /**
  * Turahe\Core\Models\Model
@@ -67,9 +67,7 @@ class Model extends EloquentModel
     /**
      * Eager load common relationships.
      */
-    public function scopeWithCommon(Builder $query): void
-    {
-    }
+    public function scopeWithCommon(Builder $query): void {}
 
     /**
      * Apply order to null values to be sorted as last
@@ -103,7 +101,6 @@ class Model extends EloquentModel
      * Return a timestamp as DateTime object.
      *
      * @param  mixed  $value
-
      * @return \Turahe\Core\Date\Carbon
      */
     protected function asDateTime($value)

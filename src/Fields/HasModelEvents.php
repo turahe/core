@@ -20,9 +20,7 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordCreating($model)
-    {
-    }
+    public function recordCreating($model) {}
 
     /**
      * Handle the resource record "created" event
@@ -30,9 +28,7 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordCreated($model)
-    {
-    }
+    public function recordCreated($model) {}
 
     /**
      * Handle the resource record "updating" event
@@ -40,9 +36,7 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordUpdating($model)
-    {
-    }
+    public function recordUpdating($model) {}
 
     /**
      * Handle the resource record "updated" event
@@ -50,9 +44,7 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordUpdated($model)
-    {
-    }
+    public function recordUpdated($model) {}
 
     /**
      * Handle the resource record "deleting" event
@@ -60,9 +52,7 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordDeleting($model)
-    {
-    }
+    public function recordDeleting($model) {}
 
     /**
      * Handle the resource record "deleted" event
@@ -70,7 +60,5 @@ trait HasModelEvents
      * @param  \Turahe\Core\Models\Model  $model
      * @return void
      */
-    public function recordDeleted($model)
-    {
-    }
+    public function recordDeleted($model) {}
 }

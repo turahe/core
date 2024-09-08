@@ -27,18 +27,18 @@ class MediaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'file_name'      => $this->basename,
-            'extension'      => $this->extension,
-            'size'           => $this->size,
-            'disk_path'      => $this->getDiskPath(),
-            'mime_type'      => $this->mime_type,
+            'file_name' => $this->basename,
+            'extension' => $this->extension,
+            'size' => $this->size,
+            'disk_path' => $this->getDiskPath(),
+            'mime_type' => $this->mime_type,
             'aggregate_type' => $this->aggregate_type,
-            'view_url'       => $this->getViewUrl(),
-            'preview_url'    => $this->getPreviewUrl(),
-            'preview_path'   => $this->previewPath(),
-            'download_url'   => $this->getDownloadUrl(),
-            'download_path'  => $this->downloadPath(),
-            'pending_data'   => $this->whenLoaded('pendingData'),
+            'view_url' => $this->getViewUrl(),
+            'preview_url' => $this->getPreviewUrl(),
+            'preview_path' => $this->previewPath(),
+            'download_url' => $this->getDownloadUrl(),
+            'download_path' => $this->downloadPath(),
+            'pending_data' => $this->whenLoaded('pendingData'),
         ], $request);
     }
 }

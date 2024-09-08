@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\MailableTemplate;
+use Illuminate\Http\Request;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Resources\MailableResource;
+use Turahe\Core\Models\MailableTemplate;
 
 class MailableController extends ApiController
 {
@@ -56,7 +56,7 @@ class MailableController extends ApiController
     public function update(MailableTemplate $template, Request $request): JsonResponse
     {
         $request->validate([
-            'subject'       => 'required|string|max:191',
+            'subject' => 'required|string|max:191',
             'html_template' => 'required|string',
         ]);
 

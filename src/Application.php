@@ -12,16 +12,16 @@
 
 namespace Turahe\Core;
 
-use Illuminate\Support\Arr;
 use Akaunting\Money\Currency;
-use Turahe\Core\Models\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Turahe\Core\Resource\Resource;
-use Turahe\Core\Updater\Migration;
 use Illuminate\Support\Facades\File;
-use Turahe\Core\Updater\UpdateFinalizer;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Turahe\Core\Contracts\HasNotificationsSettings;
+use Turahe\Core\Models\Model;
+use Turahe\Core\Resource\Resource;
+use Turahe\Core\Updater\Migration;
+use Turahe\Core\Updater\UpdateFinalizer;
 
 class Application
 {
@@ -277,8 +277,8 @@ class Application
             return $notification::configurable();
         })->map(function ($notification) use ($notifiable) {
             return array_merge([
-                'key'         => $notification::key(),
-                'name'        => $notification::name(),
+                'key' => $notification::key(),
+                'name' => $notification::name(),
                 'description' => $notification::description(),
 
                 'channels' => $channels = collect($notification::availableChannels())

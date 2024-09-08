@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Turahe\Core\Database\Factories\OAuthAccountFactory;
 use Turahe\Core\Facades\Google;
 use Turahe\Core\OAuth\AccessTokenProvider;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Turahe\Core\OAuth\Events\OAuthAccountDeleting;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Turahe\Core\Database\Factories\OAuthAccountFactory;
 
 /**
  * Turahe\Core\Models\OAuthAccount
@@ -84,8 +84,8 @@ class OAuthAccount extends Model
      */
     protected $casts = [
         'requires_auth' => 'boolean',
-        'access_token'  => 'encrypted',
-        'user_id'       => 'int',
+        'access_token' => 'encrypted',
+        'user_id' => 'int',
     ];
 
     /**

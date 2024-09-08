@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Criteria;
 
-use Exception;
 use BackedEnum;
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Request;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 use Turahe\Core\Contracts\Criteria\QueryCriteria;
 
 class RequestCriteria implements QueryCriteria
@@ -274,7 +274,7 @@ class RequestCriteria implements QueryCriteria
             $orderArray = explode('|', $order);
 
             $order = [
-                'field'     => $orderArray[0],
+                'field' => $orderArray[0],
                 'direction' => $orderArray[1] ?? '',
             ];
         }

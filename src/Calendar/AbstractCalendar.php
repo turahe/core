@@ -31,8 +31,8 @@ abstract class AbstractCalendar extends AbstractMask implements CalendarInterfac
     public function toArray(): array
     {
         return [
-            'id'         => $this->getId(),
-            'title'      => $this->getTitle(),
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
             'is_default' => $this->isDefault(),
         ];
     }

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
-use Tests\TestCase;
 use Illuminate\Support\Carbon;
-use Turahe\Core\Facades\Format;
+use Tests\TestCase;
 use Turahe\Contacts\Models\Company;
 use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Facades\Format;
 
 class PlaceholdersControllerTest extends TestCase
 {
@@ -49,7 +49,7 @@ class PlaceholdersControllerTest extends TestCase
         $company = Company::factory()->create(['created_at' => $companyCreatedAt = Carbon::parse('2023-04-26 00:00:00')]);
 
         $response = $this->postJson('/api/placeholders/input-fields', [
-            'content'   => '<input class="_placeholder" type="text" value="" placeholder="Created At" data-tag="contact.created_at" /><input class="_placeholder" type="text" value="" placeholder="Created At" data-tag="company.created_at" />',
+            'content' => '<input class="_placeholder" type="text" value="" placeholder="Created At" data-tag="contact.created_at" /><input class="_placeholder" type="text" value="" placeholder="Created At" data-tag="company.created_at" />',
             'resources' => [['name' => 'contacts', 'id' => $contact->id], ['name' => 'companies', 'id' => $company->id]],
         ]);
 
@@ -65,7 +65,7 @@ class PlaceholdersControllerTest extends TestCase
         $contact = Contact::factory()->create();
 
         $response = $this->postJson('/api/placeholders/input-fields', [
-            'content'   => '<input class="_placeholder" type="text" value="" placeholder="E-Mail Address" data-tag="contact.email" /><input class="_placeholder" type="text" value="" placeholder="First Name" data-tag="contact.first_name" />',
+            'content' => '<input class="_placeholder" type="text" value="" placeholder="E-Mail Address" data-tag="contact.email" /><input class="_placeholder" type="text" value="" placeholder="First Name" data-tag="contact.first_name" />',
             'resources' => [['name' => 'contacts', 'id' => $contact->id]],
         ]);
 
@@ -81,7 +81,7 @@ class PlaceholdersControllerTest extends TestCase
         $contact = Contact::factory()->for($otherUser)->create();
 
         $response = $this->postJson('/api/placeholders/input-fields', [
-            'content'   => '<input class="_placeholder" type="text" value="" placeholder="E-Mail Address" data-group="contacts" data-tag="email" />',
+            'content' => '<input class="_placeholder" type="text" value="" placeholder="E-Mail Address" data-group="contacts" data-tag="email" />',
             'resources' => [['name' => 'contacts', 'id' => $contact->id]],
         ]);
 

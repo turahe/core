@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Changelog;
 
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Facades\ChangeLogger;
 use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\ActivityLogStatus;
 use Spatie\Activitylog\Contracts\Activity;
+use Turahe\Core\Facades\ChangeLogger;
+use Turahe\Core\Facades\Innoclapps;
 
 class PendingLog
 {
@@ -43,9 +43,7 @@ class PendingLog
     /**
      * Initialize PendingLog
      */
-    public function __construct(protected ActivityLogger $logger, protected string $logTriggerMethod)
-    {
-    }
+    public function __construct(protected ActivityLogger $logger, protected string $logTriggerMethod) {}
 
     /**
      * Force to log even if the logger is disabled

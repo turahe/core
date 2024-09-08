@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Filters;
 
-class DateTime extends Date
-{
-}
+class DateTime extends Date {}

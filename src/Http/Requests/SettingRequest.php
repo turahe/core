@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Requests;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Settings\DefaultSettings;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Turahe\Core\EditorPendingMediaProcessor;
+use Turahe\Core\Settings\DefaultSettings;
 
 class SettingRequest extends FormRequest
 {

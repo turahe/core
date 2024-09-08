@@ -14,6 +14,4 @@ namespace Turahe\Core\Resource\Import;
 
 use Exception;
 
-class RowsExceededException extends Exception
-{
-}
+class RowsExceededException extends Exception {}

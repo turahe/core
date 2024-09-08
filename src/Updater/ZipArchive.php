@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Updater;
 
-use ZipArchive as BaseZipArchive;
 use Illuminate\Filesystem\Filesystem;
-use Turahe\Core\Updater\Exceptions\UpdaterException;
-use Turahe\Core\Updater\Exceptions\FailedToExtractZipException;
 use Turahe\Core\Updater\Exceptions\CannotOpenZipArchiveException;
+use Turahe\Core\Updater\Exceptions\FailedToExtractZipException;
+use Turahe\Core\Updater\Exceptions\UpdaterException;
+use ZipArchive as BaseZipArchive;
 
 class ZipArchive
 {

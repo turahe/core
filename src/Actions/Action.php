@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Actions;
 
-use JsonSerializable;
-use Illuminate\Support\Str;
-use Turahe\Core\Authorizeable;
-use Illuminate\Support\Collection;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use JsonSerializable;
+use Turahe\Core\Authorizeable;
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Resource\Http\ResourceRequest;
 
 abstract class Action implements JsonSerializable
@@ -253,14 +253,14 @@ abstract class Action implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'name'                => $this->name(),
-            'message'             => $this->message(),
-            'destroyable'         => $this instanceof DestroyableAction,
+            'name' => $this->name(),
+            'message' => $this->message(),
+            'destroyable' => $this instanceof DestroyableAction,
             'withoutConfirmation' => $this->withoutConfirmation,
-            'fields'              => $this->resolveFields(app(ResourceRequest::class)),
-            'hideOnIndex'         => $this->hideOnIndex,
-            'hideOnUpdate'        => $this->hideOnUpdate,
-            'uriKey'              => $this->uriKey(),
+            'fields' => $this->resolveFields(app(ResourceRequest::class)),
+            'hideOnIndex' => $this->hideOnIndex,
+            'hideOnUpdate' => $this->hideOnUpdate,
+            'uriKey' => $this->uriKey(),
         ];
     }
 }

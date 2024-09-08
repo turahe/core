@@ -12,17 +12,17 @@
 
 namespace Turahe\Core\Resource;
 
-use Turahe\Core\Models\Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Criteria\FilterRulesCriteria;
+use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
 use Turahe\Core\Contracts\Services\CreateService;
 use Turahe\Core\Contracts\Services\DeleteService;
 use Turahe\Core\Contracts\Services\UpdateService;
-use Turahe\Core\Resource\Http\ResourcefulRequest;
+use Turahe\Core\Criteria\FilterRulesCriteria;
+use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Events\ResourceRecordCreated;
 use Turahe\Core\Resource\Events\ResourceRecordUpdated;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
+use Turahe\Core\Resource\Http\ResourcefulRequest;
 
 class ResourcefulHandler implements ResourcefulRequestHandler
 {
@@ -31,9 +31,7 @@ class ResourcefulHandler implements ResourcefulRequestHandler
     /**
      * Initialize the resourceful handler.
      */
-    public function __construct(protected ResourcefulRequest $request)
-    {
-    }
+    public function __construct(protected ResourcefulRequest $request) {}
 
     /**
      * Handle the resource index action.

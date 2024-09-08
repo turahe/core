@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Database\Factories;
 
-use Illuminate\Support\Str;
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\OAuthAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use Turahe\Core\Models\OAuthAccount;
+use Turahe\Users\Models\User;
 
 class OAuthAccountFactory extends Factory
 {
@@ -34,12 +34,12 @@ class OAuthAccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'type'          => 'google',
-            'user_id'       => User::factory(),
+            'type' => 'google',
+            'user_id' => User::factory(),
             'oauth_user_id' => Str::uuid()->__toString(),
-            'email'         => $this->faker->unique()->safeEmail(),
-            'access_token'  => Str::uuid()->__toString(),
-            'expires'       => now()->addDay(5)->timestamp,
+            'email' => $this->faker->unique()->safeEmail(),
+            'access_token' => Str::uuid()->__toString(),
+            'expires' => now()->addDay(5)->timestamp,
         ];
     }
 

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Contracts\Resources;
 
-use Turahe\Core\Table\Table;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\Table;
 
 interface Tableable
 {

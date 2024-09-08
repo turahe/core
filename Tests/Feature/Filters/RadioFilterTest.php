@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Feature\Filters;
 
-use Tests\TestCase;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Tests\Fixtures\Event;
+use Tests\TestCase;
 use Turahe\Core\Filters\Radio;
 use Turahe\Core\Tests\Concerns\TestsFilters;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class RadioFilterTest extends TestCase
 {

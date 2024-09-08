@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Contracts\Resources;
 
-interface Resourceful
-{
-}
+interface Resourceful {}

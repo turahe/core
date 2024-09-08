@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Models;
 
-use Turahe\Core\Concerns\HasUuid;
 use Spatie\Permission\Models\Role as SpatieRole;
+use Turahe\Core\Concerns\HasUuid;
 
 /**
  * Turahe\Core\Models\Role

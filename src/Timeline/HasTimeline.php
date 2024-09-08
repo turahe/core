@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Timeline;
 
-use Turahe\Core\Models\PinnedTimelineSubject;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Turahe\Core\Models\PinnedTimelineSubject;
 
 trait HasTimeline
 {

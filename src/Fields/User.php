@@ -16,8 +16,8 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Table\BelongsToColumn;
-use Turahe\Users\Models\User as UserModel;
 use Turahe\Users\Http\Resources\UserResource;
+use Turahe\Users\Models\User as UserModel;
 
 class User extends BelongsTo
 {
@@ -46,7 +46,7 @@ class User extends BelongsTo
     /**
      * Creat new User instance field
      *
-     * @param  string  $label Custom label
+     * @param  string  $label  Custom label
      * @param  string  $relationName
      * @param  string|null  $attribute
      */
@@ -259,7 +259,7 @@ class User extends BelongsTo
         return [
             $this->valueKey => $user->{$this->valueKey},
             $this->labelKey => $user->{$this->labelKey},
-            'avatar_url'    => $user->avatar_url,
+            'avatar_url' => $user->avatar_url,
         ];
     }
 

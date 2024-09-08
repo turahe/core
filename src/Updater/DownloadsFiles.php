@@ -72,7 +72,7 @@ trait DownloadsFiles
             'GET',
             $this->getDownloadUrl(),
             [
-                'sink'    => $this->getStoragePath(),
+                'sink' => $this->getStoragePath(),
                 'headers' => $this->hasAccessToken() ? ['Authorization' => $this->getAccessToken()] : [],
             ]
         );

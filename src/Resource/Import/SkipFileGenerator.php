@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Resource\Import;
 
-use Turahe\Core\Models\Import;
-use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Facades\Excel;
+use Turahe\Core\Models\Import;
 
 class SkipFileGenerator implements FromArray
 {
@@ -29,9 +29,7 @@ class SkipFileGenerator implements FromArray
      * @param  \Illuminate\Support\Collection  $failures
      * @param  \Illuminate\Support\Collection  $mappings
      */
-    public function __construct(protected Import $import, protected $failures, protected $mappings)
-    {
-    }
+    public function __construct(protected Import $import, protected $failures, protected $mappings) {}
 
     /**
      * Creates the import skip file.

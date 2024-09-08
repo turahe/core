@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Tests\Feature\Filters;
 
-use Tests\TestCase;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Tests\Fixtures\Event;
+use Tests\TestCase;
 use Turahe\Core\Filters\Date;
 use Turahe\Core\Filters\DateTime;
-use Turahe\Core\Tests\Concerns\TestsFilters;
 use Turahe\Core\ProvidesBetweenArgumentsViaString;
-use Illuminate\Database\Eloquent\Factories\Sequence;
+use Turahe\Core\Tests\Concerns\TestsFilters;
 
 class DateFilterTest extends TestCase
 {
@@ -121,7 +121,7 @@ class DateFilterTest extends TestCase
         Event::factory()->count(3)->state(new Sequence(
             ['date' => date('Y-m-d', strtotime('last week'))],
             ['start' => date('Y-m-d', strtotime('second day next week'))],
-            ['date'  => $nextWeek = date('Y-m-d', strtotime('next week'))]
+            ['date' => $nextWeek = date('Y-m-d', strtotime('next week'))]
         ))->create();
 
         $result = $this->perform('date', 'less_or_equal', $nextWeek);
@@ -247,7 +247,7 @@ class DateFilterTest extends TestCase
         // If this event is queried, means that the test will probably fail
         Event::factory()->create([
             'start' => date('Y-m-d H:i:s', strtotime('25 years ago')),
-            'end'   => date('Y-m-d H:i:s', strtotime('25 years ago')),
+            'end' => date('Y-m-d H:i:s', strtotime('25 years ago')),
         ]);
 
         foreach ([Date::class, DateTime::class] as $filter) {

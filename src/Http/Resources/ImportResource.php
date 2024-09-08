@@ -28,18 +28,18 @@ class ImportResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'file_name'          => $this->file_name,
+            'file_name' => $this->file_name,
             'skip_file_filename' => $this->skip_file_filename,
-            'mappings'           => $this->data['mappings'],
-            'resource_name'      => $this->resource_name,
-            'status'             => $this->status,
-            'imported'           => $this->imported,
-            'skipped'            => $this->skipped,
-            'duplicates'         => $this->duplicates,
-            'fields'             => $this->fields(),
-            'user_id'            => $this->user_id,
-            'user'               => new UserResource($this->whenLoaded('user')),
-            'completed_at'       => $this->completed_at,
+            'mappings' => $this->data['mappings'],
+            'resource_name' => $this->resource_name,
+            'status' => $this->status,
+            'imported' => $this->imported,
+            'skipped' => $this->skipped,
+            'duplicates' => $this->duplicates,
+            'fields' => $this->fields(),
+            'user_id' => $this->user_id,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'completed_at' => $this->completed_at,
         ], $request);
     }
 }

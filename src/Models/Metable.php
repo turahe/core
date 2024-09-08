@@ -21,6 +21,4 @@ namespace Turahe\Core\Models;
  *
  * @mixin \Eloquent
  */
-class Metable extends \Illuminate\Database\Eloquent\Model
-{
-}
+class Metable extends \Illuminate\Database\Eloquent\Model {}

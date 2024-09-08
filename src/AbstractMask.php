@@ -12,17 +12,15 @@
 
 namespace Turahe\Core;
 
-use JsonSerializable;
 use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
 
 abstract class AbstractMask implements Arrayable, JsonSerializable
 {
     /**
      * Initialize the mask
      */
-    public function __construct(protected object|array $entity)
-    {
-    }
+    public function __construct(protected object|array $entity) {}
 
     /**
      * Get the entity

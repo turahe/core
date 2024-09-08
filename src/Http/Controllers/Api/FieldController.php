@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Turahe\Core\Facades\Fields;
-use Illuminate\Http\JsonResponse;
 use Turahe\Core\Http\Controllers\ApiController;
 
 class FieldController extends ApiController
@@ -72,7 +72,7 @@ class FieldController extends ApiController
 
         return $this->response([
             'settings' => Fields::resolveForSettings($group, $view),
-            'fields'   => Fields::resolveForDisplay($group, $view),
+            'fields' => Fields::resolveForDisplay($group, $view),
         ]);
     }
 }

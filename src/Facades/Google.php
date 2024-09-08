@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Turahe\Core\Google\Client;
 use Illuminate\Support\Facades\Facade;
+use Turahe\Core\Google\Client;
 
 /**
  * @mixin \Turahe\Core\Google\Client

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Resource\Http;
 
+use Turahe\Core\Contracts\Resources\Resourceful;
 use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\FieldsCollection;
 use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Resource;
-use Turahe\Core\Fields\FieldsCollection;
-use Turahe\Core\Contracts\Resources\Resourceful;
 
 class ResourcefulRequest extends ResourceRequest
 {

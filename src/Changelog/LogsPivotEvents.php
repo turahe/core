@@ -61,7 +61,7 @@ trait LogsPivotEvents
                 ChangeLogger::onModel($relatedModel, [
                     'icon' => 'Trash',
                     'lang' => [
-                        'key'   => 'core::timeline.association_restored',
+                        'key' => 'core::timeline.association_restored',
                         'attrs' => ['associationDisplayName' => $relatedModel->display_name],
                     ],
                 ])->log();
@@ -114,7 +114,7 @@ trait LogsPivotEvents
                     return ChangeLogger::onModel($relatedModel, [
                         'icon' => 'Trash',
                         'lang' => [
-                            'key'   => 'core::timeline.association_permanently_deleted',
+                            'key' => 'core::timeline.association_permanently_deleted',
                             'attrs' => ['associationDisplayName' => $instance->display_name],
                         ],
                     ])->log();

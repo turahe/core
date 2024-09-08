@@ -13,11 +13,11 @@
 namespace Turahe\Core\Synchronization\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Turahe\Core\Models\Synchronization;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Turahe\Core\Models\Synchronization;
 use Turahe\Core\Synchronization\Exceptions\InvalidSyncNotificationURLException;
 
 class RefreshWebhookSynchronizations implements ShouldQueue

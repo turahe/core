@@ -14,6 +14,4 @@ namespace Turahe\Core\Synchronization\Exceptions;
 
 use Exception;
 
-class InvalidSyncNotificationURLException extends Exception
-{
-}
+class InvalidSyncNotificationURLException extends Exception {}

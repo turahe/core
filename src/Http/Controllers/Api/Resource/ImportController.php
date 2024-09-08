@@ -13,15 +13,15 @@
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
 use Exception;
-use Turahe\Core\Models\Import;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Http\Resources\ImportResource;
-use Turahe\Core\Resource\Http\ResourceRequest;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Turahe\Core\Contracts\Resources\Importable;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Http\Resources\ImportResource;
+use Turahe\Core\Models\Import;
+use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Resource\Import\RowsExceededException;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ImportController extends ApiController
 {
@@ -49,11 +49,11 @@ class ImportController extends ApiController
         $import = Import::findOrFail($request->route('id'));
 
         $request->validate([
-            'mappings'                      => 'required|array',
-            'mappings.*.attribute'          => 'nullable|distinct|string',
-            'mappings.*.auto_detected'      => 'required|boolean',
-            'mappings.*.original'           => 'required|string',
-            'mappings.*.skip'               => 'required|boolean',
+            'mappings' => 'required|array',
+            'mappings.*.attribute' => 'nullable|distinct|string',
+            'mappings.*.auto_detected' => 'required|boolean',
+            'mappings.*.original' => 'required|string',
+            'mappings.*.skip' => 'required|boolean',
             'mappings.*.detected_attribute' => 'present',
         ]);
 
@@ -76,8 +76,8 @@ class ImportController extends ApiController
             }
 
             return $this->response([
-                'message'       => $e->getMessage(),
-                'deleted'       => $deleted ?? false,
+                'message' => $e->getMessage(),
+                'deleted' => $deleted ?? false,
                 'rows_exceeded' => $e instanceof RowsExceededException,
             ], 500);
         }

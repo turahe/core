@@ -24,11 +24,11 @@ class TagResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'            => $this->id,
-            'name'          => $this->name,
-            'swatch_color'  => $this->swatch_color,
+            'id' => $this->id,
+            'name' => $this->name,
+            'swatch_color' => $this->swatch_color,
             'display_order' => $this->display_order,
-            'type'          => $this->type,
+            'type' => $this->type,
         ];
     }
 }

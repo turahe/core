@@ -14,8 +14,8 @@ namespace Turahe\Core\Fields;
 
 use Illuminate\Support\Collection;
 use Turahe\Core\Casts\ISO8601Date;
-use Turahe\Core\Models\CustomField;
 use Turahe\Core\Casts\ISO8601DateTime;
+use Turahe\Core\Models\CustomField;
 
 class CustomFieldResourceCollection extends Collection
 {
@@ -98,17 +98,17 @@ class CustomFieldResourceCollection extends Collection
     protected function castableFieldsData()
     {
         return [
-            'Text'     => 'string',
+            'Text' => 'string',
             'Textarea' => 'string',
-            'Email'    => 'string',
+            'Email' => 'string',
             'Timezone' => 'string',
-            'Date'     => ISO8601Date::class,
+            'Date' => ISO8601Date::class,
             'DateTime' => ISO8601DateTime::class,
-            'Boolean'  => 'boolean',
-            'Numeric'  => 'decimal:3',
-            'Number'   => 'int',
-            'Radio'    => 'int',
-            'Select'   => 'int',
+            'Boolean' => 'boolean',
+            'Numeric' => 'decimal:3',
+            'Number' => 'int',
+            'Radio' => 'int',
+            'Select' => 'int',
         ];
     }
 }

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\OAuthAccount;
+use Illuminate\Http\Request;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Resources\OAuthAccountResource;
+use Turahe\Core\Models\OAuthAccount;
 
 class OAuthAccountController extends ApiController
 {

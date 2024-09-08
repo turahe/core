@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Providers;
 
-use Turahe\Core\ReCaptcha;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Support\DeferrableProvider;
+use Turahe\Core\ReCaptcha;
 
 class ReCaptchaServiceProvider extends ServiceProvider implements DeferrableProvider
 {

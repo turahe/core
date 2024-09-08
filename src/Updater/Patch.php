@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Updater;
 
-use JsonSerializable;
-use Illuminate\Support\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Carbon;
+use JsonSerializable;
 use Turahe\Core\Models\Patch as PatchModel;
 
 final class Patch implements Arrayable, JsonSerializable
@@ -29,9 +29,7 @@ final class Patch implements Arrayable, JsonSerializable
     /**
      * Initialize new Relase instance.
      */
-    public function __construct(protected object $patch)
-    {
-    }
+    public function __construct(protected object $patch) {}
 
     /**
      * Check whether the patch is applied.
@@ -47,7 +45,7 @@ final class Patch implements Arrayable, JsonSerializable
     public function markAsApplied(): bool
     {
         (new PatchModel([
-            'token'   => $this->token(),
+            'token' => $this->token(),
             'version' => $this->version(),
         ]))->save();
 
@@ -103,9 +101,9 @@ final class Patch implements Arrayable, JsonSerializable
     {
         return [
             'description' => $this->description(),
-            'date'        => $this->date()->toJSON(),
-            'token'       => $this->token(),
-            'isApplied'   => $this->isApplied(),
+            'date' => $this->date()->toJSON(),
+            'token' => $this->token(),
+            'isApplied' => $this->isApplied(),
         ];
     }
 

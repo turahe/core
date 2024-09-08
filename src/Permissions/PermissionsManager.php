@@ -149,7 +149,7 @@ class PermissionsManager
         if (! array_key_exists($name, $this->groups)) {
             $this->groups[$name] = [
                 'views' => [],
-                'as'    => $lastStack['as'],
+                'as' => $lastStack['as'],
             ];
         } elseif ($lastStack['as'] && ! $this->groups[$name]['as']) {
             $this->groups[$name]['as'] = $lastStack['as'];
@@ -255,12 +255,12 @@ class PermissionsManager
         $revokeable = $data['revokeable'] ?? $single;  // View with single permission can be revoked
 
         $this->groups[$resourceName]['views'][] = [
-            'revokeable'  => $revokeable, // Whether the user can revoke the permission
-            'keys'        => $keys, // Keys are the permission internal names e.q. ['delete', 'create','view'];
-            'single'      => $single,
+            'revokeable' => $revokeable, // Whether the user can revoke the permission
+            'keys' => $keys, // Keys are the permission internal names e.q. ['delete', 'create','view'];
+            'single' => $single,
             'permissions' => $data['permissions'], // The available permissions for this view
-            'as'          => $data['as'] ?? null, // The view name to show e.q. View
-            'view'        => $viewName, // The view ID
+            'as' => $data['as'] ?? null, // The view name to show e.q. View
+            'view' => $viewName, // The view ID
         ];
     }
 }

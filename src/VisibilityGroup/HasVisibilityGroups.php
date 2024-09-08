@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\VisibilityGroup;
 
-use Turahe\Users\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Turahe\Users\Models\User;
 
 interface HasVisibilityGroups
 {

@@ -13,12 +13,12 @@
 namespace Turahe\Core\Google;
 
 use Google\Client as GoogleClient;
-use Turahe\Core\OAuth\OAuthManager;
-use Turahe\Core\Google\Services\Labels;
-use Turahe\Core\Google\Services\History;
-use Turahe\Core\Google\Services\Message;
 use Turahe\Core\Google\Services\Calendar;
+use Turahe\Core\Google\Services\History;
+use Turahe\Core\Google\Services\Labels;
+use Turahe\Core\Google\Services\Message;
 use Turahe\Core\OAuth\AccessTokenProvider;
+use Turahe\Core\OAuth\OAuthManager;
 
 class Client
 {

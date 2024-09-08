@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Calendar\Outlook;
 
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Microsoft\Graph\Model\Calendar as CalendarModel;
+use Turahe\Core\Contracts\OAuth\Calendarable;
 use Turahe\Core\Facades\MsGraph as Api;
 use Turahe\Core\OAuth\AccessTokenProvider;
-use Turahe\Core\Contracts\OAuth\Calendarable;
-use Microsoft\Graph\Model\Calendar as CalendarModel;
 use Turahe\Core\OAuth\Exceptions\ConnectionErrorException;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class OutlookCalendar implements Calendarable
 {

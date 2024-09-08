@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Providers;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Turahe\Core\Contracts\OAuth\StateStorage;
 use Turahe\Core\OAuth\State\StateStorageManager;
-use Illuminate\Contracts\Support\DeferrableProvider;
 
 class OAuthServiceProvider extends ServiceProvider implements DeferrableProvider
 {

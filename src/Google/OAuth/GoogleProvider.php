@@ -13,8 +13,8 @@
 namespace Turahe\Core\Google\OAuth;
 
 use League\OAuth2\Client\Provider\Google;
-use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Token\AccessToken;
 
 class GoogleProvider extends Google
 {

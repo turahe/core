@@ -13,6 +13,4 @@
 namespace Turahe\Core\Concerns;
 
 /** @mixin \Turahe\Core\Models\Model */
-trait HasMeta
-{
-}
+trait HasMeta {}

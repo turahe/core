@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Zapier;
 
-use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
-use Turahe\Core\Models\ZapierHook;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
+use Turahe\Core\Models\ZapierHook;
 
 class ProcessZapHookAction implements ShouldQueue
 {
@@ -47,9 +47,7 @@ class ProcessZapHookAction implements ShouldQueue
     /**
      * Create new ProcessZapHooksAction instance.
      */
-    public function __construct(protected string $hookUrl, protected mixed $payload)
-    {
-    }
+    public function __construct(protected string $hookUrl, protected mixed $payload) {}
 
     /**
      * Execute the job.

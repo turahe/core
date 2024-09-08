@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Updater;
 
-use Illuminate\Http\JsonResponse;
-use Turahe\Core\Updater\Updater;
 use App\Installer\RequirementsChecker;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Artisan;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Updater\Updater;
 
 class UpdateController extends ApiController
 {
@@ -26,10 +26,10 @@ class UpdateController extends ApiController
     public function index(Updater $updater): JsonResponse
     {
         return $this->response([
-            'installed_version'        => $updater->getVersionInstalled(),
+            'installed_version' => $updater->getVersionInstalled(),
             'latest_available_version' => $updater->getVersionAvailable(),
             'is_new_version_available' => $updater->isNewVersionAvailable(),
-            'purchase_key'             => $updater->getPurchaseKey(),
+            'purchase_key' => $updater->getPurchaseKey(),
         ]);
     }
 
@@ -39,7 +39,7 @@ class UpdateController extends ApiController
     public function update(?string $purchaseKey = null): JsonResponse
     {
         // Update flag
-        $requirements = new RequirementsChecker();
+        $requirements = new RequirementsChecker;
 
         abort_if($requirements->fails('zip'), 409, __('core::update.update_zip_is_required'));
 

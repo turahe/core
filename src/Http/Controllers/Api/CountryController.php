@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Turahe\Core\Models\Country;
 use Illuminate\Http\JsonResponse;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Resources\CountryResource;
+use Turahe\Core\Models\Country;
 
 class CountryController extends ApiController
 {

@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Resource\Resource;
+use Illuminate\Http\Request;
 use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Timeline\Timelineables;
-use Turahe\Core\Models\PinnedTimelineSubject;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Resources\ChangelogResource;
+use Turahe\Core\Models\PinnedTimelineSubject;
+use Turahe\Core\Resource\Resource;
+use Turahe\Core\Timeline\Timelineables;
 
 class TimelineController extends ApiController
 {

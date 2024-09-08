@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Turahe\Core\Microsoft\Client;
 use Illuminate\Support\Facades\Facade;
+use Turahe\Core\Microsoft\Client;
 
 /**
  * @mixin \Turahe\Core\Microsoft\Client

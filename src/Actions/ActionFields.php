@@ -17,9 +17,7 @@ class ActionFields
     /**
      * Create new instance of action request fields
      */
-    public function __construct(protected array $fields)
-    {
-    }
+    public function __construct(protected array $fields) {}
 
     /**
      * Get field

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Turahe\Core\Criteria\FilterRulesCriteria;
-use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Contracts\Resources\Exportable;
 use Turahe\Core\Criteria\ExportRequestCriteria;
+use Turahe\Core\Criteria\FilterRulesCriteria;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class ExportController extends ApiController
 {

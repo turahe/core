@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Fields;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Turahe\Core\Table\BelongsToColumn;
 
 class BelongsTo extends Optionable
@@ -193,7 +193,7 @@ class BelongsTo extends Optionable
         return with($this->jsonResource, function ($jsonResource) use ($model) {
             return [
                 $this->belongsToRelation => new $jsonResource($model->{$this->belongsToRelation}),
-                $this->attribute         => $this->resolve($model),
+                $this->attribute => $this->resolve($model),
             ];
         });
     }
@@ -339,7 +339,7 @@ class BelongsTo extends Optionable
     {
         return array_merge(parent::jsonSerialize(), [
             'belongsToRelation' => $this->belongsToRelation,
-            'dependsOn'         => $this->dependsOn ? $this->dependsOn->attribute : null,
+            'dependsOn' => $this->dependsOn ? $this->dependsOn->attribute : null,
         ]);
     }
 }

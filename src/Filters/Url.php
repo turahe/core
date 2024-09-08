@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Filters;
 
-class Url extends Text
-{
-}
+class Url extends Text {}

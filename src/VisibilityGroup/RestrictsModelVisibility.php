@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\VisibilityGroup;
 
-use Turahe\Users\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Models\ModelVisibilityGroup;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Turahe\Core\Models\ModelVisibilityGroup;
+use Turahe\Users\Models\User;
 
 trait RestrictsModelVisibility
 {
@@ -55,7 +55,7 @@ trait RestrictsModelVisibility
         }
 
         return [
-            'type'       => $this->visibilityGroup->type,
+            'type' => $this->visibilityGroup->type,
             'depends_on' => $this->getVisibilityDependentsIds(),
         ];
     }

@@ -24,13 +24,13 @@ class CalendarEventResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'         => $this->getKey(),
-            'title'      => $this->getCalendarTitle($request->viewName),
-            'start'      => $this->getCalendarStartDate($request->viewName),
-            'end'        => $this->getCalendarEndDate($request->viewName),
-            'allDay'     => $this->isAllDay(),
+            'id' => $this->getKey(),
+            'title' => $this->getCalendarTitle($request->viewName),
+            'start' => $this->getCalendarStartDate($request->viewName),
+            'end' => $this->getCalendarEndDate($request->viewName),
+            'allDay' => $this->isAllDay(),
             'isReadOnly' => $request->user()->cant('update', $this->resource),
-            'textColor'  => method_exists($this->resource, 'getCalendarEventTextColor') ?
+            'textColor' => method_exists($this->resource, 'getCalendarEventTextColor') ?
                 $this->getCalendarEventTextColor() :
                 null,
             'backgroundColor' => $bgColor = method_exists($this->resource, 'getCalendarEventBgColor') ?

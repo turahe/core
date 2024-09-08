@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Turahe\Core\Database\Seeders\PermissionsSeeder;
 use Turahe\Core\Tests\Concerns\TestsImportAndExport;
 
@@ -42,7 +42,7 @@ class ExportControllerTest extends TestCase
 
         try {
             $response = $this->postJson('/api/contacts/export', [
-                'type'   => 'csv',
+                'type' => 'csv',
                 'period' => 'last_7_days',
             ])->assertOk()
                 ->assertHeader('Content-Disposition', 'attachment; filename=contacts.csv')
@@ -71,7 +71,7 @@ class ExportControllerTest extends TestCase
 
         try {
             $response = $this->postJson('/api/contacts/export', [
-                'type'   => 'csv',
+                'type' => 'csv',
                 'period' => 'last_7_days',
             ]);
 
@@ -93,7 +93,7 @@ class ExportControllerTest extends TestCase
         Contact::factory()->count(2)->create();
 
         $this->postJson('/api/contacts/export', [
-            'type'   => 'csv',
+            'type' => 'csv',
             'period' => 'last_7_days',
         ])->assertForbidden();
     }
@@ -105,19 +105,19 @@ class ExportControllerTest extends TestCase
         $contacts = Contact::factory()->count(2)->create();
 
         $response = $this->postJson('/api/contacts/export', [
-            'type'    => 'csv',
-            'period'  => 'last_7_days',
+            'type' => 'csv',
+            'period' => 'last_7_days',
             'filters' => [
                 'condition' => 'and',
-                'children'  => [
+                'children' => [
                     [
-                        'type'  => 'rule',
+                        'type' => 'rule',
                         'query' => [
-                            'type'     => 'text',
-                            'rule'     => 'first_name',
+                            'type' => 'text',
+                            'rule' => 'first_name',
                             'operator' => 'equal',
-                            'operand'  => '',
-                            'value'    => $contacts[0]->first_name,
+                            'operand' => '',
+                            'value' => $contacts[0]->first_name,
                         ],
                     ],
                 ],

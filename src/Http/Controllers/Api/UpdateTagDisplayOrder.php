@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Turahe\Core\Models\Tag;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\Tag;
 
 class UpdateTagDisplayOrder extends ApiController
 {
@@ -25,7 +25,7 @@ class UpdateTagDisplayOrder extends ApiController
     public function __invoke(Request $request): JsonResponse
     {
         $request->validate([
-            '*.id'            => 'required|int',
+            '*.id' => 'required|int',
             '*.display_order' => 'required|int',
         ]);
 

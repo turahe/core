@@ -28,14 +28,14 @@ class ZapierHookControllerTest extends TestCase
 
         $this->postJson('/api/zapier/hooks/events/create', [
             'targetUrl' => $url = 'https://wach.id',
-            'zapId'     => 123,
-            'data'      => ['dummy-data' => 'dummy-value'],
+            'zapId' => 123,
+            'data' => ['dummy-data' => 'dummy-value'],
         ])->assertCreated()
             ->assertJson([
                 'user_id' => $user->id,
-                'hook'    => $url,
-                'zap_id'  => 123,
-                'data'    => ['dummy-data' => 'dummy-value'],
+                'hook' => $url,
+                'zap_id' => 123,
+                'data' => ['dummy-data' => 'dummy-value'],
             ]);
     }
 
@@ -45,8 +45,8 @@ class ZapierHookControllerTest extends TestCase
 
         $id = $this->postJson('/api/zapier/hooks/events/create', [
             'targetUrl' => 'https://wach.id',
-            'zapId'     => 123,
-            'data'      => ['dummy-data' => 'dummy-value'],
+            'zapId' => 123,
+            'data' => ['dummy-data' => 'dummy-value'],
         ])->getData()->id;
 
         $this->deleteJson('/api/zapier/hooks/'.$id)->assertNoContent();

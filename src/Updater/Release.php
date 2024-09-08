@@ -26,9 +26,7 @@ final class Release
     /**
      * Initialize new Relase instance.
      */
-    public function __construct(protected string $version, protected Filesystem $filesystem)
-    {
-    }
+    public function __construct(protected string $version, protected Filesystem $filesystem) {}
 
     /**
      * Get the release version.

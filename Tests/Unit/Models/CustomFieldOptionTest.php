@@ -32,10 +32,10 @@ class CustomFieldOptionTest extends TestCase
     protected function makeField($attrs = [])
     {
         return new CustomField(array_merge([
-            'field_id'      => 'field_id',
-            'field_type'    => 'Text',
+            'field_id' => 'field_id',
+            'field_type' => 'Text',
             'resource_name' => 'resource',
-            'label'         => 'Label',
+            'label' => 'Label',
         ], $attrs));
     }
 }

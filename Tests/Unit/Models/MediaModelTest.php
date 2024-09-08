@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Tests\TestCase;
-use Tests\Fixtures\Event;
-use Turahe\Core\Models\Media;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
+use Tests\Fixtures\Event;
+use Tests\TestCase;
+use Turahe\Core\Models\Media;
 
 class MediaModelTest extends TestCase
 {
@@ -55,7 +55,7 @@ class MediaModelTest extends TestCase
 
     public function test_it_does_not_make_query_when_pruning_if_the_mediable_ids_count_is_zero()
     {
-        $this->assertFalse((new Media())->purgeByMediableIds(Event::class, []));
+        $this->assertFalse((new Media)->purgeByMediableIds(Event::class, []));
     }
 
     public function test_it_can_find_media_by_token()
@@ -67,13 +67,13 @@ class MediaModelTest extends TestCase
 
     protected function createMedia()
     {
-        $media = (new Media())->forceFill([
-            'disk'           => 'local',
-            'directory'      => 'media',
-            'filename'       => 'filename',
-            'extension'      => 'jpg',
-            'mime_type'      => 'image/jpg',
-            'size'           => 200,
+        $media = (new Media)->forceFill([
+            'disk' => 'local',
+            'directory' => 'media',
+            'filename' => 'filename',
+            'extension' => 'jpg',
+            'mime_type' => 'image/jpg',
+            'size' => 200,
             'aggregate_type' => 'image',
         ]);
 

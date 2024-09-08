@@ -13,11 +13,11 @@
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Tests\TestCase;
-use Turahe\Core\Mail\Headers\Header;
-use Turahe\Core\Mail\Headers\IdHeader;
-use Turahe\Core\Mail\Headers\DateHeader;
 use Turahe\Core\Mail\Headers\AddressHeader;
+use Turahe\Core\Mail\Headers\DateHeader;
+use Turahe\Core\Mail\Headers\Header;
 use Turahe\Core\Mail\Headers\HeadersCollection;
+use Turahe\Core\Mail\Headers\IdHeader;
 
 class HeadersCollectionTest extends TestCase
 {

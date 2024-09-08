@@ -12,18 +12,18 @@
 
 namespace Turahe\Core\Microsoft\OAuth;
 
-use Psr\Http\Message\ResponseInterface;
-use League\OAuth2\Client\Token\AccessToken;
-use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessToken;
+use Psr\Http\Message\ResponseInterface;
 
 class MicrosoftProvider extends GenericProvider
 {
     public function __construct(array $options = [], array $collaborators = [])
     {
         parent::__construct(array_merge($options, [
-            'urlAuthorize'            => $this->getBaseAuthorizationUrl(),
-            'urlAccessToken'          => $this->getBaseAccessTokenUrl([]),
+            'urlAuthorize' => $this->getBaseAuthorizationUrl(),
+            'urlAccessToken' => $this->getBaseAccessTokenUrl([]),
             'urlResourceOwnerDetails' => 'https://graph.microsoft.com/v1.0/me',
         ]), $collaborators);
     }
@@ -85,7 +85,7 @@ class MicrosoftProvider extends GenericProvider
     /**
      * Checks a provider response for errors.
      *
-     * @param  array|string  $data Parsed response data
+     * @param  array|string  $data  Parsed response data
      * @return void
      *
      * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException

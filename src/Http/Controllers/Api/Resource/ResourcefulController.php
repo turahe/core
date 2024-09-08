@@ -15,8 +15,8 @@ namespace Turahe\Core\Http\Controllers\Api\Resource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Turahe\Core\Http\Controllers\ApiController;
-use Turahe\Core\Resource\Http\ResourcefulRequest;
 use Turahe\Core\Resource\Http\CreateResourceRequest;
+use Turahe\Core\Resource\Http\ResourcefulRequest;
 use Turahe\Core\Resource\Http\UpdateResourceRequest;
 
 class ResourcefulController extends ApiController

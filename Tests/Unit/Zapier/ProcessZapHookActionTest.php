@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Unit\Zapier;
 
-use Tests\TestCase;
 use Illuminate\Http\Client\Request;
-use Turahe\Core\Models\ZapierHook;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
+use Turahe\Core\Models\ZapierHook;
 use Turahe\Core\Zapier\ProcessZapHookAction;
 
 class ProcessZapHookActionTest extends TestCase
@@ -57,12 +57,12 @@ class ProcessZapHookActionTest extends TestCase
     protected function createHook()
     {
         return ZapierHook::create([
-            'hook'          => 'https://zapier.com/fake/hook/url',
-            'zap_id'        => 123,
-            'data'          => ['dummy-data' => 'dummy-value'],
-            'user_id'       => $this->createUser()->id,
+            'hook' => 'https://zapier.com/fake/hook/url',
+            'zap_id' => 123,
+            'data' => ['dummy-data' => 'dummy-value'],
+            'user_id' => $this->createUser()->id,
             'resource_name' => 'events',
-            'action'        => 'create',
+            'action' => 'create',
         ]);
     }
 }

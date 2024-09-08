@@ -43,6 +43,7 @@
             }
         }
     },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Turahe\\Core\\": "src"

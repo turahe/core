@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Contracts\Resources;
 
-interface Mediable
-{
-}
+interface Mediable {}

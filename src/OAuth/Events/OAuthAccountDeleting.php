@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\OAuth\Events;
 
-use Turahe\Core\Models\OAuthAccount;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Turahe\Core\Models\OAuthAccount;
 
 class OAuthAccountDeleting
 {
@@ -24,7 +24,5 @@ class OAuthAccountDeleting
     /**
      * Create a new event instance.
      */
-    public function __construct(public OAuthAccount $account)
-    {
-    }
+    public function __construct(public OAuthAccount $account) {}
 }

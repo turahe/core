@@ -12,17 +12,15 @@
 
 namespace Turahe\Core\Resource\Import;
 
-use JsonSerializable;
 use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
 
 class Failure implements Arrayable, JsonSerializable
 {
     /**
      * Create new Failure instance.
      */
-    public function __construct(protected int $row, protected string $attribute, protected array $errors, protected array $values = [])
-    {
-    }
+    public function __construct(protected int $row, protected string $attribute, protected array $errors, protected array $values = []) {}
 
     public function row(): int
     {
@@ -57,10 +55,10 @@ class Failure implements Arrayable, JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'row'       => $this->row(),
+            'row' => $this->row(),
             'attribute' => $this->attribute(),
-            'errors'    => $this->errors(),
-            'values'    => $this->values(),
+            'errors' => $this->errors(),
+            'values' => $this->values(),
         ];
     }
 }

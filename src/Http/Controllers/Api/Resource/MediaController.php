@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Turahe\Core\Models\Media;
-use Turahe\Media\MediaUploader;
 use Illuminate\Http\JsonResponse;
 use Turahe\Core\Contracts\Resources\Mediable;
-use Turahe\Core\Http\Resources\MediaResource;
-use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Http\Resources\MediaResource;
+use Turahe\Core\Models\Media;
+use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Media\MediaUploader;
 
 class MediaController extends ApiController
 {

@@ -55,9 +55,9 @@ class FilterControllerTest extends TestCase
 
         $this->postJson('/api/filters', $data = [
             'identifier' => 'users',
-            'name'       => 'Filter Name',
-            'is_shared'  => true,
-            'rules'      => $this->filterRulesPayload(),
+            'name' => 'Filter Name',
+            'is_shared' => true,
+            'rules' => $this->filterRulesPayload(),
         ])->assertJson($data);
     }
 
@@ -68,9 +68,9 @@ class FilterControllerTest extends TestCase
         $filter = Filter::factory()->for($user)->create();
 
         $this->putJson('/api/filters/'.$filter->id, $data = [
-            'name'      => 'New Filter Name',
+            'name' => 'New Filter Name',
             'is_shared' => true,
-            'rules'     => $this->filterRulesPayload(),
+            'rules' => $this->filterRulesPayload(),
         ])->assertJson($data);
     }
 
@@ -85,12 +85,12 @@ class FilterControllerTest extends TestCase
         $this->asRegularUser()->signIn();
 
         $this->putJson('/api/filters/'.$filter->id, [
-            'name'      => 'New Filter Name',
+            'name' => 'New Filter Name',
             'is_shared' => true,
         ])->assertForbidden();
 
         $this->assertDatabaseHas('filters', [
-            'name'      => $name,
+            'name' => $name,
             'is_shared' => false,
         ]);
     }
@@ -168,7 +168,7 @@ class FilterControllerTest extends TestCase
         $filter = Filter::factory()->create();
 
         $this->putJson('/api/filters/'.$filter->id, [
-            'name'      => 'New Filter Name',
+            'name' => 'New Filter Name',
             'is_shared' => false,
         ])->assertForbidden();
 
@@ -182,7 +182,7 @@ class FilterControllerTest extends TestCase
         $filter = Filter::factory()->create(['user_id' => null]);
 
         $this->putJson('/api/filters/'.$filter->id, [
-            'name'      => 'New Filter Name',
+            'name' => 'New Filter Name',
             'is_shared' => false,
         ])->assertForbidden();
 
@@ -200,14 +200,14 @@ class FilterControllerTest extends TestCase
     {
         return [
             'condition' => 'and',
-            'children'  => [[
-                'type'  => 'rule',
+            'children' => [[
+                'type' => 'rule',
                 'query' => [
-                    'type'     => 'text',
+                    'type' => 'text',
                     'operator' => 'equal',
-                    'rule'     => 'dummy_attribute',
-                    'operand'  => null,
-                    'value'    => 'Dummy Value',
+                    'rule' => 'dummy_attribute',
+                    'operand' => null,
+                    'value' => 'Dummy Value',
                 ],
             ]],
         ];

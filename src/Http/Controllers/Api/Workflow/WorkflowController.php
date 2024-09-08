@@ -13,10 +13,10 @@
 namespace Turahe\Core\Http\Controllers\Api\Workflow;
 
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\Workflow;
-use Turahe\Core\Http\Requests\WorkflowRequest;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Http\Requests\WorkflowRequest;
 use Turahe\Core\Http\Resources\WorkflowResource;
+use Turahe\Core\Models\Workflow;
 
 class WorkflowController extends ApiController
 {

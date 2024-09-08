@@ -15,9 +15,9 @@ namespace Turahe\Core\Google\Services\Message;
 use Google\Client;
 use Google\Service\Gmail;
 use Google\Service\Gmail\MessagePart;
+use Turahe\Core\Google\Concerns\HasDecodeableBody;
 use Turahe\Core\Google\Concerns\HasHeaders;
 use Turahe\Core\Mail\Headers\HeadersCollection;
-use Turahe\Core\Google\Concerns\HasDecodeableBody;
 
 class Attachment
 {

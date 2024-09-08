@@ -18,15 +18,15 @@ class DefaultSettings
      * All of the registered default settings.
      */
     protected static array $defaults = [
-        '_server_ip'         => null,
-        '_server_hostname'   => null,
-        '_installed_date'    => null,
+        '_server_ip' => null,
+        '_server_hostname' => null,
+        '_installed_date' => null,
         '_last_updated_date' => null,
         '_db_driver_version' => null,
-        '_db_driver'         => null,
-        '_app_url'           => null,
-        '_version'           => null,
-        'purchase_key'       => null,
+        '_db_driver' => null,
+        '_app_url' => null,
+        '_version' => null,
+        'purchase_key' => null,
     ];
 
     /**

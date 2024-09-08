@@ -22,7 +22,7 @@ class AddressHeader extends Header
     /**
      * Initialize header
      *
-     * @param  string  $name The header name
+     * @param  string  $name  The header name
      * @param  string|array  $value
      * @param  string|null  $personName
      */
@@ -92,7 +92,7 @@ class AddressHeader extends Header
 
             $this->addresses[] = [
                 'address' => trim($email),
-                'name'    => is_null($name) ? null : trim($name),
+                'name' => is_null($name) ? null : trim($name),
             ];
         }
     }

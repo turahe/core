@@ -12,6 +12,4 @@
 
 namespace App\UpdateNewFeature;
 
-class DummyClass
-{
-}
+class DummyClass {}

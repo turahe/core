@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Turahe\Core\Menu\MenuManager;
 use Illuminate\Support\Facades\Facade;
+use Turahe\Core\Menu\MenuManager;
 
 /**
  * @method static static register(\Turahe\Core\Menu\MenuItem|array $items)

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Turahe\Core\Card\CardsManager;
 use Illuminate\Support\Facades\Facade;
+use Turahe\Core\Card\CardsManager;
 
 /**
  * @method static static register(string $resourceName, mixed $provider)

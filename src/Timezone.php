@@ -13,11 +13,11 @@
 namespace Turahe\Core;
 
 use DateTime;
-use Exception;
 use DateTimeZone;
+use Exception;
+use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 use Turahe\Core\Contracts\Localizeable;
-use Illuminate\Contracts\Support\Arrayable;
 
 class Timezone implements Arrayable, JsonSerializable
 {
@@ -64,7 +64,6 @@ class Timezone implements Arrayable, JsonSerializable
      *
      * @param mixed
      *
-     * @return string
      * @throws Exception
      */
     public function fromUTC(...$params): string

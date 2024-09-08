@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\QueryBuilder;
 
-use stdClass;
 use Exception;
-use Illuminate\Support\Collection;
-use Turahe\Core\Filters\OperandFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use stdClass;
+use Turahe\Core\Filters\OperandFilter;
 use Turahe\Core\ProvidesBetweenArgumentsViaString;
 use Turahe\Core\QueryBuilder\Exceptions\QueryBuilderException;
 
@@ -28,9 +28,7 @@ class Parser
     /**
      * Initialize new Parser instance.
      */
-    public function __construct(protected Collection $filters)
-    {
-    }
+    public function __construct(protected Collection $filters) {}
 
     /**
      * Build a query based on the provided rules.
@@ -214,8 +212,8 @@ class Parser
      * (This used to be part of makeQuery, where the name made sense, but I pulled it
      * out to reduce some duplicated code inside JoinSupportingQueryBuilder)
      *
-     * @param  mixed  $value the value that needs to be queried in the database.
-     * @param  string  $queryCondition and/or...
+     * @param  mixed  $value  the value that needs to be queried in the database.
+     * @param  string  $queryCondition  and/or...
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function convertIncomingQBtoQuery(Builder $builder, stdClass $rule, $value, $queryCondition = 'AND')

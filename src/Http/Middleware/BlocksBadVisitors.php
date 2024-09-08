@@ -15,10 +15,10 @@ namespace Turahe\Core\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Turahe\Core\Facades\Innoclapps;
 
 class BlocksBadVisitors
 {

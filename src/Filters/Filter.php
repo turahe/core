@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\Filters;
 
-use JsonSerializable;
-use Turahe\Core\Makeable;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
-use Turahe\Core\HasHelpText;
+use JsonSerializable;
 use Turahe\Core\Authorizeable;
+use Turahe\Core\HasHelpText;
+use Turahe\Core\Makeable;
 use Turahe\Core\MetableElement;
 use Turahe\Core\QueryBuilder\Parser;
-use Illuminate\Database\Eloquent\Builder;
 use Turahe\Core\QueryBuilder\ParserTrait;
-use Illuminate\Contracts\Support\Arrayable;
 
 class Filter implements Arrayable, JsonSerializable
 {
@@ -203,8 +203,8 @@ class Filter implements Arrayable, JsonSerializable
      * Apply the filter when custom query callback is provided
      *
      * @param  mixed  $value
-     *  @param  string  $condition
-     *  @param  array  $sqlOperator
+     * @param  string  $condition
+     * @param  array  $sqlOperator
      * @param  stdClass  $rule
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -381,13 +381,13 @@ class Filter implements Arrayable, JsonSerializable
     public function getBuilderData(): array
     {
         return [
-            'type'  => 'rule',
+            'type' => 'rule',
             'query' => array_filter([
-                'type'     => $this->type(),
-                'rule'     => $this->field(),
+                'type' => $this->type(),
+                'rule' => $this->field(),
                 'operator' => $this->operator,
-                'operand'  => $this instanceof OperandFilter ? $this->operand : null,
-                'value'    => $this->value,
+                'operand' => $this instanceof OperandFilter ? $this->operand : null,
+                'value' => $this->value,
             ]),
         ];
     }
@@ -398,17 +398,17 @@ class Filter implements Arrayable, JsonSerializable
     public function jsonSerialize(): array
     {
         return array_merge([
-            'id'                => $this->field(),
-            'label'             => $this->label(),
-            'type'              => $this->type(),
-            'operators'         => $this->getOperators(),
-            'operatorsOptions'  => $this->operatorsOptions(),
-            'component'         => $this->component(),
-            'isStatic'          => $this->isStatic(),
-            'operands'          => $this instanceof OperandFilter ? $this->getOperands() : [],
+            'id' => $this->field(),
+            'label' => $this->label(),
+            'type' => $this->type(),
+            'operators' => $this->getOperators(),
+            'operatorsOptions' => $this->operatorsOptions(),
+            'component' => $this->component(),
+            'isStatic' => $this->isStatic(),
+            'operands' => $this instanceof OperandFilter ? $this->getOperands() : [],
             'has_authorization' => $this->hasAuthorization(),
-            'helpText'          => $this->helpText,
-            'displayAs'         => $this->displayAs,
+            'helpText' => $this->helpText,
+            'displayAs' => $this->displayAs,
         ], $this->meta());
     }
 }

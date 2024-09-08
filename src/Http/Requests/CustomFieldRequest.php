@@ -13,16 +13,16 @@
 namespace Turahe\Core\Http\Requests;
 
 use Closure;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
-use Turahe\Core\Facades\Fields;
-use Turahe\Core\Rules\UniqueRule;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Models\CustomField;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rule;
 use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
 use Turahe\Core\Contracts\Resources\AcceptsUniqueCustomFields;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Models\CustomField;
+use Turahe\Core\Rules\UniqueRule;
 
 class CustomFieldRequest extends FormRequest
 {
@@ -43,9 +43,9 @@ class CustomFieldRequest extends FormRequest
                         ->map(fn ($resource) => $resource->name())
                 ),
             ],
-            'label'      => 'required|string|max:191',
+            'label' => 'required|string|max:191',
             'field_type' => [Rule::requiredIf($this->isCreation()), Rule::in(Fields::customFieldsTypes())],
-            'is_unique'  => [
+            'is_unique' => [
                 'sometimes',  'nullable', 'boolean', Rule::prohibitedIf(
                     function () {
                         if (! $this->isCreation()) {
@@ -63,7 +63,7 @@ class CustomFieldRequest extends FormRequest
                 ),
             ],
             'field_id' => $this->getFieldIdRules(),
-            'options'  => ['nullable', 'array', function (string $attribute, mixed $value, Closure $fail) {
+            'options' => ['nullable', 'array', function (string $attribute, mixed $value, Closure $fail) {
                 $customField = ! $this->isCreation() ?
                     CustomField::find($this->route('custom_field')) :
                     null;
@@ -131,8 +131,8 @@ class CustomFieldRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'field_type.in'   => __('core::fields.validation.field_type_invalid'),
-            'field_id.regex'  => __('core::fields.validation.field_id_invalid'),
+            'field_type.in' => __('core::fields.validation.field_type_invalid'),
+            'field_id.regex' => __('core::fields.validation.field_id_invalid'),
             'field_id.unique' => __('core::fields.validation.exist'),
         ];
     }

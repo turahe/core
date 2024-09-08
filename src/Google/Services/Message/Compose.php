@@ -13,12 +13,12 @@
 namespace Turahe\Core\Google\Services\Message;
 
 use Google\Client;
-use LogicException;
 use Google\Service\Gmail;
 use Illuminate\Mail\Message;
+use LogicException;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Part\TextPart;
 use Symfony\Component\Mime\Header\Headers;
+use Symfony\Component\Mime\Part\TextPart;
 use Turahe\Core\Mail\InteractsWithSymfonyMessage;
 
 class Compose extends Message
@@ -69,7 +69,7 @@ class Compose extends Message
      */
     protected function getMessageService()
     {
-        return new \Google\Service\Gmail\Message();
+        return new \Google\Service\Gmail\Message;
     }
 
     /**
@@ -112,7 +112,7 @@ class Compose extends Message
         }
 
         if (! $headers->has('Date')) {
-            $headers->addDateHeader('Date', new \DateTimeImmutable());
+            $headers->addDateHeader('Date', new \DateTimeImmutable);
         }
 
         // determine the "real" sender

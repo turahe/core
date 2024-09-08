@@ -14,6 +14,4 @@ namespace Turahe\Core\OAuth\Exceptions;
 
 use Exception;
 
-class ConnectionErrorException extends Exception
-{
-}
+class ConnectionErrorException extends Exception {}

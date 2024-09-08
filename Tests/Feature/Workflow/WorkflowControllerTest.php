@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\Tests\Feature\Workflow;
 
-use Tests\TestCase;
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Workflow;
-use Turahe\Deals\Models\Pipeline;
 use Illuminate\Support\Facades\Auth;
-use Turahe\Core\Workflow\Workflows;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\Fixtures\Workflows\CreateDealAction;
 use Tests\Fixtures\Workflows\ContactCreatedTrigger;
 use Tests\Fixtures\Workflows\ContactUserChangedTrigger;
+use Tests\Fixtures\Workflows\CreateDealAction;
+use Tests\TestCase;
+use Turahe\Core\Models\Workflow;
+use Turahe\Core\Workflow\Workflows;
+use Turahe\Deals\Models\Pipeline;
+use Turahe\Users\Models\User;
 
 class WorkflowControllerTest extends TestCase
 {
@@ -64,17 +64,17 @@ class WorkflowControllerTest extends TestCase
         $stageId = $pipeline->stages->get(2)->id;
 
         $id = $this->postJson('/api/workflows', $this->worklowArray([
-            'name'        => 'Deal Name',
+            'name' => 'Deal Name',
             'pipeline_id' => $pipeline->id,
-            'stage_id'    => $stageId,
-            'amount'      => 1000,
-            'user_id'     => $user->id,
+            'stage_id' => $stageId,
+            'amount' => 1000,
+            'user_id' => $user->id,
         ]))->assertCreated()
             ->assertJson([
-                'title'        => 'Title',
-                'description'  => 'Description',
-                'is_active'    => true,
-                'action_type'  => CreateDealAction::class,
+                'title' => 'Title',
+                'description' => 'Description',
+                'is_active' => true,
+                'action_type' => CreateDealAction::class,
                 'trigger_type' => ContactCreatedTrigger::class,
             ])
             ->assertJsonPath('data.user_id', $user->id)
@@ -95,29 +95,29 @@ class WorkflowControllerTest extends TestCase
         $stageId = $pipeline->stages->get(3)->id;
 
         $id = $this->createWorkflow([
-            'name'        => 'Deal Name',
+            'name' => 'Deal Name',
             'pipeline_id' => $pipeline->id,
-            'stage_id'    => $stageId,
-            'amount'      => 1000,
-            'user_id'     => $user->id,
+            'stage_id' => $stageId,
+            'amount' => 1000,
+            'user_id' => $user->id,
         ])->id;
 
         $this->putJson('/api/workflows/'.$id, [
-            'title'        => 'Changed Title',
-            'description'  => 'Changed Description',
-            'is_active'    => false,
-            'action_type'  => CreateDealAction::class,
+            'title' => 'Changed Title',
+            'description' => 'Changed Description',
+            'is_active' => false,
+            'action_type' => CreateDealAction::class,
             'trigger_type' => ContactCreatedTrigger::class,
-            'name'         => 'Changed Name',
-            'pipeline_id'  => $pipeline->id,
-            'stage_id'     => $stageId,
-            'amount'       => 1500,
-            'user_id'      => $user->id,
+            'name' => 'Changed Name',
+            'pipeline_id' => $pipeline->id,
+            'stage_id' => $stageId,
+            'amount' => 1500,
+            'user_id' => $user->id,
         ])->assertOk()->assertJson([
-            'title'        => 'Changed Title',
-            'description'  => 'Changed Description',
-            'is_active'    => false,
-            'action_type'  => CreateDealAction::class,
+            'title' => 'Changed Title',
+            'description' => 'Changed Description',
+            'is_active' => false,
+            'action_type' => CreateDealAction::class,
             'trigger_type' => ContactCreatedTrigger::class,
         ])
             ->assertJsonPath('data.user_id', $user->id)
@@ -143,14 +143,14 @@ class WorkflowControllerTest extends TestCase
         $workflow = $this->createWorkflow(['is_active' => false]);
 
         $this->getJson('/api/workflows/'.$workflow->id)->assertJson([
-            'id'           => $workflow->id,
-            'title'        => $workflow->title,
-            'description'  => $workflow->description,
-            'is_active'    => false,
+            'id' => $workflow->id,
+            'title' => $workflow->title,
+            'description' => $workflow->description,
+            'is_active' => false,
             'trigger_type' => $workflow->trigger_type,
-            'action_type'  => $workflow->action_type,
-            'created_at'   => $workflow->created_at->toJSON(),
-            'updated_at'   => $workflow->updated_at->toJSON(),
+            'action_type' => $workflow->action_type,
+            'created_at' => $workflow->created_at->toJSON(),
+            'updated_at' => $workflow->updated_at->toJSON(),
         ]);
     }
 
@@ -202,7 +202,7 @@ class WorkflowControllerTest extends TestCase
         $this->signIn();
 
         $this->postJson('/api/workflows', $this->worklowArray([
-            'trigger_type'                                      => ContactUserChangedTrigger::class,
+            'trigger_type' => ContactUserChangedTrigger::class,
             ContactUserChangedTrigger::changeField()->attribute => 15,
         ]))
             ->assertJsonPath('data.'.ContactUserChangedTrigger::changeField()->attribute, 15);
@@ -213,7 +213,7 @@ class WorkflowControllerTest extends TestCase
         $this->signIn();
 
         $payload = $this->worklowArray([
-            'trigger_type'                                      => ContactUserChangedTrigger::class,
+            'trigger_type' => ContactUserChangedTrigger::class,
             ContactUserChangedTrigger::changeField()->attribute => null,
         ]);
 
@@ -236,7 +236,7 @@ class WorkflowControllerTest extends TestCase
         $this->postJson('/api/workflows', $this->worklowArray(['action_type' => 'dummy']))
             ->assertJsonValidationErrors(['action_type' => __('validation.in_array', [
                 'attribute' => 'action',
-                'other'     => 'the trigger available actions',
+                'other' => 'the trigger available actions',
             ])]);
     }
 
@@ -260,10 +260,10 @@ class WorkflowControllerTest extends TestCase
     protected function worklowArray($attributes = [])
     {
         return array_merge([
-            'title'        => 'Title',
-            'description'  => 'Description',
-            'is_active'    => true,
-            'action_type'  => CreateDealAction::class,
+            'title' => 'Title',
+            'description' => 'Description',
+            'is_active' => true,
+            'action_type' => CreateDealAction::class,
             'trigger_type' => ContactCreatedTrigger::class,
         ], $attributes);
     }

@@ -13,13 +13,13 @@
 namespace Turahe\Core\Workflow\Actions;
 
 use Closure;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Turahe\Core\Fields\Text;
-use Turahe\Core\Workflow\Action;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Workflow\Action;
 
 class WebhookAction extends Action implements ShouldQueue
 {

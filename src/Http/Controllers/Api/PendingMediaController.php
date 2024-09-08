@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Turahe\Media\MediaUploader;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\PendingMedia;
-use Turahe\Core\Http\Resources\MediaResource;
+use Illuminate\Http\Request;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Http\Resources\MediaResource;
+use Turahe\Core\Models\PendingMedia;
+use Turahe\Media\MediaUploader;
 
 class PendingMediaController extends ApiController
 {

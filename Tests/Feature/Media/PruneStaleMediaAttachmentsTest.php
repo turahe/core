@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Feature\Media;
 
-use Tests\TestCase;
 use Illuminate\Support\Carbon;
-use Turahe\Core\Models\Media;
+use Tests\TestCase;
 use Turahe\Core\Media\PruneStaleMediaAttachments;
+use Turahe\Core\Models\Media;
 
 class PruneStaleMediaAttachmentsTest extends TestCase
 {
@@ -36,15 +36,15 @@ class PruneStaleMediaAttachmentsTest extends TestCase
 
     protected function createMedia()
     {
-        $media = new Media();
+        $media = new Media;
 
         $media->forceFill([
-            'disk'           => 'local',
-            'directory'      => 'media',
-            'filename'       => 'filename',
-            'extension'      => 'jpg',
-            'mime_type'      => 'image/jpg',
-            'size'           => 200,
+            'disk' => 'local',
+            'directory' => 'media',
+            'filename' => 'filename',
+            'extension' => 'jpg',
+            'mime_type' => 'image/jpg',
+            'size' => 200,
             'aggregate_type' => 'image',
         ]);
 

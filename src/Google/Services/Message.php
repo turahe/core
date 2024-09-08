@@ -13,12 +13,12 @@
 namespace Turahe\Core\Google\Services;
 
 use Google\Client;
+use Google\Service\Exception as GoogleServiceException;
+use Google\Service\Gmail\BatchDeleteMessagesRequest;
+use Google\Service\Gmail\BatchModifyMessagesRequest;
 use Illuminate\Support\Collection;
 use Turahe\Core\Google\Services\Message\Mail;
 use Turahe\Core\Google\Services\Message\SendMail;
-use Google\Service\Gmail\BatchDeleteMessagesRequest;
-use Google\Service\Gmail\BatchModifyMessagesRequest;
-use Google\Service\Exception as GoogleServiceException;
 
 class Message extends Service
 {
@@ -195,7 +195,7 @@ class Message extends Service
         /** @var \Google\Service\Gmail */
         $service = $this->service;
 
-        $request = new BatchModifyMessagesRequest();
+        $request = new BatchModifyMessagesRequest;
 
         $request->setRemoveLabelIds($removeLabelIds);
         $request->setAddLabelIds($addLabelIds);
@@ -217,7 +217,7 @@ class Message extends Service
         /** @var \Google\Service\Gmail */
         $service = $this->service;
 
-        $request = new BatchDeleteMessagesRequest();
+        $request = new BatchDeleteMessagesRequest;
 
         $request->setIds($messages);
 
@@ -407,9 +407,9 @@ class Message extends Service
         foreach ($messages as $messageKey => $message) {
             foreach ($message->getAttachments() as $attachmentKey => $attachment) {
                 $attachments->push((object) [
-                    'attachment_id'  => $attachment->getId(),
-                    'message_id'     => $message->getId(),
-                    'message_key'    => $messageKey,
+                    'attachment_id' => $attachment->getId(),
+                    'message_id' => $message->getId(),
+                    'message_key' => $messageKey,
                     'attachment_key' => $attachmentKey,
                 ]);
             }

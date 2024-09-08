@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Models;
 
-use DateTime;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Synchronization\SyncState;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Turahe\Core\Contracts\Synchronization\SynchronizesViaWebhook;
+use Turahe\Core\Synchronization\SyncState;
 
 /**
  * Turahe\Core\Models\Synchronization
@@ -88,9 +88,9 @@ class Synchronization extends Model
      */
     protected $casts = [
         'last_synchronized_at' => 'datetime',
-        'start_sync_from'      => 'datetime',
-        'expires_at'           => 'datetime',
-        'sync_state'           => SyncState::class,
+        'start_sync_from' => 'datetime',
+        'expires_at' => 'datetime',
+        'sync_state' => SyncState::class,
     ];
 
     /**
@@ -257,7 +257,7 @@ class Synchronization extends Model
     {
         $this->fill([
             'resource_id' => $resourceId,
-            'expires_at'  => $expiresAt instanceof Carbon ? $expiresAt : Carbon::parse($expiresAt),
+            'expires_at' => $expiresAt instanceof Carbon ? $expiresAt : Carbon::parse($expiresAt),
         ])->save();
 
         return $this;

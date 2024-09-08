@@ -12,19 +12,19 @@
 
 namespace Turahe\Core\Table;
 
-use Illuminate\Support\Str;
-use Turahe\Core\ResolvesActions;
-use Turahe\Core\ResolvesFilters;
-use Illuminate\Support\Collection;
-use Turahe\Core\Contracts\Countable;
-use Turahe\Core\Actions\RestoreAction;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Turahe\Core\Actions\ForceDeleteAction;
-use Turahe\Core\ProvidesModelAuthorizations;
+use Turahe\Core\Actions\RestoreAction;
+use Turahe\Core\Contracts\Countable;
 use Turahe\Core\Criteria\FilterRulesCriteria;
 use Turahe\Core\Criteria\TableRequestCriteria;
+use Turahe\Core\ProvidesModelAuthorizations;
+use Turahe\Core\ResolvesActions;
+use Turahe\Core\ResolvesFilters;
 use Turahe\Core\Resource\Http\ResourceRequest;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Table
 {
@@ -142,9 +142,7 @@ class Table
     /**
      * Custom boot method.
      */
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 
     /**
      * Provide the table columns.

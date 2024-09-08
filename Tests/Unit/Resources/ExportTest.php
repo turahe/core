@@ -13,13 +13,13 @@
 namespace Turahe\Core\Tests\Unit\Resources;
 
 use Tests\TestCase;
-use Turahe\Core\Fields\Text;
-use Turahe\Core\Facades\Fields;
-use Turahe\Core\Fields\DateTime;
-use Turahe\Core\Resource\Export;
 use Turahe\Contacts\Models\Contact;
-use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Export\Exceptions\InvalidExportTypeException;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\DateTime;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Resource\Export;
 
 class ExportTest extends TestCase
 {

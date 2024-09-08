@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\QueryBuilder\Exceptions;
 
-class FieldValueMustBeArrayException extends QueryBuilderException
-{
-}
+class FieldValueMustBeArrayException extends QueryBuilderException {}

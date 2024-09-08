@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Turahe\Core\Models\Import;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use Turahe\Core\Http\Resources\ImportResource;
-use Turahe\Core\Resource\Http\ResourceRequest;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Turahe\Core\Contracts\Resources\Importable;
 use Turahe\Core\Http\Controllers\ApiController;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Turahe\Core\Http\Resources\ImportResource;
+use Turahe\Core\Models\Import;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class ImportSkipFileController extends ApiController
 {
@@ -67,9 +67,9 @@ class ImportSkipFileController extends ApiController
             $import->skip_file_path,
             $filename = basename($import->skip_file_path),
             [
-                'Content-Type'        => 'text/csv',
+                'Content-Type' => 'text/csv',
                 'Content-Disposition' => 'attachment; filename='.$filename,
-                'charset'             => 'utf-8',
+                'charset' => 'utf-8',
             ]
         );
     }

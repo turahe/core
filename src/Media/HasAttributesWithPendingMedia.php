@@ -64,6 +64,6 @@ trait HasAttributesWithPendingMedia
      */
     protected static function createMediaProcessor(): EditorPendingMediaProcessor
     {
-        return new EditorPendingMediaProcessor();
+        return new EditorPendingMediaProcessor;
     }
 }

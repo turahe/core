@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Turahe\Core\Models\Role;
 use Turahe\Core\Rules\UniqueRule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
 {

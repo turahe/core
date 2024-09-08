@@ -13,9 +13,9 @@
 namespace Turahe\Core\Updater\Exceptions;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 
 class UpdaterException extends Exception
 {

@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\CustomField;
+use Illuminate\Http\Request;
 use Turahe\Core\Fields\CustomFieldService;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Requests\CustomFieldRequest;
 use Turahe\Core\Http\Resources\CustomFieldResource;
+use Turahe\Core\Models\CustomField;
 
 class CustomFieldController extends ApiController
 {

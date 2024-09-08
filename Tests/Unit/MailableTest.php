@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Unit;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\File;
 use Tests\Fixtures\SampleMailTemplate;
-use Turahe\Core\Models\MailableTemplate;
+use Tests\TestCase;
 use Turahe\Core\Facades\MailableTemplates;
+use Turahe\Core\Models\MailableTemplate;
 
 class MailableTest extends TestCase
 {
@@ -26,12 +26,12 @@ class MailableTest extends TestCase
         MailableTemplates::flushCache()->register(SampleMailTemplate::class)->seedIfRequired();
 
         $this->assertDatabaseHas('mailable_templates', [
-            'name'          => SampleMailTemplate::name(),
-            'subject'       => SampleMailTemplate::defaultSubject(),
+            'name' => SampleMailTemplate::name(),
+            'subject' => SampleMailTemplate::defaultSubject(),
             'html_template' => SampleMailTemplate::defaultHtmlTemplate(),
             'text_template' => SampleMailTemplate::defaultTextMessage(),
-            'mailable'      => SampleMailTemplate::class,
-            'locale'        => 'en',
+            'mailable' => SampleMailTemplate::class,
+            'locale' => 'en',
         ]);
     }
 

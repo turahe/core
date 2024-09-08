@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Fields;
 
-use ReflectionClass;
 use Illuminate\Support\Arr;
-use Turahe\Core\Facades\Fields;
 use Illuminate\Support\Collection;
-use Turahe\Core\SubClassDiscovery;
 use Illuminate\Support\Facades\Auth;
+use ReflectionClass;
 use Turahe\Core\Contracts\Fields\Customfieldable;
 use Turahe\Core\Contracts\Fields\UniqueableCustomfield;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\SubClassDiscovery;
 
 class FieldsManager
 {
@@ -312,10 +312,10 @@ class FieldsManager
             $field = (new ReflectionClass($className))->newInstanceWithoutConstructor();
 
             return [$type = class_basename($className) => [
-                'type'            => $type,
-                'className'       => $className,
-                'uniqueable'      => $field instanceof UniqueableCustomfield,
-                'optionable'      => $field->isOptionable(),
+                'type' => $type,
+                'className' => $className,
+                'uniqueable' => $field instanceof UniqueableCustomfield,
+                'optionable' => $field->isOptionable(),
                 'multioptionable' => $field->isMultiOptionable(),
             ]];
         });
@@ -369,7 +369,7 @@ class FieldsManager
      */
     public function getCustomFieldsForResource(string $resourceName): Collection
     {
-        return (new CustomFieldService())->forResource($resourceName)->map(
+        return (new CustomFieldService)->forResource($resourceName)->map(
             fn ($field) => CustomFieldFactory::createInstance($field)
         );
     }
@@ -379,7 +379,7 @@ class FieldsManager
      */
     protected function load(string $group): FieldsCollection
     {
-        $fields = new FieldsCollection();
+        $fields = new FieldsCollection;
 
         foreach (static::$fields[$group] ?? [] as $provider) {
             if ($provider instanceof Field) {

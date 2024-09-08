@@ -29,7 +29,7 @@ class History extends Service
      *
      * Get the Gmail account history
      *
-     * @param  array  $params Additional params for the request
+     * @param  array  $params  Additional params for the request
      * @return \Google\Service\Gmail\History
      */
     public function get($params = [])

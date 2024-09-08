@@ -51,7 +51,7 @@ class ActionButtonPlaceholder extends UrlPlaceholder
             }
 
             return view('core::mail.action', [
-                'url'  => parent::format(),
+                'url' => parent::format(),
                 'text' => $text ?: __('core::mail_template.placeholders.view_record'),
             ])->render();
         };

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Filters;
 
-use Turahe\Core\Fields\HasOptions;
 use Turahe\Core\Fields\ChangesKeys;
+use Turahe\Core\Fields\HasOptions;
 
 class Optionable extends Filter
 {

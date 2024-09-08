@@ -14,6 +14,4 @@ namespace Turahe\Core\OAuth;
 
 use Exception;
 
-class EmptyRefreshTokenException extends Exception
-{
-}
+class EmptyRefreshTokenException extends Exception {}

@@ -12,10 +12,10 @@
 
 namespace Turahe\Core;
 
+use Illuminate\Http\Resources\Json\JsonResource as BaseJsonResource;
 use Turahe\Core\Contracts\Presentable;
 use Turahe\Core\Contracts\Primaryable;
 use Turahe\Core\Timeline\Timelineables;
-use Illuminate\Http\Resources\Json\JsonResource as BaseJsonResource;
 
 class JsonResource extends BaseJsonResource
 {
@@ -50,7 +50,7 @@ class JsonResource extends BaseJsonResource
 
         $data[] = $this->mergeWhen($this->resource instanceof Presentable, [
             'display_name' => $this->display_name,
-            'path'         => $this->path,
+            'path' => $this->path,
         ]);
 
         $data[] = $this->mergeWhen($this->resource instanceof Primaryable, function () {
@@ -69,9 +69,9 @@ class JsonResource extends BaseJsonResource
         if (! $request->isZapier()) {
             if (Timelineables::isTimelineable($this->resource)) {
                 $data[] = $this->merge([
-                    'timeline_component'   => $this->getTimelineComponent(),
-                    'timeline_relation'    => $this->getTimelineRelation(),
-                    'timeline_key'         => $this->timelineKey(),
+                    'timeline_component' => $this->getTimelineComponent(),
+                    'timeline_relation' => $this->getTimelineRelation(),
+                    'timeline_key' => $this->timelineKey(),
                     'timeline_sort_column' => $this->getTimelineSortColumn(),
                 ]);
 
@@ -80,7 +80,7 @@ class JsonResource extends BaseJsonResource
                     $pinnedSubject = $this->getPinnedSubject(static::$topLevelResource::class, static::$topLevelResource->getKey());
 
                     $data[] = $this->merge([
-                        'is_pinned'   => ! is_null($pinnedSubject),
+                        'is_pinned' => ! is_null($pinnedSubject),
                         'pinned_date' => $pinnedSubject?->created_at,
                     ]);
                 }

@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Console\Commands;
 
-use Throwable;
-use Illuminate\Console\Command;
-use Turahe\Core\Updater\Updater;
 use App\Installer\RequirementsChecker;
+use Illuminate\Console\Command;
+use Throwable;
+use Turahe\Core\Updater\Updater;
 
 class UpdateCommand extends Command
 {

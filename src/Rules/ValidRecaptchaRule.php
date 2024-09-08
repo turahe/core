@@ -13,9 +13,9 @@
 namespace Turahe\Core\Rules;
 
 use Closure;
-use Turahe\Core\Facades\ReCaptcha;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Http;
+use Turahe\Core\Facades\ReCaptcha;
 
 class ValidRecaptchaRule implements ValidationRule
 {
@@ -30,7 +30,7 @@ class ValidRecaptchaRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! Http::asForm()->post($this->verifyEndpoint, [
-            'secret'   => ReCaptcha::getSecretKey(),
+            'secret' => ReCaptcha::getSecretKey(),
             'response' => $value,
         ])['success']) {
             $fail('validation.recaptcha')->translate();

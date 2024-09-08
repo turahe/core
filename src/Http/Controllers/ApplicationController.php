@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 
 class ApplicationController extends Controller
 {

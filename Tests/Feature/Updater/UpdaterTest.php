@@ -12,19 +12,19 @@
 
 namespace Turahe\Core\Tests\Feature\Updater;
 
-use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Turahe\Core\Updater\Updater;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Schema;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyUsedException;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
+use Symfony\Component\Finder\Finder;
+use Tests\TestCase;
 use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
-use Turahe\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
 use Turahe\Core\Updater\Exceptions\MinPHPVersionRequirementException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyUsedException;
+use Turahe\Core\Updater\Exceptions\ReleaseDoesNotExistsException;
+use Turahe\Core\Updater\Updater;
 
 /**
  * @group updater
@@ -36,11 +36,11 @@ class UpdaterTest extends TestCase
     public function test_can_properly_retrieve_and_parse_releases_from_archive()
     {
         settings()->set([
-            '_installed_date'    => date('Y-m-d H:i:s'),
+            '_installed_date' => date('Y-m-d H:i:s'),
             '_last_updated_date' => date('Y-m-d H:i:s'),
-            '_server_ip'         => '127.0.01',
+            '_server_ip' => '127.0.01',
             '_db_driver_version' => '1',
-            '_db_driver'         => 'mysql',
+            '_db_driver' => 'mysql',
         ])->save();
 
         $updater = $this->createUpdaterInstance(new Response(200, [], $this->archiveResponse()));

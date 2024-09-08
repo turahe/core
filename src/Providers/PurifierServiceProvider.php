@@ -13,9 +13,9 @@
 namespace Turahe\Core\Providers;
 
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Turahe\Core\HtmlPurifier\Purifier;
-use Illuminate\Contracts\Support\DeferrableProvider;
 
 class PurifierServiceProvider extends ServiceProvider implements DeferrableProvider
 {

@@ -13,10 +13,10 @@
 namespace Turahe\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Turahe\Core\Facades\Innoclapps;
 
 class PreventRequestsWhenMigrationNeeded
 {

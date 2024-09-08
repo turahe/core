@@ -12,18 +12,18 @@
 
 namespace Turahe\Core\Fields;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Arr;
-use Turahe\Core\Models\Filter;
-use Turahe\Core\Facades\Fields;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Turahe\Core\Contracts\Fields\Customfieldable;
+use Turahe\Core\Facades\Fields;
 use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Models\CustomField;
-use Turahe\Core\QueryBuilder\Parser;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Turahe\Core\Models\CustomFieldOption;
-use Turahe\Core\Contracts\Fields\Customfieldable;
+use Turahe\Core\Models\Filter;
+use Turahe\Core\QueryBuilder\Parser;
 
 class CustomFieldService
 {
@@ -58,10 +58,10 @@ class CustomFieldService
         // As in Seeder, mass assignment protection is disabled
         $field = new CustomField([
             'resource_name' => $attributes['resource_name'],
-            'label'         => $attributes['label'],
-            'field_type'    => $attributes['field_type'],
-            'field_id'      => $attributes['field_id'],
-            'is_unique'     => $unique,
+            'label' => $attributes['label'],
+            'field_type' => $attributes['field_type'],
+            'field_id' => $attributes['field_id'],
+            'is_unique' => $unique,
         ]);
 
         $field->save();
@@ -86,9 +86,9 @@ class CustomFieldService
         $this->prepareOptionsForInsert($options)
             ->each(function ($option, $index) use ($field) {
                 $field->options()->create([
-                    'name'          => $option['name'],
+                    'name' => $option['name'],
                     'display_order' => $option['display_order'] ?? $index + 1,
-                    'swatch_color'  => $option['swatch_color'] ?? null,
+                    'swatch_color' => $option['swatch_color'] ?? null,
                 ]);
             });
 
@@ -136,9 +136,9 @@ class CustomFieldService
 
         $this->prepareOptionsForInsert($options)->each(function ($option, $index) use ($field, $optionsBeforeUpdate) {
             $attributes = [
-                'name'          => $option['name'],
+                'name' => $option['name'],
                 'display_order' => $option['display_order'] ?? $index + 1,
-                'swatch_color'  => $option['swatch_color'] ?? null,
+                'swatch_color' => $option['swatch_color'] ?? null,
             ];
 
             if (isset($option['id'])) {

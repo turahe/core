@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Resource;
 
-use Turahe\Core\Models\Model;
 use Turahe\Core\Contracts\Presentable;
+use Turahe\Core\Models\Model;
 
 class EmailSearch extends GlobalSearch
 {
@@ -23,10 +23,10 @@ class EmailSearch extends GlobalSearch
     protected function data(Model&Presentable $model, Resource $resource): array
     {
         return [
-            'id'           => $model->getKey(),
-            'address'      => $model->email,
-            'name'         => $model->display_name,
-            'path'         => $model->path,
+            'id' => $model->getKey(),
+            'address' => $model->email,
+            'name' => $model->display_name,
+            'path' => $model->path,
             'resourceName' => $resource->name(),
         ];
     }

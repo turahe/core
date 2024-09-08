@@ -14,6 +14,4 @@ namespace Turahe\Core\Google\OAuth;
 
 use League\OAuth2\Client\Provider\GoogleUser;
 
-class GoogleResourceOwner extends GoogleUser
-{
-}
+class GoogleResourceOwner extends GoogleUser {}

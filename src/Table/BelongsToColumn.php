@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Table;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class BelongsToColumn extends RelationshipColumn
 {

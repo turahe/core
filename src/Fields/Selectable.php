@@ -32,7 +32,7 @@ trait Selectable
     public function lazyLoad(string $url, array $params = []): static
     {
         return $this->withMeta(['lazyLoad' => [
-            'url'    => $url,
+            'url' => $url,
             'params' => $params,
         ]]);
     }

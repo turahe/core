@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\VoIP;
 
-use JsonSerializable;
 use BadMethodCallException;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
+use JsonSerializable;
 
 class Call implements Arrayable, JsonSerializable
 {
@@ -27,9 +27,7 @@ class Call implements Arrayable, JsonSerializable
      * @param  string  $to
      * @param  string  $status
      */
-    public function __construct(protected $primaryNumber, protected $from, protected $to, protected $status)
-    {
-    }
+    public function __construct(protected $primaryNumber, protected $from, protected $to, protected $status) {}
 
     /**
      * Possible call statuses
@@ -93,9 +91,9 @@ class Call implements Arrayable, JsonSerializable
     public function toArray()
     {
         return [
-            'from'        => $this->from,
-            'to'          => $this->to,
-            'status'      => $this->status,
+            'from' => $this->from,
+            'to' => $this->to,
+            'status' => $this->status,
             'is_incoming' => $this->isIncoming(),
         ];
     }

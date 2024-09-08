@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Card;
 
-use Turahe\Core\JsonResource;
-use Illuminate\Support\Facades\Request;
-use Turahe\Core\Contracts\Presentable;
-use Illuminate\Database\Query\Expression;
-use Turahe\Core\Criteria\RequestCriteria;
-use Turahe\Core\ProvidesModelAuthorizations;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Query\Expression;
+use Illuminate\Support\Facades\Request;
+use Turahe\Core\Contracts\Presentable;
+use Turahe\Core\Criteria\RequestCriteria;
+use Turahe\Core\JsonResource;
+use Turahe\Core\ProvidesModelAuthorizations;
 
 abstract class TableAsyncCard extends Card
 {
@@ -166,7 +166,7 @@ abstract class TableAsyncCard extends Card
     {
         return array_merge(parent::jsonSerialize(), [
             'fields' => $this->fields(),
-            'items'  => JsonResource::collection($this->transformResult($this->performQuery()))
+            'items' => JsonResource::collection($this->transformResult($this->performQuery()))
                 ->toResponse(Request::instance())
                 ->getData(),
         ]);

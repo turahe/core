@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Workflow;
 
-use Turahe\Core\Models\Workflow;
-use Illuminate\Support\Collection;
-use Turahe\Core\SubClassDiscovery;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Turahe\Core\Contracts\Workflow\EventTrigger;
 use Turahe\Core\Contracts\Workflow\ModelTrigger;
+use Turahe\Core\Models\Workflow;
+use Turahe\Core\SubClassDiscovery;
 
 class Workflows
 {
@@ -60,9 +60,9 @@ class Workflows
 
         (function ($method) use ($action, $trigger, $workflow) {
             static::$processed[$action::class] = [
-                'action'   => $action,
+                'action' => $action,
                 'workflow' => $workflow,
-                'trigger'  => $trigger,
+                'trigger' => $trigger,
             ];
 
             ProcessWorkflowAction::{$method}($action);
@@ -92,7 +92,7 @@ class Workflows
 
         static::$queue[] = [
             'workflow' => $workflow,
-            'data'     => $data,
+            'data' => $data,
         ];
     }
 
@@ -189,7 +189,7 @@ class Workflows
             })->map(function ($trigger) {
                 return [
                     'trigger' => $trigger,
-                    'event'   => $trigger::event(),
+                    'event' => $trigger::event(),
                 ];
             })->values()->all();
     }

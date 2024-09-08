@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Concerns;
 
-use Tests\Fixtures\Event;
 use Illuminate\Support\Facades\Request;
+use Tests\Fixtures\Event;
 use Turahe\Core\Criteria\FilterRulesCriteria;
 
 trait TestsFilters
@@ -35,7 +35,7 @@ trait TestsFilters
             $operand
         );
 
-        return (new Event())
+        return (new Event)
             ->newQuery()
             ->criteria(
                 new FilterRulesCriteria($rule, collect([$filter]), Request::instance())
@@ -54,18 +54,18 @@ trait TestsFilters
     protected function payload($field, $value, $type, $operator)
     {
         $rule = [
-            'type'  => 'rule',
+            'type' => 'rule',
             'query' => [
-                'type'     => $type,
-                'rule'     => $field,
+                'type' => $type,
+                'rule' => $field,
                 'operator' => $operator,
-                'value'    => $value,
+                'value' => $value,
             ],
         ];
 
         return [
             'condition' => 'and',
-            'children'  => [$rule],
+            'children' => [$rule],
         ];
     }
 }

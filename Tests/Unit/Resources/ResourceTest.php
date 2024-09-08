@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Resources;
 
-use Tests\TestCase;
 use Tests\Fixtures\EventResource;
+use Tests\TestCase;
 use Turahe\Core\Facades\Innoclapps;
 
 class ResourceTest extends TestCase

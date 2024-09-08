@@ -13,10 +13,10 @@
 namespace Turahe\Core\Http\Requests;
 
 use Closure;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 use Turahe\Core\Rules\SwatchColorRule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class TagRequest extends FormRequest
 {

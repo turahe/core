@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\Criteria;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Turahe\Core\Models\Filter;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Turahe\Core\Contracts\Criteria\QueryCriteria;
+use Turahe\Core\Models\Filter;
+use Turahe\Core\QueryBuilder\JoinRelationParser;
 use Turahe\Core\QueryBuilder\Parser;
 use Turahe\Users\Filters\UserFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\QueryBuilder\JoinRelationParser;
-use Turahe\Core\Contracts\Criteria\QueryCriteria;
 
 class FilterRulesCriteria implements QueryCriteria
 {
@@ -43,13 +43,11 @@ class FilterRulesCriteria implements QueryCriteria
     protected $view;
 
     /**
-     * @param  array|object|null  $rules The request rules
-     * @param  \Illuminate\Support\Collection  $filters All resource available filters
+     * @param  array|object|null  $rules  The request rules
+     * @param  \Illuminate\Support\Collection  $filters  All resource available filters
      * @param \Illuminate\Http\Request
      */
-    public function __construct(protected $rules, protected $filters, protected Request $request)
-    {
-    }
+    public function __construct(protected $rules, protected $filters, protected Request $request) {}
 
     /**
      * Apply the criteria for the given query.
@@ -142,7 +140,7 @@ class FilterRulesCriteria implements QueryCriteria
     /**
      * Check if field is relation e.q. contact.first_name
      *
-     * @param  string  $name QueryBuilder Rule ID
+     * @param  string  $name  QueryBuilder Rule ID
      * @return bool
      */
     protected function isFieldRelation($name)
@@ -166,7 +164,7 @@ class FilterRulesCriteria implements QueryCriteria
      *       $query->where($field, $operator, $value, $condition);
      *    });
      *
-     * @param  string  $name QueryBuilder Rule ID
+     * @param  string  $name  QueryBuilder Rule ID
      * @return array
      */
     protected function getRelationFieldDataForQuery($name)

@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Feature\Updater;
 
-use Tests\TestCase;
-use Illuminate\Support\Carbon;
-use Turahe\Core\Updater\Patch;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Carbon;
+use Tests\TestCase;
+use Turahe\Core\Updater\Patch;
 
 /**
  * @group updater
@@ -49,9 +49,9 @@ class PatchTest extends TestCase
 
         $this->assertEquals([
             'description' => 'Fixes issue with activities',
-            'date'        => '2021-08-24T18:52:54.000000Z',
-            'token'       => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
-            'isApplied'   => true,
+            'date' => '2021-08-24T18:52:54.000000Z',
+            'token' => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
+            'isApplied' => true,
         ], $patch->toArray());
     }
 

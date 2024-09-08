@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Request;
 
 abstract class ApiController extends Controller
 {

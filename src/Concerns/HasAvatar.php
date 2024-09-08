@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Concerns;
 
-use Turahe\Core\Media\HasMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Turahe\Core\Media\HasMedia;
 
 /** @mixin \Turahe\Core\Models\Model */
 trait HasAvatar

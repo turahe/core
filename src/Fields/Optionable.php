@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Fields;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Optionable extends Field
 {

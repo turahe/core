@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\MailableTemplate;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Html2Text;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\HtmlString;
-use Turahe\Core\Resource\ResourcePlaceholders;
-use Turahe\Core\Placeholders\Placeholders as BasePlaceholders;
+use Illuminate\Support\Str;
+use Turahe\Core\Html2Text;
 use Turahe\Core\Models\MailableTemplate as MailableTemplateModel;
+use Turahe\Core\Placeholders\Placeholders as BasePlaceholders;
+use Turahe\Core\Resource\ResourcePlaceholders;
 
 abstract class MailableTemplate extends Mailable
 {
@@ -122,11 +122,11 @@ abstract class MailableTemplate extends Mailable
 
         return app(Renderer::class, [
             'htmlTemplate' => $template->getHtmlTemplate(),
-            'subject'      => $this->getMailableTemplateSubject(),
+            'subject' => $this->getMailableTemplateSubject(),
             'placeholders' => $this->placeholders(),
-            'htmlLayout'   => $this->getHtmlLayout(),
+            'htmlLayout' => $this->getHtmlLayout(),
             'textTemplate' => $template->getTextTemplate() ?: static::altMessageFromHtml($template->getHtmlTemplate()),
-            'textLayout'   => $this->getTextLayout(),
+            'textLayout' => $this->getTextLayout(),
         ]);
     }
 
@@ -149,9 +149,7 @@ abstract class MailableTemplate extends Mailable
      *
      * @return string|null
      */
-    public function getTextLayout()
-    {
-    }
+    public function getTextLayout() {}
 
     /**
      * Provide the defined mailable template placeholders
@@ -176,7 +174,7 @@ abstract class MailableTemplate extends Mailable
     /**
      * Seed the mailable in database as mail template
      *
-     * @param  string  $locale Locale to seed the mail template
+     * @param  string  $locale  Locale to seed the mail template
      * @return \Turahe\Core\Models\MailableTemplate
      */
     public static function seed($locale = 'en')
@@ -186,12 +184,12 @@ abstract class MailableTemplate extends Mailable
 
         $template = MailableTemplateModel::firstOrNew(
             [
-                'locale'   => $locale,
+                'locale' => $locale,
                 'mailable' => $mailable,
             ],
             [
-                'locale'        => $locale,
-                'subject'       => $default->subject(),
+                'locale' => $locale,
+                'subject' => $default->subject(),
                 'html_template' => $default->htmlMessage(),
                 'text_template' => $default->textMessage(),
             ]

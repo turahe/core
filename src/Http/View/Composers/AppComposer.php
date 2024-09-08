@@ -12,19 +12,19 @@
 
 namespace Turahe\Core\Http\View\Composers;
 
-use Illuminate\View\View;
-use Turahe\Core\Models\Tag;
-use Turahe\Core\Facades\Menu;
-use Turahe\Core\Facades\VoIP;
-use Turahe\Core\Facades\Fields;
-use Turahe\Core\Facades\ReCaptcha;
-use Turahe\Core\Resource\Resource;
-use Illuminate\Support\Facades\Auth;
-use Turahe\Core\Facades\Innoclapps;
 use App\Installer\RequirementsChecker;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Menu;
+use Turahe\Core\Facades\ReCaptcha;
+use Turahe\Core\Facades\VoIP;
 use Turahe\Core\Highlights\Highlights;
-use Turahe\Core\Settings\SettingsMenu;
 use Turahe\Core\Http\Resources\TagResource;
+use Turahe\Core\Models\Tag;
+use Turahe\Core\Resource\Resource;
+use Turahe\Core\Settings\SettingsMenu;
 
 class AppComposer
 {
@@ -52,16 +52,16 @@ class AppComposer
         }
 
         $config['broadcasting'] = [
-            'default'    => config('broadcasting.default'),
+            'default' => config('broadcasting.default'),
             'connection' => config('broadcasting.connections.'.config('broadcasting.default')),
         ];
 
         $config['options'] = [
-            'time_format'  => config('core.time_format'),
-            'date_format'  => config('core.date_format'),
+            'time_format' => config('core.time_format'),
+            'date_format' => config('core.date_format'),
             'company_name' => config('app.name'),
-            'logo_light'   => config('core.logo.light'),
-            'logo_dark'    => config('core.logo.dark'),
+            'logo_light' => config('core.logo.light'),
+            'logo_dark' => config('core.logo.dark'),
         ];
 
         $config['max_upload_size'] = config('mediable.max_size');
@@ -79,8 +79,8 @@ class AppComposer
 
         $config['reCaptcha'] = [
             'configured' => ReCaptcha::configured(),
-            'validate'   => ReCaptcha::shouldShow(),
-            'siteKey'    => ReCaptcha::getSiteKey(),
+            'validate' => ReCaptcha::shouldShow(),
+            'siteKey' => ReCaptcha::getSiteKey(),
         ];
 
         // Required in FormField Group for externals forms e.q. web form
@@ -94,7 +94,7 @@ class AppComposer
 
         // Sensitive settings are not included in this list
         $config['options'] = array_merge($config['options'], [
-            'first_day_of_week'       => settings('first_day_of_week'),
+            'first_day_of_week' => settings('first_day_of_week'),
             'disable_password_forgot' => forgot_password_is_disabled(),
         ]);
 
@@ -115,9 +115,9 @@ class AppComposer
             $config['tags'] = TagResource::collection(Tag::get());
 
             $config['fields'] = array_merge($config['fields'], [
-                'custom_fields'       => Fields::customFieldable(),
+                'custom_fields' => Fields::customFieldable(),
                 'custom_field_prefix' => config('fields.custom_fields.prefix'),
-                'groups'              => collect(Innoclapps::registeredResources())->filter(
+                'groups' => collect(Innoclapps::registeredResources())->filter(
                     fn ($resource) => Fields::has($resource->name())
                 )->mapWithKeys(
                     fn (Resource $resource) => [$resource->name() => $resource->name()]
@@ -147,9 +147,9 @@ class AppComposer
             ];
 
             $config['voip'] = [
-                'client'    => config('core.voip.client'),
+                'client' => config('core.voip.client'),
                 'endpoints' => [
-                    'call'   => VoIP::callUrl(),
+                    'call' => VoIP::callUrl(),
                     'events' => VoIP::eventsUrl(),
                 ],
             ];
@@ -160,7 +160,7 @@ class AppComposer
 
             $config['requirements'] = [
                 'imap' => $requirements->passes('imap'),
-                'zip'  => $requirements->passes('zip'),
+                'zip' => $requirements->passes('zip'),
             ];
 
             $config['associations'] = [

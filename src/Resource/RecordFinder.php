@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Resource;
 
-use Turahe\Core\Models\Model;
 use Illuminate\Support\LazyCollection;
+use Turahe\Core\Models\Model;
 
 class RecordFinder
 {
@@ -28,9 +28,7 @@ class RecordFinder
     /**
      * Initialize new RecordFinder instance.
      */
-    public function __construct(protected Model $model)
-    {
-    }
+    public function __construct(protected Model $model) {}
 
     /**
      * Match all of the given values

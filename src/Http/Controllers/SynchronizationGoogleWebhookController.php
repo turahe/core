@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Turahe\Core\Models\Synchronization;
 
 class SynchronizationGoogleWebhookController extends Controller

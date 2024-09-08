@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\OAuth;
 
-use Turahe\Core\Models\OAuthAccount;
 use League\OAuth2\Client\Grant\RefreshToken;
 use Turahe\Core\Google\OAuth\GoogleProvider;
 use Turahe\Core\Microsoft\OAuth\MicrosoftProvider;
+use Turahe\Core\Models\OAuthAccount;
 use Turahe\Core\OAuth\Events\OAuthAccountConnected;
 
 class OAuthManager
@@ -92,7 +92,7 @@ class OAuthManager
             return tap($newToken->getToken(), function ($refreshedToken) use ($newToken, $account) {
                 $account->fill([
                     'access_token' => $refreshedToken,
-                    'expires'      => $newToken->getExpires(),
+                    'expires' => $newToken->getExpires(),
                 ])->save();
             });
         }
@@ -122,11 +122,11 @@ class OAuthManager
         $redirectUrl = config('core.google.redirect_url');
 
         return new GoogleProvider([
-            'clientId'     => config('core.google.client_id'),
+            'clientId' => config('core.google.client_id'),
             'clientSecret' => config('core.google.client_secret'),
-            'redirectUri'  => $redirectUrl ?: url(config('core.google.redirect_uri')),
-            'accessType'   => config('core.google.access_type'),
-            'scopes'       => config('core.google.scopes'),
+            'redirectUri' => $redirectUrl ?: url(config('core.google.redirect_uri')),
+            'accessType' => config('core.google.access_type'),
+            'scopes' => config('core.google.scopes'),
         ]);
     }
 
@@ -140,10 +140,10 @@ class OAuthManager
         $redirectUrl = config('core.microsoft.redirect_url');
 
         return new MicrosoftProvider([
-            'clientId'     => config('core.microsoft.client_id'),
+            'clientId' => config('core.microsoft.client_id'),
             'clientSecret' => config('core.microsoft.client_secret'),
-            'redirectUri'  => $redirectUrl ?: url(config('core.microsoft.redirect_uri')),
-            'scopes'       => config('core.microsoft.scopes'),
+            'redirectUri' => $redirectUrl ?: url(config('core.microsoft.redirect_uri')),
+            'scopes' => config('core.microsoft.scopes'),
         ]);
     }
 
@@ -188,9 +188,9 @@ class OAuthManager
     protected function storeAccount($type, $accessToken, $user)
     {
         $data = [
-            'email'         => $user->getEmail(),
-            'access_token'  => $accessToken->getToken(),
-            'expires'       => $accessToken->getExpires(),
+            'email' => $user->getEmail(),
+            'access_token' => $accessToken->getToken(),
+            'expires' => $accessToken->getExpires(),
             'oauth_user_id' => $user->getId(),
             'requires_auth' => false,
         ];

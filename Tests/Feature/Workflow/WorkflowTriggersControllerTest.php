@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Feature\Workflow;
 
 use Tests\TestCase;
-use Turahe\Core\Workflow\Workflows;
 use Turahe\Activities\Models\ActivityType;
+use Turahe\Core\Workflow\Workflows;
 
 class WorkflowTriggersControllerTest extends TestCase
 {

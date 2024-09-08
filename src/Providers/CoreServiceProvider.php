@@ -12,33 +12,33 @@
 
 namespace Turahe\Core\Providers;
 
-use Akaunting\Money\Money;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Akaunting\Money\Currency;
-use Turahe\Core\Facades\Menu;
-use Turahe\Core\DatabaseState;
-use Turahe\Core\Menu\MenuItem;
-use Turahe\Core\Facades\Zapier;
-use Illuminate\Support\Facades\URL;
-use Turahe\Core\Updater\Migration;
-use Illuminate\Support\Facades\View;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Workflow\Workflows;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\ServiceProvider;
-use Turahe\Core\Settings\SettingsMenu;
-use Turahe\Core\Timeline\Timelineables;
+use Akaunting\Money\Money;
 use Illuminate\Console\Scheduling\Schedule;
-use Turahe\Core\Facades\MailableTemplates;
-use Turahe\Core\Settings\SettingsMenuItem;
 use Illuminate\Database\Migrations\Migrator;
-use Turahe\Core\Media\PruneStaleMediaAttachments;
-use Turahe\Core\Workflow\WorkflowEventsSubscriber;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Turahe\Core\DatabaseState;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\MailableTemplates;
+use Turahe\Core\Facades\Menu;
+use Turahe\Core\Facades\Zapier;
+use Turahe\Core\Media\PruneStaleMediaAttachments;
+use Turahe\Core\Menu\MenuItem;
+use Turahe\Core\Settings\SettingsMenu;
+use Turahe\Core\Settings\SettingsMenuItem;
 use Turahe\Core\Synchronization\Jobs\PeriodicSynchronizations;
 use Turahe\Core\Synchronization\Jobs\RefreshWebhookSynchronizations;
+use Turahe\Core\Timeline\Timelineables;
+use Turahe\Core\Updater\Migration;
+use Turahe\Core\Workflow\WorkflowEventsSubscriber;
+use Turahe\Core\Workflow\Workflows;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -52,9 +52,9 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerTranslations();
-//        $this->registerConfig();
-//        $this->registerViews();
-//        $this->loadMigrationsFrom(__DIR__. './../Database/Migrations');
+        //        $this->registerConfig();
+        //        $this->registerViews();
+        //        $this->loadMigrationsFrom(__DIR__. './../Database/Migrations');
 
         $this->app['events']->subscribe(WorkflowEventsSubscriber::class);
         $this->app['events']->listen(RequestHandled::class, Workflows::processQueue(...));
@@ -92,8 +92,8 @@ class CoreServiceProvider extends ServiceProvider
         ]);
 
         $this->app->singleton('timezone', \Turahe\Core\Timezone::class);
-//        $this->app->when(Migration::class)->needs(Migrator::class)->give(fn () => $this->app['migrator']);
-//        $this->app->register(RouteServiceProvider::class);
+        //        $this->app->when(Migration::class)->needs(Migrator::class)->give(fn () => $this->app['migrator']);
+        //        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -102,13 +102,13 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
-            __DIR__. './../../../config/config.php',
+            __DIR__.'./../../../config/config.php',
             $this->moduleNameLower
         );
 
         foreach (['html_purifier', 'fields', 'settings', 'updater', 'synchronization'] as $config) {
             $this->mergeConfigFrom(
-                __DIR__. './../../../config/$config.php',
+                __DIR__.'./../../../config/$config.php',
                 $config
             );
         }
@@ -121,7 +121,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
 
-        $sourcePath = __DIR__. './../resources/views';
+        $sourcePath = __DIR__.'./../resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -135,7 +135,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $this->loadTranslationsFrom(__DIR__. './../resources/lang', $this->moduleNameLower);
+        $this->loadTranslationsFrom(__DIR__.'./../resources/lang', $this->moduleNameLower);
     }
 
     /**

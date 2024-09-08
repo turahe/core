@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Timeline;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Models\PinnedTimelineSubject;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
+use Turahe\Core\Models\PinnedTimelineSubject;
 
 trait Timelineable
 {

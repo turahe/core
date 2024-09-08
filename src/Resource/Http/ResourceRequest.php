@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Resource\Http;
 
-use Turahe\Core\Models\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use Turahe\Core\Models\Model;
 
 class ResourceRequest extends FormRequest
 {

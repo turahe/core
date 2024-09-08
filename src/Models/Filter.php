@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Models;
 
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Turahe\Core\Database\Factories\FilterFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Lang;
+use Turahe\Core\Database\Factories\FilterFactory;
 
 /**
  * Turahe\Core\Models\Filter
@@ -83,10 +83,10 @@ class Filter extends Model
      * @var array
      */
     protected $casts = [
-        'rules'       => 'array',
-        'is_shared'   => 'boolean',
+        'rules' => 'array',
+        'is_shared' => 'boolean',
         'is_readonly' => 'boolean',
-        'user_id'     => 'int',
+        'user_id' => 'int',
     ];
 
     /**
@@ -150,7 +150,7 @@ class Filter extends Model
             if (is_array($value) && ! array_key_exists('children', $value)) {
                 $value = [
                     'condition' => 'and',
-                    'children'  => $value,
+                    'children' => $value,
                 ];
             }
 

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Contracts\Resources;
 
-use Turahe\Core\Models\Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Turahe\Core\Models\Model;
 
 interface ResourcefulRequestHandler
 {

@@ -12,15 +12,15 @@
 
 namespace Turahe\Core\Tests\Feature\Updater;
 
-use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
+use Symfony\Component\Finder\Finder;
+use Tests\TestCase;
+use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
+use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
+use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
+use Turahe\Core\Updater\Exceptions\UpdaterException;
 use Turahe\Core\Updater\Patch;
 use Turahe\Core\Updater\Patcher;
-use Symfony\Component\Finder\Finder;
-use Turahe\Core\Updater\Exceptions\UpdaterException;
-use Turahe\Core\Updater\Exceptions\PurchaseKeyEmptyException;
-use Turahe\Core\Updater\Exceptions\InvalidPurchaseKeyException;
-use Turahe\Core\Updater\Exceptions\HasWrongPermissionsException;
 
 /**
  * @group updater
@@ -109,10 +109,10 @@ class PatcherTest extends TestCase
         $patcher = $this->createPatcherInstance([
             new Response(200, [], json_encode([
                 [
-                    'date'        => '2021-08-24T18:52:54.000000Z',
+                    'date' => '2021-08-24T18:52:54.000000Z',
                     'description' => 'Fixes issue with activities',
-                    'token'       => $token = '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
-                    'version'     => '1.0.0',
+                    'token' => $token = '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
+                    'version' => '1.0.0',
                 ],
             ])),
         ]);
@@ -131,10 +131,10 @@ class PatcherTest extends TestCase
         $patcher = $this->createPatcherInstance([
             new Response(200, [], json_encode([
                 [
-                    'date'        => '2021-08-24T18:52:54.000000Z',
+                    'date' => '2021-08-24T18:52:54.000000Z',
                     'description' => 'Fixes issue with activities',
-                    'token'       => $token,
-                    'version'     => '1.0.0',
+                    'token' => $token,
+                    'version' => '1.0.0',
                 ],
             ])),
         ]);
@@ -174,10 +174,10 @@ class PatcherTest extends TestCase
         $patcher = $this->createPatcherInstance([
             new Response(200, [], json_encode([
                 [
-                    'date'        => '2021-08-24T18:52:54.000000Z',
+                    'date' => '2021-08-24T18:52:54.000000Z',
                     'description' => 'Fixes issue with activities',
-                    'token'       => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
-                    'version'     => '1.2.0',
+                    'token' => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
+                    'version' => '1.2.0',
                 ],
             ])),
         ]);

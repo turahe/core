@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Fields;
 
-use Turahe\Core\Table\Column;
 use Turahe\Core\Contracts\Fields\Customfieldable;
+use Turahe\Core\Table\Column;
 
 class Textarea extends Field implements Customfieldable
 {

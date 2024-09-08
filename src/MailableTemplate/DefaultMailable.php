@@ -19,9 +19,7 @@ class DefaultMailable
      *
      * @param  string  $message
      */
-    public function __construct(protected string $html_message, protected string $subject, protected ?string $text_message = null)
-    {
-    }
+    public function __construct(protected string $html_message, protected string $subject, protected ?string $text_message = null) {}
 
     /**
      * Get the mailable default HTML message

@@ -93,7 +93,7 @@ class AssociationsSyncControllerTest extends TestCase
 
         $this->postJson('/api/associations/contacts/'.$contact->id, [
             'companies' => [$company->id],
-            'deals'     => null,
+            'deals' => null,
         ])->assertOk();
     }
 
@@ -132,7 +132,7 @@ class AssociationsSyncControllerTest extends TestCase
 
         $this->deleteJson('/api/associations/contacts/'.$contact->id, [
             'companies' => [$contact->companies->first()->id],
-            'deals'     => null,
+            'deals' => null,
         ])->assertNoContent();
     }
 

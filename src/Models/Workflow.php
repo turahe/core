@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Models;
 
-use Turahe\Core\Concerns\HasCreator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Turahe\Core\Concerns\HasCreator;
 
 /**
  * Turahe\Core\Models\Workflow
@@ -75,10 +75,10 @@ class Workflow extends Model
      * @var array
      */
     protected $casts = [
-        'data'             => 'array',
-        'is_active'        => 'boolean',
+        'data' => 'array',
+        'is_active' => 'boolean',
         'total_executions' => 'int',
-        'created_by'       => 'int',
+        'created_by' => 'int',
     ];
 
     /**

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Turahe\Core\Models\Role;
 use Illuminate\Http\JsonResponse;
+use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Requests\RoleRequest;
 use Turahe\Core\Http\Resources\RoleResource;
-use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\Role;
 
 class RoleController extends ApiController
 {

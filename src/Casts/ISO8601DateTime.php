@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Casts;
 
-use Turahe\Core\Date\Carbon;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Turahe\Core\Date\Carbon;
 
 class ISO8601DateTime implements CastsAttributes
 {

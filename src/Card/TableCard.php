@@ -57,9 +57,9 @@ class TableCard extends Card
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'fields'     => $this->fields(),
-            'items'      => $this->items(),
-            'emptyText'  => $this->emptyText(),
+            'fields' => $this->fields(),
+            'items' => $this->items(),
+            'emptyText' => $this->emptyText(),
             'primaryKey' => $this->primaryKey,
         ]);
     }

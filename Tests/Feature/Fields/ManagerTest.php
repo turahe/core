@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\Tests\Feature\Fields;
 
-use Tests\TestCase;
-use Turahe\Core\Fields\Text;
-use Turahe\Core\Fields\User;
-use Turahe\Core\Table\Column;
-use Turahe\Core\Facades\Fields;
-use Turahe\Contacts\Models\Contact;
-use Tests\Fixtures\SampleTableColumn;
 use Illuminate\Support\Facades\Notification;
 use Tests\Fixtures\SampleDatabaseNotification;
+use Tests\Fixtures\SampleTableColumn;
+use Tests\TestCase;
+use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\Text;
+use Turahe\Core\Fields\User;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\Column;
 
 class ManagerTest extends TestCase
 {

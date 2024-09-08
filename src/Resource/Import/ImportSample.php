@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Resource\Import;
 
-use Turahe\Core\Fields\Field;
-use Turahe\Core\Resource\Resource;
-use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromArray;
-use Turahe\Core\Fields\FieldsCollection;
+use Maatwebsite\Excel\Facades\Excel;
 use Turahe\Core\Contracts\Fields\Dateable;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\FieldsCollection;
+use Turahe\Core\Resource\Resource;
 
 class ImportSample implements FromArray
 {
@@ -26,9 +26,7 @@ class ImportSample implements FromArray
     /**
      * Create new Import instance.
      */
-    public function __construct(protected Resource $resource)
-    {
-    }
+    public function __construct(protected Resource $resource) {}
 
     /**
      * Resolve the fields for the sample data

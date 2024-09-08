@@ -78,7 +78,7 @@ trait AssociatesResources
     /**
      * Filter the given associations for saving for the given resource
      *
-     * @param  string|\Turahe\Core\Resource\Resource  $resource $resource The resource the associations will be attached
+     * @param  string|\Turahe\Core\Resource\Resource  $resource  $resource The resource the associations will be attached
      * @param  array  $associations
      * @return array
      */

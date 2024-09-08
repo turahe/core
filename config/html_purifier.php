@@ -11,12 +11,12 @@
  */
 
 return [
-    'enabled'       => env('HTML_PURIFY', true),
-    'encoding'      => 'UTF-8',
-    'finalize'      => true,
-    'cachePath'     => storage_path('html-purifier-cache'),
+    'enabled' => env('HTML_PURIFY', true),
+    'encoding' => 'UTF-8',
+    'finalize' => true,
+    'cachePath' => storage_path('html-purifier-cache'),
     'cacheFileMode' => 0755,
-    'flex'          => true,
+    'flex' => true,
 
     'settings' => [
         'default' => [
@@ -25,24 +25,24 @@ return [
             'CSS.AllowedProperties' => 'font,font-size,font-weight,font-style,font-family,padding-left,padding-right,padding-top,padding-bottom,padding,margin, margin-left,margin-right,margin-top,margin-bottom,color,text-align,letter-spacing,width,height,min-width,min-height,max-width,max-height,overflow,border,border-width,border-style,border-color,border-top,border-bottom,border-right,border-left,line-height,text-decoration,background,background-color,background-image,background-size,background-repeat,background-position,text-transform,word-spacing,opacity,float,position,top,left,right,border-radius,bottom,border-top-left-radius,border-top-right-radius,border-bottom-right-radius,border-bottom-left-radius,list-style,display,filter',
 
             'AutoFormat.AutoParagraph' => false,
-            'AutoFormat.RemoveEmpty'   => false,
-            'Attr.EnableID'            => true,
-            'CSS.Trusted'              => true,
-            'CSS.Proprietary'          => true,
-            'HTML.SafeIframe'          => true,
-            'URI.SafeIframeRegexp'     => '%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%',
-            'CSS.AllowTricky'          => true,
+            'AutoFormat.RemoveEmpty' => false,
+            'Attr.EnableID' => true,
+            'CSS.Trusted' => true,
+            'CSS.Proprietary' => true,
+            'HTML.SafeIframe' => true,
+            'URI.SafeIframeRegexp' => '%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%',
+            'CSS.AllowTricky' => true,
             'Attr.AllowedFrameTargets' => ['_blank'],
 
             // Images
             'URI.AllowedSchemes' => [
-                'http'   => true,
-                'https'  => true,
+                'http' => true,
+                'https' => true,
                 'mailto' => true,
-                'ftp'    => true,
-                'nntp'   => true,
-                'news'   => true,
-                'tel'    => true,
+                'ftp' => true,
+                'nntp' => true,
+                'news' => true,
+                'tel' => true,
                 // Base64 Images
                 'data' => true,
             ],
@@ -50,13 +50,13 @@ return [
             // These config option disables the pixel checks and allows
             // specifiy e.q. width="auto" or height="auto" for example on images
             'HTML.MaxImgLength' => null,
-            'CSS.MaxImgLength'  => null,
+            'CSS.MaxImgLength' => null,
         ],
 
         'custom_definition' => [
-            'id'       => 'CustomHTML5',
-            'rev'      => (int) str_replace('.', '', \Modules\Core\Application::VERSION),
-            'debug'    => env('APP_DEBUG', false),
+            'id' => 'CustomHTML5',
+            'rev' => (int) str_replace('.', '', \Modules\Core\Application::VERSION),
+            'debug' => env('APP_DEBUG', false),
             'elements' => [
                 // http://developers.whatwg.org/sections.html
                 ['section', 'Block', 'Flow', 'Common'],
@@ -76,19 +76,19 @@ return [
 
                 // http://developers.whatwg.org/the-video-element.html#the-video-element
                 ['video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', [
-                    'loop'     => 'Bool',
+                    'loop' => 'Bool',
                     'autoplay' => 'Bool',
-                    'src'      => 'URI',
-                    'type'     => 'Text',
-                    'width'    => 'Length',
-                    'height'   => 'Length',
-                    'poster'   => 'URI',
-                    'preload'  => 'Enum#auto,metadata,none',
+                    'src' => 'URI',
+                    'type' => 'Text',
+                    'width' => 'Length',
+                    'height' => 'Length',
+                    'poster' => 'URI',
+                    'preload' => 'Enum#auto,metadata,none',
                     'controls' => 'Bool',
                 ]],
 
                 ['source', 'Block', 'Flow', 'Common', [
-                    'src'  => 'URI',
+                    'src' => 'URI',
                     'type' => 'Text',
                 ]],
 
@@ -126,19 +126,19 @@ return [
         'custom_elements' => [
             ['u', 'Inline', 'Inline', 'Common'],
             ['iframe', 'Inline', 'Flow', 'Common', [
-                'src'                   => 'URI#embedded',
-                'width'                 => 'Length',
-                'height'                => 'Length',
-                'name'                  => 'ID',
-                'scrolling'             => 'Enum#yes,no,auto',
-                'frameborder'           => 'Enum#0,1',
-                'allow'                 => 'Text',
-                'allowfullscreen'       => 'Bool',
+                'src' => 'URI#embedded',
+                'width' => 'Length',
+                'height' => 'Length',
+                'name' => 'ID',
+                'scrolling' => 'Enum#yes,no,auto',
+                'frameborder' => 'Enum#0,1',
+                'allow' => 'Text',
+                'allowfullscreen' => 'Bool',
                 'webkitallowfullscreen' => 'Bool',
-                'mozallowfullscreen'    => 'Bool',
-                'longdesc'              => 'URI',
-                'marginheight'          => 'Pixels',
-                'marginwidth'           => 'Pixels',
+                'mozallowfullscreen' => 'Bool',
+                'longdesc' => 'URI',
+                'marginheight' => 'Pixels',
+                'marginwidth' => 'Pixels',
             ],
             ],
         ],

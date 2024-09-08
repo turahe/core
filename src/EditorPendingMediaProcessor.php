@@ -12,13 +12,13 @@
 
 namespace Turahe\Core;
 
-use Stringable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Turahe\Core\Models\Media;
 use KubAT\PhpSimple\HtmlDomParser;
+use Stringable;
+use Turahe\Core\Models\Media;
 use Turahe\Core\Models\PendingMedia;
-use Illuminate\Database\Eloquent\Builder;
 
 class EditorPendingMediaProcessor
 {

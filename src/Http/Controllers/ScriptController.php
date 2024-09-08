@@ -13,10 +13,10 @@
 namespace Turahe\Core\Http\Controllers;
 
 use DateTime;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Turahe\Core\Facades\Innoclapps;
 
 class ScriptController extends Controller

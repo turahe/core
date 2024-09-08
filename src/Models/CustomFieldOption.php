@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Models;
 
-use Illuminate\Support\Facades\Lang;
-use Turahe\Core\Concerns\HasDisplayOrder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Lang;
+use Turahe\Core\Concerns\HasDisplayOrder;
 
 /**
  * Turahe\Core\Models\CustomFieldOption
@@ -74,7 +74,7 @@ class CustomFieldOption extends Model
      */
     protected $casts = [
         'custom_field_id' => 'int',
-        'display_order'   => 'int',
+        'display_order' => 'int',
     ];
 
     /**

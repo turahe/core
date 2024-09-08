@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Policies;
 
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Import;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Turahe\Core\Models\Import;
+use Turahe\Users\Models\User;
 
 class ImportPolicy
 {

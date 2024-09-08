@@ -12,28 +12,28 @@
 
 namespace Turahe\Core\Resource;
 
-use JsonSerializable;
-use Turahe\Core\Table\ID;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Turahe\Core\Facades\Menu;
-use Turahe\Core\Fields\Field;
+use Illuminate\Support\Str;
+use JsonSerializable;
+use Turahe\Core\Contracts\Resources\AcceptsUniqueCustomFields;
+use Turahe\Core\Contracts\Resources\Resourceful;
+use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
+use Turahe\Core\Contracts\Services\Service;
+use Turahe\Core\Criteria\RequestCriteria;
 use Turahe\Core\Facades\Cards;
 use Turahe\Core\Facades\Fields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Menu;
+use Turahe\Core\Fields\CustomFieldFactory;
+use Turahe\Core\Fields\Field;
 use Turahe\Core\ResolvesActions;
 use Turahe\Core\ResolvesFilters;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Settings\SettingsMenu;
-use Turahe\Core\Resource\Import\Import;
-use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Criteria\RequestCriteria;
-use Turahe\Core\Fields\CustomFieldFactory;
-use Turahe\Core\Contracts\Services\Service;
-use Turahe\Core\Resource\Import\ImportSample;
 use Turahe\Core\Resource\Http\ResourceRequest;
-use Turahe\Core\Contracts\Resources\Resourceful;
-use Turahe\Core\Contracts\Resources\AcceptsUniqueCustomFields;
-use Turahe\Core\Contracts\Resources\ResourcefulRequestHandler;
+use Turahe\Core\Resource\Import\Import;
+use Turahe\Core\Resource\Import\ImportSample;
+use Turahe\Core\Settings\SettingsMenu;
+use Turahe\Core\Table\ID;
 
 abstract class Resource implements JsonSerializable
 {
@@ -342,9 +342,7 @@ abstract class Resource implements JsonSerializable
     /**
      * Register permissions for the resource
      */
-    public function registerPermissions(): void
-    {
-    }
+    public function registerPermissions(): void {}
 
     /**
      * Get the custom validation messages for the resource
@@ -578,11 +576,11 @@ abstract class Resource implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'name'                      => $this->name(),
-            'singularName'              => $this->singularName(),
-            'label'                     => $this->label(),
-            'singularLabel'             => $this->singularLabel(),
-            'fieldsCustomizable'        => static::$fieldsCustomizable,
+            'name' => $this->name(),
+            'singularName' => $this->singularName(),
+            'label' => $this->label(),
+            'singularLabel' => $this->singularLabel(),
+            'fieldsCustomizable' => static::$fieldsCustomizable,
             'acceptsUniqueCustomFields' => $this instanceof AcceptsUniqueCustomFields,
         ];
     }

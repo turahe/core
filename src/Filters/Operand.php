@@ -14,8 +14,8 @@ namespace Turahe\Core\Filters;
 
 use Exception;
 use JsonSerializable;
-use Turahe\Core\Makeable;
 use Turahe\Core\Fields\ChangesKeys;
+use Turahe\Core\Makeable;
 
 class Operand implements JsonSerializable
 {
@@ -75,11 +75,11 @@ class Operand implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'value'    => $this->value,
-            'label'    => $this->label,
+            'value' => $this->value,
+            'label' => $this->label,
             'valueKey' => $this->valueKey,
             'labelKey' => $this->labelKey,
-            'rule'     => $this->rule,
+            'rule' => $this->rule,
         ];
     }
 }

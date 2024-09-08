@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Turahe\Core\Models\Filter;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Turahe\Core\Filters\UserFiltersService;
+use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Requests\FilterRequest;
 use Turahe\Core\Http\Resources\FilterResource;
-use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\Filter;
 
 class FilterController extends ApiController
 {

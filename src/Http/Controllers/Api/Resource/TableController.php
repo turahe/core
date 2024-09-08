@@ -13,9 +13,9 @@
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Http\Resources\TableResource;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Requests\ResourceTableRequest;
+use Turahe\Core\Http\Resources\TableResource;
 use Turahe\Core\QueryBuilder\Exceptions\QueryBuilderException;
 
 class TableController extends ApiController

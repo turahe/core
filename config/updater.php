@@ -27,10 +27,10 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'archive_url'         => env('UPDATER_ARCHIVE_URL', 'https://archive.wach.id'),
+    'archive_url' => env('UPDATER_ARCHIVE_URL', 'https://archive.wach.id'),
     'patches_archive_url' => env('PATCHES_ARCHIVE_URL', 'https://archive.wach.id/patches'),
-    'purchase_key'        => env('PURCHASE_KEY', ''),
-    'download_path'       => env('UPDATER_DOWNLOAD_PATH', storage_path('updater')),
+    'purchase_key' => env('PURCHASE_KEY', ''),
+    'download_path' => env('UPDATER_DOWNLOAD_PATH', storage_path('updater')),
 
     /*
     |--------------------------------------------------------------------------

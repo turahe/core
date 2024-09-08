@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Fields;
 
-use Turahe\Core\Table\BooleanColumn;
 use Turahe\Core\Contracts\Fields\Customfieldable;
+use Turahe\Core\Table\BooleanColumn;
 
 class Boolean extends Field implements Customfieldable
 {
@@ -117,7 +117,7 @@ class Boolean extends Field implements Customfieldable
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'trueValue'  => $this->trueValue,
+            'trueValue' => $this->trueValue,
             'falseValue' => $this->falseValue,
         ]);
     }

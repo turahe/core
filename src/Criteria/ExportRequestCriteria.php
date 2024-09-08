@@ -13,10 +13,10 @@
 namespace Turahe\Core\Criteria;
 
 use Exception;
-use Illuminate\Http\Request;
-use Turahe\Core\Date\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Turahe\Core\Contracts\Criteria\QueryCriteria;
+use Turahe\Core\Date\Carbon;
 use Turahe\Core\ProvidesBetweenArgumentsViaString;
 
 class ExportRequestCriteria implements QueryCriteria
@@ -26,9 +26,7 @@ class ExportRequestCriteria implements QueryCriteria
     /**
      * Create new ExportRequestCriteria instance.
      */
-    public function __construct(protected Request $request)
-    {
-    }
+    public function __construct(protected Request $request) {}
 
     /**
      * Apply the criteria for the given query.

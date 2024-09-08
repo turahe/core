@@ -12,10 +12,10 @@
 
 namespace Turahe\Core;
 
-use JsonSerializable;
-use InvalidArgumentException;
-use Turahe\Core\Date\Carbon;
 use Illuminate\Support\Facades\Request;
+use InvalidArgumentException;
+use JsonSerializable;
+use Turahe\Core\Date\Carbon;
 
 class RangedElement implements JsonSerializable
 {
@@ -81,9 +81,9 @@ class RangedElement implements JsonSerializable
         $range = $range - 1;
 
         return match ($unit) {
-            'month'   => $now->subMonths($range)->firstOfMonth()->setTime(0, 0)->inAppTimezone(),
-            'week'    => $now->subWeeks($range)->startOfWeek()->setTime(0, 0)->inAppTimezone(),
-            'day'     => $now->subDays($range)->setTime(0, 0)->inAppTimezone(),
+            'month' => $now->subMonths($range)->firstOfMonth()->setTime(0, 0)->inAppTimezone(),
+            'week' => $now->subWeeks($range)->startOfWeek()->setTime(0, 0)->inAppTimezone(),
+            'day' => $now->subDays($range)->setTime(0, 0)->inAppTimezone(),
             'default' => throw new InvalidArgumentException('Invalid chart unit provided.')
         };
     }
@@ -94,7 +94,7 @@ class RangedElement implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'range'  => $this->getCurrentRange(Request::instance()),
+            'range' => $this->getCurrentRange(Request::instance()),
             'ranges' => $this->getFormattedRanges(),
         ];
     }

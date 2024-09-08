@@ -13,11 +13,11 @@
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Resource\EmailSearch;
 use Turahe\Core\Contracts\Resources\HasEmail;
-use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Resource\EmailSearch;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class EmailSearchController extends ApiController
 {

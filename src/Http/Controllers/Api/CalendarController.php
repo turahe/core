@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Contracts\DisplaysOnCalendar;
-use Turahe\Core\Http\Controllers\ApiController;
 use Illuminate\Contracts\Database\Query\Expression;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Turahe\Core\Contracts\DisplaysOnCalendar;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Http\Resources\CalendarEventResource;
 
 class CalendarController extends ApiController

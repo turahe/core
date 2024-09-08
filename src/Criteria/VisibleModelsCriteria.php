@@ -12,19 +12,17 @@
 
 namespace Turahe\Core\Criteria;
 
-use Turahe\Users\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Turahe\Core\Contracts\Criteria\QueryCriteria;
+use Turahe\Users\Models\User;
 
 class VisibleModelsCriteria implements QueryCriteria
 {
     /**
      * Create new VisibleModelsCriteria instance.
      */
-    public function __construct(protected ?User $user = null)
-    {
-    }
+    public function __construct(protected ?User $user = null) {}
 
     /**
      * Apply the criteria for the given query.

@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Policies;
 
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\OAuthAccount;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Turahe\Core\Models\OAuthAccount;
+use Turahe\Users\Models\User;
 
 class OAuthAccountPolicy
 {

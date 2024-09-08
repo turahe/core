@@ -12,38 +12,38 @@
 
 namespace Turahe\Core\Resource\Import;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Fields\Field;
-use Turahe\Core\Models\Model;
-use Turahe\Users\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Turahe\Core\Resource\Resource;
-use Maatwebsite\Excel\Facades\Excel;
-use Turahe\Core\Facades\Innoclapps;
-use Illuminate\Support\LazyCollection;
-use Maatwebsite\Excel\Concerns\ToArray;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Events\AfterImport;
-use Turahe\Core\Fields\FieldsCollection;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Events\BeforeImport;
-use Turahe\Core\Rules\UniqueResourceRule;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
-use Turahe\Core\Resource\Http\ImportRequest;
+use Illuminate\Support\LazyCollection;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Validator as LaravelValidator;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Turahe\Core\Models\Import as ImportModel;
-use Turahe\Core\Resource\Http\ResourceRequest;
+use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Events\AfterImport;
+use Maatwebsite\Excel\Events\BeforeImport;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Illuminate\Validation\Validator as LaravelValidator;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\FieldsCollection;
+use Turahe\Core\Models\Import as ImportModel;
+use Turahe\Core\Models\Model;
+use Turahe\Core\Resource\Http\ImportRequest;
+use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Resource\Resource;
+use Turahe\Core\Rules\UniqueResourceRule;
+use Turahe\Users\Models\User;
 
 class Import extends DefaultValueBinder implements SkipsEmptyRows, ToArray, WithChunkReading, WithCustomValueBinder, WithEvents, WithHeadingRow, WithMapping
 {
@@ -145,10 +145,10 @@ class Import extends DefaultValueBinder implements SkipsEmptyRows, ToArray, With
 
             $import->fill([
                 'skip_file_path' => $skipFilePath ?? null,
-                'status'         => 'finished',
-                'imported'       => $this->imported,
-                'skipped'        => $this->skipped,
-                'duplicates'     => $this->duplicates,
+                'status' => 'finished',
+                'imported' => $this->imported,
+                'skipped' => $this->skipped,
+                'duplicates' => $this->duplicates,
             ])->save();
         } catch (\Exception $e) {
             $import->fill(['status' => 'mapping'])->save();
@@ -162,17 +162,17 @@ class Import extends DefaultValueBinder implements SkipsEmptyRows, ToArray, With
      */
     public function upload(UploadedFile $file, User $user): ImportModel
     {
-        $path = $this->storeFile($file, $model = new ImportModel());
+        $path = $this->storeFile($file, $model = new ImportModel);
 
         $model->fill([
-            'file_path'     => $path,
+            'file_path' => $path,
             'resource_name' => $this->resource->name(),
-            'user_id'       => $user->getKey(),
-            'status'        => 'mapping',
-            'imported'      => 0,
-            'duplicates'    => 0,
-            'skipped'       => 0,
-            'data'          => [
+            'user_id' => $user->getKey(),
+            'status' => 'mapping',
+            'imported' => 0,
+            'duplicates' => 0,
+            'skipped' => 0,
+            'data' => [
                 'mappings' => $this->createMappings($path),
             ],
         ])->save();
@@ -190,8 +190,8 @@ class Import extends DefaultValueBinder implements SkipsEmptyRows, ToArray, With
 
         $model->fill([
             'file_path' => $path,
-            'status'    => 'mapping',
-            'data'      => array_merge($model->data, [
+            'status' => 'mapping',
+            'data' => array_merge($model->data, [
                 'mappings' => $this->createMappings($path),
             ]),
         ])->save();

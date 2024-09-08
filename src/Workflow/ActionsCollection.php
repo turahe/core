@@ -14,6 +14,4 @@ namespace Turahe\Core\Workflow;
 
 use Illuminate\Support\Collection;
 
-class ActionsCollection extends Collection
-{
-}
+class ActionsCollection extends Collection {}

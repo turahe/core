@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\View\View;
-use Turahe\Core\Models\Media;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Turahe\Core\Models\Media;
 
 class MediaViewController extends Controller
 {
@@ -50,10 +50,10 @@ class MediaViewController extends Controller
         $disk = Storage::disk($media->disk);
 
         return $disk->response($media->getDiskPath(), null, [
-            'Pragma'        => 'public',
+            'Pragma' => 'public',
             'Cache-Control' => 'max-age=86400, public',
-            'Content-Type'  => $media->mime_type,
-            'Expires'       => gmdate('D, d M Y H:i:s \G\M\T', time() + 86400 * 7), // 7 days
+            'Content-Type' => $media->mime_type,
+            'Expires' => gmdate('D, d M Y H:i:s \G\M\T', time() + 86400 * 7), // 7 days
             'Last-Modified' => gmdate('D, d M Y H:i:s \G\M\T', $disk->lastModified($media->getDiskPath())),
         ]);
     }

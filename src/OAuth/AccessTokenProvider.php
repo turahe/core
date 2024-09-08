@@ -17,9 +17,7 @@ class AccessTokenProvider
     /**
      * Initialize the acess token provider class
      */
-    public function __construct(protected string $token, protected string $email)
-    {
-    }
+    public function __construct(protected string $token, protected string $email) {}
 
     /**
      * Get the access token

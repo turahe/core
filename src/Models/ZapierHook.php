@@ -63,9 +63,9 @@ class ZapierHook extends Model
      * @var array
      */
     protected $casts = [
-        'data'    => 'array',
+        'data' => 'array',
         'user_id' => 'int',
-        'zap_id'  => 'int',
+        'zap_id' => 'int',
     ];
 
     /**

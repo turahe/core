@@ -194,8 +194,8 @@ class IntroductionField extends Field
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'title'     => $this->title,
-            'message'   => $this->message,
+            'title' => $this->title,
+            'message' => $this->message,
             'titleIcon' => $this->titleIcon,
         ]);
     }

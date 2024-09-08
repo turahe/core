@@ -34,9 +34,7 @@ class ReCaptcha
     /**
      * Initialize new ReCaptcha instance.
      */
-    public function __construct(protected Request $request)
-    {
-    }
+    public function __construct(protected Request $request) {}
 
     /**
      * Get the reCaptcha site key

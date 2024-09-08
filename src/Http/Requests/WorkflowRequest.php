@@ -13,13 +13,13 @@
 namespace Turahe\Core\Http\Requests;
 
 use Closure;
-use Turahe\Core\Fields\Field;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
+use Turahe\Core\Contracts\Workflow\FieldChangeTrigger;
+use Turahe\Core\Fields\Field;
 use Turahe\Core\Workflow\Trigger;
 use Turahe\Core\Workflow\Workflows;
-use Illuminate\Foundation\Http\FormRequest;
-use Turahe\Core\Contracts\Workflow\FieldChangeTrigger;
 
 class WorkflowRequest extends FormRequest
 {
@@ -59,7 +59,7 @@ class WorkflowRequest extends FormRequest
         return array_merge(
             [
                 'trigger_type' => ['required', Rule::in(Workflows::availableTriggers())],
-                'action_type'  => ['required', function (string $attribute, mixed $value, Closure $fail) {
+                'action_type' => ['required', function (string $attribute, mixed $value, Closure $fail) {
                     if (! $this->getTrigger()) {
                         return;
                     }
@@ -67,13 +67,13 @@ class WorkflowRequest extends FormRequest
                     if (is_null($this->getTrigger()->getAction($value))) {
                         $fail('validation.in_array')->translate([
                             'attribute' => 'action',
-                            'other'     => 'the trigger available actions',
+                            'other' => 'the trigger available actions',
                         ]);
                     }
                 }],
-                'title'       => 'required|string|max:191',
+                'title' => 'required|string|max:191',
                 'description' => 'max:191',
-                'is_active'   => 'boolean',
+                'is_active' => 'boolean',
             ],
             $this->isFieldChangeTrigger() ? [$this->getTrigger()::changeField()->attribute => 'required'] : [],
             $this->getRulesFromActionFields()

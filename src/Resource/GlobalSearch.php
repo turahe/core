@@ -12,21 +12,19 @@
 
 namespace Turahe\Core\Resource;
 
-use JsonSerializable;
-use Turahe\Core\Models\Model;
-use Illuminate\Support\Collection;
-use Turahe\Core\Contracts\Presentable;
-use Turahe\Core\Resource\Http\ResourceRequest;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use JsonSerializable;
+use Turahe\Core\Contracts\Presentable;
+use Turahe\Core\Models\Model;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class GlobalSearch implements JsonSerializable
 {
     /**
      * Initialize global search for the given resources.
      */
-    public function __construct(protected ResourceRequest $request, protected Collection $resources)
-    {
-    }
+    public function __construct(protected ResourceRequest $request, protected Collection $resources) {}
 
     /**
      * Get the search result
@@ -41,7 +39,7 @@ class GlobalSearch implements JsonSerializable
             ->each(function ($resource) use (&$result) {
                 $result->push([
                     'title' => $resource->label(),
-                    'data'  => $this->query($resource)
+                    'data' => $this->query($resource)
                         ->take($resource->globalSearchResultsLimit)
                         ->get()
                         ->whereInstanceOf(Presentable::class)
@@ -76,11 +74,11 @@ class GlobalSearch implements JsonSerializable
     protected function data(Model&Presentable $model, Resource $resource): array
     {
         return [
-            'path'               => $model->path,
-            'display_name'       => $model->display_name,
-            'created_at'         => $model->created_at,
+            'path' => $model->path,
+            'display_name' => $model->display_name,
+            'created_at' => $model->created_at,
             $model->getKeyName() => $model->getKey(),
-            'resourceName'       => $resource->name(),
+            'resourceName' => $resource->name(),
         ];
     }
 

@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Filters;
 
-use Turahe\Core\Fields\HasOptions;
-use Turahe\Core\Fields\ChangesKeys;
 use Turahe\Core\Facades\Timezone as Facade;
+use Turahe\Core\Fields\ChangesKeys;
+use Turahe\Core\Fields\HasOptions;
 
 class Timezone extends Filter
 {

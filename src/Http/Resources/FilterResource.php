@@ -27,16 +27,16 @@ class FilterResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'name'              => $this->name,
-            'identifier'        => $this->identifier,
-            'rules'             => $this->rules,
-            'user_id'           => $this->user_id,
-            'is_shared'         => $this->is_shared,
+            'name' => $this->name,
+            'identifier' => $this->identifier,
+            'rules' => $this->rules,
+            'user_id' => $this->user_id,
+            'is_shared' => $this->is_shared,
             'is_system_default' => $this->is_system_default,
-            'is_readonly'       => $this->is_readonly,
-            'defaults'          => $this->defaults->map(fn ($default) => [
+            'is_readonly' => $this->is_readonly,
+            'defaults' => $this->defaults->map(fn ($default) => [
                 'user_id' => $default->user_id,
-                'view'    => $default->view,
+                'view' => $default->view,
             ])->values(),
         ], $request);
     }

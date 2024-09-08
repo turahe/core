@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\QueryBuilder;
 
-use stdClass;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use stdClass;
 
 class JoinRelationParser extends Parser
 {
@@ -25,16 +25,16 @@ class JoinRelationParser extends Parser
     protected $joinFields;
 
     /**
-     * @param  array  $joinFields an associative array of the join fields keyed by fields name, with the following keys
-     *                          - from_table       The name of the master table
-     *                          - from_col         The column of the master table to use in the join
-     *                          - to_table         The name of the join table
-     *                          - to_col           The column of the join table to use
-     *                          - to_value_column  The column of the join table containing the value to use as a
-     *                          where clause
-     *                          - to_clause*       An additional clause to add to the join condition, compatible
-     *                          with $query->where($clause)
-     *                          - not_exists*      Only return rows which do not exist in the subclause
+     * @param  array  $joinFields  an associative array of the join fields keyed by fields name, with the following keys
+     *                             - from_table       The name of the master table
+     *                             - from_col         The column of the master table to use in the join
+     *                             - to_table         The name of the join table
+     *                             - to_col           The column of the join table to use
+     *                             - to_value_column  The column of the join table containing the value to use as a
+     *                             where clause
+     *                             - to_clause*       An additional clause to add to the join condition, compatible
+     *                             with $query->where($clause)
+     *                             - not_exists*      Only return rows which do not exist in the subclause
      *
      * * optional field
      */
@@ -51,7 +51,7 @@ class JoinRelationParser extends Parser
      * Make sure that all the correct fields are in the rule object then add the expression to
      * the query that was given by the user to the QueryBuilder.
      *
-     * @param  string  $queryCondition the condition that will be used in the query
+     * @param  string  $queryCondition  the condition that will be used in the query
      * @return \Illuminate\Database\Eloquent\Builder
      *
      * @throws \Exception

@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Card;
 
-use JsonSerializable;
-use Turahe\Core\Makeable;
 use Illuminate\Support\Str;
-use Turahe\Core\HasHelpText;
+use JsonSerializable;
 use Turahe\Core\Authorizeable;
-use Turahe\Core\RangedElement;
+use Turahe\Core\HasHelpText;
+use Turahe\Core\Makeable;
 use Turahe\Core\MetableElement;
+use Turahe\Core\RangedElement;
 
 // @ todo, add Authorizeable tests and general test
 
@@ -147,9 +147,7 @@ abstract class Card extends RangedElement implements JsonSerializable
      *
      * @return array|\Illuminate\Support\Collection
      */
-    public function users()
-    {
-    }
+    public function users() {}
 
     /**
      * jsonSerialize
@@ -157,18 +155,18 @@ abstract class Card extends RangedElement implements JsonSerializable
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'uriKey'            => $this->uriKey(),
-            'component'         => $this->component(),
-            'name'              => $this->name(),
-            'description'       => $this->description(),
-            'width'             => $this->width,
+            'uriKey' => $this->uriKey(),
+            'component' => $this->component(),
+            'name' => $this->name(),
+            'description' => $this->description(),
+            'width' => $this->width,
             'withUserSelection' => is_callable($this->withUserSelection) ?
                 call_user_func($this->withUserSelection, $this) :
                 $this->withUserSelection,
-            'users'                   => $this->users(),
+            'users' => $this->users(),
             'refreshOnActionExecuted' => $this->refreshOnActionExecuted,
-            'helpText'                => $this->helpText,
-            'data'                    => method_exists($this, 'getData') ? $this->getData() : [],
+            'helpText' => $this->helpText,
+            'data' => method_exists($this, 'getData') ? $this->getData() : [],
         ], $this->meta());
     }
 }

@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Settings;
 
+use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 use Turahe\Core\Makeable;
-use Illuminate\Contracts\Support\Arrayable;
 
 class SettingsMenuItem implements Arrayable, JsonSerializable
 {
@@ -32,9 +32,7 @@ class SettingsMenuItem implements Arrayable, JsonSerializable
     /**
      * Create new SettingsMenuItem instance.
      */
-    public function __construct(protected string $title, protected ?string $route = null, protected ?string $icon = null)
-    {
-    }
+    public function __construct(protected string $title, protected ?string $route = null, protected ?string $icon = null) {}
 
     /**
      * Set the menu item unique identifier.
@@ -108,12 +106,12 @@ class SettingsMenuItem implements Arrayable, JsonSerializable
     public function toArray()
     {
         return [
-            'id'       => $this->id,
-            'title'    => $this->title,
-            'route'    => $this->route,
-            'icon'     => $this->icon,
+            'id' => $this->id,
+            'title' => $this->title,
+            'route' => $this->route,
+            'icon' => $this->icon,
             'children' => $this->getChildren(),
-            'order'    => $this->order,
+            'order' => $this->order,
         ];
     }
 

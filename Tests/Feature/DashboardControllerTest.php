@@ -31,7 +31,7 @@ class DashboardControllerTest extends TestCase
         $this->signIn();
 
         $this->postJson('/api/dashboards', [
-            'name'       => 'Test',
+            'name' => 'Test',
             'is_default' => true,
         ])->assertJson(['name' => 'Test', 'is_default' => true]);
     }
@@ -42,7 +42,7 @@ class DashboardControllerTest extends TestCase
         $defaultNow = $user->dashboards->firstWhere('is_default', true);
 
         $this->postJson('/api/dashboards', [
-            'name'       => 'Test',
+            'name' => 'Test',
             'is_default' => true,
         ]);
 
@@ -66,7 +66,7 @@ class DashboardControllerTest extends TestCase
         $this->signIn();
 
         $this->postJson('/api/dashboards', [
-            'name'  => 'Test',
+            'name' => 'Test',
             'cards' => [['key' => 'user-delete', 'order' => 1000]],
         ])->assertJsonCount(1, 'cards');
     }
@@ -123,9 +123,9 @@ class DashboardControllerTest extends TestCase
         ]]);
 
         $this->putJson('/api/dashboards/'.$dashboard->id, [
-            'name'       => 'Updated Name',
+            'name' => 'Updated Name',
             'is_default' => true,
-            'cards'      => [['key' => 'card-key', 'order' => 1000]],
+            'cards' => [['key' => 'card-key', 'order' => 1000]],
         ])->assertOk()
             ->assertJson(['name' => 'Updated Name', 'is_default' => true])
             ->assertJsonPath('cards.0.order', 1000);

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Database\Factories;
 
-use Turahe\Core\Models\Filter;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Turahe\Core\Models\Filter;
 
 class FilterFactory extends Factory
 {
@@ -33,19 +33,19 @@ class FilterFactory extends Factory
     {
         return [
             'identifier' => 'users',
-            'name'       => 'Filter Name',
-            'is_shared'  => false,
+            'name' => 'Filter Name',
+            'is_shared' => false,
 
             'rules' => [
                 'condition' => 'and',
-                'children'  => [[
-                    'type'  => 'rule',
+                'children' => [[
+                    'type' => 'rule',
                     'query' => [
-                        'type'      => 'text',
+                        'type' => 'text',
                         'opereator' => 'equal',
-                        'rule'      => 'test_attribute',
-                        'operand'   => 'Test',
-                        'value'     => 'Test',
+                        'rule' => 'test_attribute',
+                        'operand' => 'Test',
+                        'value' => 'Test',
                     ],
                 ]],
             ],

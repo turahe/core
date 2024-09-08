@@ -13,9 +13,9 @@
 namespace Turahe\Core\Fields;
 
 use Illuminate\Support\Arr;
+use Turahe\Core\Contracts\Fields\Customfieldable;
 use Turahe\Core\Facades\Timezone as Facade;
 use Turahe\Core\Rules\ValidTimezoneCheckRule;
-use Turahe\Core\Contracts\Fields\Customfieldable;
 
 class Timezone extends Field implements Customfieldable
 {

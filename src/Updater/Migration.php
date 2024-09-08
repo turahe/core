@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Updater;
 
-use SplFileInfo;
-use Nwidart\Turahe\Facades\Module;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Database\Migrations\Migrator;
+use Illuminate\Filesystem\Filesystem;
+use Nwidart\Turahe\Facades\Module;
+use SplFileInfo;
 
 class Migration
 {
@@ -27,9 +27,7 @@ class Migration
     /**
      * Initialize new Migration instance
      */
-    public function __construct(protected Migrator $migrator)
-    {
-    }
+    public function __construct(protected Migrator $migrator) {}
 
     /**
      * Get all of the updates patchers

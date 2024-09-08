@@ -12,28 +12,28 @@
 
 namespace Turahe\Core\Tests;
 
-use Tests\TestCase;
-use Turahe\Core\Fields\Date;
-use Illuminate\Support\Carbon;
-use Turahe\Core\Fields\Email;
-use Turahe\Core\Models\Model;
-use Turahe\Core\Table\Column;
-use Turahe\Core\Fields\Number;
-use Turahe\Core\Models\Import;
-use Turahe\Core\Facades\Fields;
-use Turahe\Core\Fields\Boolean;
-use Turahe\Core\Fields\Numeric;
-use Illuminate\Http\Testing\File;
-use Turahe\Core\Fields\DateTime;
-use Turahe\Core\Fields\Timezone;
-use Turahe\Core\Facades\Innoclapps;
-use Illuminate\Support\Facades\Storage;
 use Database\Seeders\CustomFieldsSeeder;
+use Illuminate\Http\Testing\File;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\TestCase;
+use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\Boolean;
+use Turahe\Core\Fields\Date;
+use Turahe\Core\Fields\DateTime;
+use Turahe\Core\Fields\Email;
+use Turahe\Core\Fields\Number;
+use Turahe\Core\Fields\Numeric;
+use Turahe\Core\Fields\Timezone;
+use Turahe\Core\Models\Import;
+use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\Column;
 use Turahe\Core\Tests\Concerns\TestsCustomFields;
 use Turahe\Core\Tests\Concerns\TestsImportAndExport;
-use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
 
 class ResourceTestCase extends TestCase
 {
@@ -192,27 +192,27 @@ class ResourceTestCase extends TestCase
     protected function assertThatDatabaseHasCustomFieldsValues()
     {
         $this->assertDatabaseHas($this->tableName(), [
-            'cf_custom_field_boolean'    => '1',
-            'cf_custom_field_date'       => '2021-12-05 00:00:00',
-            'cf_custom_field_datetime'   => '2021-12-05 10:00:00',
+            'cf_custom_field_boolean' => '1',
+            'cf_custom_field_date' => '2021-12-05 00:00:00',
+            'cf_custom_field_datetime' => '2021-12-05 10:00:00',
             'cf_custom_field_work_email' => 'info@wach.id',
-            'cf_custom_field_number'     => '200',
-            'cf_custom_field_numeric'    => '1250',
-            'cf_custom_field_radio'      => $this->findCustomField('cf_custom_field_radio')->options->first()->getKey(),
-            'cf_custom_field_select'     => $this->findCustomField('cf_custom_field_select')->options->first()->getKey(),
-            'cf_custom_field_text'       => 'test-value',
-            'cf_custom_field_textarea'   => 'test-value',
-            'cf_custom_field_timezone'   => 'Europe/Berlin',
+            'cf_custom_field_number' => '200',
+            'cf_custom_field_numeric' => '1250',
+            'cf_custom_field_radio' => $this->findCustomField('cf_custom_field_radio')->options->first()->getKey(),
+            'cf_custom_field_select' => $this->findCustomField('cf_custom_field_select')->options->first()->getKey(),
+            'cf_custom_field_text' => 'test-value',
+            'cf_custom_field_textarea' => 'test-value',
+            'cf_custom_field_timezone' => 'Europe/Berlin',
         ]);
 
         $this->assertDatabaseHas('model_has_custom_field_options', [
             'custom_field_id' => (string) $this->findCustomField('cf_custom_field_multiselect')->id,
-            'option_id'       => (string) $this->findCustomField('cf_custom_field_multiselect')->options->first()->getKey(),
+            'option_id' => (string) $this->findCustomField('cf_custom_field_multiselect')->options->first()->getKey(),
         ]);
 
         $this->assertDatabaseHas('model_has_custom_field_options', [
             'custom_field_id' => (string) $this->findCustomField('cf_custom_field_checkbox')->id,
-            'option_id'       => (string) $this->findCustomField('cf_custom_field_checkbox')->options->first()->getKey(),
+            'option_id' => (string) $this->findCustomField('cf_custom_field_checkbox')->options->first()->getKey(),
         ]);
     }
 
@@ -354,7 +354,7 @@ class ResourceTestCase extends TestCase
 
         try {
             $response = $this->postJson($this->endpoint().'/export', [
-                'type'   => 'csv',
+                'type' => 'csv',
                 'period' => 'last_7_days',
             ])->assertOk()->assertDownload();
 

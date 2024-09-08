@@ -13,10 +13,10 @@
 namespace Turahe\Core\Workflow;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ProcessWorkflowAction implements ShouldQueue
 {
@@ -25,9 +25,7 @@ class ProcessWorkflowAction implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(protected Action $action)
-    {
-    }
+    public function __construct(protected Action $action) {}
 
     /**
      * Execute the job.

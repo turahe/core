@@ -13,8 +13,8 @@
 namespace Turahe\Core\Changelog;
 
 use Closure;
-use Spatie\Activitylog\EventLogBag;
 use Spatie\Activitylog\Contracts\LoggablePipe;
+use Spatie\Activitylog\EventLogBag;
 
 class CustomFieldsChangesLogger implements LoggablePipe
 {

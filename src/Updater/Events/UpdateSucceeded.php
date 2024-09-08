@@ -19,9 +19,7 @@ class UpdateSucceeded
     /**
      * Initialize new UpdateSucceeded instance.
      */
-    public function __construct(protected Release $release)
-    {
-    }
+    public function __construct(protected Release $release) {}
 
     /**
      * Get the new version.

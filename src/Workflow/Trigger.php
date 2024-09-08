@@ -13,9 +13,9 @@
 namespace Turahe\Core\Workflow;
 
 use Closure;
+use Illuminate\Support\Str;
 use JsonSerializable;
 use ReflectionFunction;
-use Illuminate\Support\Str;
 use Turahe\Core\Contracts\Workflow\FieldChangeTrigger;
 
 abstract class Trigger implements JsonSerializable
@@ -120,8 +120,8 @@ abstract class Trigger implements JsonSerializable
     {
         return array_merge([
             'identifier' => static::identifier(),
-            'name'       => static::name(),
-            'actions'    => $this->getActions(),
+            'name' => static::name(),
+            'actions' => $this->getActions(),
         ], $this instanceof FieldChangeTrigger ? ['change_field' => static::changeField()] : []);
     }
 }

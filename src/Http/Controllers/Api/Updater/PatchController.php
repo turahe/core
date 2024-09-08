@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Updater;
 
-use Illuminate\Http\JsonResponse;
-use Turahe\Core\Updater\Patcher;
 use App\Installer\RequirementsChecker;
+use Illuminate\Http\JsonResponse;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Updater\Exceptions\UpdaterException;
+use Turahe\Core\Updater\Patcher;
 
 class PatchController extends ApiController
 {
@@ -35,7 +35,7 @@ class PatchController extends ApiController
     {
         // Apply patch flag
 
-        $requirements = new RequirementsChecker();
+        $requirements = new RequirementsChecker;
 
         $patcher = app(Patcher::class);
 

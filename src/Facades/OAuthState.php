@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Str;
 use Turahe\Core\Contracts\OAuth\StateStorage;
 
 /**

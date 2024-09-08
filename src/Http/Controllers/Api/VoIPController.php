@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Turahe\Core\Facades\VoIP;
-use Illuminate\Http\JsonResponse;
 use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\VoIP\Events\IncomingCallMissed;
 

@@ -13,20 +13,20 @@
 namespace Turahe\Core\QueryBuilder;
 
 use Closure;
-use stdClass;
-use Illuminate\Support\Str;
-use Turahe\Core\Date\Carbon;
-use Turahe\Core\Filters\Date;
-use Turahe\Core\Filters\Filter;
-use Turahe\Core\Filters\Checkbox;
-use Turahe\Core\Filters\DateTime;
-use Turahe\Core\Filters\MultiSelect;
-use Turahe\Core\Filters\OperandFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
+use Illuminate\Support\Str;
+use stdClass;
+use Turahe\Core\Date\Carbon;
+use Turahe\Core\Filters\Checkbox;
 use Turahe\Core\Filters\CountableRelation;
-use Turahe\Core\QueryBuilder\Exceptions\QueryBuilderException;
+use Turahe\Core\Filters\Date;
+use Turahe\Core\Filters\DateTime;
+use Turahe\Core\Filters\Filter;
+use Turahe\Core\Filters\MultiSelect;
+use Turahe\Core\Filters\OperandFilter;
 use Turahe\Core\QueryBuilder\Exceptions\FieldValueMustBeArrayException;
+use Turahe\Core\QueryBuilder\Exceptions\QueryBuilderException;
 
 trait ParserTrait
 {
@@ -34,28 +34,28 @@ trait ParserTrait
      * Available query operators.
      */
     protected array $operators = [
-        'is'               => ['accept_values' => true, 'apply_to' => ['date']],
-        'was'              => ['accept_values' => true, 'apply_to' => ['date']],
-        'equal'            => ['accept_values' => true, 'apply_to' => ['text', 'number', 'numeric', 'date', 'radio', 'select']],
-        'not_equal'        => ['accept_values' => true, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
-        'in'               => ['accept_values' => true, 'apply_to' => ['multi-select', 'checkbox']],
-        'not_in'           => ['accept_values' => true, 'apply_to' => ['multi-select']],
-        'less'             => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
-        'less_or_equal'    => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
-        'greater'          => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
+        'is' => ['accept_values' => true, 'apply_to' => ['date']],
+        'was' => ['accept_values' => true, 'apply_to' => ['date']],
+        'equal' => ['accept_values' => true, 'apply_to' => ['text', 'number', 'numeric', 'date', 'radio', 'select']],
+        'not_equal' => ['accept_values' => true, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
+        'in' => ['accept_values' => true, 'apply_to' => ['multi-select', 'checkbox']],
+        'not_in' => ['accept_values' => true, 'apply_to' => ['multi-select']],
+        'less' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
+        'less_or_equal' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
+        'greater' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
         'greater_or_equal' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
-        'between'          => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
-        'not_between'      => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
-        'begins_with'      => ['accept_values' => true, 'apply_to' => ['text']],
-        'not_begins_with'  => ['accept_values' => true, 'apply_to' => ['text']],
-        'contains'         => ['accept_values' => true, 'apply_to' => ['text']],
-        'not_contains'     => ['accept_values' => true, 'apply_to' => ['text']],
-        'ends_with'        => ['accept_values' => true, 'apply_to' => ['text']],
-        'not_ends_with'    => ['accept_values' => true, 'apply_to' => ['text']],
-        'is_null'          => ['accept_values' => false, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
-        'is_not_null'      => ['accept_values' => false, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
+        'between' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
+        'not_between' => ['accept_values' => true, 'apply_to' => ['number', 'numeric', 'date']],
+        'begins_with' => ['accept_values' => true, 'apply_to' => ['text']],
+        'not_begins_with' => ['accept_values' => true, 'apply_to' => ['text']],
+        'contains' => ['accept_values' => true, 'apply_to' => ['text']],
+        'not_contains' => ['accept_values' => true, 'apply_to' => ['text']],
+        'ends_with' => ['accept_values' => true, 'apply_to' => ['text']],
+        'not_ends_with' => ['accept_values' => true, 'apply_to' => ['text']],
+        'is_null' => ['accept_values' => false, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
+        'is_not_null' => ['accept_values' => false, 'apply_to' => ['text', 'number', 'numeric', 'date', 'select']],
         // Not applicable for any, as empty strings are stored as null
-        'is_empty'     => ['accept_values' => false, 'apply_to' => []],
+        'is_empty' => ['accept_values' => false, 'apply_to' => []],
         'is_not_empty' => ['accept_values' => false, 'apply_to' => []],
     ];
 
@@ -63,28 +63,28 @@ trait ParserTrait
      * SQL Operators.
      */
     protected array $operator_sql = [
-        'is'               => ['operator' => 'BETWEEN'],
-        'was'              => ['operator' => 'BETWEEN'],
-        'equal'            => ['operator' => '='],
-        'not_equal'        => ['operator' => '!='],
-        'in'               => ['operator' => 'IN'],
-        'not_in'           => ['operator' => 'NOT IN'],
-        'less'             => ['operator' => '<'],
-        'less_or_equal'    => ['operator' => '<='],
-        'greater'          => ['operator' => '>'],
+        'is' => ['operator' => 'BETWEEN'],
+        'was' => ['operator' => 'BETWEEN'],
+        'equal' => ['operator' => '='],
+        'not_equal' => ['operator' => '!='],
+        'in' => ['operator' => 'IN'],
+        'not_in' => ['operator' => 'NOT IN'],
+        'less' => ['operator' => '<'],
+        'less_or_equal' => ['operator' => '<='],
+        'greater' => ['operator' => '>'],
         'greater_or_equal' => ['operator' => '>='],
-        'between'          => ['operator' => 'BETWEEN'],
-        'not_between'      => ['operator' => 'NOT BETWEEN'],
-        'begins_with'      => ['operator' => 'LIKE',     'prepend' => '%'],
-        'not_begins_with'  => ['operator' => 'NOT LIKE', 'prepend' => '%'],
-        'contains'         => ['operator' => 'LIKE',     'append' => '%', 'prepend' => '%'],
-        'not_contains'     => ['operator' => 'NOT LIKE', 'append' => '%', 'prepend' => '%'],
-        'ends_with'        => ['operator' => 'LIKE',     'append' => '%'],
-        'not_ends_with'    => ['operator' => 'NOT LIKE', 'append' => '%'],
-        'is_empty'         => ['operator' => '='],
-        'is_not_empty'     => ['operator' => '!='],
-        'is_null'          => ['operator' => 'NULL'],
-        'is_not_null'      => ['operator' => 'NOT NULL'],
+        'between' => ['operator' => 'BETWEEN'],
+        'not_between' => ['operator' => 'NOT BETWEEN'],
+        'begins_with' => ['operator' => 'LIKE',     'prepend' => '%'],
+        'not_begins_with' => ['operator' => 'NOT LIKE', 'prepend' => '%'],
+        'contains' => ['operator' => 'LIKE',     'append' => '%', 'prepend' => '%'],
+        'not_contains' => ['operator' => 'NOT LIKE', 'append' => '%', 'prepend' => '%'],
+        'ends_with' => ['operator' => 'LIKE',     'append' => '%'],
+        'not_ends_with' => ['operator' => 'NOT LIKE', 'append' => '%'],
+        'is_empty' => ['operator' => '='],
+        'is_not_empty' => ['operator' => '!='],
+        'is_null' => ['operator' => 'NULL'],
+        'is_not_null' => ['operator' => 'NOT NULL'],
     ];
 
     /**
@@ -197,9 +197,9 @@ trait ParserTrait
     /**
      * Enforce whether the value for a given field is the correct type
      *
-     * @param  bool  $requireArray value must be an array
-     * @param  mixed  $value the value we are checking against
-     * @param  string  $field the field that we are enforcing
+     * @param  bool  $requireArray  value must be an array
+     * @param  mixed  $value  the value we are checking against
+     * @param  string  $field  the field that we are enforcing
      * @return mixed value after enforcement
      *
      * @throws QueryBuilderException if value is not a correct type
@@ -275,8 +275,8 @@ trait ParserTrait
     /**
      * Append or prepend a string to the query if required.
      *
-     * @param  bool  $requireArray value must be an array
-     * @param  mixed  $value the value we are checking against
+     * @param  bool  $requireArray  value must be an array
+     * @param  mixed  $value  the value we are checking against
      * @param  mixed  $sqlOperator
      * @return mixed $value
      */

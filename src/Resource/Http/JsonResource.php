@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Resource\Http;
 
-use JsonSerializable;
-use Illuminate\Support\Facades\Auth;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\Auth;
+use JsonSerializable;
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\JsonResource as BaseJsonResource;
 
 class JsonResource extends BaseJsonResource

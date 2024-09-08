@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Unit;
 
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 use Turahe\Core\Facades\Fields;
-use Illuminate\Support\Facades\Schema;
 use Turahe\Core\Fields\CustomFieldService;
 use Turahe\Core\Tests\Concerns\TestsCustomFields;
 
@@ -24,15 +24,15 @@ class CustomFieldServiceTest extends TestCase
 
     public function test_field_column_is_altered_when_custom_field_is_created()
     {
-        $service = new CustomFieldService();
+        $service = new CustomFieldService;
 
         foreach ($this->fieldsTypesThatRequiresDatabaseColumnCreation() as $type) {
             $field = $service->create([
-                'field_type'    => $type,
-                'field_id'      => 'cf_some_id_'.strtolower($type),
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => 'cf_some_id_'.strtolower($type),
+                'label' => $type,
                 'resource_name' => 'contacts',
-                'options'       => in_array($type, Fields::getNonOptionableCustomFieldsTypes()) ? [] : ['option-1'],
+                'options' => in_array($type, Fields::getNonOptionableCustomFieldsTypes()) ? [] : ['option-1'],
             ]);
 
             $this->assertTrue(Schema::hasColumn('contacts', $field->field_id));
@@ -41,15 +41,15 @@ class CustomFieldServiceTest extends TestCase
 
     public function test_field_column_is_dropped_when_custom_field_is_deleted()
     {
-        $service = new CustomFieldService();
+        $service = new CustomFieldService;
 
         foreach ($this->fieldsTypesThatRequiresDatabaseColumnCreation() as $type) {
             $field = $service->create([
-                'field_type'    => $type,
-                'field_id'      => 'cf_some_id_'.strtolower($type),
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => 'cf_some_id_'.strtolower($type),
+                'label' => $type,
                 'resource_name' => 'contacts',
-                'options'       => in_array($type, Fields::getNonOptionableCustomFieldsTypes()) ? [] : ['option-1'],
+                'options' => in_array($type, Fields::getNonOptionableCustomFieldsTypes()) ? [] : ['option-1'],
             ]);
 
             $service->delete($field->id);
@@ -61,15 +61,15 @@ class CustomFieldServiceTest extends TestCase
     {
         $this->signIn();
 
-        $service = new CustomFieldService();
+        $service = new CustomFieldService;
 
         foreach ($this->fieldsTypesThatDoesntRequiresDatabaseColumnCreation() as $type) {
             $field = $service->create([
-                'field_type'    => $type,
-                'field_id'      => 'cf_some_id_'.strtolower($type),
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => 'cf_some_id_'.strtolower($type),
+                'label' => $type,
                 'resource_name' => 'contacts',
-                'options'       => ['option-1'],
+                'options' => ['option-1'],
             ]);
 
             $this->assertFalse(Schema::hasColumn('contacts', $field->field_id));

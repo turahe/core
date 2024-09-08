@@ -51,7 +51,7 @@ class Timelineables
     {
         Timeline::acceptsPinsFrom([
             'subject' => $subject,
-            'as'      => $subject::getTimelineSubjectKey(),
+            'as' => $subject::getTimelineSubjectKey(),
             'accepts' => array_map(function ($class) {
                 return ['as' => $class::timelineKey(), 'timelineable_type' => $class];
             }, Arr::wrap($timelineables)),

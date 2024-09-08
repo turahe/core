@@ -12,14 +12,14 @@
 
 namespace Turahe\Core;
 
-use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Turahe\Users\Models\User;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\MailableTemplate\MailableTemplate;
-use Turahe\Core\Contracts\HasNotificationsSettings;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Notifications\Notification as BaseNotification;
+use Illuminate\Support\Str;
+use Turahe\Core\Contracts\HasNotificationsSettings;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\MailableTemplate\MailableTemplate;
+use Turahe\Users\Models\User;
 
 class Notification extends BaseNotification
 {

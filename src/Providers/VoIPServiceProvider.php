@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Providers;
 
-use Turahe\Core\VoIP\VoIPManager;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Turahe\Core\Contracts\VoIP\VoIPClient;
-use Illuminate\Contracts\Support\DeferrableProvider;
+use Turahe\Core\VoIP\VoIPManager;
 
 class VoIPServiceProvider extends ServiceProvider implements DeferrableProvider
 {

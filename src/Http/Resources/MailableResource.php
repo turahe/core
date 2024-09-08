@@ -27,12 +27,12 @@ class MailableResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'name'          => $this->name,
-            'locale'        => $this->locale,
-            'subject'       => $this->getSubject(),
+            'name' => $this->name,
+            'locale' => $this->locale,
+            'subject' => $this->getSubject(),
             'html_template' => clean($this->getHtmlTemplate()),
             'text_template' => clean($this->getTextTemplate()),
-            'placeholders'  => $this->getPlaceholders(),
+            'placeholders' => $this->getPlaceholders(),
         ], $request);
     }
 }

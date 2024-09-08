@@ -89,33 +89,33 @@ class CustomFieldControllerTest extends TestCase
 
         // Only lowercase alpha characters (a-z) and underscore (_) are accepted.
         $this->postJson('/api/custom-fields', [
-            'field_id'      => 'NonASCII-2@',
+            'field_id' => 'NonASCII-2@',
             'resource_name' => 'contacts',
         ])->assertJsonValidationErrors('field_id');
 
         // Cannot be named column from database
         $this->postJson('/api/custom-fields', [
-            'field_id'      => 'first_name',
+            'field_id' => 'first_name',
             'resource_name' => 'contacts',
         ])->assertJsonValidationErrors('field_id');
 
         // Max 64 characterts
         $this->postJson('/api/custom-fields', [
-            'field_id'      => str_repeat('T', 65),
+            'field_id' => str_repeat('T', 65),
             'resource_name' => 'contacts',
         ])->assertJsonValidationErrors('field_id');
 
         // Cannot be named from other existent fields e.q. custom fields
         // Create a field first
         $this->postJson('/api/custom-fields', [
-            'field_type'    => 'Text',
-            'field_id'      => 'test-field-id',
-            'label'         => 'Label',
+            'field_type' => 'Text',
+            'field_id' => 'test-field-id',
+            'label' => 'Label',
             'resource_name' => 'contacts',
         ]);
 
         $this->postJson('/api/custom-fields', [
-            'field_id'      => 'test-field-id',
+            'field_id' => 'test-field-id',
             'resource_name' => 'contacts',
         ])->assertJsonValidationErrors('field_id');
     }
@@ -133,11 +133,11 @@ class CustomFieldControllerTest extends TestCase
         $this->signIn();
 
         $this->postJson('/api/custom-fields', [
-            'field_type'    => Fields::getOptionableCustomFieldsTypes()[0],
-            'field_id'      => 'some_id',
-            'label'         => 'Label',
+            'field_type' => Fields::getOptionableCustomFieldsTypes()[0],
+            'field_id' => 'some_id',
+            'label' => 'Label',
             'resource_name' => 'contacts',
-            'options'       => [],
+            'options' => [],
         ])->assertJsonValidationErrors('options');
     }
 
@@ -147,31 +147,31 @@ class CustomFieldControllerTest extends TestCase
 
         foreach (Fields::getNonOptionableCustomFieldsTypes() as $type) {
             $this->postJson('/api/custom-fields', [
-                'field_type'    => $type,
-                'field_id'      => $id = 'cf_some_id_'.strtolower($type),
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => $id = 'cf_some_id_'.strtolower($type),
+                'label' => $type,
                 'resource_name' => 'contacts',
             ])->assertJson([
-                'field_type'    => $type,
-                'field_id'      => $id,
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => $id,
+                'label' => $type,
                 'resource_name' => 'contacts',
             ]);
         }
 
         foreach (Fields::getOptionableCustomFieldsTypes() as $type) {
             $this->postJson('/api/custom-fields', [
-                'field_type'    => $type,
-                'field_id'      => $id = 'cf_some_id_'.strtolower($type),
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => $id = 'cf_some_id_'.strtolower($type),
+                'label' => $type,
                 'resource_name' => 'contacts',
-                'options'       => $options = [['name' => 'Option 1'], ['name' => 'Option 2']],
+                'options' => $options = [['name' => 'Option 1'], ['name' => 'Option 2']],
             ])->assertJson([
-                'field_type'    => $type,
-                'field_id'      => $id,
-                'label'         => $type,
+                'field_type' => $type,
+                'field_id' => $id,
+                'label' => $type,
                 'resource_name' => 'contacts',
-                'options'       => $options,
+                'options' => $options,
             ]);
         }
     }
@@ -180,12 +180,12 @@ class CustomFieldControllerTest extends TestCase
     {
         $this->signIn();
 
-        $field = (new CustomFieldService())->create([
-            'field_type'    => 'Checkbox',
-            'field_id'      => 'cf_some_id_for_type',
-            'label'         => 'Label',
+        $field = (new CustomFieldService)->create([
+            'field_type' => 'Checkbox',
+            'field_id' => 'cf_some_id_for_type',
+            'label' => 'Label',
             'resource_name' => 'contacts',
-            'options'       => [['name' => 'Option 1'], ['name' => 'Option 2']],
+            'options' => [['name' => 'Option 1'], ['name' => 'Option 2']],
         ]);
 
         $option1 = $field->options->first(function ($option) {
@@ -193,8 +193,8 @@ class CustomFieldControllerTest extends TestCase
         });
 
         $this->putJson('/api/custom-fields/'.$field->id, [
-            'label'         => 'Changed Label',
-            'options'       => [['name' => 'New Option'], ['id' => $option1->id, 'name' => 'Option 1 Updated']],
+            'label' => 'Changed Label',
+            'options' => [['name' => 'New Option'], ['id' => $option1->id, 'name' => 'Option 1 Updated']],
             'resource_name' => 'contacts',
         ])->assertJson([
             'label' => 'Changed Label',
@@ -224,17 +224,17 @@ class CustomFieldControllerTest extends TestCase
     {
         $this->signIn();
 
-        $field = (new CustomFieldService())->create([
-            'field_type'    => $originalType = 'Text',
-            'field_id'      => 'cf_some_id_for_type',
-            'label'         => 'Label',
+        $field = (new CustomFieldService)->create([
+            'field_type' => $originalType = 'Text',
+            'field_id' => 'cf_some_id_for_type',
+            'label' => 'Label',
             'resource_name' => 'contacts',
         ]);
 
         $this->putJson('/api/custom-fields/'.$field->id, [
-            'label'         => 'Changed Label',
+            'label' => 'Changed Label',
             'resource_name' => 'contacts',
-            'field_type'    => 'Select',
+            'field_type' => 'Select',
         ])->assertJson([
             'field_type' => $originalType,
         ]);
@@ -244,17 +244,17 @@ class CustomFieldControllerTest extends TestCase
     {
         $this->signIn();
 
-        $field = (new CustomFieldService())->create([
-            'field_type'    => 'Text',
-            'field_id'      => $originalId = 'cf_some_id_for_type',
-            'label'         => 'Label',
+        $field = (new CustomFieldService)->create([
+            'field_type' => 'Text',
+            'field_id' => $originalId = 'cf_some_id_for_type',
+            'label' => 'Label',
             'resource_name' => 'contacts',
         ]);
 
         $this->putJson('/api/custom-fields/'.$field->id, [
-            'label'         => 'Changed Label',
+            'label' => 'Changed Label',
             'resource_name' => 'contacts',
-            'field_id'      => 'changed_id',
+            'field_id' => 'changed_id',
         ])->assertJson([
             'field_id' => $originalId,
         ]);

@@ -27,7 +27,7 @@ class PermissionController extends ApiController
 
         return $this->response([
             'grouped' => Permissions::groups(),
-            'all'     => Permissions::all(),
+            'all' => Permissions::all(),
         ]);
     }
 }

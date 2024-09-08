@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Feature\Fields;
 
 use Tests\TestCase;
-use Turahe\Core\Fields\Text;
 use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\Text;
 
 class FieldControllerTest extends TestCase
 {

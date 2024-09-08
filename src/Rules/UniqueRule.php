@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Rules;
 
-use Turahe\Core\Makeable;
 use Illuminate\Validation\Rules\Unique;
+use Turahe\Core\Makeable;
 
 class UniqueRule extends Unique
 {

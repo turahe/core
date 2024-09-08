@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Feature\Updater;
 
-use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Turahe\Core\Updater\Patcher;
 use Illuminate\Support\Facades\App;
+use Tests\TestCase;
+use Turahe\Core\Updater\Patcher;
 
 /**
  * @group updater
@@ -32,10 +32,10 @@ class UpdateDownloadControllerTest extends TestCase
 
         $response = json_encode([
             [
-                'date'        => '2021-08-24T18:52:54.000000Z',
+                'date' => '2021-08-24T18:52:54.000000Z',
                 'description' => 'Fixes issue with activities',
-                'token'       => $token,
-                'version'     => '1.0.0',
+                'token' => $token,
+                'version' => '1.0.0',
             ],
         ]);
 

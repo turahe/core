@@ -66,7 +66,7 @@ class Header implements Arrayable
     public function toArray()
     {
         return [
-            'name'  => $this->getName(),
+            'name' => $this->getName(),
             'value' => $this->getValue(),
         ];
     }

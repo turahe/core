@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class PrivacyPolicy extends Controller
 {

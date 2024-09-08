@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Models;
 
-use Illuminate\Support\Str;
-use Turahe\Core\Facades\Innoclapps;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Fields\FieldsCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Fields\FieldsCollection;
 
 /**
  * Turahe\Core\Models\Import
@@ -69,9 +69,9 @@ class Import extends Model
     use HasUlids;
 
     const STATUSES = [
-        'mapping'     => 1,
+        'mapping' => 1,
         'in-progress' => 2,
-        'finished'    => 3,
+        'finished' => 3,
     ];
 
     /**
@@ -98,11 +98,11 @@ class Import extends Model
      * @var array
      */
     protected $casts = [
-        'data'       => 'array',
-        'user_id'    => 'int',
+        'data' => 'array',
+        'user_id' => 'int',
         'duplicates' => 'int',
-        'skipped'    => 'int',
-        'imported'   => 'int',
+        'skipped' => 'int',
+        'imported' => 'int',
     ];
 
     /**

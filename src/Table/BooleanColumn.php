@@ -66,7 +66,7 @@ class BooleanColumn extends Column
     {
         return array_merge([
             'falseValue' => $this->falseValue,
-            'trueValue'  => $this->trueValue,
+            'trueValue' => $this->trueValue,
         ], $this->meta);
     }
 }

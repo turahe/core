@@ -13,8 +13,8 @@
 namespace Turahe\Core\Table;
 
 use Closure;
-use Turahe\Core\Contracts\Presentable;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Turahe\Core\Contracts\Presentable;
 use Turahe\Core\Table\LengthAwarePaginator as TableLengthAwarePaginator;
 
 trait ParsesResponse
@@ -80,9 +80,7 @@ trait ParsesResponse
     /**
      * Tap the response.
      */
-    protected function tapResponse(TableLengthAwarePaginator $response): void
-    {
-    }
+    protected function tapResponse(TableLengthAwarePaginator $response): void {}
 
     /**
      * Append attributes when column is relation.

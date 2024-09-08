@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Facades;
 
-use Turahe\Core\Application;
 use Illuminate\Support\Facades\Facade;
+use Turahe\Core\Application;
 
 /**
  * @method static void boot()

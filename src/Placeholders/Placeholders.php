@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Placeholders;
 
-use Mustache_Engine;
-use JsonSerializable;
 use Illuminate\Support\Arr;
+use JsonSerializable;
 use KubAT\PhpSimple\HtmlDomParser;
+use Mustache_Engine;
 use Mustache_Exception_SyntaxException;
 
 class Placeholders implements JsonSerializable
@@ -33,9 +33,7 @@ class Placeholders implements JsonSerializable
     /**
      * Create new Collection instance.
      */
-    public function __construct(protected array $placeholders)
-    {
-    }
+    public function __construct(protected array $placeholders) {}
 
     /**
      * Get all of the collection placeholders.

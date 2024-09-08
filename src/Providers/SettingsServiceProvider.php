@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Providers;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Settings\Contracts\Manager as ManagerContract;
+use Turahe\Core\Settings\Contracts\Store as StoreContract;
 use Turahe\Core\Settings\DefaultSettings;
 use Turahe\Core\Settings\SettingsManager;
-use Turahe\Core\Settings\Contracts\Store as StoreContract;
-use Turahe\Core\Settings\Contracts\Manager as ManagerContract;
 
 class SettingsServiceProvider extends ServiceProvider
 {

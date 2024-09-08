@@ -12,8 +12,8 @@
 
 namespace Turahe\Core;
 
-use ReflectionClass;
 use Illuminate\Support\Str;
+use ReflectionClass;
 use Symfony\Component\Finder\Finder;
 
 class SubClassDiscovery

@@ -14,8 +14,8 @@ namespace Turahe\Core\Workflow;
 
 use Closure;
 use JsonSerializable;
-use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Contracts\Workflow\ModelTrigger;
+use Turahe\Core\Facades\Innoclapps;
 
 abstract class Action implements JsonSerializable
 {
@@ -163,8 +163,8 @@ abstract class Action implements JsonSerializable
     {
         return [
             'identifier' => static::identifier(),
-            'name'       => static::name(),
-            'fields'     => $this->fields(),
+            'name' => static::name(),
+            'fields' => $this->fields(),
         ];
     }
 }

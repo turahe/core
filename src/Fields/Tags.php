@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Fields;
 
-use Turahe\Core\Table\MorphToManyColumn;
 use Turahe\Core\Http\Resources\TagResource;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\MorphToManyColumn;
 
 class Tags extends Field
 {

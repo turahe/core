@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Updater;
 
-use Turahe\Core\Application;
 use Illuminate\Support\Facades\Artisan;
+use Turahe\Core\Application;
 
 class UpdateFinalizer
 {
@@ -42,9 +42,9 @@ class UpdateFinalizer
         $this->runPatchers();
 
         settings([
-            '_version'           => Application::VERSION,
+            '_version' => Application::VERSION,
             '_last_updated_date' => date('Y-m-d H:i:s'),
-            '_updated_from'      => $this->getCachedCurrentVersion(),
+            '_updated_from' => $this->getCachedCurrentVersion(),
         ]);
 
         $this->runOptimizer();

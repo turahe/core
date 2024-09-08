@@ -14,8 +14,8 @@ namespace Turahe\Core\Resource;
 
 use Illuminate\Support\Arr;
 use Turahe\Core\Models\Model;
-use Turahe\Core\Placeholders\UrlPlaceholder;
 use Turahe\Core\Placeholders\Placeholders as BasePlaceholders;
+use Turahe\Core\Placeholders\UrlPlaceholder;
 
 class ResourcePlaceholders extends BasePlaceholders
 {
@@ -29,7 +29,7 @@ class ResourcePlaceholders extends BasePlaceholders
     /**
      * Initialze new Placeholders instance
      *
-     * @param  \Turahe\Core\Models\Model|null  $model Provide the model when parsing is needed
+     * @param  \Turahe\Core\Models\Model|null  $model  Provide the model when parsing is needed
      */
     public function __construct(PlaceholdersGroup|Resource|array $resources, protected ?Model $model = null)
     {
@@ -67,7 +67,7 @@ class ResourcePlaceholders extends BasePlaceholders
     {
         return collect($resources)->mapWithKeys(function (Resource|string $resource) {
             return with(new PlaceholdersGroup($resource), fn (PlaceholdersGroup $group) => [$resource => [
-                'label'        => $group->getResource()->singularLabel(),
+                'label' => $group->getResource()->singularLabel(),
                 'placeholders' => $group->all(),
             ]]);
         })->reject(fn ($group) => empty($group['placeholders']))->all();

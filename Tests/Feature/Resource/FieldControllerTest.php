@@ -13,10 +13,10 @@
 namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
-use Turahe\Core\Fields\Text;
-use Turahe\Core\Fields\Email;
-use Turahe\Core\Facades\Fields;
 use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Facades\Fields;
+use Turahe\Core\Fields\Email;
+use Turahe\Core\Fields\Text;
 
 class FieldControllerTest extends TestCase
 {

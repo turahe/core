@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Calendar\Google;
 
-use Turahe\Core\Facades\Google as Client;
-use Turahe\Core\OAuth\AccessTokenProvider;
-use Turahe\Core\Contracts\OAuth\Calendarable;
 use Google\Service\Exception as GoogleServiceException;
 use Turahe\Core\Calendar\Exceptions\UnauthorizedException;
+use Turahe\Core\Contracts\OAuth\Calendarable;
+use Turahe\Core\Facades\Google as Client;
+use Turahe\Core\OAuth\AccessTokenProvider;
 
 class GoogleCalendar implements Calendarable
 {

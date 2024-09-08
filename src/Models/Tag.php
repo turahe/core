@@ -13,11 +13,11 @@
 namespace Turahe\Core\Models;
 
 use ArrayAccess;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Concerns\HasDisplayOrder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Collection as DatabaseCollection;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Support\Collection;
+use Turahe\Core\Concerns\HasDisplayOrder;
 
 /**
  * Turahe\Core\Models\Tag
@@ -122,8 +122,8 @@ class Tag extends Model
 
         if (! $tag) {
             $tag = static::create([
-                'name'          => $name,
-                'type'          => $type,
+                'name' => $name,
+                'type' => $type,
                 'display_order' => 1000,
             ]);
         }

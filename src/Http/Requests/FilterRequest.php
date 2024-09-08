@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FilterRequest extends FormRequest
 {
@@ -25,9 +25,9 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => 'required|max:191|string',
+            'name' => 'required|max:191|string',
             'identifier' => Rule::requiredIf($this->isMethod('POST')),
-            'is_shared'  => 'required|boolean',
+            'is_shared' => 'required|boolean',
         ];
     }
 }

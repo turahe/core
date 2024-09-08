@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Models;
 
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Turahe\Core\Models\Country

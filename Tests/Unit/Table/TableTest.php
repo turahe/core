@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Table;
 
-use Tests\TestCase;
 use Tests\Fixtures\EventTable;
+use Tests\TestCase;
 use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Table\Exceptions\OrderByNonExistingColumnException;
 

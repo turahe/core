@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Models;
 
-use Turahe\Core\Timeline\Timelineable;
 use Spatie\Activitylog\Models\Activity as SpatieActivityLog;
+use Turahe\Core\Timeline\Timelineable;
 
 /**
  * Turahe\Core\Models\Changelog

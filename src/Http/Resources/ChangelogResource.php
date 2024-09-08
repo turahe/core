@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Resources;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Turahe\Core\JsonResource;
 use Turahe\Core\Resource\ProvidesCommonData;
 
@@ -30,8 +30,8 @@ class ChangelogResource extends JsonResource
         return $this->withCommonData([
             'description' => $this->description,
             'causer_name' => $this->causer_name,
-            'properties'  => $this->properties,
-            'module'      => str_starts_with($this->subject_type, config('modules.namespace')) ?
+            'properties' => $this->properties,
+            'module' => str_starts_with($this->subject_type, config('modules.namespace')) ?
                 strtolower(Str::of($this->subject_type)->explode('\\')[1]) :
                 null,
         ], $request);

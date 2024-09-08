@@ -25,9 +25,7 @@ class ChartResult implements JsonSerializable
     /**
      * Create a new partition result instance
      */
-    public function __construct(public array $value)
-    {
-    }
+    public function __construct(public array $value) {}
 
     /**
      * Format the labels for the chart result

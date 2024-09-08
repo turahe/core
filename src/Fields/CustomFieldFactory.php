@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Fields;
 
-use Turahe\Core\Table\Column;
+use Turahe\Core\Contracts\Fields\Dateable;
 use Turahe\Core\Filters\Filter;
 use Turahe\Core\Models\CustomField;
-use Turahe\Core\Table\HasManyColumn;
-use Turahe\Core\Table\BelongsToColumn;
-use Turahe\Core\Table\MorphToManyColumn;
-use Turahe\Core\Contracts\Fields\Dateable;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\BelongsToColumn;
+use Turahe\Core\Table\Column;
+use Turahe\Core\Table\HasManyColumn;
+use Turahe\Core\Table\MorphToManyColumn;
 
 class CustomFieldFactory
 {
@@ -41,9 +41,7 @@ class CustomFieldFactory
     /**
      * Create new CustomFieldFactory instance.
      */
-    public function __construct(protected string $resourceName)
-    {
-    }
+    public function __construct(protected string $resourceName) {}
 
     /**
      * Create fields from custom fields intended for filters
@@ -228,13 +226,13 @@ class CustomFieldFactory
      */
     protected function fields()
     {
-        return (new CustomFieldService())->forResource($this->resourceName);
+        return (new CustomFieldService)->forResource($this->resourceName);
     }
 
     /**
      * Handle the label option when custom field is optionable
      *
-     * @param  string  $label The original provided label
+     * @param  string  $label  The original provided label
      * @return array|int
      */
     protected static function getOptionIdViaLabel(Optionable $field, $label)

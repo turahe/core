@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Synchronization;
 
-use Turahe\Core\Models\Synchronization;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Turahe\Core\Models\Synchronization;
 
 /** @mixin \Turahe\Core\Models\Model */
 trait Synchronizable

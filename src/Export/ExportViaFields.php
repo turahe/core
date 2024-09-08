@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Export;
 
-use Turahe\Core\Fields\Field;
-use Maatwebsite\Excel\Facades\Excel;
-use Turahe\Core\Fields\FieldsCollection;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Turahe\Core\Contracts\Fields\Dateable;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Facades\Excel;
+use Turahe\Core\Contracts\Fields\Dateable;
 use Turahe\Core\Export\Exceptions\InvalidExportTypeException;
+use Turahe\Core\Fields\Field;
+use Turahe\Core\Fields\FieldsCollection;
 
 abstract class ExportViaFields implements FromCollection, WithHeadings, WithMapping
 {
@@ -34,8 +34,8 @@ abstract class ExportViaFields implements FromCollection, WithHeadings, WithMapp
      * @var array
      */
     const ALLOWED_TYPES = [
-        'csv'  => \Maatwebsite\Excel\Excel::CSV,
-        'xls'  => \Maatwebsite\Excel\Excel::XLS,
+        'csv' => \Maatwebsite\Excel\Excel::CSV,
+        'xls' => \Maatwebsite\Excel\Excel::XLS,
         'xlsx' => \Maatwebsite\Excel\Excel::XLSX,
     ];
 

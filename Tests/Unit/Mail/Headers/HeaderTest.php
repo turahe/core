@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Tests\TestCase;
 use Turahe\Core\Mail\Headers\Header;
-use Illuminate\Contracts\Support\Arrayable;
 
 class HeaderTest extends TestCase
 {
@@ -46,7 +46,7 @@ class HeaderTest extends TestCase
         $this->assertInstanceOf(Arrayable::class, $header);
 
         $this->assertEquals([
-            'name'  => 'x-concord-test',
+            'name' => 'x-concord-test',
             'value' => 'value',
         ], $header->toArray());
     }

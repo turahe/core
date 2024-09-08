@@ -13,8 +13,8 @@
 namespace Turahe\Core\Rules;
 
 use Closure;
-use Turahe\Core\Facades\Innoclapps;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Turahe\Core\Facades\Innoclapps;
 
 class ValidLocaleRule implements ValidationRule
 {

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Resource;
 
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Fields\Field;
 use Turahe\Core\Models\Model;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Placeholders\Placeholder;
 use Turahe\Core\Placeholders\GenericPlaceholder;
+use Turahe\Core\Placeholders\Placeholder;
 
 class PlaceholdersGroup
 {
@@ -25,7 +25,7 @@ class PlaceholdersGroup
     /**
      * Initialize new PlaceholdersGroup instance.
      *
-     * @param  \Turahe\Core\Models\Model|null  $model Provide the model when parsing is needed
+     * @param  \Turahe\Core\Models\Model|null  $model  Provide the model when parsing is needed
      */
     public function __construct(Resource|string $resource, protected ?Model $model = null)
     {

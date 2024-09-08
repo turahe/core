@@ -12,24 +12,24 @@
 
 namespace Turahe\Core\Changelog;
 
-use Turahe\Core\Facades\ChangeLogger;
 use Turahe\Core\Contracts\Presentable;
+use Turahe\Core\Facades\ChangeLogger;
 
 class PivotLogger
 {
     /**
      * Perform the pivot activity log
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $actionOn The action attached|detached is performed to
-     * @param  \Turahe\Core\Contracts\Presentable  $pivotModel The pivot model
+     * @param  \Illuminate\Database\Eloquent\Model  $actionOn  The action attached|detached is performed to
+     * @param  \Turahe\Core\Contracts\Presentable  $pivotModel  The pivot model
      * @param  string  $relation
-     * @param  string  $action attached|detached
+     * @param  string  $action  attached|detached
      * @return mixed
      */
     protected static function perform($actionOn, Presentable $pivotModel, $relation, $action)
     {
         return ChangeLogger::onModel($actionOn, [
-            'id'   => $pivotModel->getKey(),
+            'id' => $pivotModel->getKey(),
             'name' => $pivotModel->display_name,
             'path' => $pivotModel->path,
         ])
@@ -46,7 +46,7 @@ class PivotLogger
      *
      * @param  \Turahe\Core\Models\Model  $model
      * @param  array  $pivotIds
-     * @param  string  $relation The main model relation
+     * @param  string  $relation  The main model relation
      * @return Collection
      */
     public static function getRelatedPivotIds($model, $pivotIds, $relation)

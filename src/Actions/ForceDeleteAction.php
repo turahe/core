@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Actions;
 
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class ForceDeleteAction extends Action
 {

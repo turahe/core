@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Microsoft\Services\Batch;
 
-use Turahe\Core\Makeable;
-use Microsoft\Graph\Model\Entity;
 use Illuminate\Contracts\Support\Arrayable;
+use Microsoft\Graph\Model\Entity;
+use Turahe\Core\Makeable;
 
 class BatchRequest implements Arrayable
 {
@@ -265,9 +265,9 @@ class BatchRequest implements Arrayable
     public function toArray()
     {
         $payload = [
-            'id'     => $this->getId(),
+            'id' => $this->getId(),
             'method' => $this->getMethod(),
-            'url'    => $this->getUrl(),
+            'url' => $this->getUrl(),
         ];
 
         if ($this->hasBody()) {

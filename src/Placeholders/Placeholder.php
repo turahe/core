@@ -139,11 +139,11 @@ abstract class Placeholder implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'tag'                 => $this->tag,
-            'description'         => $this->description,
+            'tag' => $this->tag,
+            'description' => $this->description,
             'interpolation_start' => $this->interpolationStart,
-            'interpolation_end'   => $this->interpolationEnd,
-            'newlineable'         => $this->newlineable,
+            'interpolation_end' => $this->interpolationEnd,
+            'newlineable' => $this->newlineable,
         ];
     }
 

@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Tests\TestCase;
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Import;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+use Turahe\Core\Models\Import;
+use Turahe\Users\Models\User;
 
 class ImportTest extends TestCase
 {
@@ -70,11 +70,11 @@ class ImportTest extends TestCase
     protected function makeImport($attrs = [])
     {
         return new Import(array_merge([
-            'file_path'     => 'imports/text.csv',
+            'file_path' => 'imports/text.csv',
             'resource_name' => 'resource',
-            'status'        => 'mapping',
-            'user_id'       => 1,
-            'data'          => [],
+            'status' => 'mapping',
+            'user_id' => 1,
+            'data' => [],
         ], $attrs));
     }
 }

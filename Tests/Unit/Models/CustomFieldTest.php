@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Tests\TestCase;
 use Illuminate\Support\Str;
-use Turahe\Core\Fields\Text;
+use Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
+use Turahe\Core\Fields\Text;
 use Turahe\Core\Models\CustomField;
 
 class CustomFieldTest extends TestCase
@@ -118,14 +118,14 @@ class CustomFieldTest extends TestCase
         $prepared = $field->prepareOptions();
 
         $this->assertEquals([
-            'id'           => $field->options[0]->id,
-            'label'        => 'Option 1',
+            'id' => $field->options[0]->id,
+            'label' => 'Option 1',
             'swatch_color' => '#333333',
         ], $prepared[0]);
 
         $this->assertEquals([
-            'id'           => $field->options[1]->id,
-            'label'        => 'Option 2',
+            'id' => $field->options[1]->id,
+            'label' => 'Option 2',
             'swatch_color' => '#333332',
         ], $prepared[1]);
     }
@@ -144,8 +144,8 @@ class CustomFieldTest extends TestCase
         $prepared = $field->prepareRelatedOptions($related);
 
         $this->assertEquals([
-            'id'           => $field->options[0]->id,
-            'label'        => 'Option 1',
+            'id' => $field->options[0]->id,
+            'label' => 'Option 1',
             'swatch_color' => '#333333',
         ], $prepared[0]);
     }
@@ -153,10 +153,10 @@ class CustomFieldTest extends TestCase
     protected function makeField($attrs = [])
     {
         return new CustomField(array_merge([
-            'field_id'      => 'cf_field_id',
-            'field_type'    => 'Text',
+            'field_id' => 'cf_field_id',
+            'field_type' => 'Text',
             'resource_name' => 'resource',
-            'label'         => 'Label',
+            'label' => 'Label',
         ], $attrs));
     }
 }

@@ -112,7 +112,7 @@ class Format
     /**
      * Format date diff for humans
      *
-     * @param $dateValue
+     * @param  $dateValue
      * @return string|null
      */
     public function diffForHumans($value, ?Localizeable $user = null)

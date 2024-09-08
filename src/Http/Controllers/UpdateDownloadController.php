@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Turahe\Core\Updater\Patcher;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Turahe\Core\Updater\Patcher;
 
 class UpdateDownloadController extends Controller
 {

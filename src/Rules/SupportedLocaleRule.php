@@ -13,8 +13,8 @@
 namespace Turahe\Core\Rules;
 
 use Closure;
-use ResourceBundle;
 use Illuminate\Contracts\Validation\ValidationRule;
+use ResourceBundle;
 
 class SupportedLocaleRule implements ValidationRule
 {

@@ -14,6 +14,4 @@ namespace Turahe\Core\Calendar\Exceptions;
 
 use Exception;
 
-class UnauthorizedException extends Exception
-{
-}
+class UnauthorizedException extends Exception {}

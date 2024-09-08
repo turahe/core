@@ -13,15 +13,15 @@
 namespace Turahe\Core\Resource;
 
 use Closure;
-use Turahe\Core\Facades\Zapier;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Core\Models\CustomField;
-use Turahe\Core\Models\CustomFieldOption;
-use Turahe\Core\Fields\CustomFieldService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Turahe\Core\Fields\CustomFieldResourceCollection;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Turahe\Core\Contracts\Resources\AcceptsCustomFields;
+use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Facades\Zapier;
+use Turahe\Core\Fields\CustomFieldResourceCollection;
+use Turahe\Core\Fields\CustomFieldService;
+use Turahe\Core\Models\CustomField;
+use Turahe\Core\Models\CustomFieldOption;
 
 /** @mixin \Turahe\Core\Models\Model */
 trait Resourceable
@@ -216,7 +216,7 @@ trait Resourceable
     protected static function getCustomFieldService(): CustomFieldService
     {
         return once(function () {
-            return new CustomFieldService();
+            return new CustomFieldService;
         });
     }
 

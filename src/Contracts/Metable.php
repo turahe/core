@@ -34,7 +34,7 @@ interface Metable
     /**
      * Retrieve the value of the `Meta` at a given key.
      *
-     * @param  mixed  $default Fallback value if no Meta is found.
+     * @param  mixed  $default  Fallback value if no Meta is found.
      * @return mixed
      */
     public function getMeta(string $key, $default = null);

@@ -13,17 +13,17 @@
 namespace Turahe\Core\Fields;
 
 use Closure;
-use JsonSerializable;
-use Turahe\Core\Makeable;
 use Illuminate\Support\Arr;
-use Turahe\Core\HasHelpText;
+use JsonSerializable;
 use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\HasHelpText;
+use Turahe\Core\Http\Resources\CustomFieldResource;
+use Turahe\Core\Makeable;
 use Turahe\Core\Models\CustomField;
+use Turahe\Core\Placeholders\GenericPlaceholder;
+use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Resource\Import\Import;
 use Turahe\Core\Rules\UniqueResourceRule;
-use Turahe\Core\Resource\Http\ResourceRequest;
-use Turahe\Core\Placeholders\GenericPlaceholder;
-use Turahe\Core\Http\Resources\CustomFieldResource;
 
 class Field extends FieldElement implements JsonSerializable
 {
@@ -184,8 +184,8 @@ class Field extends FieldElement implements JsonSerializable
     /**
      * Initialize new Field instance class
      *
-     * @param  string  $attribute field attribute
-     * @param  string|null  $label field label
+     * @param  string  $attribute  field attribute
+     * @param  string|null  $label  field label
      */
     public function __construct($attribute, $label = null)
     {
@@ -201,9 +201,7 @@ class Field extends FieldElement implements JsonSerializable
      *
      * @return void
      */
-    public function boot()
-    {
-    }
+    public function boot() {}
 
     /**
      * Set field attribute
@@ -830,32 +828,32 @@ class Field extends FieldElement implements JsonSerializable
         }
 
         return array_merge([
-            'component'             => $this->component(),
-            'attribute'             => $this->attribute,
-            'label'                 => $this->label,
-            'helpText'              => $this->helpText,
-            'helpTextDisplay'       => $this->helpTextDisplay,
-            'readonly'              => $this->isReadOnly(),
-            'supportsInputGroup'    => $this->supportsInputGroup(),
-            'collapsed'             => $this->collapsed,
-            'primary'               => $this->isPrimary(),
-            'icon'                  => $this->icon,
-            'showOnIndex'           => $this->showOnIndex,
-            'showOnCreation'        => $this->showOnCreation,
-            'showOnUpdate'          => $this->showOnUpdate,
-            'showOnDetail'          => $this->showOnDetail,
-            'applicableForIndex'    => $this->isApplicableForIndex(),
+            'component' => $this->component(),
+            'attribute' => $this->attribute,
+            'label' => $this->label,
+            'helpText' => $this->helpText,
+            'helpTextDisplay' => $this->helpTextDisplay,
+            'readonly' => $this->isReadOnly(),
+            'supportsInputGroup' => $this->supportsInputGroup(),
+            'collapsed' => $this->collapsed,
+            'primary' => $this->isPrimary(),
+            'icon' => $this->icon,
+            'showOnIndex' => $this->showOnIndex,
+            'showOnCreation' => $this->showOnCreation,
+            'showOnUpdate' => $this->showOnUpdate,
+            'showOnDetail' => $this->showOnDetail,
+            'applicableForIndex' => $this->isApplicableForIndex(),
             'applicableForCreation' => $this->isApplicableForCreation(),
-            'applicableForUpdate'   => $this->isApplicableForUpdate(),
-            'toggleable'            => $this->toggleable,
-            'displayNone'           => $this->displayNone,
-            'emitChangeEvent'       => $this->emitChangeEvent,
-            'colClass'              => $this->getColClass(resolve(ResourceRequest::class)),
-            'value'                 => $this->defaultValue(resolve(ResourceRequest::class)),
-            'isRequired'            => $isRequired,
-            'isUnique'              => $this->isUnique(),
-            'canUnmarkUnique'       => $this->canUnmarkUnique,
-            'customField'           => $this->isCustomField() ? new CustomFieldResource($this->customField) : null,
+            'applicableForUpdate' => $this->isApplicableForUpdate(),
+            'toggleable' => $this->toggleable,
+            'displayNone' => $this->displayNone,
+            'emitChangeEvent' => $this->emitChangeEvent,
+            'colClass' => $this->getColClass(resolve(ResourceRequest::class)),
+            'value' => $this->defaultValue(resolve(ResourceRequest::class)),
+            'isRequired' => $isRequired,
+            'isUnique' => $this->isUnique(),
+            'canUnmarkUnique' => $this->canUnmarkUnique,
+            'customField' => $this->isCustomField() ? new CustomFieldResource($this->customField) : null,
         ], $this->meta());
     }
 }

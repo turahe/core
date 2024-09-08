@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Filters;
 
+use Illuminate\Database\Eloquent\Builder;
 use Turahe\Core\Models\Tag;
 use Turahe\Core\QueryBuilder\Parser;
-use Illuminate\Database\Eloquent\Builder;
 
 class Tags extends Optionable
 {

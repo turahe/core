@@ -19,9 +19,9 @@ class PivotDetached extends PivotLogger
      *
      * Used e.q. when detaching company
      *
-     * @param  \Turahe\Core\Models\Model  $detachedFrom The model where the pivot is detached
-     * @param  array  $pivotIds Attached pivot IDs
-     * @param  string  $identifier The relation name the event occured
+     * @param  \Turahe\Core\Models\Model  $detachedFrom  The model where the pivot is detached
+     * @param  array  $pivotIds  Attached pivot IDs
+     * @param  string  $identifier  The relation name the event occured
      * @return null
      */
     public static function log($detachedFrom, $pivotIds, $relation)

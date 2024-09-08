@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Turahe\Core\Facades\Fields;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Facades\Fields;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class FieldController extends ApiController
 {

@@ -13,9 +13,9 @@
 namespace Turahe\Core\Changelog;
 
 use Closure;
-use Turahe\Core\Models\Changelog;
 use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Facades\CauserResolver;
+use Turahe\Core\Models\Changelog;
 
 class Logging
 {

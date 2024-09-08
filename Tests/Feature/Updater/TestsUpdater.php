@@ -13,13 +13,13 @@
 namespace Turahe\Core\Tests\Feature\Updater;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Arr;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use Turahe\Core\Updater\Patcher;
 use Turahe\Core\Updater\Updater;
-use GuzzleHttp\Handler\MockHandler;
-use Illuminate\Support\Facades\File;
-use Illuminate\Filesystem\Filesystem;
 
 trait TestsUpdater
 {
@@ -28,24 +28,24 @@ trait TestsUpdater
     protected function createUpdaterInstance($responses, $config = [])
     {
         return new Updater($this->createClientInstance($responses), new Filesystem, array_merge([
-            'purchase_key'      => config('updater.purchase_key'),
-            'archive_url'       => config('updater.archive_url'),
-            'download_path'     => config('updater.download_path'),
+            'purchase_key' => config('updater.purchase_key'),
+            'archive_url' => config('updater.archive_url'),
+            'download_path' => config('updater.download_path'),
             'version_installed' => '1.0.0',
-            'exclude_folders'   => config('updater.exclude_folders'),
-            'exclude_files'     => config('updater.exclude_files'),
-            'permissions'       => config('updater.permissions'),
+            'exclude_folders' => config('updater.exclude_folders'),
+            'exclude_files' => config('updater.exclude_files'),
+            'permissions' => config('updater.permissions'),
         ], $config));
     }
 
     protected function createPatcherInstance($responses, $config = [])
     {
         return new Patcher($this->createClientInstance($responses), new Filesystem, array_merge([
-            'purchase_key'      => config('updater.purchase_key'),
-            'patches_url'       => config('updater.patches_archive_url'),
-            'download_path'     => config('updater.download_path'),
+            'purchase_key' => config('updater.purchase_key'),
+            'patches_url' => config('updater.patches_archive_url'),
+            'download_path' => config('updater.download_path'),
             'version_installed' => '1.0.0',
-            'permissions'       => config('updater.permissions'),
+            'permissions' => config('updater.permissions'),
         ], $config));
     }
 
@@ -59,16 +59,16 @@ trait TestsUpdater
     {
         return json_encode([
             [
-                'date'        => '2021-08-24T18:52:54.000000Z',
+                'date' => '2021-08-24T18:52:54.000000Z',
                 'description' => 'Fixes issue with activities',
-                'token'       => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
-                'version'     => '1.0.0',
+                'token' => '96671235-ddb3-40ab-8ab9-3ca5df8de6b7',
+                'version' => '1.0.0',
             ],
             [
-                'date'        => '2021-08-24T18:54:23.000000Z',
+                'date' => '2021-08-24T18:54:23.000000Z',
                 'description' => 'Fixes issue with calendar',
-                'token'       => 'f7595877-f826-4f4c-b6e2-60722fc4a30d',
-                'version'     => '1.0.0',
+                'token' => 'f7595877-f826-4f4c-b6e2-60722fc4a30d',
+                'version' => '1.0.0',
             ],
         ]);
     }
@@ -139,7 +139,7 @@ trait TestsUpdater
         $rootPath = $this->fixtureFilesPath();
         $path ??= $this->zipPathForFixtureFiles();
         // Initialize archive object
-        $zip = new \ZipArchive();
+        $zip = new \ZipArchive;
         $zip->open($path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         // Create recursive directory iterator

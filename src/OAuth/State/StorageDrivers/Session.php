@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\OAuth\State\StorageDrivers;
 
-use Turahe\Core\Contracts\OAuth\StateStorage;
 use Illuminate\Support\Facades\Session as Storage;
+use Turahe\Core\Contracts\OAuth\StateStorage;
 
 class Session implements StateStorage
 {

@@ -13,20 +13,18 @@
 namespace Turahe\Core\Rules;
 
 use Closure;
-use Turahe\Users\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Turahe\Core\VisibilityGroup\HasVisibilityGroups;
+use Turahe\Users\Models\User;
 
 class VisibleModelRule implements ValidationRule
 {
     /**
      * Create a new rule instance.
      */
-    public function __construct(protected HasVisibilityGroups&Model $model, protected ?User $user = null)
-    {
-    }
+    public function __construct(protected HasVisibilityGroups&Model $model, protected ?User $user = null) {}
 
     /**
      * Run the validation rule.

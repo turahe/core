@@ -26,8 +26,8 @@ trait ChecksForDuplicates
     {
         return $this->withMeta([
             'checkDuplicatesWith' => [
-                'url'          => $url,
-                'params'       => $params,
+                'url' => $url,
+                'params' => $params,
                 'lang_keypath' => $langKey,
             ],
         ]);

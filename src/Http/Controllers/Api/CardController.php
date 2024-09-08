@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Turahe\Core\Facades\Cards;
 use Illuminate\Http\JsonResponse;
+use Turahe\Core\Facades\Cards;
 use Turahe\Core\Http\Controllers\ApiController;
 
 class CardController extends ApiController

@@ -12,9 +12,9 @@
 
 namespace Turahe\Core;
 
+use Illuminate\Support\Facades\Gate;
 use ReflectionClass;
 use ReflectionMethod;
-use Illuminate\Support\Facades\Gate;
 
 trait ProvidesModelAuthorizations
 {
@@ -22,7 +22,7 @@ trait ProvidesModelAuthorizations
      * Get all defined authorizations for the model
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  array  $without Exclude abilities from authorization
+     * @param  array  $without  Exclude abilities from authorization
      * @return array|null
      *
      * @throws \ReflectionException

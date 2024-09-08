@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Database\Factories;
 
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Dashboard;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Turahe\Core\Models\Dashboard;
+use Turahe\Users\Models\User;
 
 class DashboardFactory extends Factory
 {
@@ -33,10 +33,10 @@ class DashboardFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'       => $this->faker->paragraph(1),
+            'name' => $this->faker->paragraph(1),
             'is_default' => false,
-            'user_id'    => User::factory(),
-            'cards'      => [],
+            'user_id' => User::factory(),
+            'cards' => [],
         ];
     }
 

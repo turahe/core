@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Fields;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Turahe\Core\Http\Resources\CountryResource;
 use Turahe\Core\Models\Country as CountryModel;
 
@@ -22,7 +22,7 @@ class Country extends BelongsTo
     /**
      * Create new instance of Country field
      *
-     * @param  string  $label Custom label
+     * @param  string  $label  Custom label
      */
     public function __construct($label = null)
     {

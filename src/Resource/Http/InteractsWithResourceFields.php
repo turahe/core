@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Resource\Http;
 
-use Turahe\Core\Fields\FieldsCollection;
 use Illuminate\Contracts\Validation\Validator;
+use Turahe\Core\Fields\FieldsCollection;
 
 trait InteractsWithResourceFields
 {

@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Zapier;
 
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use Turahe\Core\Models\ZapierHook;
-use Turahe\Core\Resource\Resource;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Turahe\Core\Models\ZapierHook;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Resource\Resource;
 
 class Zapier
 {

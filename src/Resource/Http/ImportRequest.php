@@ -104,14 +104,10 @@ class ImportRequest extends ResourcefulRequest
     /**
      * Prepare the data for validation.
      */
-    protected function prepareForValidation(): void
-    {
-    }
+    protected function prepareForValidation(): void {}
 
     /**
      * Validate the class instance.
      */
-    public function validateResolved(): void
-    {
-    }
+    public function validateResolved(): void {}
 }

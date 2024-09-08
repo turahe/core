@@ -14,12 +14,12 @@ namespace Turahe\Core\HtmlPurifier;
 
 use Exception;
 use HTMLPurifier;
-use HTMLPurifier_HTML5Config;
-use HTMLPurifier_AttrDef_Enum;
-use HTMLPurifier_HTMLDefinition;
-use Illuminate\Filesystem\Filesystem;
 use HTMLPurifier_AttrDef_CSS_Percentage;
+use HTMLPurifier_AttrDef_Enum;
+use HTMLPurifier_HTML5Config;
+use HTMLPurifier_HTMLDefinition;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Filesystem\Filesystem;
 
 /**
  * @codeCoverageIgnore
@@ -64,7 +64,7 @@ class Purifier
      *
      * @see http://htmlpurifier.org/docs/enduser-customize.html
      *
-     * @param  \HTMLPurifier_HTML5Config  $configObject Defaults to using default config
+     * @param  \HTMLPurifier_HTML5Config  $configObject  Defaults to using default config
      * @return \HTMLPurifier_HTML5Config $configObject
      */
     private function addCustomDefinition(array $definitionConfig, ?HTMLPurifier_HTML5Config $configObject = null)
@@ -312,9 +312,9 @@ class Purifier
             'flex-end',
         ]);
 
-        $definition->info['flex-basis'] = new HTMLPurifier_AttrDef_CSS_Percentage();
+        $definition->info['flex-basis'] = new HTMLPurifier_AttrDef_CSS_Percentage;
 
-        $definition->info['flex'] = new HTMLPurifier_AttrDef_CSS_Flex();
+        $definition->info['flex'] = new HTMLPurifier_AttrDef_CSS_Flex;
     }
 
     /**

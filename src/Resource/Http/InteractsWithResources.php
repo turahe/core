@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Resource\Http;
 
+use Illuminate\Database\Eloquent\Builder;
+use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Resource;
-use Turahe\Core\Facades\Innoclapps;
-use Illuminate\Database\Eloquent\Builder;
 
 trait InteractsWithResources
 {

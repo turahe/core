@@ -13,8 +13,8 @@
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Resource\Http\ResourceRequest;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Resource\Http\ResourceRequest;
 
 class SearchController extends ApiController
 {

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Charts;
 
-use Turahe\Core\Card\Card;
 use Illuminate\Http\Request;
+use Turahe\Core\Card\Card;
 
 abstract class Chart extends Card
 {
@@ -58,9 +58,9 @@ abstract class Chart extends Card
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'result'       => $this->calculate(request()),
+            'result' => $this->calculate(request()),
             'amount_value' => $this->amountValue,
-            'color'        => $this->color,
+            'color' => $this->color,
         ]);
     }
 }

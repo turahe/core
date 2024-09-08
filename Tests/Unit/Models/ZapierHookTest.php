@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Unit\Models;
 
 use Tests\TestCase;
-use Turahe\Users\Models\User;
 use Turahe\Core\Models\ZapierHook;
+use Turahe\Users\Models\User;
 
 class ZapierHookTest extends TestCase
 {
@@ -23,11 +23,11 @@ class ZapierHookTest extends TestCase
         $user = $this->createUser();
 
         $hook = new ZapierHook([
-            'hook'          => 'created',
-            'action'        => 'create',
+            'hook' => 'created',
+            'action' => 'create',
             'resource_name' => 'resource',
-            'user_id'       => $user->id,
-            'zap_id'        => 123,
+            'user_id' => $user->id,
+            'zap_id' => 123,
         ]);
 
         $hook->save();

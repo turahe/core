@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Macros\Arr;
 
-use Tests\TestCase;
 use Illuminate\Support\Arr;
+use Tests\TestCase;
 
 class ToObjectTest extends TestCase
 {

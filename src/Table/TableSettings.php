@@ -12,14 +12,14 @@
 
 namespace Turahe\Core\Table;
 
-use JsonSerializable;
-use Turahe\Users\Models\User;
-use Illuminate\Support\Collection;
-use Turahe\Core\Contracts\Metable;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
+use JsonSerializable;
+use Turahe\Core\Contracts\Metable;
 use Turahe\Core\Filters\UserFiltersService;
 use Turahe\Core\Http\Resources\FilterResource;
 use Turahe\Core\Table\Exceptions\OrderByNonExistingColumnException;
+use Turahe\Users\Models\User;
 
 class TableSettings implements Arrayable, JsonSerializable
 {
@@ -36,9 +36,7 @@ class TableSettings implements Arrayable, JsonSerializable
     /**
      * Create new TableSettings instance.
      */
-    public function __construct(protected Table $table, protected Metable $user)
-    {
-    }
+    public function __construct(protected Table $table, protected Metable $user) {}
 
     /**
      * Get the table available actions.
@@ -57,7 +55,7 @@ class TableSettings implements Arrayable, JsonSerializable
      */
     public function savedFilters(): Collection
     {
-        return (new UserFiltersService())->get($this->user->id, $this->table->identifier());
+        return (new UserFiltersService)->get($this->user->id, $this->table->identifier());
     }
 
     /**
@@ -269,18 +267,18 @@ class TableSettings implements Arrayable, JsonSerializable
     public function toArray()
     {
         return [
-            'identifier'             => $this->table->identifier(),
-            'perPage'                => $this->perPage(),
-            'customizeable'          => $this->table->customizeable,
+            'identifier' => $this->table->identifier(),
+            'perPage' => $this->perPage(),
+            'customizeable' => $this->table->customizeable,
             'allowDefaultSortChange' => $this->table->allowDefaultSortChange,
-            'requestQueryString'     => $this->table->getRequestQueryString(),
-            'rules'                  => $this->table->resolveFilters($this->table->getRequest()),
-            'maxHeight'              => $this->maxHeight(),
-            'condensed'              => $this->isCondensed(),
-            'filters'                => $this->filtersResource(),
-            'columns'                => $this->getColumns(),
-            'order'                  => $this->validateOrder($this->getOrder()),
-            'actions'                => $this->actions(),
+            'requestQueryString' => $this->table->getRequestQueryString(),
+            'rules' => $this->table->resolveFilters($this->table->getRequest()),
+            'maxHeight' => $this->maxHeight(),
+            'condensed' => $this->isCondensed(),
+            'filters' => $this->filtersResource(),
+            'columns' => $this->getColumns(),
+            'order' => $this->validateOrder($this->getOrder()),
+            'actions' => $this->actions(),
         ];
     }
 

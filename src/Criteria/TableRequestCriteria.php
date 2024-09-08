@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Criteria;
 
-use Turahe\Core\Table\Table;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Turahe\Core\Table\Table;
 
 class TableRequestCriteria extends RequestCriteria
 {

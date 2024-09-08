@@ -107,6 +107,6 @@ class Editor extends Field
      */
     protected function createImagesProcessor()
     {
-        return new EditorPendingMediaProcessor();
+        return new EditorPendingMediaProcessor;
     }
 }

@@ -13,11 +13,11 @@
 namespace Turahe\Core\Menu;
 
 use Closure;
-use JsonSerializable;
-use Turahe\Core\Makeable;
-use Illuminate\Support\Str;
-use Turahe\Core\Authorizeable;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
+use JsonSerializable;
+use Turahe\Core\Authorizeable;
+use Turahe\Core\Makeable;
 
 class MenuItem implements Arrayable, JsonSerializable
 {
@@ -192,17 +192,17 @@ class MenuItem implements Arrayable, JsonSerializable
     public function toArray()
     {
         return [
-            'id'                   => $this->id,
-            'name'                 => $this->name,
-            'singularName'         => $this->singularName,
-            'route'                => $this->route,
-            'icon'                 => $this->icon,
-            'inQuickCreate'        => $this->inQuickCreate,
-            'quickCreateRoute'     => $this->quickCreateRoute,
-            'quickCreateName'      => $this->quickCreateName,
-            'position'             => $this->position,
-            'badge'                => $this->getBadge(),
-            'badgeVariant'         => $this->badgeVariant,
+            'id' => $this->id,
+            'name' => $this->name,
+            'singularName' => $this->singularName,
+            'route' => $this->route,
+            'icon' => $this->icon,
+            'inQuickCreate' => $this->inQuickCreate,
+            'quickCreateRoute' => $this->quickCreateRoute,
+            'quickCreateName' => $this->quickCreateName,
+            'position' => $this->position,
+            'badge' => $this->getBadge(),
+            'badgeVariant' => $this->badgeVariant,
             'keyboardShortcutChar' => $this->keyboardShortcutChar,
         ];
     }

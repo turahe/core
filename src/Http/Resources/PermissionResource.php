@@ -27,7 +27,7 @@ class PermissionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return $this->withCommonData([
-            'name'    => $this->name,
+            'name' => $this->name,
             'role_id' => $this->whenPivotLoaded('role_has_permissions', function () {
                 return $this->pivot->role_id;
             }),

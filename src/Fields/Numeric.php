@@ -13,9 +13,9 @@
 namespace Turahe\Core\Fields;
 
 use Akaunting\Money\Currency;
+use Turahe\Core\Contracts\Fields\Customfieldable;
 use Turahe\Core\Facades\Innoclapps;
 use Turahe\Core\Table\NumericColumn;
-use Turahe\Core\Contracts\Fields\Customfieldable;
 
 class Numeric extends Field implements Customfieldable
 {

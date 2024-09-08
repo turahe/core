@@ -13,9 +13,9 @@
 namespace Turahe\Core\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Turahe\Core\Timeline\Timeline;
-use Turahe\Core\Models\PinnedTimelineSubject;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\PinnedTimelineSubject;
+use Turahe\Core\Timeline\Timeline;
 
 class TimelinePinController extends ApiController
 {
@@ -45,9 +45,9 @@ class TimelinePinController extends ApiController
     protected function validateRequest(Request $request): array
     {
         $data = $request->validate([
-            'subject_id'        => 'required|int',
-            'subject_type'      => 'required|string',
-            'timelineable_id'   => 'required|int',
+            'subject_id' => 'required|int',
+            'subject_type' => 'required|string',
+            'timelineable_id' => 'required|int',
             'timelineable_type' => 'required|string',
         ]);
 

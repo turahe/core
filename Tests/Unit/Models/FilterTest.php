@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Tests\TestCase;
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Filter;
 use Illuminate\Support\Facades\Lang;
+use Tests\TestCase;
+use Turahe\Core\Models\Filter;
+use Turahe\Users\Models\User;
 
 class FilterTest extends TestCase
 {
@@ -34,10 +34,10 @@ class FilterTest extends TestCase
 
         $this->assertCount(1, $filter->defaults);
         $this->assertEquals([
-            'view'    => 'create',
+            'view' => 'create',
             'user_id' => $user->id,
         ], [
-            'view'    => $filter->defaults[0]->view,
+            'view' => $filter->defaults[0]->view,
             'user_id' => $filter->defaults[0]->user_id,
         ]);
     }
@@ -77,19 +77,19 @@ class FilterTest extends TestCase
     public function test_filter_has_rules()
     {
         $rule = [
-            'type'  => 'rule',
+            'type' => 'rule',
             'query' => [
-                'type'      => 'text',
+                'type' => 'text',
                 'opereator' => 'equal',
-                'rule'      => 'test_attribute',
-                'operand'   => 'Test',
-                'value'     => 'Test',
+                'rule' => 'test_attribute',
+                'operand' => 'Test',
+                'value' => 'Test',
             ],
         ];
 
         $filter = Filter::factory()->make(['rules' => $rules = [
             'condition' => 'and',
-            'children'  => [$rule],
+            'children' => [$rule],
         ],
         ]);
 
@@ -99,13 +99,13 @@ class FilterTest extends TestCase
     public function test_filter_rules_can_be_set_only_by_passing_children()
     {
         $rule = [
-            'type'  => 'rule',
+            'type' => 'rule',
             'query' => [
-                'type'      => 'text',
+                'type' => 'text',
                 'opereator' => 'equal',
-                'rule'      => 'test_attribute',
-                'operand'   => 'Test',
-                'value'     => 'Test',
+                'rule' => 'test_attribute',
+                'operand' => 'Test',
+                'value' => 'Test',
             ],
         ];
 
@@ -113,7 +113,7 @@ class FilterTest extends TestCase
 
         $expected = [
             'condition' => 'and',
-            'children'  => $rule,
+            'children' => $rule,
         ];
 
         $this->assertEquals($expected, $filter->rules);

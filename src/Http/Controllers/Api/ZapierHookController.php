@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Models\ZapierHook;
+use Illuminate\Http\Request;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Models\ZapierHook;
 
 class ZapierHookController extends ApiController
 {
@@ -25,10 +25,10 @@ class ZapierHookController extends ApiController
     public function store(string $resourceName, string $action, Request $request): JsonResponse
     {
         $hook = new ZapierHook([
-            'hook'          => $request->targetUrl,
+            'hook' => $request->targetUrl,
             'resource_name' => $resourceName,
-            'action'        => $action,
-            'user_id'       => $request->user()->id,
+            'action' => $action,
+            'user_id' => $request->user()->id,
             // Needs further testing, previously the zapId was only numeric
             // but now includes subscriptions:zapId
             'zap_id' => str_contains($request->zapId, 'subscription:') ?

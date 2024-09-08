@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Feature\Updater;
 
-use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
-use Turahe\Core\Updater\Updater;
 use Illuminate\Support\Facades\App;
+use Tests\TestCase;
+use Turahe\Core\Updater\Updater;
 
 /**
  * @group updater
@@ -49,10 +49,10 @@ class UpdateControllerTest extends TestCase
         });
 
         $this->getJson('/api/update')->assertExactJson([
-            'installed_version'        => '1.1.0',
+            'installed_version' => '1.1.0',
             'is_new_version_available' => false,
             'latest_available_version' => '1.1.0',
-            'purchase_key'             => config('updater.purchase_key'),
+            'purchase_key' => config('updater.purchase_key'),
         ]);
     }
 }

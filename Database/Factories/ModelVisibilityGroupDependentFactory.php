@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Database\Factories;
 
-use Turahe\Core\Models\ModelVisibilityGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Turahe\Core\Models\ModelVisibilityGroup;
 use Turahe\Core\Models\ModelVisibilityGroupDependent;
 
 class ModelVisibilityGroupDependentFactory extends Factory

@@ -12,6 +12,4 @@
 
 namespace Turahe\Core\Table;
 
-class MorphManyColumn extends HasManyColumn
-{
-}
+class MorphManyColumn extends HasManyColumn {}

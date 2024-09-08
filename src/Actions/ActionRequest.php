@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Actions;
 
-use Turahe\Core\Table\Table;
 use Turahe\Core\Fields\Field;
 use Turahe\Core\Resource\Http\ResourceRequest;
+use Turahe\Core\Table\Table;
 
 class ActionRequest extends ResourceRequest
 {

@@ -12,23 +12,23 @@
 
 namespace Turahe\Core\Changelog;
 
-use DateInterval;
 use Carbon\CarbonInterval;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Collection;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\EventLogBag;
-use Turahe\Core\Facades\ChangeLogger;
-use Spatie\Activitylog\ActivityLogger;
+use DateInterval;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Spatie\Activitylog\ActivityLogger;
+use Spatie\Activitylog\ActivitylogServiceProvider;
 use Spatie\Activitylog\ActivityLogStatus;
 use Spatie\Activitylog\Contracts\Activity;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Contracts\LoggablePipe;
-use Spatie\Activitylog\ActivitylogServiceProvider;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\Activitylog\EventLogBag;
+use Spatie\Activitylog\LogOptions;
+use Turahe\Core\Facades\ChangeLogger;
 
 /**
  * There is code here from spatie \Spatie\Activitylog\Traits\LogsActivity trait
@@ -70,7 +70,7 @@ trait LogsModelChanges
         static::eventsToBeRecorded()->each(function ($eventName) {
             if ($eventName === 'updated') {
                 static::updating(function (Model $model) {
-                    $oldValues = (new static())->setRawAttributes($model->getRawOriginal());
+                    $oldValues = (new static)->setRawAttributes($model->getRawOriginal());
                     $model->oldAttributes = static::logChanges($oldValues);
                 });
             }

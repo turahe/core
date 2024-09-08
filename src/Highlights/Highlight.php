@@ -42,9 +42,9 @@ abstract class Highlight implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'count'        => $this->count(),
-            'name'         => $this->name(),
-            'route'        => $this->route(),
+            'count' => $this->count(),
+            'name' => $this->name(),
+            'route' => $this->route(),
             'bgColorClass' => $this->bgColorClass(),
         ];
     }

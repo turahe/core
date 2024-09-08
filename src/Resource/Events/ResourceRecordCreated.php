@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Resource\Events;
 
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Turahe\Core\Models\Model;
 use Turahe\Core\Resource\Resource;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
 
 class ResourceRecordCreated
 {
@@ -25,7 +25,5 @@ class ResourceRecordCreated
     /**
      * Create new ResourceRecordCreated instance.
      */
-    public function __construct(public Model $model, public Resource $resource)
-    {
-    }
+    public function __construct(public Model $model, public Resource $resource) {}
 }

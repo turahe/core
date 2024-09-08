@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Settings\Stores;
 
-use Illuminate\Support\Arr;
 use Illuminate\Redis\RedisManager;
+use Illuminate\Support\Arr;
 
 /**
  * @codeCoverageIgnore

@@ -14,8 +14,8 @@ namespace Turahe\Core\Tests\Feature\Resource;
 
 use Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
-use Turahe\Core\Database\Seeders\PermissionsSeeder;
 use Turahe\Contacts\Resource\Contact\Contact as ContactResource;
+use Turahe\Core\Database\Seeders\PermissionsSeeder;
 
 class GlobalSearchControllerTest extends TestCase
 {

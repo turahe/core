@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Turahe\Core\Facades\OAuthState;
 use Turahe\Core\OAuth\OAuthManager;
-use Illuminate\Http\RedirectResponse;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class OAuthController extends Controller
 {
@@ -30,9 +30,7 @@ class OAuthController extends Controller
     /**
      * Initialize OAuth Controller.
      */
-    public function __construct(protected OAuthManager $manager)
-    {
-    }
+    public function __construct(protected OAuthManager $manager) {}
 
     /**
      * Connect OAuth Account.

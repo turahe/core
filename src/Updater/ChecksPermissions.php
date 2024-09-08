@@ -67,7 +67,7 @@ trait ChecksPermissions
             return call_user_func_array(static::$permissionsCheckerFinderUsing, [$path]);
         }
 
-        return (new Finder())->exclude($excludedFolders)->notName('worker.log')->in($path);
+        return (new Finder)->exclude($excludedFolders)->notName('worker.log')->in($path);
     }
 
     /**

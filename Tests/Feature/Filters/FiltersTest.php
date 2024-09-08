@@ -12,13 +12,13 @@
 
 namespace Turahe\Core\Tests\Feature\Filters;
 
+use Illuminate\Support\Facades\Request;
+use Tests\Fixtures\EventTable;
 use Tests\TestCase;
 use Turahe\Core\Filters\Date;
-use Tests\Fixtures\EventTable;
-use Turahe\Core\Table\TableSettings;
-use Illuminate\Support\Facades\Request;
-use Turahe\Core\Tests\Concerns\TestsFilters;
 use Turahe\Core\QueryBuilder\Exceptions\FieldValueMustBeArrayException;
+use Turahe\Core\Table\TableSettings;
+use Turahe\Core\Tests\Concerns\TestsFilters;
 
 class FiltersTest extends TestCase
 {

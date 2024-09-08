@@ -12,16 +12,16 @@
 
 namespace Turahe\Core\VoIP\Clients;
 
-use Turahe\Core\VoIP\Call;
-use Twilio\Jwt\ClientToken;
 use Illuminate\Http\Request;
-use Turahe\Core\Facades\VoIP;
-use Turahe\Users\Models\User;
-use Twilio\TwiML\VoiceResponse;
-use Twilio\Security\RequestValidator;
+use Turahe\Core\Contracts\VoIP\ReceivesEvents;
 use Turahe\Core\Contracts\VoIP\Tokenable;
 use Turahe\Core\Contracts\VoIP\VoIPClient;
-use Turahe\Core\Contracts\VoIP\ReceivesEvents;
+use Turahe\Core\Facades\VoIP;
+use Turahe\Core\VoIP\Call;
+use Turahe\Users\Models\User;
+use Twilio\Jwt\ClientToken;
+use Twilio\Security\RequestValidator;
+use Twilio\TwiML\VoiceResponse;
 
 class Twilio implements ReceivesEvents, Tokenable, VoIPClient
 {

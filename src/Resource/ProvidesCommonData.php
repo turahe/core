@@ -13,12 +13,12 @@
 namespace Turahe\Core\Resource;
 
 use Illuminate\Support\Collection;
-use Turahe\Core\Facades\Innoclapps;
-use Turahe\Activities\Models\Activity;
 use Turahe\Activities\Contracts\Attendeeable;
-use Turahe\Billable\Http\Resources\BillableResource;
 use Turahe\Activities\Http\Resources\ActivityResource;
+use Turahe\Activities\Models\Activity;
 use Turahe\Billable\Contracts\BillableResource as BillableResourceContract;
+use Turahe\Billable\Http\Resources\BillableResource;
+use Turahe\Core\Facades\Innoclapps;
 
 trait ProvidesCommonData
 {
@@ -53,7 +53,7 @@ trait ProvidesCommonData
 
             if ($this->resource instanceof Attendeeable) {
                 $data[] = $this->merge([
-                    'guest_email'        => $this->getGuestEmail(),
+                    'guest_email' => $this->getGuestEmail(),
                     'guest_display_name' => $this->getGuestDisplayName(),
                 ]);
             }
@@ -87,9 +87,9 @@ trait ProvidesCommonData
                     // Only included needed data for the front-end
                     // if needed via API, users can use the ?with= parameter to load associated resources
                     return [
-                        'id'                    => $record->id,
-                        'display_name'          => $record->display_name,
-                        'path'                  => $record->path,
+                        'id' => $record->id,
+                        'display_name' => $record->display_name,
+                        'path' => $record->path,
                         'is_primary_associated' => $index === 0,
                     ];
                 });

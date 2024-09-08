@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Contracts\VoIP;
 
-use Turahe\Core\VoIP\Call;
 use Illuminate\Http\Request;
+use Turahe\Core\VoIP\Call;
 
 interface VoIPClient
 {

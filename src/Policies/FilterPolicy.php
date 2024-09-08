@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Policies;
 
-use Turahe\Users\Models\User;
-use Turahe\Core\Models\Filter;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Turahe\Core\Models\Filter;
+use Turahe\Users\Models\User;
 
 class FilterPolicy
 {

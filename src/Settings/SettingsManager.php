@@ -14,8 +14,8 @@ namespace Turahe\Core\Settings;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Manager;
-use Turahe\Core\Settings\Contracts\Store as StoreContract;
 use Turahe\Core\Settings\Contracts\Manager as SettingsManagerContract;
+use Turahe\Core\Settings\Contracts\Store as StoreContract;
 
 class SettingsManager extends Manager implements SettingsManagerContract
 {

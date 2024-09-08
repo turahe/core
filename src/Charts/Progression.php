@@ -12,11 +12,11 @@
 
 namespace Turahe\Core\Charts;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Turahe\Core\Date\Carbon;
-use Illuminate\Support\Facades\DB;
 use Turahe\Core\Facades\Timezone;
-use Illuminate\Database\Eloquent\Builder;
 
 abstract class Progression extends Chart
 {
@@ -261,8 +261,8 @@ abstract class Progression extends Chart
 
         return match ($unit) {
             'month' => $this->formatMonthDate($date),
-            'week'  => $this->formatWeekDate($date),
-            'day'   => $dayCallback(),
+            'week' => $this->formatWeekDate($date),
+            'day' => $dayCallback(),
             default => $date,
         };
     }
@@ -358,8 +358,8 @@ abstract class Progression extends Chart
     {
         return match ($unit) {
             'month' => "DATE_FORMAT({$column}, '%Y-%m')",
-            'week'  => "DATE_FORMAT({$column}, '%x-%v')",
-            'day'   => "DATE_FORMAT({$column}, '%Y-%m-%d')",
+            'week' => "DATE_FORMAT({$column}, '%x-%v')",
+            'day' => "DATE_FORMAT({$column}, '%Y-%m-%d')",
         };
     }
 
@@ -370,8 +370,8 @@ abstract class Progression extends Chart
     {
         return match ($unit) {
             'month' => "to_char($column, 'YYYY-MM')",
-            'week'  => "to_char($column, 'IYYY-IW')",
-            'day'   => "to_char($column, 'YYYY-MM-DD')",
+            'week' => "to_char($column, 'IYYY-IW')",
+            'day' => "to_char($column, 'YYYY-MM-DD')",
         };
     }
 

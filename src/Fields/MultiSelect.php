@@ -26,7 +26,5 @@ class MultiSelect extends Select
      * @param  string  $fieldId
      * @return void
      */
-    public static function createValueColumn($table, $fieldId)
-    {
-    }
+    public static function createValueColumn($table, $fieldId) {}
 }

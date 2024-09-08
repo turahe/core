@@ -12,8 +12,8 @@
 
 namespace Turahe\Core;
 
-use JsonSerializable;
 use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
 
 class LogReader implements Arrayable, JsonSerializable
 {
@@ -89,11 +89,11 @@ class LogReader implements Arrayable, JsonSerializable
             $newContent .= $header.' '.$parsed_bodySet[$key];
 
             $logs[] = [
-                'env'       => $parsed_envSet[$key],
-                'type'      => $parsed_levelSet[$key],
+                'env' => $parsed_envSet[$key],
+                'type' => $parsed_levelSet[$key],
                 'timestamp' => $parsed_dateSet[$key],
-                'header'    => $header,
-                'message'   => mb_convert_encoding(trim($parsed_bodySet[$key]), 'UTF-8', 'UTF-8'),
+                'header' => $header,
+                'message' => mb_convert_encoding(trim($parsed_bodySet[$key]), 'UTF-8', 'UTF-8'),
             ];
         }
 
@@ -113,8 +113,8 @@ class LogReader implements Arrayable, JsonSerializable
 
         if (count($dates) == 0) {
             return [
-                'success'   => false,
-                'message'   => 'No logs available',
+                'success' => false,
+                'message' => 'No logs available',
                 'log_dates' => $dates,
             ];
         }
@@ -123,16 +123,16 @@ class LogReader implements Arrayable, JsonSerializable
 
         if (! in_array($date, $dates)) {
             return [
-                'success'   => false,
-                'message'   => 'No log file found for the selected date',
+                'success' => false,
+                'message' => 'No log file found for the selected date',
                 'log_dates' => $dates,
             ];
         }
 
         return [
             'log_dates' => $dates,
-            'date'      => $date,
-            'logs'      => $this->parse($date),
+            'date' => $date,
+            'logs' => $this->parse($date),
         ];
     }
 

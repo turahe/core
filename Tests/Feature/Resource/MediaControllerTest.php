@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Tests\Feature\Resource;
 
-use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
-use Turahe\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+use Turahe\Contacts\Models\Contact;
 
 class MediaControllerTest extends TestCase
 {
@@ -29,8 +29,8 @@ class MediaControllerTest extends TestCase
         $this->postJson('/api/contacts/'.$contact->id.'/media', [
             'file' => UploadedFile::fake()->image('photo1.jpg'),
         ])->assertJson([
-            'file_name'            => 'photo1.jpg',
-            'extension'            => 'jpg',
+            'file_name' => 'photo1.jpg',
+            'extension' => 'jpg',
             'was_recently_created' => true,
         ]);
     }

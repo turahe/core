@@ -13,9 +13,9 @@
 namespace Turahe\Core\Settings\Stores;
 
 use Closure;
-use Turahe\Core\Settings\Utilities\Arr;
 use Illuminate\Database\Eloquent\Builder;
 use Turahe\Core\Models\Setting as SettingModel;
+use Turahe\Core\Settings\Utilities\Arr;
 
 /**
  * @codeCoverageIgnore
@@ -207,7 +207,7 @@ class DatabaseStore extends AbstractStore
     /**
      * Create a new query builder instance.
      *
-     * @param $insert  bool
+     * @param  $insert  bool
      */
     protected function newQuery(bool $insert = false): Builder
     {
@@ -236,7 +236,7 @@ class DatabaseStore extends AbstractStore
 
         foreach ($data as $key => $value) {
             $dbData[] = array_merge($extraColumns, [
-                $this->keyColumn   => $key,
+                $this->keyColumn => $key,
                 $this->valueColumn => $value,
             ]);
         }
@@ -259,8 +259,8 @@ class DatabaseStore extends AbstractStore
     {
         $changes = [
             'inserted' => Arr::dot($data),
-            'updated'  => [],
-            'deleted'  => [],
+            'updated' => [],
+            'deleted' => [],
         ];
 
         foreach ($this->newQuery()->pluck($this->keyColumn) as $key) {

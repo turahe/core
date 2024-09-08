@@ -13,11 +13,11 @@
 namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Turahe\Core\Facades\MailableTemplates;
-use Turahe\Core\Resource\ResourcePlaceholders;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Turahe\Core\Facades\MailableTemplates;
 use Turahe\Core\Media\HasAttributesWithPendingMedia;
 use Turahe\Core\Placeholders\Placeholders as BasePlaceholders;
+use Turahe\Core\Resource\ResourcePlaceholders;
 
 /**
  * Turahe\Core\Models\MailableTemplate

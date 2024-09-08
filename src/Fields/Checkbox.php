@@ -28,7 +28,5 @@ class Checkbox extends Optionable implements Customfieldable
      * @param  string  $fieldId
      * @return void
      */
-    public static function createValueColumn($table, $fieldId)
-    {
-    }
+    public static function createValueColumn($table, $fieldId) {}
 }

@@ -12,12 +12,12 @@
 
 namespace Turahe\Core\Http\Controllers\Api\Resource;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Turahe\Core\Facades\Innoclapps;
+use Turahe\Core\Http\Controllers\ApiController;
 use Turahe\Core\Resource\PlaceholdersGroup;
 use Turahe\Core\Resource\ResourcePlaceholders;
-use Turahe\Core\Http\Controllers\ApiController;
 
 class PlaceholdersController extends ApiController
 {

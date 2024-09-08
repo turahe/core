@@ -12,10 +12,10 @@
 
 namespace Turahe\Core\Http\Controllers\Api;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
-use Turahe\Core\Http\Requests\SettingRequest;
+use Illuminate\Support\Str;
 use Turahe\Core\Http\Controllers\ApiController;
+use Turahe\Core\Http\Requests\SettingRequest;
 
 class SettingsController extends ApiController
 {

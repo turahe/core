@@ -77,9 +77,9 @@ class PinnedTimelineSubject extends Model
     public function pin($subjectId, $subjectType, $timelineabeId, $timelineableType)
     {
         $this->fill([
-            'subject_id'        => $subjectId,
-            'subject_type'      => $subjectType,
-            'timelineable_id'   => $timelineabeId,
+            'subject_id' => $subjectId,
+            'subject_type' => $subjectType,
+            'timelineable_id' => $timelineabeId,
             'timelineable_type' => $timelineableType,
         ])->save();
 
@@ -98,9 +98,9 @@ class PinnedTimelineSubject extends Model
     public function unpin($subjectId, $subjectType, $timelineableId, $timelineableType)
     {
         $this->where([
-            'subject_id'        => $subjectId,
-            'subject_type'      => $subjectType,
-            'timelineable_id'   => $timelineableId,
+            'subject_id' => $subjectId,
+            'subject_type' => $subjectType,
+            'timelineable_id' => $timelineableId,
             'timelineable_type' => $timelineableType,
         ])->delete();
     }
