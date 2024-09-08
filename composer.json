@@ -11,36 +11,22 @@
             "type": "git"
         },
         {
-            "url": "https://github.com/turahe/laravel-counters.git",
-            "type": "git"
-        },
-        {
-            "url": "https://github.com/turahe/laravel-otp.git",
-            "type": "git"
-        },
-        {
-            "url": "https://github.com/turahe/laravel-otp.git",
-            "type": "git"
-        },
-        {
             "url": "https://github.com/turahe/laravel-userstamps.git",
-            "type": "git"
-        },
-        {
-            "url": "https://github.com/turahe/laravel-likeable.git",
             "type": "git"
         }
     ],
     "require": {
         "php": "^8.3",
+        "google/apiclient": "^2.15.0",
+        "microsoft/microsoft-graph": "^1.94",
         "soundasleep/html2text": "~1.1",
-        "turahe/laravel-counters": "dev-master",
-        "turahe/laravel-likeable": "^1.0",
+        "spatie/laravel-activitylog": "^4.8",
+        "sqits/laravel-userstamps": "dev-master",
         "turahe/master-data": "dev-master",
         "turahe/media": "dev-master",
         "turahe/seotools": "^1.2",
-        "akaunting/laravel-money": "^5.2"
-
+        "akaunting/laravel-money": "^5.2",
+        "xemlock/htmlpurifier-html5": "^0.1.11"
     },
     "require-dev": {
         "laravel/pint": "^1.17",
