@@ -12,7 +12,6 @@
 
 namespace Turahe\Core\Http\View\Composers;
 
-use App\Installer\RequirementsChecker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Turahe\Core\Facades\Fields;
