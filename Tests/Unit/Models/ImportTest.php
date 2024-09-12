@@ -14,8 +14,8 @@ namespace Turahe\Core\Tests\Unit\Models;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Import;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Users\Models\User;
 
 class ImportTest extends TestCase

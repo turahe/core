@@ -15,8 +15,8 @@ namespace Turahe\Core\Tests\Unit\Models;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 use Tests\Fixtures\Event;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Media;
+use Turahe\Core\Tests\TestCase;
 
 class MediaModelTest extends TestCase
 {

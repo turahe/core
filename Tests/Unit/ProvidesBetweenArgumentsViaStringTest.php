@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Unit;
 
 use Carbon\Carbon;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\ProvidesBetweenArgumentsViaString;
+use Turahe\Core\Tests\TestCase;
 
 class ProvidesBetweenArgumentsViaStringTest extends TestCase
 {

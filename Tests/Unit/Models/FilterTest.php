@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Unit\Models;
 
 use Illuminate\Support\Facades\Lang;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\Filter;
+use Turahe\Core\Tests\TestCase;
 use Turahe\Users\Models\User;
 
 class FilterTest extends TestCase

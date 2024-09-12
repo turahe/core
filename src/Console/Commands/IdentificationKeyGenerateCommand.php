@@ -24,7 +24,7 @@ class IdentificationKeyGenerateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'concord:generate-key
+    protected $signature = 'core:generate-key
                     {--show : Display the key instead of modifying files}
                     {--force : Force the operation to run when in production}';
 

@@ -14,11 +14,11 @@ namespace Turahe\Core\Tests\Unit\Criteria;
 
 use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Contacts\Models\Contact;
 use Turahe\Contacts\Models\Source;
 use Turahe\Core\Criteria\RequestCriteria;
 use Turahe\Core\Criteria\SearchByFirstNameAndLastNameCriteria;
+use Turahe\Core\Tests\TestCase;
 
 class RequestCriteriaTest extends TestCase
 {

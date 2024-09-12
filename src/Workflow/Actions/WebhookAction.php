@@ -62,7 +62,7 @@ class WebhookAction extends Action implements ShouldQueue
 
             return $headers;
         }), [
-            'User-Agent' => 'Concord CRM',
+            'User-Agent' => 'Core Agents',
         ]);
     }
 

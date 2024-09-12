@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Unit\Casts;
 
 use Tests\Fixtures\Event;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Casts\ISO8601DateTime;
+use Turahe\Core\Tests\TestCase;
 
 class SO8601DateTimeTest extends TestCase
 {

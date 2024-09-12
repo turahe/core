@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\Headers\AddressHeader;
+use Turahe\Core\Tests\TestCase;
 
 class AddressHeaderTest extends TestCase
 {

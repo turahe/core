@@ -33,7 +33,6 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-
         $this->app['events']->subscribe(WorkflowEventsSubscriber::class);
         $this->app['events']->listen(RequestHandled::class, Workflows::processQueue(...));
 

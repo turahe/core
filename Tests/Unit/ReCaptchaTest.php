@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit;
 
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\ReCaptcha;
+use Turahe\Core\Tests\TestCase;
 
 class ReCaptchaTest extends TestCase
 {

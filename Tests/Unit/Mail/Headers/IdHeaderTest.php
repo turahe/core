@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\Headers\IdHeader;
+use Turahe\Core\Tests\TestCase;
 
 class IdHeaderTest extends TestCase
 {

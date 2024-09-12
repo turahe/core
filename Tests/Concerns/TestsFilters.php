@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Concerns;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
-use Tests\Fixtures\Event;
 use Turahe\Core\Criteria\FilterRulesCriteria;
 
 trait TestsFilters
@@ -21,8 +21,8 @@ trait TestsFilters
     /**
      * Perform filers search
      *
-     * @param  Criteria  $criteria
-     * @return \Illuminate\Support\Collection
+     * @param  null  $value
+     * @return Collection
      */
     protected function perform($attribute, $operand, $value = null)
     {

@@ -12,8 +12,8 @@
 
 namespace Turahe\Core\Tests\Unit\Mail;
 
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\EmbeddedImagesProcessor;
+use Turahe\Core\Tests\TestCase;
 
 class EmbeddedImagesProcessorTest extends TestCase
 {

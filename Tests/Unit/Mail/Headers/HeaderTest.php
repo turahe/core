@@ -13,8 +13,8 @@
 namespace Turahe\Core\Tests\Unit\Mail\Headers;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Mail\Headers\Header;
+use Turahe\Core\Tests\TestCase;
 
 class HeaderTest extends TestCase
 {

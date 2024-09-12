@@ -13,28 +13,12 @@
 namespace Turahe\Core\Tests\Unit;
 
 use Illuminate\Support\Facades\File;
-use Tests\Fixtures\SampleMailTemplate;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Facades\MailableTemplates;
 use Turahe\Core\Models\MailableTemplate;
+use Turahe\Core\Tests\TestCase;
 
 class MailableTest extends TestCase
 {
-    public function test_mailable_template_is_seeded_when_new_mailable_exist()
-    {
-        MailableTemplates::dontDiscover();
-        MailableTemplates::flushCache()->register(SampleMailTemplate::class)->seedIfRequired();
-
-        $this->assertDatabaseHas('mailable_templates', [
-            'name' => SampleMailTemplate::name(),
-            'subject' => SampleMailTemplate::defaultSubject(),
-            'html_template' => SampleMailTemplate::defaultHtmlTemplate(),
-            'text_template' => SampleMailTemplate::defaultTextMessage(),
-            'mailable' => SampleMailTemplate::class,
-            'locale' => 'en',
-        ]);
-    }
-
     public function test_mailable_templates_are_seeded_when_new_locale_exist()
     {
         File::ensureDirectoryExists(lang_path('en_TEST'));

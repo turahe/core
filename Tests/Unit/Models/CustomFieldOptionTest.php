@@ -12,9 +12,9 @@
 
 namespace Turahe\Core\Tests\Unit\Models;
 
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Models\CustomField;
 use Turahe\Core\Models\CustomFieldOption;
+use Turahe\Core\Tests\TestCase;
 
 class CustomFieldOptionTest extends TestCase
 {

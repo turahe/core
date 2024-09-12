@@ -13,7 +13,7 @@
 namespace Turahe\Core\Tests\Unit\Casts;
 
 use Turahe\Core\Casts\ISO8601Date;
-use Turahe\Core\Tests\Fixtures\Event;
+use Turahe\Core\Tests\Models\Event;
 use Turahe\Core\Tests\TestCase;
 
 class ISO8601DateTest extends TestCase
