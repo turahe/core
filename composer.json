@@ -1,0 +1,39 @@
+{
+    "name": "turahe/core",
+    "description": "core sdk",
+    "require": {
+        "turahe/media": "^1.0",
+        "turahe/laravel-userstamps": "^1.0",
+        "spatie/laravel-sluggable": "^3.6",
+        "spatie/eloquent-sortable": "^4.4",
+        "kalnoy/nestedset": "^6.0",
+        "league/fractal": "^0.20.1",
+        "turahe/master-data": "^1.0",
+      "ext-intl": "*",
+        "propaganistas/laravel-phone": "^5.3"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.17",
+        "orchestra/testbench": "^9.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Turahe\\Core\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Turahe\\Core\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nur Wachid",
+            "email": "wachid@outlook.com"
+        }
+    ]
+}
