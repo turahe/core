@@ -1,6 +1,7 @@
 <?php
 
 namespace Turahe\Core\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Turahe\Core\Tests\Models\User;
@@ -47,5 +48,4 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $table->timestamps();
         });
     }
-
 }

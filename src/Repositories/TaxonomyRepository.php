@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Repositories;
 
-use Turahe\Core\Contracts\TaxonomyRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
+use Turahe\Core\Contracts\TaxonomyRepositoryInterface;
 use Turahe\Core\Models\Taxonomy;
 
 class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInterface

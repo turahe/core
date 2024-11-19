@@ -3,7 +3,6 @@
 namespace Turahe\Core\Tests\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Turahe\Core\Tests\Feature\Factories\TaxonomyFactory;
 
 class Taxonomy extends \Turahe\Core\Models\Taxonomy
@@ -14,5 +13,4 @@ class Taxonomy extends \Turahe\Core\Models\Taxonomy
     {
         return TaxonomyFactory::new();
     }
-
 }

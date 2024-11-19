@@ -16,7 +16,6 @@ namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -125,7 +124,6 @@ use Turahe\UserStamps\Concerns\HasUserStamps;
  */
 class Taxonomy extends Model implements Sortable
 {
-
     use HasMedia;
     use HasSlug;
     use HasUlids;
@@ -190,8 +188,6 @@ class Taxonomy extends Model implements Sortable
         'order_column_name' => 'record_ordering',
         'sort_when_creating' => true,
     ];
-
-
 
     /**
      * Get the options for generating the slug.

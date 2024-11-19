@@ -7,8 +7,9 @@ use Turahe\Core\Concerns\HasSettings;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
-    use HasUlids;
     use HasSettings;
+    use HasUlids;
+
     protected $table = 'users';
 
     /**
@@ -29,5 +30,4 @@ class User extends \Illuminate\Foundation\Auth\User
         'language' => 'string',
         'timezone' => 'timezone:all',
     ];
-
 }

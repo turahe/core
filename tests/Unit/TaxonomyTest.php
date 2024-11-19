@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\Test;
 use Turahe\Core\Repositories\TaxonomyRepository;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Tests\Models\Taxonomy;
+use Turahe\Core\Tests\TestCase;
+
 class TaxonomyTest extends TestCase
 {
     #[Test]
