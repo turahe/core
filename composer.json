@@ -29,6 +29,14 @@
             "Turahe\\Core\\Tests\\": "tests/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Turahe\\Core\\CoreServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
     "authors": [
         {
             "name": "Nur Wachid",
