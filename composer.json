@@ -2,6 +2,7 @@
     "name": "turahe/core",
     "description": "core sdk",
     "require": {
+        "php": "^8.2",
         "ext-intl": "*",
         "google/apiclient": "^2.18",
         "kalnoy/nestedset": "^6.0",
@@ -12,7 +13,8 @@
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sluggable": "^3.6",
         "turahe/laravel-userstamps": "^1.0",
-        "turahe/master-data": "^1.0"
+        "turahe/master-data": "^1.0",
+      "ext-iconv": "*"
     },
     "require-dev": {
         "laravel/pint": "^1.17",
@@ -47,6 +49,10 @@
         }
     ],
     "config": {
-        "sort-packages": true
-    }
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

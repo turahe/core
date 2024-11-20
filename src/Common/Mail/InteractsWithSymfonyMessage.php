@@ -3,16 +3,16 @@
 namespace Turahe\Core\Common\Mail;
 
 use Illuminate\Support\Arr;
+use Symfony\Component\Mime\Email;
 
 trait InteractsWithSymfonyMessage
 {
     /**
      * Add the mail client headers to the symfony message
      *
-     * @param  \Symfony\Component\Mime\Email  $message
      * @return static
      */
-    protected function addHeadersToSymfonyMessage($message)
+    protected function addHeadersToSymfonyMessage(Email $message)
     {
         foreach ($this->headers as $header) {
             $message->getHeaders()->addTextHeader($header['name'], $header['value']);
@@ -23,13 +23,8 @@ trait InteractsWithSymfonyMessage
 
     /**
      * Add symfony message header
-     *
-     * @param  \Symfony\Component\Mime\Email  $message
-     * @param  string  $name
-     * @param  string  $value
-     * @return static
      */
-    protected function addSymfonyMessageHeader($message, $name, $value)
+    protected function addSymfonyMessageHeader(Email $message, string $name, string $value): static
     {
         $message->getHeaders()->addHeader($name, $value);
 
@@ -38,11 +33,8 @@ trait InteractsWithSymfonyMessage
 
     /**
      * Add symfony message In-Reply-To header
-     *
-     * @param  \Symfony\Component\Mime\Email  $message
-     * @return static
      */
-    protected function addSymfonyMessageInReplyToHeader($message, string $messageId)
+    protected function addSymfonyMessageInReplyToHeader(Email $message, string $messageId): static
     {
         $this->addSymfonyMessageHeader($message, 'In-Reply-To', "<$messageId>");
 
@@ -51,11 +43,8 @@ trait InteractsWithSymfonyMessage
 
     /**
      * Add symfony message References header
-     *
-     * @param  \Symfony\Component\Mime\Email  $message
-     * @return static
      */
-    protected function addSymfonyMessageReferencesHeader($message, array|string $references)
+    protected function addSymfonyMessageReferencesHeader(Email $message, array|string $references): static
     {
         $value = array_map(fn ($id) => "<$id>", Arr::wrap($references));
 
@@ -66,13 +55,8 @@ trait InteractsWithSymfonyMessage
 
     /**
      * Add symfony message ID header
-     *
-     * @param  \Symfony\Component\Mime\Email  $message
-     * @param  string  $name
-     * @param  string  $value
-     * @return static
      */
-    protected function addSymfonyMessageIdHeader($message, $name, $value)
+    protected function addSymfonyMessageIdHeader(Email $message, string $name, string $value): static
     {
         $message->getHeaders()->addIdHeader($name, $value);
 

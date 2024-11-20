@@ -13,10 +13,8 @@ class AddressHeader extends Header
      * Initialize header
      *
      * @param  string  $name  The header name
-     * @param  string|array  $value
-     * @param  string|null  $personName
      */
-    public function __construct($name, $value, $personName = null)
+    public function __construct(string $name, array|string $value, ?string $personName = null)
     {
         parent::__construct($name, null);
 
@@ -25,30 +23,24 @@ class AddressHeader extends Header
 
     /**
      * Get all addresses
-     *
-     * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->addresses;
     }
 
     /**
      * Get header email address
-     *
-     * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->addresses[0]['address'];
     }
 
     /**
      * Get the address person name
-     *
-     * @return string|null
      */
-    public function getPersonName()
+    public function getPersonName(): ?string
     {
         return $this->addresses[0]['name'];
     }
@@ -56,11 +48,9 @@ class AddressHeader extends Header
     /**
      * Parse the header value
      *
-     * @param  string|array  $value
-     * @param  string|null  $name
      * @return void
      */
-    protected function parseValue($value, $name)
+    protected function parseValue(array|string $value, ?string $name)
     {
         if (! is_array($value)) {
             if (str_contains($value, ',')) {
@@ -89,11 +79,8 @@ class AddressHeader extends Header
 
     /**
      * Parse address header
-     *
-     * @param  string  $header
-     * @return array
      */
-    protected function parseHeader($header)
+    protected function parseHeader(string $header): array
     {
         $name = preg_replace('/(.*)<(.*)>/', '\\1', $header);
         $name = trim(str_replace('"', '', $name));

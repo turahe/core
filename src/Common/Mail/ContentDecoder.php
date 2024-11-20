@@ -13,7 +13,7 @@ class ContentDecoder
      * @param  string|null  $toEncoding  The type of encoding that $str is being converted to.
      * @return string
      */
-    public static function decode($str, $contentTransferEncoding = null, $fromEncoding = null, $toEncoding = null)
+    public static function decode(string $str, ?string $contentTransferEncoding = null, ?string $fromEncoding = null, ?string $toEncoding = null)
     {
         if (! empty($contentTransferEncoding)) {
             switch (strtolower($contentTransferEncoding)) {

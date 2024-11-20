@@ -2,6 +2,7 @@
 
 namespace Turahe\Core\Common\Mail\Headers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Header implements Arrayable
@@ -12,17 +13,14 @@ class Header implements Arrayable
     protected $name;
 
     /**
-     * @var string|array
+     * @var string|array|Carbon
      */
     protected $value;
 
     /**
      * Initialize header
-     *
-     * @param  string  $name
-     * @param  string|array  $value
      */
-    public function __construct($name, $value)
+    public function __construct(string $name, array|string|null $value = null)
     {
         $this->name = strtolower(trim($name));
         $this->value = is_string($value) ? trim($value) : $value;
@@ -30,10 +28,8 @@ class Header implements Arrayable
 
     /**
      * Get the header name
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -41,7 +37,7 @@ class Header implements Arrayable
     /**
      * Get the header value
      *
-     * @return string|array
+     * @return Carbon|array|string|null
      */
     public function getValue()
     {

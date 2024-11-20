@@ -28,10 +28,9 @@ trait HasParts
      *
      * Necessary to reset the $allParts variable.
      *
-     * @param  \Illuminate\Support\Collection  $partsContainer
      * @return \Illuminate\Support\Collection
      */
-    protected function getAllParts($partsContainer)
+    protected function getAllParts(Collection $partsContainer)
     {
         $this->iterateParts($partsContainer);
 

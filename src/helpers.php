@@ -9,16 +9,11 @@ if (! function_exists('format_currency')) {
             $number = 0;
         }
 
-        if (\Turahe\Master\Models\Currency::where('iso_code', $code)->exists()) {
-            $fmt = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
-            $fmt->setTextAttribute(NumberFormatter::CURRENCY_CODE, $code);
-            $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+        $fmt = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
+        $fmt->setTextAttribute(NumberFormatter::CURRENCY_CODE, $code);
+        $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
 
-            return $fmt->formatCurrency($number, $code);
-        }
-
-        throw new InvalidArgumentException('format currency only accept iso code only. Input was:'.$code);
-        //        return config('app.currency'). ' '.number_format($number, 2, ',', '.');
+        return $fmt->formatCurrency($number, $code);
     }
 }
 if (! function_exists('name_alias')) {

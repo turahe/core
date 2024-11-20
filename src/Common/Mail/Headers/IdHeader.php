@@ -2,6 +2,8 @@
 
 namespace Turahe\Core\Common\Mail\Headers;
 
+use Carbon\Carbon;
+
 class IdHeader extends Header
 {
     /**
@@ -10,21 +12,19 @@ class IdHeader extends Header
      * For example Message-ID header can have only one value
      * The method can be used to fetch the ID which contains only 1 value
      *
-     * @return string|null
+     * @return Carbon|null
      */
     public function getValue()
     {
-        return $this->simpifyHeaders($this->value)[0] ?? null;
+        return $this->simplifyHeaders($this->value)[0] ?? null;
     }
 
     /**
      * Get all header ids
-     *
-     * @return array
      */
-    public function getIds()
+    public function getIds(): array|string|null
     {
-        return $this->simpifyHeaders($this->value);
+        return $this->simplifyHeaders($this->value);
     }
 
     /**
@@ -32,17 +32,14 @@ class IdHeader extends Header
      *
      * As the ID's are provided e.q. <message-id@gmail.com> we need to
      * remove the < > in order to be accepted as valid ID header
-     *
-     * @param  string  $headerValue
-     * @return string
      */
-    protected function createValidIdHeader($headerValue)
+    protected function createValidIdHeader(string $headerValue): string
     {
         return trim(str_replace(['<', '>'], '', $headerValue));
     }
 
     /**
-     * Simplyfy ID headers e.q. like references
+     * Simplify ID headers e.q. like references
      *
      * Some mail clients e.q. like Outlook add coma (,) instead of space
      * we need to replace the coma with space
@@ -50,11 +47,8 @@ class IdHeader extends Header
      * This is no longer valid but some mail clients are still using this approach
      *
      * @see https://tools.ietf.org/html/rfc822#appendix-C.3.6
-     *
-     * @param  array|string  $value
-     * @return array|string|null
      */
-    protected function simpifyHeaders($value)
+    protected function simplifyHeaders(array|string $value): array|string|null
     {
         if (is_array($value)) {
             // Convert it to string so we can parse both arrays and string and make them valid

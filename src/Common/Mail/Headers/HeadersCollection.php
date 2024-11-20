@@ -53,12 +53,8 @@ class HeadersCollection extends Collection
 
     /**
      * Push header to the collection
-     *
-     * @param  string  $name
-     * @param  string|null  $value
-     * @return static
      */
-    public function pushHeader($name, $value)
+    public function pushHeader(string $name, ?string $value): static
     {
         $class = $this->getClassFor($name);
 
@@ -69,11 +65,8 @@ class HeadersCollection extends Collection
 
     /**
      * Returns the name of an header class for the passed header name.
-     *
-     * @param  string  $name
-     * @return string
      */
-    protected function getClassFor($name)
+    protected function getClassFor(string $name): string
     {
         $test = strtolower($name);
 

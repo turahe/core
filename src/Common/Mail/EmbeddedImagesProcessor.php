@@ -9,11 +9,9 @@ class EmbeddedImagesProcessor
     /**
      * Process embedded images and execute action on each embedded image
      *
-     * @param  string  $body
-     * @param  \Closure  $callback
      * @return string|null
      */
-    public function __invoke($body, $callback)
+    public function __invoke(?string $body, \Closure $callback)
     {
         if (is_null($body)) {
             return $body;
