@@ -2,20 +2,23 @@
     "name": "turahe/core",
     "description": "core sdk",
     "require": {
-        "turahe/laravel-userstamps": "^1.0",
-        "spatie/laravel-sluggable": "^3.6",
-        "spatie/eloquent-sortable": "^4.4",
+        "ext-intl": "*",
+        "google/apiclient": "^2.18",
         "kalnoy/nestedset": "^6.0",
         "league/fractal": "^0.20.1",
-        "turahe/master-data": "^1.0",
-      "ext-intl": "*",
-        "propaganistas/laravel-phone": "^5.3"
+        "league/oauth2-google": "^4.0",
+        "microsoft/microsoft-graph": "^1.94",
+        "propaganistas/laravel-phone": "^5.3",
+        "spatie/eloquent-sortable": "^4.4",
+        "spatie/laravel-sluggable": "^3.6",
+        "turahe/laravel-userstamps": "^1.0",
+        "turahe/master-data": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.17",
         "orchestra/testbench": "^8.0|^9.0"
     },
-    "license": "MIT",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "Turahe\\Core\\": "src/"
