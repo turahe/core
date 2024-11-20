@@ -33,9 +33,9 @@ use Turahe\UserStamps\Concerns\HasUserStamps;
  * @property int|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $author
- * @property-read \App\Models\User|null $destroyer
- * @property-read \App\Models\User|null $editor
+ * @property-read \Turahe\Core\Models\User|null $author
+ * @property-read \Turahe\Core\Models\User|null $destroyer
+ * @property-read \Turahe\Core\Models\User|null $editor
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Setting group($groupName)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
