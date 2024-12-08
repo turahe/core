@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Models;
 
-use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as DbCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -17,45 +16,6 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Turahe\UserStamps\Concerns\HasUserStamps;
 
-/**
- * @property string $id
- * @property string $name
- * @property string $slug
- * @property string|null $type
- * @property int|null $record_ordering
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property string|null $deleted_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Turahe\Core\Models\User|null $author
- * @property-read \Turahe\Core\Models\User|null $destroyer
- * @property-read \Turahe\Core\Models\User|null $editor
- *
- * @method static Builder|Tag containing(string $name)
- * @method static Builder|Tag newModelQuery()
- * @method static Builder|Tag newQuery()
- * @method static Builder|Tag onlyTrashed()
- * @method static Builder|Tag ordered(string $direction = 'asc')
- * @method static Builder|Tag query()
- * @method static Builder|Tag whereCreatedAt($value)
- * @method static Builder|Tag whereCreatedBy($value)
- * @method static Builder|Tag whereDeletedAt($value)
- * @method static Builder|Tag whereDeletedBy($value)
- * @method static Builder|Tag whereId($value)
- * @method static Builder|Tag whereName($value)
- * @method static Builder|Tag whereRecordOrdering($value)
- * @method static Builder|Tag whereSlug($value)
- * @method static Builder|Tag whereType($value)
- * @method static Builder|Tag whereUpdatedAt($value)
- * @method static Builder|Tag whereUpdatedBy($value)
- * @method static Builder|Tag withTrashed()
- * @method static Builder|Tag withType(?string $type = null)
- * @method static Builder|Tag withoutTrashed()
- *
- * @mixin \Eloquent
- */
 class Tag extends Model implements Sortable
 {
     use HasSlug;
@@ -120,10 +80,8 @@ class Tag extends Model implements Sortable
     /**
      * find or create tags
      */
-    public static function findOrCreate(
-        string|array|ArrayAccess $values,
-        ?string $type = null,
-    ): Collection|self {
+    public static function findOrCreate(string|array|\ArrayAccess $values, ?string $type = null): Collection|self
+    {
         $tags = collect($values)->map(function ($value) use ($type) {
             if ($value instanceof self) {
                 return $value;

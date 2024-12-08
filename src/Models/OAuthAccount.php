@@ -10,39 +10,6 @@ use Turahe\Core\Facades\Google;
 use Turahe\Core\OAuth\AccessTokenProvider;
 use Turahe\Core\OAuth\Events\OAuthAccountDeleting;
 
-/**
- * @property int $id
- * @property string $type
- * @property string $user_id
- * @property string $oauth_user_id
- * @property string|null $email
- * @property bool $requires_auth
- * @property mixed $access_token
- * @property string|null $refresh_token
- * @property string $expires
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Turahe\Core\Models\User|null $user
- *
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount query()
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereAccessToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereExpires($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereOauthUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereRefreshToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereRequiresAuth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthAccount whereUserId($value)
- *
- * @property-read string $expiration
- *
- * @mixin \Eloquent
- */
 class OAuthAccount extends Model
 {
     /**

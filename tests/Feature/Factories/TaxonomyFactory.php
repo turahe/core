@@ -3,7 +3,7 @@
 namespace Turahe\Core\Tests\Feature\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Turahe\Core\Tests\Models\Taxonomy;
+use Turahe\Core\Models\Taxonomy;
 
 class TaxonomyFactory extends Factory
 {

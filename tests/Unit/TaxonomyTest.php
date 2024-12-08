@@ -6,17 +6,16 @@ namespace Turahe\Core\Tests\Unit;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
-use PHPUnit\Framework\Attributes\Test;
+use Turahe\Core\Models\Taxonomy;
 use Turahe\Core\Repositories\TaxonomyRepository;
-use Turahe\Core\Tests\Models\Taxonomy;
+use Turahe\Core\Tests\Feature\Factories\TaxonomyFactory;
 use Turahe\Core\Tests\TestCase;
 
 class TaxonomyTest extends TestCase
 {
-    #[Test]
-    public function it_can_list_all_taxonomies(): void
+    public function test_can_list_all_taxonomies(): void
     {
-        Taxonomy::factory(6)->create();
+        TaxonomyFactory::new()->count(6)->create();
 
         $taxonomyRepo = new TaxonomyRepository(new Taxonomy);
         $taxonomies = $taxonomyRepo->getTaxonomies();
@@ -25,10 +24,9 @@ class TaxonomyTest extends TestCase
         $this->assertCount(6, $taxonomies->all()); // +1 in the TestCase
     }
 
-    #[Test]
-    public function it_can_force_delete_the_taxonomy(): void
+    public function test_can_force_delete_the_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create();
+        $taxonomy = TaxonomyFactory::new()->create();
 
         $taxonomyRepo = new TaxonomyRepository($taxonomy);
         $deleted = $taxonomyRepo->deleteTaxonomy();
@@ -36,8 +34,7 @@ class TaxonomyTest extends TestCase
         $this->assertTrue($deleted);
     }
 
-    #[Test]
-    public function it_cannot_get_the_taxonomy(): void
+    public function test_cannot_get_the_taxonomy(): void
     {
         $this->expectException(ModelNotFoundException::class);
 
@@ -46,10 +43,9 @@ class TaxonomyTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_delete_the_taxonomy(): void
+    public function test_can_delete_the_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create();
+        $taxonomy = TaxonomyFactory::new()->create();
 
         $taxonomyRepo = new TaxonomyRepository($taxonomy);
         $deleted = $taxonomyRepo->trashTaxonomy();
@@ -57,10 +53,9 @@ class TaxonomyTest extends TestCase
         $this->assertTrue($deleted);
     }
 
-    #[Test]
-    public function it_can_update_the_taxonomy(): void
+    public function test_can_update_the_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create();
+        $taxonomy = TaxonomyFactory::new()->create();
 
         $data = [
             'name' => 'test 1',
@@ -79,10 +74,9 @@ class TaxonomyTest extends TestCase
         $this->assertNotEmpty($taxonomy->description);
     }
 
-    #[Test]
-    public function it_can_return_the_created_taxonomy(): void
+    public function test_can_return_the_created_taxonomy(): void
     {
-        $taxonomyFactory = Taxonomy::factory()->create();
+        $taxonomyFactory = TaxonomyFactory::new()->create();
 
         $taxonomyRepo = new TaxonomyRepository(new Taxonomy);
         $taxonomy = $taxonomyRepo->getTaxonomy($taxonomyFactory->getKey());
@@ -94,8 +88,7 @@ class TaxonomyTest extends TestCase
         $this->assertEquals($taxonomyFactory->description, $taxonomy->description);
     }
 
-    #[Test]
-    public function it_can_create_a_taxonomy(): void
+    public function test_can_create_a_taxonomy(): void
     {
         $data = [
             'name' => 'test 1',
@@ -112,8 +105,7 @@ class TaxonomyTest extends TestCase
         $this->assertEmpty($taxonomy->description);
     }
 
-    #[Test]
-    public function it_can_create_a_taxonomy_from_string(): void
+    public function test_can_create_a_taxonomy_from_string(): void
     {
         $name = 'test';
 
@@ -124,8 +116,7 @@ class TaxonomyTest extends TestCase
         $this->assertEquals($name, $taxonomy->name);
     }
 
-    #[Test]
-    public function it_can_create_a_taxonomy_from_string_with_pipes(): void
+    public function test_can_create_a_taxonomy_from_string_with_pipes(): void
     {
         $name = 'test1|test2';
 
@@ -143,8 +134,7 @@ class TaxonomyTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_create_a_taxonomy_from_array(): void
+    public function test_can_create_a_taxonomy_from_array(): void
     {
         $names = ['category1', 'category2', 'category3'];
 
@@ -162,12 +152,11 @@ class TaxonomyTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_create_a_taxonomy_with_parent(): void
+    public function test_can_create_a_taxonomy_with_parent(): void
     {
         $name = 'test';
 
-        $parent = Taxonomy::factory()->create();
+        $parent = TaxonomyFactory::new()->create();
         $taxonomyRepo = new TaxonomyRepository(new Taxonomy);
         $taxonomy = $taxonomyRepo->createTaxonomy($name, strtoupper($name), $parent);
 
@@ -176,8 +165,7 @@ class TaxonomyTest extends TestCase
         $this->assertEquals($parent->getKey(), $taxonomy->parent_id);
     }
 
-    #[Test]
-    public function it_automatically_generates_a_slug(): void
+    public function test_automatically_generates_a_slug(): void
     {
         $taxonomyRepo = new TaxonomyRepository(new Taxonomy);
         $taxonomy = $taxonomyRepo->createTaxonomy('this is a taxonomy');
@@ -186,8 +174,7 @@ class TaxonomyTest extends TestCase
         $this->assertNull($taxonomy->code);
     }
 
-    #[Test]
-    public function it_can_create_taxonomies_using_an_array(): void
+    public function test_can_create_taxonomies_using_an_array(): void
     {
 
         $taxonomyRepo = new TaxonomyRepository(new Taxonomy);

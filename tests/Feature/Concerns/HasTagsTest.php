@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Turahe\Core\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use PHPUnit\Framework\Attributes\Test;
 use Turahe\Core\Models\Tag;
 use Turahe\Core\Tests\Models\DummyTag;
 use Turahe\Core\Tests\TestCase;
@@ -20,14 +19,12 @@ class HasTagsTest extends TestCase
         $this->testModel = DummyTag::create(['name' => 'test']);
     }
 
-    #[Test]
-    public function it_provides_a_tags_relation(): void
+    public function test_provides_a_tags_relation(): void
     {
         $this->assertInstanceOf(MorphToMany::class, $this->testModel->tags());
     }
 
-    #[Test]
-    public function it_can_attach_a_tag(): void
+    public function test_can_attach_a_tag(): void
     {
         $this->testModel->attachTag('tagName');
 
@@ -37,8 +34,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_attach_a_tag_with_a_type(): void
+    public function test_can_attach_a_tag_with_a_type(): void
     {
 
         $this->testModel->attachTag('tagName', 'testType');
@@ -50,8 +46,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['testType'], $this->testModel->tags->pluck('type')->toArray());
     }
 
-    #[Test]
-    public function it_can_attach_a_tag_multiple_times_without_creating_duplicate_entries(): void
+    public function test_can_attach_a_tag_multiple_times_without_creating_duplicate_entries(): void
     {
         $this->testModel->attachTag('tagName');
         $this->testModel->attachTag('tagName');
@@ -59,8 +54,7 @@ class HasTagsTest extends TestCase
         $this->assertCount(1, $this->testModel->tags);
     }
 
-    #[Test]
-    public function it_can_use_a_tag_model_when_attaching_a_tag(): void
+    public function test_can_use_a_tag_model_when_attaching_a_tag(): void
     {
         $tag = Tag::findOrCreate('tagName');
 
@@ -69,8 +63,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['tagName'], $this->testModel->tags->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_can_attach_a_tag_inside_a_static_create_method(): void
+    public function test_can_attach_a_tag_inside_a_static_create_method(): void
     {
         $testModel = DummyTag::create([
             'name' => 'test',
@@ -80,8 +73,7 @@ class HasTagsTest extends TestCase
         $this->assertCount(2, $testModel->tags);
     }
 
-    #[Test]
-    public function it_can_attach_a_tag_via_the_tags_mutator(): void
+    public function test_can_attach_a_tag_via_the_tags_mutator(): void
     {
         $this->testModel->tags = 'tag1';
 
@@ -89,8 +81,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_attach_multiple_tags_via_the_tags_mutator(): void
+    public function test_can_attach_multiple_tags_via_the_tags_mutator(): void
     {
         $this->testModel->tags = ['tag1', 'tag2'];
 
@@ -98,8 +89,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_override_tags_via_the_tags_mutator(): void
+    public function test_can_override_tags_via_the_tags_mutator(): void
     {
         $this->testModel->tags = ['tag1', 'tag2'];
         $this->testModel->tags = ['tag2', 'tag3', 'tag4'];
@@ -108,8 +98,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_attach_multiple_tags(): void
+    public function test_can_attach_multiple_tags(): void
     {
         $this->testModel->attachTags(['test1', 'test2']);
 
@@ -117,24 +106,21 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_attach_multiple_tags_with_a_type(): void
+    public function test_can_attach_multiple_tags_with_a_type(): void
     {
         $this->testModel->attachTags(['test1', 'test2'], 'testType');
 
         $this->assertCount(2, $this->testModel->tags->where('type', '=', 'testType')->toArray());
     }
 
-    #[Test]
-    public function it_can_attach_a_existing_tag(): void
+    public function test_can_attach_a_existing_tag(): void
     {
         $this->testModel->attachTag(Tag::findOrCreate('test'));
 
         $this->assertCount(1, $this->testModel->tags);
     }
 
-    #[Test]
-    public function it_can_detach_a_tag(): void
+    public function test_can_detach_a_tag(): void
     {
         $this->testModel->attachTags(['test1', 'test2', 'test3']);
 
@@ -143,8 +129,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['test1', 'test3'], $this->testModel->tags->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_can_detach_a_tag_with_a_type(): void
+    public function test_can_detach_a_tag_with_a_type(): void
     {
         $this->testModel->attachTags(['test1', 'test2'], 'testType');
 
@@ -154,8 +139,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_detach_a_tag_with_a_type_and_not_affect_a_tag_without_a_type(): void
+    public function test_can_detach_a_tag_with_a_type_and_not_affect_a_tag_without_a_type(): void
     {
         $this->testModel->attachTag('test1', 'testType');
 
@@ -168,8 +152,7 @@ class HasTagsTest extends TestCase
         $this->assertNull($this->testModel->tags->where('name', '=', 'test1')->first()->type);
     }
 
-    #[Test]
-    public function it_can_detach_a_tag_with_a_type_while_leaving_another_of_a_different_type(): void
+    public function test_can_detach_a_tag_with_a_type_while_leaving_another_of_a_different_type(): void
     {
         $this->testModel->attachTag('test1', 'testType');
 
@@ -182,8 +165,7 @@ class HasTagsTest extends TestCase
         $this->assertSame('otherType', $this->testModel->tags->where('name', 'test1')->first()->type);
     }
 
-    #[Test]
-    public function it_can_detach_multiple_tags(): void
+    public function test_can_detach_multiple_tags(): void
     {
         $this->testModel->attachTags(['test1', 'test2', 'test3']);
 
@@ -193,8 +175,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_get_all_attached_tags_of_a_certain_type(): void
+    public function test_can_get_all_attached_tags_of_a_certain_type(): void
     {
         $this->testModel->tags()->attach(Tag::findOrCreate('test', 'type1'));
         $this->testModel->tags()->attach(Tag::findOrCreate('test2', 'type2'));
@@ -206,8 +187,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_provides_a_scope_to_get_all_models_that_have_any_of_the_given_tags_2(): void
+    public function test_provides_a_scope_to_get_all_models_that_have_any_of_the_given_tags_2(): void
     {
 
         DummyTag::create([
@@ -230,8 +210,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['model2', 'model3'], $testModels->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_provides_a_scope_to_get_all_models_that_have_a_given_tag(): void
+    public function test_provides_a_scope_to_get_all_models_that_have_a_given_tag(): void
     {
         DummyTag::create([
             'name' => 'model1',
@@ -257,8 +236,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['model2', 'model3'], $testModels->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_provides_a_scope_to_get_all_models_that_have_all_given_tags(): void
+    public function test_provides_a_scope_to_get_all_models_that_have_all_given_tags(): void
     {
         DummyTag::create([
             'name' => 'model1',
@@ -280,8 +258,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['model3'], $testModels->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_provides_a_scope_to_get_all_models_that_do_not_have_any_of_the_given_tags(): void
+    public function test_provides_a_scope_to_get_all_models_that_do_not_have_any_of_the_given_tags(): void
     {
 
         DummyTag::create([
@@ -299,8 +276,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals([$this->testModel->name, 'model1'], $testModels->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_provides_a_scope_to_get_all_models_that_have_any_of_the_given_tag_instances(): void
+    public function test_provides_a_scope_to_get_all_models_that_have_any_of_the_given_tag_instances(): void
     {
         $tag = Tag::findOrCreate('tagA', 'typeA');
 
@@ -311,8 +287,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['model1'], $testModels->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_can_sync_a_single_tag(): void
+    public function test_can_sync_a_single_tag(): void
     {
         $this->testModel->attachTags(['tag1', 'tag2', 'tag3']);
 
@@ -321,8 +296,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['tag3'], $this->testModel->tags->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_can_sync_multiple_tags(): void
+    public function test_can_sync_multiple_tags(): void
     {
         $this->testModel->attachTags(['tag1', 'tag2', 'tag3']);
 
@@ -332,8 +306,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_sync_multiple_tags_from_a_collection(): void
+    public function test_can_sync_multiple_tags_from_a_collection(): void
     {
         $this->testModel->attachTags(collect(['tag1', 'tag2', 'tag3']));
 
@@ -343,8 +316,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_sync_tags_with_different_types(): void
+    public function test_can_sync_tags_with_different_types(): void
     {
         $this->testModel->syncTagsWithType(['tagA1', 'tagA2', 'tagA3'], 'typeA');
         $this->testModel->syncTagsWithType(['tagB1', 'tagB2'], 'typeB');
@@ -357,8 +329,7 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_sync_tags_without_a_type_and_not_affect_tags_with_a_type(): void
+    public function test_can_sync_tags_without_a_type_and_not_affect_tags_with_a_type(): void
     {
         $this->testModel->syncTagsWithType(['test1', 'test2'], 'testType');
 
@@ -373,8 +344,7 @@ class HasTagsTest extends TestCase
         $this->assertNull($this->testModel->tags->where('name', '=', 'test3')->first()->type);
     }
 
-    #[Test]
-    public function it_can_detach_tags_on_model_delete(): void
+    public function test_can_detach_tags_on_model_delete(): void
     {
         $this->testModel->attachTag('tagDeletable');
 
@@ -384,14 +354,12 @@ class HasTagsTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_delete_models_without_tags(): void
+    public function test_can_delete_models_without_tags(): void
     {
         $this->assertTrue($this->testModel->delete());
     }
 
-    #[Test]
-    public function it_can_sync_tags_with_same_name(): void
+    public function test_can_sync_tags_with_same_name(): void
     {
         $this->testModel->syncTagsWithType(['tagA1', 'tagA1'], 'typeA');
 
@@ -399,8 +367,7 @@ class HasTagsTest extends TestCase
         $this->assertEquals(['tagA1'], $tagsOfTypeA->pluck('name')->toArray());
     }
 
-    #[Test]
-    public function it_can_check_if_it_has_a_tag(): void
+    public function test_can_check_if_it_has_a_tag(): void
     {
         $tag = Tag::findOrCreate('test-tag');
         $anotherTag = Tag::findOrCreate('another-tag');
@@ -413,8 +380,7 @@ class HasTagsTest extends TestCase
         $this->assertFalse($this->testModel->hasTag($anotherTag->getKey()));
     }
 
-    #[Test]
-    public function it_can_check_if_it_has_a_tag_with_type(): void
+    public function test_can_check_if_it_has_a_tag_with_type(): void
     {
         $tag = Tag::findOrCreate('test-tag', 'type1');
         Tag::findOrCreate('test-tag', 'type2');

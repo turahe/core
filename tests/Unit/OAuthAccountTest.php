@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace Turahe\Core\Tests\Unit;
 
 use Illuminate\Support\Facades\Crypt;
-use PHPUnit\Framework\Attributes\Test;
 use Turahe\Core\Models\OAuthAccount;
 use Turahe\Core\OAuth\AccessTokenProvider;
 use Turahe\Core\Tests\TestCase;
 
 class OAuthAccountTest extends TestCase
 {
-    #[Test]
-    public function it_can_encrypts_the_oauth_account_access_token(): void
+    public function test_can_encrypts_the_oauth_account_access_token(): void
     {
         Crypt::shouldReceive('encrypt')->once()
             ->with('token', false)
@@ -22,8 +20,7 @@ class OAuthAccountTest extends TestCase
         new OAuthAccount(['access_token' => 'token']);
     }
 
-    #[Test]
-    public function it_can_decrypts_the_oauth_account_access_token(): void
+    public function test_can_decrypts_the_oauth_account_access_token(): void
     {
         $account = new OAuthAccount(['access_token' => 'token']);
 
@@ -33,8 +30,7 @@ class OAuthAccountTest extends TestCase
         $this->assertEquals('token', $account->access_token);
     }
 
-    #[Test]
-    public function it_can_oauth_account_has_access_token_provider(): void
+    public function test_can_oauth_account_has_access_token_provider(): void
     {
         $account = new OAuthAccount(['access_token' => 'token', 'email' => 'john@example.com']);
 

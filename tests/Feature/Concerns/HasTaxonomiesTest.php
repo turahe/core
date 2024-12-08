@@ -6,9 +6,9 @@ namespace Turahe\Core\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
-use PHPUnit\Framework\Attributes\Test;
+use Turahe\Core\Models\Taxonomy;
+use Turahe\Core\Tests\Feature\Factories\TaxonomyFactory;
 use Turahe\Core\Tests\Models\DummyTaxonomy;
-use Turahe\Core\Tests\Models\Taxonomy;
 use Turahe\Core\Tests\TestCase;
 
 class HasTaxonomiesTest extends TestCase
@@ -21,15 +21,13 @@ class HasTaxonomiesTest extends TestCase
         $this->testModel = DummyTaxonomy::create(['name' => 'test']);
     }
 
-    #[Test]
-    public function it_provides_a_categories_relation(): void
+    public function test_provides_a_categories_relation(): void
     {
         $this->assertInstanceOf(MorphToMany::class, $this->testModel->taxonomies());
         $this->assertInstanceOf(Collection::class, $this->testModel->taxonomies);
     }
 
-    #[Test]
-    public function it_can_model_create_categories_from_string(): void
+    public function test_can_model_create_categories_from_string(): void
     {
         $name = 'taxonomy';
         $orgTaxonomy = $this->testModel->addTaxonomies($name);
@@ -48,8 +46,7 @@ class HasTaxonomiesTest extends TestCase
         $this->assertInstanceOf(DummyTaxonomy::class, $orgTaxonomy);
     }
 
-    #[Test]
-    public function it_can_model_create_categories_from_array(): void
+    public function test_can_model_create_categories_from_array(): void
     {
         $names = ['taxonomy1', 'taxonomy2', 'taxonomy3'];
         $orgTaxonomy = $this->testModel->addTaxonomies($names);
@@ -72,11 +69,10 @@ class HasTaxonomiesTest extends TestCase
         $this->assertInstanceOf(DummyTaxonomy::class, $orgTaxonomy);
     }
 
-    #[Test]
-    public function it_can_model_create_categories_has_parent(): void
+    public function test_can_model_create_categories_has_parent(): void
     {
 
-        $parent = Taxonomy::factory()->create();
+        $parent = TaxonomyFactory::new()->create();
 
         $names = ['taxonomy1', 'taxonomy2', 'taxonomy3'];
         $orgTaxonomy = $this->testModel->addTaxonomies($names, $parent);
@@ -100,10 +96,9 @@ class HasTaxonomiesTest extends TestCase
         $this->assertInstanceOf(DummyTaxonomy::class, $orgTaxonomy);
     }
 
-    #[Test]
-    public function it_can_model_delete_and_all_categories(): void
+    public function test_can_model_delete_and_all_categories(): void
     {
-        $taxonomies = Taxonomy::factory(3)->create();
+        $taxonomies = TaxonomyFactory::new()->count(3)->create();
         $this->testModel->taxonomies()->saveMany($taxonomies);
 
         $deleted = $this->testModel->delete();
@@ -118,10 +113,9 @@ class HasTaxonomiesTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_model_get_taxonomy(): void
+    public function test_can_model_get_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create($data = [
+        $taxonomy = TaxonomyFactory::new()->create($data = [
             'name' => 'taxonomy',
         ]);
         $this->testModel->taxonomies()->attach($taxonomy->getKey());
@@ -131,10 +125,9 @@ class HasTaxonomiesTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_model_has_taxonomy(): void
+    public function test_can_model_has_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create($data = [
+        $taxonomy = TaxonomyFactory::new()->create($data = [
             'name' => 'taxonomy',
         ]);
         $this->testModel->taxonomies()->attach($taxonomy->getKey());
@@ -144,10 +137,9 @@ class HasTaxonomiesTest extends TestCase
 
     }
 
-    #[Test]
-    public function it_can_model_detach_taxonomy(): void
+    public function test_can_model_detach_taxonomy(): void
     {
-        $taxonomy = Taxonomy::factory()->create();
+        $taxonomy = TaxonomyFactory::new()->create();
         $this->testModel->taxonomies()->attach($taxonomy->getKey());
 
         $detach = $this->testModel->detachTaxonomies();
