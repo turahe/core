@@ -52,12 +52,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $table->string('name');
         });
 
-        $this->app['db']->connection()->getSchemaBuilder()->create('organizations', function ($table) {
-            $table->ulid('id')->primary();
-            $table->string('name');
-            $table->timestamps();
-        });
-
         $this->app['db']->connection()->getSchemaBuilder()->create('users', function ($table) {
             $table->ulid('id')->primary();
             $table->timestamps();
