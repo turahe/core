@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Kalnoy\Nestedset\NodeTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
@@ -39,6 +40,7 @@ class Organization extends Model implements Sortable
     use HasTaxonomies;
     use HasUlids;
     use HasUserStamps;
+    use NodeTrait;
     use Prunable;
     use SoftDeletes;
     use SortableTrait;

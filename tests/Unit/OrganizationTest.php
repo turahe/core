@@ -37,6 +37,17 @@ class OrganizationTest extends TestCase
 
     }
 
+    public function test_organization_has_children(): void
+    {
+        $org1 = OrganizationFactory::new()->create();
+        $org2 = OrganizationFactory::new()->create([
+            'parent_id' => $org1->getKey(),
+        ]);
+
+        $this->assertEquals($org1->getKey(), $org2->parent_id);
+
+    }
+
     public function test_can_force_delete_the_organization(): void
     {
         $organization = OrganizationFactory::new()->create();
