@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Kalnoy\Nestedset\NodeTrait;
@@ -138,7 +137,7 @@ class Organization extends Model implements Sortable
     public function users(): MorphToMany
     {
         return $this->morphedByMany(
-            User::class,
+            config('auth.providers.users.model'),
             'model',
             'model_has_organization',
             'model_id',
@@ -157,9 +156,8 @@ class Organization extends Model implements Sortable
     /**
      * Scope a query to include only the organizations the user belongs to.
      */
-    public function scopeUserTeams(Builder $query, ?User $user = null): void
+    public function scopeUserTeams(Builder $query, $user = null): void
     {
-        /** @var User $user */
         $user = $user ?: Auth::user();
 
         if ($user->isSuperAdmin()) {
