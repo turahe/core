@@ -14,7 +14,7 @@ class HasSettingsTest extends TestCase
 {
     protected $testModel;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->testModel = User::create([]);

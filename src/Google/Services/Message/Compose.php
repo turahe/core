@@ -19,13 +19,10 @@ use Google\Client;
 use Google\Service\Exception;
 use Google\Service\Gmail;
 use Illuminate\Mail\Message;
-use LogicException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mime\Part\TextPart;
-use Turahe\MailClient\Client\Mail\InteractsWithSymfonyMessage;
-
-use function count;
+use Turahe\Core\Common\Mail\InteractsWithSymfonyMessage;
 
 class Compose extends Message
 {
@@ -110,7 +107,7 @@ class Compose extends Message
 
         if (! $headers->has('From')) {
             if (! $headers->has('Sender')) {
-                throw new LogicException('An email must have a "From" or a "Sender" header.');
+                throw new \LogicException('An email must have a "From" or a "Sender" header.');
             }
             $headers->addMailboxListHeader('From', [$headers->get('Sender')->getAddress()]);
         }

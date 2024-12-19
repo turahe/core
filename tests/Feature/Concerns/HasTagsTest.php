@@ -13,7 +13,7 @@ class HasTagsTest extends TestCase
 {
     protected $testModel;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->testModel = DummyTag::create(['name' => 'test']);
