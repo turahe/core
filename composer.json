@@ -3,7 +3,7 @@
     "description": "core sdk",
     "repositories": [{
         "type": "composer",
-        "url": "https://packagist.wach.id"
+        "url": "https://packagist.x-api.app"
     }],
     "license": "proprietary",
     "require": {
@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.17",
-        "orchestra/testbench": "^8.0|^9.0"
+        "orchestra/testbench": "^8.0|^9.0|^10.0"
     },
     
     "autoload": {
