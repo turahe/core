@@ -74,7 +74,7 @@ class Image
             ->setResize('fit')
             ->setGravity('no')
             ->setEnlarge(0)
-            //convert img to extension
+            // convert img to extension
             ->setExtension($extension);
 
         return $this;

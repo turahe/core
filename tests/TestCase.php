@@ -33,6 +33,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
+        $app['config']->set('core.table.use_timestamps', false);
         $app['config']->set('userstamps.users_table_column_type', 'ulid');
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
