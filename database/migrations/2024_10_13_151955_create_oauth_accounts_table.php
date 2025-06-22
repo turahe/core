@@ -25,12 +25,7 @@ return new class extends Migration
             $table->text('refresh_token')->nullable();
             $table->integer('expires');
 
-            if (config('core.table.use_timestamps')) {
-                $table->timestamps();
-            } else {
-                $table->integer('created_at')->index()->nullable();
-                $table->integer('updated_at')->index()->nullable();
-            }
+            $table->timestamps();
         });
     }
 

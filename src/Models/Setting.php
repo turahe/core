@@ -26,8 +26,6 @@ class Setting extends Model
     use HasUserStamps;
     use SoftDeletes;
 
-    public $dateFormat = 'U';
-
     protected $fillable = [
         'model_id',
         'model_type',

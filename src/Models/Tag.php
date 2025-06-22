@@ -25,11 +25,6 @@ class Tag extends Model implements Sortable
     use SortableTrait;
 
     /**
-     * @var string
-     */
-    public $dateFormat = 'U';
-
-    /**
      * @var string[]
      */
     protected $fillable = [

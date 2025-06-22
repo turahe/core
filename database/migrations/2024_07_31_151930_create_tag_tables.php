@@ -21,14 +21,8 @@ return new class extends Migration
             $table->userstamps();
             $table->softUserstamps();
 
-            if (config('core.table.use_timestamps')) {
-                $table->timestamps();
-                $table->softDeletes();
-            } else {
-                $table->integer('created_at')->index()->nullable();
-                $table->integer('updated_at')->index()->nullable();
-                $table->integer('deleted_at')->index()->nullable();
-            }
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('taggables', function (Blueprint $table): void {

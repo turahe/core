@@ -44,8 +44,6 @@ class Organization extends Model implements Sortable
     use SoftDeletes;
     use SortableTrait;
 
-    public $dateFormat = 'U';
-
     protected $fillable = [
         'name',
         'code',

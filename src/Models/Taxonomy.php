@@ -46,11 +46,6 @@ class Taxonomy extends Model implements Sortable
     ];
 
     /**
-     * @var string
-     */
-    public $dateFormat = 'U';
-
-    /**
      * @return string
      */
     public function getLftName()
