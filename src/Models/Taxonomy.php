@@ -36,7 +36,13 @@ class Taxonomy extends Model implements Sortable
     use SoftDeletes;
     use SortableTrait;
 
-    protected $table = 'taxonomies';
+    protected $table;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->table = config('core.tables.taxonomies');
+    }
 
     protected $fillable = [
         'name',

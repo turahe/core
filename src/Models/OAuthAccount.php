@@ -17,7 +17,13 @@ class OAuthAccount extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_accounts';
+    protected $table;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->table = config('core.tables.oauth_accounts');
+    }
 
     /**
      * The attributes that aren't mass assignable.

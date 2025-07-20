@@ -7,6 +7,7 @@ namespace Turahe\Core\Concerns;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -21,6 +22,11 @@ trait HasSettings
     {
         static::deleting(function ($model): void {
             $model->settings()->delete();
+            $model->clearSettingsCache();
+        });
+
+        static::saved(function ($model): void {
+            $model->clearSettingsCache();
         });
     }
 
@@ -52,6 +58,57 @@ trait HasSettings
     }
 
     /**
+     * Get the cache key for this model's settings
+     */
+    protected function getSettingsCacheKey(): string
+    {
+        return sprintf(
+            'settings:%s:%s:%s',
+            $this->getMorphClass(),
+            $this->getKey(),
+            $this->updated_at?->timestamp ?? 0
+        );
+    }
+
+    /**
+     * Get the cache key for a specific setting
+     */
+    protected function getSettingCacheKey(string $key): string
+    {
+        return sprintf(
+            'setting:%s:%s:%s:%s',
+            $this->getMorphClass(),
+            $this->getKey(),
+            $key,
+            $this->updated_at?->timestamp ?? 0
+        );
+    }
+
+    /**
+     * Clear all cached settings for this model
+     */
+    public function clearSettingsCache(): void
+    {
+        if (!config('core.cache.enabled', true)) {
+            return;
+        }
+
+        $cacheKey = $this->getSettingsCacheKey();
+        Cache::forget($cacheKey);
+        
+        // Clear individual setting caches by pattern
+        $pattern = sprintf(
+            'setting:%s:%s:*',
+            $this->getMorphClass(),
+            $this->getKey()
+        );
+        
+        // Note: This is a simplified approach. In production, you might want to use
+        // Redis SCAN command or maintain a list of cached keys for more efficient clearing
+        Cache::forget($pattern);
+    }
+
+    /**
      * @throws ValidationException
      */
     public function setSetting(array $settings = [], string $group = 'default'): self
@@ -65,7 +122,15 @@ trait HasSettings
                 'value' => $value,
                 'group' => $group,
             ]);
+            
+            // Clear cache for this specific setting
+            if (config('core.cache.enabled', true)) {
+                Cache::forget($this->getSettingCacheKey($key));
+            }
         }
+
+        // Clear all settings cache
+        $this->clearSettingsCache();
 
         return $this;
     }
@@ -75,9 +140,19 @@ trait HasSettings
      */
     public function allSetting(): array
     {
-        return $this->settings->keyBy('key')
-            ->transform(fn ($item) => Str::isJson($item->value) ? json_decode($item->value, true) : $item->value)
-            ->toArray();
+        if (!config('core.cache.enabled', true)) {
+            return $this->settings->keyBy('key')
+                ->transform(fn ($item) => Str::isJson($item->value) ? json_decode($item->value, true) : $item->value)
+                ->toArray();
+        }
+
+        $cacheKey = $this->getSettingsCacheKey();
+        
+        return Cache::remember($cacheKey, config('core.cache.settings_ttl', 3600), function () {
+            return $this->settings->keyBy('key')
+                ->transform(fn ($item) => Str::isJson($item->value) ? json_decode($item->value, true) : $item->value)
+                ->toArray();
+        });
     }
 
     /**
@@ -111,7 +186,19 @@ trait HasSettings
      */
     public function getSetting(?string $key = null)
     {
-        return $key ? $this->settings->where('key', $key)->first() : $this->all();
+        if ($key) {
+            if (!config('core.cache.enabled', true)) {
+                return $this->settings->where('key', $key)->first();
+            }
+
+            $cacheKey = $this->getSettingCacheKey($key);
+            
+            return Cache::remember($cacheKey, config('core.cache.settings_ttl', 3600), function () use ($key) {
+                return $this->settings->where('key', $key)->first();
+            });
+        }
+        
+        return $this->all();
     }
 
     /**
@@ -169,17 +256,32 @@ trait HasSettings
             'value' => $value,
         ]);
 
+        // Clear cache for this specific setting
+        if (config('core.cache.enabled', true)) {
+            Cache::forget($this->getSettingCacheKey($key));
+        }
+        $this->clearSettingsCache();
+
         return $this;
     }
 
     public function deleteSetting(?string $key = null): bool
     {
         if (is_null($key)) {
-            return (bool) $this->settings()->delete();
+            $result = (bool) $this->settings()->delete();
+            $this->clearSettingsCache();
+            return $result;
         }
 
-        return (bool) $this->settings()->where('key', $key)->delete();
-
+        $result = (bool) $this->settings()->where('key', $key)->delete();
+        
+        // Clear cache for this specific setting
+        if (config('core.cache.enabled', true)) {
+            Cache::forget($this->getSettingCacheKey($key));
+        }
+        $this->clearSettingsCache();
+        
+        return $result;
     }
 
     /**

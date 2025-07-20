@@ -108,7 +108,7 @@ class Image
     {
         $argument1 = Str::lower($argument1);
 
-        $this->resize = (! in_array($argument1, config('img-proxy.resize_values'), true))
+        $this->resize = (! in_array($argument1, config('core.imgproxy.resize_values'), true))
             ? self::DEFAULT_RESIZE
             : $argument1;
 
@@ -123,8 +123,8 @@ class Image
     public function setWidth(int $argument1 = 1)
     {
         $argument1 = abs($argument1) ?: 1;
-        if ($argument1 > config('img-proxy.max_dim_px')) {
-            $argument1 = config('img-proxy.max_dim_px');
+        if ($argument1 > config('core.imgproxy.max_dim_px')) {
+            $argument1 = config('core.imgproxy.max_dim_px');
         }
         $this->width = $argument1;
 
@@ -139,8 +139,8 @@ class Image
     public function setHeight(int $argument1 = 1)
     {
         $argument1 = abs($argument1) ?: 1;
-        if ($argument1 > config('img-proxy.max_dim_px')) {
-            $argument1 = config('img-proxy.max_dim_px');
+        if ($argument1 > config('core.imgproxy.max_dim_px')) {
+            $argument1 = config('core.imgproxy.max_dim_px');
         }
         $this->height = $argument1;
 
@@ -158,7 +158,7 @@ class Image
     public function setGravity(?string $argument1 = null)
     {
         $argument1 = Str::lower($argument1);
-        $this->gravity = (! in_array($argument1, config('img-proxy.gravity_values')))
+        $this->gravity = (! in_array($argument1, config('core.imgproxy.gravity_values')))
             ? self::DEFAULT_GRAVITY
             : $argument1;
 
@@ -192,12 +192,12 @@ class Image
     public function setExtension($argument1)
     {
         if (is_null($argument1)) {
-            $argument1 = config('img-proxy.default_extension');
+            $argument1 = config('core.imgproxy.default_extension');
         }
         if ($argument1 !== false) {
             $argument1 = Str::lower($argument1);
 
-            if (! in_array($argument1, config('img-proxy.formats'))) {
+            if (! in_array($argument1, config('core.imgproxy.formats'))) {
                 throw new Exception($argument1);
             }
         }

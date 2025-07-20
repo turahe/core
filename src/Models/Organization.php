@@ -51,7 +51,13 @@ class Organization extends Model implements Sortable
         'slug',
     ];
 
-    protected $table = 'organizations';
+    protected $table;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->table = config('core.tables.organizations');
+    }
 
     /**
      * @return string
@@ -137,7 +143,7 @@ class Organization extends Model implements Sortable
         return $this->morphedByMany(
             config('auth.providers.users.model'),
             'model',
-            'model_has_organization',
+            config('core.tables.model_has_organization'),
             'model_id',
             'organization_id',
         )->withPivot('role');

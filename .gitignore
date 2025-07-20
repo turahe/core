@@ -1,5 +1,101 @@
+# Composer
 composer.lock
-vendor
+vendor/
+composer.phar
+
+# PHP
 .phpunit.result.cache
-.idea
 .phpunit.cache
+.php-cs-fixer.cache
+.php-cs-fixer.php
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Laravel
+.env
+.env.*
+!.env.example
+bootstrap/cache/
+storage/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+
+# Testing
+.phpunit.xml
+.phpunit.xml.dist
+coverage/
+tests/coverage/
+*.coverage
+*.coverage.xml
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Cache and temporary files
+*.cache
+*.tmp
+*.temp
+cache/
+tmp/
+temp/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+logs/
+
+# Node.js (if using frontend assets)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.zip
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Local configuration
+config/local.php
+config/testing.php
+
+# Test database files
+database/database.sqlite
+database/testing.sqlite
+
+# Redis dump files
+dump.rdb
+*.rdb
+
+# Temporary test files
+docker/test/test-*.php
+docker/test/quick-test.php
+docker/test/simple-test.php
+docker/test/test-connections.php
+docker/test/test-config.php
+docker/test/test-settings-cache.php

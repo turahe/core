@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oauth_accounts', function (Blueprint $table): void {
+        Schema::create(config('core.tables.oauth_accounts'), function (Blueprint $table): void {
             $table->ulid('id')->primary();
 
             $table->string('type');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oauth_accounts');
+        Schema::dropIfExists(config('core.tables.oauth_accounts'));
     }
 };

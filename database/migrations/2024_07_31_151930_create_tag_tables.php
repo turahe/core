@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table): void {
+        Schema::create(config('core.tables.tags'), function (Blueprint $table): void {
             $table->ulid('id')->primary();
 
             $table->string('name');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('taggables', function (Blueprint $table): void {
+        Schema::create(config('core.tables.taggables'), function (Blueprint $table): void {
             $table->foreignUlid('tag_id')->constrained()->cascadeOnDelete();
 
             $table->ulidMorphs('taggable');
@@ -36,7 +36,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('taggables');
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists(config('core.tables.taggables'));
+        Schema::dropIfExists(config('core.tables.tags'));
     }
 };

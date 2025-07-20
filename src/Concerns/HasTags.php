@@ -40,7 +40,7 @@ trait HasTags
     public function tags(): MorphToMany
     {
         return $this
-            ->morphToMany(Tag::class, 'taggable', 'taggables')
+            ->morphToMany(Tag::class, 'taggable', config('core.tables.taggables'))
             ->using(MorphPivot::class)
             ->ordered();
     }

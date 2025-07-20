@@ -1,0 +1,100 @@
+name: Dependabot
+
+on:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1' # Every Monday at 2 AM
+
+jobs:
+  dependabot:
+    name: Dependabot
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_sqlite
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Setup test environment
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
+
+      - name: Check code style
+        run: vendor/bin/pint --test
+
+      - name: Auto-approve Dependabot PRs
+        if: success()
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge for Dependabot PRs
+        if: success()
+        run: |
+          gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  security-updates:
+    name: Security Updates
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: intl, iconv, mbstring, xml, ctype, json
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Check for security vulnerabilities
+        run: |
+          composer audit --format=json > security-report.json
+          if [ -s security-report.json ]; then
+            echo "Security vulnerabilities found!"
+            cat security-report.json
+            exit 1
+          else
+            echo "No security vulnerabilities found."
+          fi
+
+      - name: Run security checker
+        run: vendor/bin/security-checker security:check composer.lock
+
+      - name: Create issue for security updates
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Security Update Required',
+              body: 'Security vulnerabilities detected in dependencies. Please review and update.',
+              labels: ['security', 'dependencies']
+            }) 

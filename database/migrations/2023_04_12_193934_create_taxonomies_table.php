@@ -23,7 +23,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('taxonomies', function (Blueprint $table): void {
+        Schema::create(config('core.tables.taxonomies'), function (Blueprint $table): void {
             $table->ulid('id')->primary();
             $table->string('name')->index();
             $table->string('slug')->index()->unique();
@@ -45,7 +45,7 @@ return new class extends Migration
 
         });
 
-        Schema::create('model_has_taxonomies', function (Blueprint $table): void {
+        Schema::create(config('core.tables.model_has_taxonomies'), function (Blueprint $table): void {
             $table->ulidMorphs('model');
             $table->ulid('taxonomy_id')->index();
             $table->integer('created_at')->index()->nullable();
@@ -62,7 +62,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('model_has_taxonomies');
-        Schema::dropIfExists('taxonomies');
+        Schema::dropIfExists(config('core.tables.model_has_taxonomies'));
+        Schema::dropIfExists(config('core.tables.taxonomies'));
     }
 };

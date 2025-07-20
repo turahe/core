@@ -25,8 +25,8 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function __construct($img)
     {
-        if (config('services.imgproxy.signature_size')) {
-            $signature_size = config('services.imgproxy.signature_size');
+        if (config('core.imgproxy.signature_size')) {
+            $signature_size = config('core.imgproxy.signature_size');
             if (is_numeric($signature_size)) {
                 $this->signature_size = (int) $signature_size;
             }
@@ -59,7 +59,7 @@ class ImageSignature implements ImageSignatureInterface
 
     public function getKey(): string
     {
-        if (empty($key = config('services.imgproxy.key'))) {
+        if (empty($key = config('core.imgproxy.key'))) {
             throw new InvalidArgumentException;
         }
 
@@ -75,7 +75,7 @@ class ImageSignature implements ImageSignatureInterface
      */
     public function getSalt(): string
     {
-        if (empty($salt = config('services.imgproxy.salt'))) {
+        if (empty($salt = config('core.imgproxy.salt'))) {
             throw new InvalidArgumentException;
         }
 

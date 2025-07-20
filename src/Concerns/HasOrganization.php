@@ -31,7 +31,7 @@ trait HasOrganization
         return $this->morphToMany(
             Organization::class,
             'model',
-            'model_has_organization',
+            config('core.tables.model_has_organization'),
         )->withPivot('role')
             ->withTimestamps();
     }
@@ -42,7 +42,7 @@ trait HasOrganization
     public function scopeOfManager(Builder $query, User $user, $withCurrentUser = true): void
     {
         $query->where(function (Builder $query) use ($user, $withCurrentUser): void {
-            $query->whereHas('organizations', fn (Builder $query) => $query->where('organizations.user_id', $user->getKey()))
+            $query->whereHas('organizations', fn (Builder $query) => $query->where('organizations.created_by', $user->getKey()))
                 ->when($withCurrentUser, fn (Builder $query) => $query->orWhere('users.id', $user->getKey()));
         });
     }
@@ -52,7 +52,7 @@ trait HasOrganization
      */
     public function managedOrganization(): HasMany
     {
-        return $this->hasMany(Organization::class);
+        return $this->hasMany(Organization::class, 'created_by');
     }
 
     /**
@@ -68,7 +68,7 @@ trait HasOrganization
      */
     public function managesOrganization(Organization $organization): bool
     {
-        return $this->getKey() === $organization->{$this->getForeignKey()};
+        return $this->getKey() === $organization->created_by;
     }
 
     /**

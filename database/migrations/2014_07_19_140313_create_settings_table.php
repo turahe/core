@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table): void {
+        Schema::create(config('core.tables.settings'), function (Blueprint $table): void {
             $table->ulid('id')->primary();
             $table->nullableUlidMorphs('model');
             $table->string('key')->index();
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists(config('core.tables.settings'));
     }
 };

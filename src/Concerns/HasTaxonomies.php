@@ -28,7 +28,7 @@ trait HasTaxonomies
         return $this->morphToMany(
             Taxonomy::class,
             'model',
-            'model_has_taxonomies',
+            config('core.tables.model_has_taxonomies'),
             'model_id',
             'taxonomy_id',
 

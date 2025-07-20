@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table): void {
+        Schema::create(config('core.tables.organizations'), function (Blueprint $table): void {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('slug')->unique()->index();
@@ -40,7 +40,7 @@ return new class extends Migration
 
         });
 
-        Schema::create('model_has_organization', function (Blueprint $table): void {
+        Schema::create(config('core.tables.model_has_organization'), function (Blueprint $table): void {
             $table->ulidMorphs('model');
             $table->ulid('organization_id');
             $table->enum('role', ['OWNER', 'MEMBER', 'ADMIN'])->default('OWNER');
@@ -59,7 +59,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('model_has_organization');
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists(config('core.tables.model_has_organization'));
+        Schema::dropIfExists(config('core.tables.organizations'));
     }
 };
