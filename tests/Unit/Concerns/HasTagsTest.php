@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Turahe\Core\Tests\Feature\Concerns;
+namespace Turahe\Core\Tests\Unit\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Turahe\Core\Models\Tag;
