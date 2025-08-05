@@ -1,0 +1,5 @@
+[33mb8f7670[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m fix ci: test in master and dev
+[33mb01d4b1[m feat: update package for Laravel 11/12 and PHP 8.3/8.4 support
+[33m6a758ee[m fix: github
+[33m659c2c0[m[33m ([m[1;33mtag: [m[1;33mv1.2.1[m[33m, [m[1;33mtag: [m[1;33mv1.1.1[m[33m)[m fix: timestamp
+[33m2260d29[m[33m ([m[1;33mtag: [m[1;33mv1.2.0[m[33m, [m[1;33mtag: [m[1;33mv1.2[m[33m)[m add config use timestamps or unit time

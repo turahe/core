@@ -4,7 +4,7 @@
 [![CI with Docker](https://github.com/turahe/core/actions/workflows/ci-docker.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/ci-docker.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue.svg)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/Laravel-11%2B%20%7C%2012%2B-red.svg)](https://laravel.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-11%2B-red.svg)](https://laravel.com)
 [![Packagist](https://img.shields.io/packagist/v/turahe/core.svg)](https://packagist.org/packages/turahe/core)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/turahe/core.svg)](https://packagist.org/packages/turahe/core)
 
@@ -55,7 +55,7 @@ A comprehensive Laravel package providing core functionality for modern web appl
 
 ### Requirements
 - PHP 8.3 or higher
-- Laravel 11 or 12
+- Laravel 11
 - MySQL 8.0+ (recommended) or SQLite
 - Redis (optional, for caching)
 
