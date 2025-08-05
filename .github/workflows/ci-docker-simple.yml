@@ -8,7 +8,7 @@ on:
 
 jobs:
   docker-tests:
-    name: Docker Tests (PHP 8.4 - Laravel 11)
+    name: Docker Tests (PHP 8.4 - Laravel 10)
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +39,8 @@ jobs:
         run: |
           docker build -f docker/test/Dockerfile \
             --build-arg PHP_VERSION=8.4 \
-            --build-arg LARAVEL_VERSION=11.* \
-            --build-arg TESTBENCH_VERSION=11.* \
+            --build-arg LARAVEL_VERSION=10.* \
+            --build-arg TESTBENCH_VERSION=10.* \
             -t turahe-core-test .
 
       - name: Run tests in Docker container
