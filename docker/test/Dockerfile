@@ -32,8 +32,8 @@ RUN pecl install redis && docker-php-ext-enable redis
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set build arguments for Laravel and Testbench versions
-ARG LARAVEL_VERSION=10.*
-ARG TESTBENCH_VERSION=8.*
+ARG LARAVEL_VERSION=12.*
+ARG TESTBENCH_VERSION=12.*
 
 # Set working directory
 WORKDIR /app

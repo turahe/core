@@ -2,6 +2,7 @@
 
 namespace Turahe\Core;
 
+use Illuminate\Support\Facades\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
@@ -16,6 +17,14 @@ class CoreServiceProvider extends ServiceProvider
             \Turahe\Core\Contracts\TagRepositoryInterface::class,
             \Turahe\Core\Repositories\TagRepository::class
         );
+
+        // Register Google and Microsoft services as singletons
+        $this->app->singleton('google', function ($app) {
+            return new \Turahe\Core\Google\Client();
+        });
+        $this->app->singleton('msgraph', function ($app) {
+            return new \Turahe\Core\Microsoft\Client();
+        });
     }
 
     /**
@@ -24,6 +33,10 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/core.php', 'core');
+
+        // Register facades/aliases for Google and MsGraph
+        AliasLoader::getInstance()->alias('Google', \Turahe\Core\Facades\Google::class);
+        AliasLoader::getInstance()->alias('MsGraph', \Turahe\Core\Facades\MsGraph::class);
 
         if ($this->app instanceof \Illuminate\Foundation\Application) {
             $databasePath = __DIR__.'/../database/migrations';

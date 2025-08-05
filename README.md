@@ -1,235 +1,348 @@
+# Turahe Core
+
 [![PHP Composer](https://github.com/turahe/core/actions/workflows/php.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/php.yml)
-[![Tests](https://img.shields.io/badge/tests-196%20passing-brightgreen)](https://github.com/turahe/core)
-[![PHP Version](https://img.shields.io/badge/php-8.2%2B-blue.svg)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/laravel-8%2B%20%7C%209%2B%20%7C%2010%2B-orange.svg)](https://laravel.com)
+[![CI with Docker](https://github.com/turahe/core/actions/workflows/ci-docker.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/ci-docker.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue.svg)](https://php.net)
+[![Laravel Version](https://img.shields.io/badge/Laravel-11%2B%20%7C%2012%2B-red.svg)](https://laravel.com)
+[![Packagist](https://img.shields.io/packagist/v/turahe/core.svg)](https://packagist.org/packages/turahe/core)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/turahe/core.svg)](https://packagist.org/packages/turahe/core)
 
-# Turahe Core SDK
-
-A comprehensive Laravel package providing essential core functionality including image processing, OAuth integration, taxonomy management, and utility helpers.
+A comprehensive Laravel package providing core functionality for modern web applications including image processing, OAuth integration, taxonomy management, organization handling, and utility helpers.
 
 ## 🚀 Features
 
 ### 📸 Image Processing
-- **ImgProxy Integration**: Advanced image resizing, cropping, and format conversion
-- **Image Signatures**: Secure URL generation with HMAC signatures
-- **Preset Support**: Predefined image transformation presets
-- **Multiple Formats**: Support for JPG, PNG, WebP, and more
+- **ImgProxy Integration**: Secure image URL signing and processing
+- **Image Optimization**: Automatic resizing, cropping, and format conversion
+- **Preset Support**: Predefined image processing configurations
+- **Signature Verification**: Secure image URL validation
 
 ### 🔐 OAuth Integration
-- **Google OAuth**: Complete Google API integration with Calendar and Gmail support
-- **Microsoft Graph**: Microsoft 365 integration with batch operations
-- **Token Management**: Secure access token encryption and refresh handling
+- **Google OAuth**: Complete Google API integration with Calendar, Gmail, and Drive
+- **Microsoft Graph**: Full Microsoft Graph API support for Office 365 services
+- **Token Management**: Automatic token refresh and storage
 - **Resource Owners**: Custom resource owner implementations
 
-### 🏷️ Taxonomy & Tagging System
-- **Hierarchical Taxonomies**: Nested category management with parent-child relationships
-- **Tag System**: Flexible tagging with type support and scopes
-- **Slug Generation**: Automatic slug creation with configurable sluggers
-- **Sortable**: Built-in sorting capabilities
+### 🏷️ Taxonomy & Tagging
+- **Hierarchical Taxonomies**: Nested set implementation for complex categorization
+- **Flexible Tagging**: Polymorphic tagging system for any model
+- **Slug Generation**: Automatic slug creation with Spatie Laravel Sluggable
+- **Sortable Content**: Drag-and-drop ordering with Spatie Eloquent Sortable
 
 ### 🏢 Organization Management
 - **Multi-tenant Support**: Organization-based data isolation
-- **Hierarchical Structure**: Parent-child organization relationships
-- **Settings Management**: Per-organization configuration storage
+- **Role-based Access**: Member, Admin, and Owner roles
+- **Hierarchical Structure**: Nested organization trees
+- **User Associations**: Flexible user-organization relationships
 
-### 📧 Email Processing
-- **Mail Headers**: Advanced email header parsing and manipulation
-- **Address Headers**: RFC-compliant email address handling
-- **Date Headers**: Carbon-based date parsing
-- **Embedded Images**: Automatic image processing in emails
+### 📧 Email Services
+- **Gmail Integration**: Full Gmail API support with message handling
+- **Microsoft Graph Email**: Outlook/Exchange email integration
+- **Attachment Processing**: Automatic email attachment handling
+- **Message Composition**: Rich email composition features
 
 ### 🛠️ Utility Helpers
-- **Currency Formatting**: Multi-currency support with locale-specific formatting
-- **Name Aliases**: Generate initials from full names
-- **String Cleaning**: URL-safe string sanitization
-- **Acronym Generation**: Extract acronyms from text
-- **Phone Parsing**: International phone number validation and formatting
-- **Percentage Calculations**: Mathematical percentage operations
+- **Currency Formatting**: `format_currency()` for consistent money display
+- **Name Aliases**: `name_alias()` for user-friendly name display
+- **Text Cleaning**: `clean()` for sanitized text output
+- **Acronym Generation**: `acronym()` for abbreviation creation
+- **Image URLs**: `imgProxy()` and `imgProxyPreset()` for secure image URLs
+- **Percentage Calculations**: `calculate_percentage()` for mathematical operations
+- **Phone Parsing**: `parse_phone()` for international phone number handling
 
 ## 📦 Installation
 
-1. Install the package via composer:
+### Requirements
+- PHP 8.3 or higher
+- Laravel 11 or 12
+- MySQL 8.0+ (recommended) or SQLite
+- Redis (optional, for caching)
 
-    ```shell
-    composer require turahe/core
-    ```
+### Via Composer
+```bash
+composer require turahe/core
+```
 
-2. Publish resources (migrations and config files):
+### Publish Configuration
+```bash
+php artisan vendor:publish --provider="Turahe\Core\CoreServiceProvider"
+```
 
-    ```shell
-    php artisan vendor:publish --provider="Turahe\Core\CoreServiceProvider"
-    ```
+### Run Migrations
+```bash
+php artisan migrate
+```
 
-3. Execute migrations via the following command:
+## ⚙️ Configuration
 
-    ```shell
-    php artisan migrate
-    ```
+### Environment Variables
+```env
+# Database Configuration
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 
-4. Configure your environment variables:
+# Redis Configuration (Optional)
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-    ```env
-    # Image Processing
-    IMGPROXY_BASE_URL=https://your-imgproxy-server.com
-    IMGPROXY_KEY=your-32-byte-hex-key
-    IMGPROXY_SALT=your-32-byte-hex-salt
-    IMGPROXY_MAX_DIM_PX=10000
-    IMGPROXY_SIGNATURE_SIZE=32
+# Core Package Configuration
+CORE_TABLE_USE_TIMESTAMPS=false
+USERSTAMPS_USERS_TABLE_COLUMN_TYPE=ulid
+APP_KEY=your-app-key
 
-    # OAuth Configuration
-    GOOGLE_CLIENT_ID=your-google-client-id
-    GOOGLE_CLIENT_SECRET=your-google-client-secret
-    MICROSOFT_CLIENT_ID=your-microsoft-client-id
-    MICROSOFT_CLIENT_SECRET=your-microsoft-client-secret
-    ```
+# Table Names (Customizable)
+CORE_TABLE_SETTINGS=settings
+CORE_TABLE_ORGANIZATIONS=organizations
+CORE_TABLE_MODEL_HAS_ORGANIZATION=model_has_organization
+CORE_TABLE_TAXONOMIES=taxonomies
+CORE_TABLE_MODEL_HAS_TAXONOMIES=model_has_taxonomies
+CORE_TABLE_TAGS=tags
+CORE_TABLE_TAGGABLES=taggables
+CORE_TABLE_OAUTH_ACCOUNTS=oauth_accounts
 
-5. Done!
+# Cache Configuration
+CORE_CACHE_ENABLED=true
+CORE_CACHE_SETTINGS_TTL=3600
+```
 
-## 🔧 Configuration
+### Google OAuth Setup
+```env
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GOOGLE_REDIRECT_URI=your-redirect-uri
+```
 
-### Image Processing Configuration
+### Microsoft Graph Setup
+```env
+MSGRAPH_CLIENT_ID=your-ms-client-id
+MSGRAPH_CLIENT_SECRET=your-ms-client-secret
+MSGRAPH_REDIRECT_URI=your-redirect-uri
+```
 
-The package uses the `config/core.php` file for image processing settings:
+### ImgProxy Configuration
+```env
+IMGPROXY_URL=your-imgproxy-url
+IMGPROXY_KEY=your-imgproxy-key
+IMGPROXY_SALT=your-imgproxy-salt
+```
+
+## 🔧 Usage
+
+### Service Providers
+The package automatically registers the `CoreServiceProvider`. You can also manually register it in `config/app.php`:
 
 ```php
-'imgproxy' => [
-    'signature_size' => env('IMGPROXY_SIGNATURE_SIZE', 32),
-    'key' => env('IMGPROXY_KEY', '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'),
-    'salt' => env('IMGPROXY_SALT', '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'),
-    'resize_values' => ['fit', 'fill', 'crop', 'stretch', 'pad'],
-    'max_dim_px' => env('IMGPROXY_MAX_DIM_PX', 10000),
-    'gravity_values' => ['no', 'sm', 'md', 'lg', 'xl', 'xxl', 'center', 'top', 'bottom', 'left', 'right'],
-    'default_extension' => env('IMGPROXY_DEFAULT_EXTENSION', 'jpg'),
-    'formats' => ['jpg', 'jpeg', 'png', 'webp'],
+'providers' => [
+    // ...
+    Turahe\Core\CoreServiceProvider::class,
 ],
 ```
 
-## 📖 Usage Examples
-
-### Image Processing
+### Facades
+The package provides convenient facades for Google and Microsoft services:
 
 ```php
-use Turahe\Core\Services\Image\Image;
+use Turahe\Core\Facades\Google;
+use Turahe\Core\Facades\MsGraph;
 
-// Create an image with custom dimensions
-$image = new Image();
-$image->make('/path/to/image.jpg', 800, 600, 'webp');
+// Google Services
+Google::calendar()->listEvents();
+Google::gmail()->sendMessage($message);
 
-// Use presets
-$image->makePreset('/path/to/image.jpg', 'thumbnail', 'png');
-
-// Generate signed URL
-$signature = new ImageSignature($image);
-$signedUrl = $signature->take();
+// Microsoft Graph Services
+MsGraph::calendar()->getEvents();
+MsGraph::mail()->sendMessage($message);
 ```
 
 ### Helper Functions
-
 ```php
 // Currency formatting
-echo format_currency(1000000); // "Rp 1.000.000"
+echo format_currency(1234.56, 'USD'); // $1,234.56
 
 // Name aliases
-echo name_alias('John Doe'); // "JD"
+echo name_alias('John Doe'); // J. Doe
 
-// String cleaning
-echo clean('Hello World!'); // "Hello-World"
+// Text cleaning
+echo clean('<script>alert("xss")</script>'); // alert("xss")
 
 // Acronyms
-echo acronym('PHP Hypertext Preprocessor'); // "PHP"
+echo acronym('World Health Organization'); // WHO
 
-// Phone parsing
-echo parse_phone('08123456789'); // "+628123456789"
+// Image URLs
+echo imgProxy('https://example.com/image.jpg', 800, 600);
+echo imgProxyPreset('https://example.com/image.jpg', 'thumbnail');
 
 // Percentage calculations
-echo calculate_percentage(100, 25); // 25
+echo calculate_percentage(25, 100); // 25.0
+
+// Phone parsing
+echo parse_phone('+1-555-123-4567'); // +15551234567
 ```
 
-### Taxonomy Management
+### Models and Traits
 
+#### HasOrganization Trait
 ```php
-use Turahe\Core\Models\Taxonomy;
+use Turahe\Core\Concerns\HasOrganization;
 
-// Create taxonomies
-$category = Taxonomy::createTaxonomy('Technology');
-$subcategory = Taxonomy::createTaxonomy('Programming', 'PROG', $category);
+class User extends Authenticatable
+{
+    use HasOrganization;
+    
+    // Your model implementation
+}
 
-// Create multiple taxonomies
-$taxonomies = Taxonomy::createTaxonomies(['PHP', 'Laravel', 'Vue.js']);
+// Usage
+$user = User::find(1);
+$user->organizations()->attach($organizationId, ['role' => 'MEMBER']);
+$user->managedOrganizations; // Organizations where user is admin/owner
 ```
 
-### Tag System
-
+#### HasSettings Trait
 ```php
-use Turahe\Core\Models\Tag;
+use Turahe\Core\Concerns\HasSettings;
 
-// Create tags
-$tag = Tag::createTag('important', 'priority');
+class User extends Authenticatable
+{
+    use HasSettings;
+    
+    // Your model implementation
+}
 
-// Find or create tags
-$tag = Tag::findOrCreateTag('urgent', 'priority');
-
-// Get tags by type
-$priorityTags = Tag::getAllByType('priority');
+// Usage
+$user = User::find(1);
+$user->updateSetting('theme', 'dark');
+$user->getSetting('theme', 'light'); // Returns 'dark' or default 'light'
+$user->allSettings(); // Get all settings
 ```
 
-### OAuth Integration
-
+#### HasTaxonomies Trait
 ```php
-use Turahe\Core\OAuth\OAuthManager;
+use Turahe\Core\Concerns\HasTaxonomies;
 
-// Google OAuth
-$googleManager = new OAuthManager('google');
-$authUrl = $googleManager->getAuthorizationUrl();
+class Post extends Model
+{
+    use HasTaxonomies;
+    
+    // Your model implementation
+}
 
-// Microsoft Graph
-$msManager = new OAuthManager('microsoft');
-$accessToken = $msManager->getAccessToken();
+// Usage
+$post = Post::find(1);
+$post->taxonomies()->attach($categoryId);
+$post->taxonomies; // Get all taxonomies
+```
+
+#### HasTags Trait
+```php
+use Turahe\Core\Concerns\HasTags;
+
+class Post extends Model
+{
+    use HasTags;
+    
+    // Your model implementation
+}
+
+// Usage
+$post = Post::find(1);
+$post->tags()->attach($tagId);
+$post->tags; // Get all tags
+```
+
+### Repositories
+```php
+use Turahe\Core\Repositories\OrganizationRepository;
+
+$repository = app(OrganizationRepository::class);
+
+// Get all organizations
+$organizations = $repository->getOrganizations();
+
+// Get organization by ID
+$organization = $repository->getOrganization(1);
+
+// Get organization by name
+$organization = $repository->getOrganizationByName('Acme Corp');
+
+// Create organization
+$organization = $repository->createOrganization([
+    'name' => 'New Organization',
+    'slug' => 'new-organization',
+    'type' => 'company'
+]);
 ```
 
 ## 🧪 Testing
 
-The package includes comprehensive test coverage with **196 tests** and **418 assertions**.
-
 ### Running Tests
-
-```shell
+```bash
 # Run all tests
-./vendor/bin/phpunit
+vendor/bin/phpunit
 
 # Run specific test suite
-./vendor/bin/phpunit tests/Unit/ImageTest.php
-./vendor/bin/phpunit tests/Unit/HelpersTest.php
+vendor/bin/phpunit --testsuite=Unit
+vendor/bin/phpunit --testsuite=Feature
 
-# Run with testdox format
-./vendor/bin/phpunit --testdox
+# Run with coverage
+vendor/bin/phpunit --coverage-html coverage-report
+```
+
+### Docker Testing
+```bash
+# Start Docker services
+docker-compose up -d mysql redis
+
+# Run tests in Docker
+docker/test/run-tests.sh
+
+# Windows
+docker/test/run-tests.bat
 ```
 
 ### Test Coverage
+- **Unit Tests**: 196 tests with 418 assertions
+- **Feature Tests**: Database integration and trait testing
+- **Coverage**: Comprehensive coverage of all package features
 
-- **Image Processing**: 43 tests covering all Image class methods
-- **Helper Functions**: 33 tests for utility functions
-- **Image Signatures**: 8 tests for secure URL generation
-- **OAuth Integration**: 3 tests for token management
-- **Taxonomy System**: 5 tests for category management
-- **Tag System**: 16 tests for tagging functionality
-- **Organization Management**: 8 tests for multi-tenant support
-- **Email Processing**: 11 tests for mail header handling
-- **Model Concerns**: 57 tests for trait functionality
+## 🐳 Docker Development
 
-## 🔌 Service Providers
+### Quick Start
+```bash
+# Start all services
+docker-compose up -d
 
-The package automatically registers the following service providers:
+# Start specific services
+docker-compose up -d mysql redis phpmyadmin
+```
 
-- `Turahe\Core\CoreServiceProvider` - Main service provider
-- `Spatie\EloquentSortable\EloquentSortableServiceProvider` - Sorting functionality
-- `Turahe\UserStamps\UserStampsServiceProvider` - User tracking
+### Available Services
+- **MySQL 8.0**: Database server
+- **Redis 7**: Caching and session storage
+- **phpMyAdmin**: Database management interface
+- **Redis Commander**: Redis management interface
+- **ImgProxy**: Image processing service
 
-## 📋 Requirements
+### Database Access
+- **MySQL**: `localhost:3306` (user: `turahe`, password: `turahe123`)
+- **phpMyAdmin**: `http://localhost:8080` (user: `turahe`, password: `turahe123`)
+- **Redis Commander**: `http://localhost:8081`
 
-- **PHP**: 8.2 or higher
-- **Laravel**: 8.x, 9.x, or 10.x
-- **Extensions**: intl, iconv
+## 📊 CI/CD
+
+The package includes comprehensive GitHub Actions workflows:
+
+- **PHP Tests**: Multi-version PHP/Laravel matrix testing
+- **Docker Tests**: Containerized testing with MySQL/Redis
+- **Code Quality**: PHPStan, Psalm, Laravel Pint
+- **Security**: Security checker and vulnerability scanning
+- **Package Testing**: Installation and integration testing
 
 ## 🤝 Contributing
 
@@ -240,24 +353,25 @@ The package automatically registers the following service providers:
 5. Open a Pull Request
 
 ### Development Setup
-
-```shell
-# Clone the repository
+```bash
+# Clone repository
 git clone https://github.com/turahe/core.git
+cd core
 
 # Install dependencies
 composer install
 
-# Run tests
-./vendor/bin/phpunit
+# Setup testing environment
+cp .env.example .env
+php artisan key:generate
 
-# Run code style checks
-./vendor/bin/pint
+# Run tests
+vendor/bin/phpunit
 ```
 
-## 📄 License
+## 📝 License
 
-This package is proprietary software. All rights reserved.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
@@ -265,9 +379,15 @@ This package is proprietary software. All rights reserved.
 
 ## 🙏 Acknowledgments
 
-- [Laravel](https://laravel.com) - The PHP framework
-- [Spatie](https://spatie.be) - Eloquent Sortable package
-- [Google APIs](https://developers.google.com) - Google OAuth integration
-- [Microsoft Graph](https://docs.microsoft.com/graph) - Microsoft 365 integration
+- [Laravel](https://laravel.com) - The web framework
+- [Spatie](https://spatie.be) - Laravel packages
+- [Google APIs](https://developers.google.com) - Google services
+- [Microsoft Graph](https://docs.microsoft.com/graph) - Microsoft services
+- [ImgProxy](https://imgproxy.net) - Image processing
+- [Orchestra Testbench](https://github.com/orchestral/testbench) - Package testing
+
+---
+
+**Made with ❤️ for the Laravel community**
 
 
