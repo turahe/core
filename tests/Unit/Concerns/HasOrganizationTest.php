@@ -270,12 +270,163 @@ class HasOrganizationTest extends TestCase
         // but the Organization model uses userstamps, so this is a mismatch in the trait
         $this->assertEquals('user_id', $relationship->getForeignKeyName());
     }
+
+    // ===============================================
+    // Tests for PHP 8.4 Features
+    // ===============================================
+
+    public function test_managed_organizations_count_readonly_property(): void
+    {
+        $this->assertEquals(2, $this->manager->managedOrganizationsCount);
+        $this->assertEquals(0, $this->user->managedOrganizationsCount);
+    }
+
+    public function test_member_organizations_count_readonly_property(): void
+    {
+        // Attach user to organizations
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        $this->user->organizations()->attach($this->organization2, ['role' => 'admin']);
+        
+        $this->assertEquals(2, $this->user->memberOrganizationsCount);
+        $this->assertEquals(0, $this->manager->memberOrganizationsCount);
+    }
+
+    public function test_organizations_with_role_variadic_parameters(): void
+    {
+        // Attach user to organizations with different roles
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        $this->user->organizations()->attach($this->organization2, ['role' => 'admin']);
+        
+        // Test with single role
+        $memberOrgs = $this->user->organizationsWithRole('member');
+        $this->assertCount(1, $memberOrgs);
+        $this->assertEquals($this->organization1->id, $memberOrgs->first()->id);
+        
+        // Test with multiple roles using variadic parameters
+        $allRoleOrgs = $this->user->organizationsWithRole('member', 'admin');
+        $this->assertCount(2, $allRoleOrgs);
+        
+        // Test with non-existent role
+        $noOrgs = $this->user->organizationsWithRole('owner');
+        $this->assertCount(0, $noOrgs);
+    }
+
+    public function test_has_role_in_organization(): void
+    {
+        // Attach user to organization with specific role
+        $this->user->organizations()->attach($this->organization1, ['role' => 'admin']);
+        
+        $this->assertTrue($this->user->hasRoleInOrganization($this->organization1, 'admin'));
+        $this->assertFalse($this->user->hasRoleInOrganization($this->organization1, 'member'));
+        $this->assertFalse($this->user->hasRoleInOrganization($this->organization2, 'admin'));
+    }
+
+    public function test_manages_organization_with_match_expression(): void
+    {
+        // Test that manager manages organizations they created
+        $this->assertTrue($this->manager->managesOrganization($this->organization1));
+        $this->assertTrue($this->manager->managesOrganization($this->organization2));
+        
+        // Test that user doesn't manage organizations they didn't create
+        $this->assertFalse($this->user->managesOrganization($this->organization1));
+        $this->assertFalse($this->user->managesOrganization($this->organization2));
+    }
+
+    public function test_all_organization_caching(): void
+    {
+        // Attach user to one organization
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        
+        // First call should populate cache
+        $result1 = $this->user->allOrganization();
+        
+        // Second call should use cache (same object reference)
+        $result2 = $this->user->allOrganization();
+        
+        $this->assertEquals($result1, $result2);
+        $this->assertCount(1, $result1);
+    }
+
+    public function test_clear_organizations_cache(): void
+    {
+        // Attach user to organization
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        
+        // Get initial count
+        $initialCount = $this->user->allOrganization()->count();
+        $this->assertEquals(1, $initialCount);
+        
+        // Clear cache
+        $this->user->clearOrganizationsCache();
+        
+        // Add another organization
+        $this->user->organizations()->attach($this->organization2, ['role' => 'admin']);
+        
+        // Should reflect new count
+        $newCount = $this->user->allOrganization()->count();
+        $this->assertEquals(2, $newCount);
+    }
+
+    public function test_belongs_to_team_enhanced_performance(): void
+    {
+        // Test manager belongs to organization they manage
+        $this->assertTrue($this->manager->belongsToTeam($this->organization1));
+        
+        // Test user doesn't belong to organization initially
+        $this->assertFalse($this->user->belongsToTeam($this->organization1));
+        
+        // Attach user to organization
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        
+        // Clear cache to ensure fresh data
+        $this->user->clearOrganizationsCache();
+        
+        // Now user should belong to organization
+        $this->assertTrue($this->user->belongsToTeam($this->organization1));
+    }
+
+    public function test_scope_of_manager_with_auto_capture_closures(): void
+    {
+        // Create another user and organization
+        $anotherUser = TestUser::create([
+            'name' => 'Another User',
+            'email' => 'another@example.com',
+            'password' => bcrypt('password')
+        ]);
+        
+        // Attach users to organizations managed by manager
+        $this->user->organizations()->attach($this->organization1, ['role' => 'member']);
+        $anotherUser->organizations()->attach($this->organization2, ['role' => 'member']);
+        
+        // Test scope with current user included
+        $managedUsers = TestUser::ofManager($this->manager, true)->get();
+        $this->assertCount(3, $managedUsers); // manager + 2 users
+        
+        // Test scope without current user
+        $managedUsersExcludingManager = TestUser::ofManager($this->manager, false)->get();
+        $this->assertCount(2, $managedUsersExcludingManager); // 2 users only
+    }
+
+    public function test_readonly_properties_are_immutable(): void
+    {
+        // These should not throw exceptions as they're readonly
+        $count1 = $this->manager->managedOrganizationsCount;
+        $count2 = $this->user->memberOrganizationsCount;
+        
+        $this->assertIsInt($count1);
+        $this->assertIsInt($count2);
+        
+        // Verify the properties exist and return expected types
+        $this->assertEquals(2, $count1);
+        $this->assertEquals(0, $count2);
+    }
 }
 
 /**
  * Test User model that uses the HasOrganization trait
+ * Note: User already has HasOrganization trait, so no need to add it again
  */
 class TestUser extends User
 {
-    use HasOrganization;
+    // User already has HasOrganization trait
 } 

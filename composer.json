@@ -1,13 +1,9 @@
 {
     "name": "turahe/core",
     "description": "core sdk",
-    "repositories": [{
-        "type": "composer",
-        "url": "https://packagist.x-api.app"
-    }],
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "ext-iconv": "*",
         "ext-intl": "*",
         "google/apiclient": "^2.18",

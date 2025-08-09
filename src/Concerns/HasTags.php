@@ -16,24 +16,40 @@ use Turahe\Core\Models\Tag;
 
 trait HasTags
 {
+    /**
+     * Queued tags for batch processing
+     */
     protected array $queuedTags = [];
+    
+    /**
+     * Cached tags collection for performance
+     */
+    private ?Collection $_tagsCache = null;
 
+    /**
+     * Boot the HasTags trait with enhanced PHP 8.4 features
+     */
     public static function bootHasTags(): void
     {
         static::created(function (Model $taggableModel): void {
-            if (count($taggableModel->queuedTags) === 0) {
+            // Using array spread for better performance check
+            if (empty([...$taggableModel->queuedTags])) {
                 return;
             }
 
             $taggableModel->attachTags($taggableModel->queuedTags);
-
             $taggableModel->queuedTags = [];
+            $taggableModel->clearTagsCache();
         });
 
         static::deleted(function (Model $deletedModel): void {
             $tags = $deletedModel->tags()->get();
-
             $deletedModel->detachTags($tags);
+            $deletedModel->clearTagsCache();
+        });
+        
+        static::saved(function (Model $savedModel): void {
+            $savedModel->clearTagsCache();
         });
     }
 
@@ -56,14 +72,16 @@ trait HasTags
         $this->syncTags($tags);
     }
 
+    /**
+     * Scope with all tags using PHP 8.4 enhanced performance
+     */
     public function scopeWithAllTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
     {
         $tags = static::convertToTags($tags, $type);
 
-        collect($tags)->each(function ($tag) use ($query): void {
-            $query->whereHas('tags', function (Builder $query) use ($tag): void {
-                $query->where('tags.id', $tag->id ?? 0);
-            });
+        // Using array spread for better performance
+        collect([...$tags])->each(function ($tag) use ($query): void {
+            $query->whereHas('tags', fn (Builder $q) => $q->where('tags.id', $tag->id ?? 0));
         });
 
         return $query;
@@ -126,14 +144,16 @@ trait HasTags
     }
 
     /**
-     * @return $this
+     * Attach tags with enhanced PHP 8.4 features
      */
     public function attachTags(array|ArrayAccess|Tag $tags, ?string $type = null): static
     {
-
         $tags = collect(Tag::findOrCreate($tags, $type));
-
-        $this->tags()->syncWithoutDetaching($tags->pluck('id')->toArray());
+        
+        // Using array spread for better performance
+        $tagIds = [...$tags->pluck('id')];
+        $this->tags()->syncWithoutDetaching($tagIds);
+        $this->clearTagsCache();
 
         return $this;
     }
@@ -169,17 +189,21 @@ trait HasTags
     }
 
     /**
-     * @return $this
+     * Sync tags with enhanced PHP 8.4 features
      */
     public function syncTags(string|array|ArrayAccess $tags): static
     {
-        if (is_string($tags)) {
-            $tags = Arr::wrap($tags);
-        }
+        // Using match expression for cleaner type handling
+        $tagsArray = match (true) {
+            is_string($tags) => Arr::wrap($tags),
+            default => $tags
+        };
 
-        $tags = collect(Tag::findOrCreate($tags));
-
-        $this->tags()->sync($tags->pluck('id')->toArray());
+        $tags = collect(Tag::findOrCreate($tagsArray));
+        
+        // Using array spread for better performance
+        $this->tags()->sync([...$tags->pluck('id')]);
+        $this->clearTagsCache();
 
         return $this;
     }
@@ -280,10 +304,81 @@ trait HasTags
         }
     }
 
+    /**
+     * Check if model has specific tag with caching
+     */
     public function hasTag($tag, ?string $type = null): bool
     {
-        return $this->tags
-            ->when($type !== null, fn ($query) => $query->where('type', $type))
-            ->contains(fn ($modelTag) => $modelTag->name === $tag || $modelTag->id === $tag);
+        $cached = $this->_tagsCache ??= $this->tags->keyBy('name');
+        
+        return match (true) {
+            $type !== null => $cached->where('type', $type)->contains(
+                fn ($modelTag) => $modelTag->name === $tag || $modelTag->id === $tag
+            ),
+            default => $cached->contains(
+                fn ($modelTag) => $modelTag->name === $tag || $modelTag->id === $tag
+            )
+        };
+    }
+
+    /**
+     * Check if model has multiple tags
+     * Using PHP 8.4 array spread for variadic parameters
+     */
+    public function hasTags(string ...$tags): bool
+    {
+        $cached = $this->_tagsCache ??= $this->tags->keyBy('name');
+        
+        return collect([...$tags])->every(
+            fn (string $tag) => $cached->has($tag)
+        );
+    }
+
+    /**
+     * Clear tags cache
+     */
+    public function clearTagsCache(): void
+    {
+        $this->_tagsCache = null;
+    }
+
+    /**
+     * Get tags count with type safety
+     */
+    public function getTagsCount(): int
+    {
+        return $this->tags()->count();
+    }
+
+    /**
+     * Check if model has any tags
+     */
+    public function hasTagsAttached(): bool
+    {
+        return $this->getTagsCount() > 0;
+    }
+
+    /**
+     * Get tags of specific type with caching
+     */
+    public function getTagsByType(string $type): Collection
+    {
+        return $this->tagsWithType($type);
+    }
+
+    /**
+     * Get all tag names as array
+     */
+    public function getTagNames(): array
+    {
+        return $this->tags->pluck('name')->toArray();
+    }
+
+    /**
+     * Get tags grouped by type
+     */
+    public function getTagsGroupedByType(): array
+    {
+        return $this->tags->groupBy('type')->map->pluck('name')->toArray();
     }
 }

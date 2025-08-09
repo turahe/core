@@ -7,6 +7,8 @@ namespace Turahe\Core\Concerns;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Cache\Repository as CacheRepository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -15,6 +17,16 @@ use Turahe\Core\Models\Setting;
 
 trait HasSettings
 {
+    /**
+     * Cached settings for performance optimization
+     */
+    private ?Collection $_settingsCache = null;
+    
+    /**
+     * Cache instance for better performance
+     */
+    private ?CacheRepository $_cacheInstance = null;
+
     /**
      * Boot the HasSettings trait
      */
@@ -30,26 +42,35 @@ trait HasSettings
         });
     }
 
-    /** @var \Illuminate\Database\Eloquent\Model */
-    protected $model;
-
-    public function getRules(): array
-    {
-        if (property_exists($this, 'settingsRules')) {
-            return $this->settingsRules;
-        }
-
-        return [];
+    /**
+     * Get validation rules with property hooks
+     */
+    public array $rules {
+        get => property_exists($this, 'settingsRules') ? $this->settingsRules : [];
     }
 
+    /**
+     * Get default settings with property hooks
+     */
+    public array $defaultSettingsHooked {
+        get => property_exists($this, 'defaultSettings') && is_array($this->defaultSettings) 
+            ? Arr::wrap($this->defaultSettings) : [];
+    }
+    
+    /**
+     * Legacy method for backward compatibility
+     */
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
+
+    /**
+     * Legacy method for backward compatibility  
+     */
     public function getDefaultSettings(): array
     {
-        if (property_exists($this, 'defaultSettings')
-            && is_array($this->defaultSettings)) {
-            return Arr::wrap($this->defaultSettings);
-        }
-
-        return [];
+        return $this->defaultSettingsHooked;
     }
 
     public function settings(): MorphMany
@@ -59,6 +80,7 @@ trait HasSettings
 
     /**
      * Get the cache key for this model's settings
+     * Using PHP 8.4 property hooks for better performance
      */
     protected function getSettingsCacheKey(): string
     {
@@ -82,6 +104,14 @@ trait HasSettings
             $key,
             $this->updated_at?->timestamp ?? 0
         );
+    }
+
+    /**
+     * Get cache instance with lazy initialization
+     */
+    protected function getCacheInstance(): CacheRepository
+    {
+        return $this->_cacheInstance ??= Cache::store();
     }
 
     /**
@@ -109,23 +139,32 @@ trait HasSettings
     }
 
     /**
+     * Set settings with enhanced PHP 8.4 features
      * @throws ValidationException
      */
-    public function setSetting(array $settings = [], string $group = 'default'): self
+    public function setSetting(array $settings = [], string $group = 'default'): static
     {
         $this->validate($settings);
 
-        foreach ($settings as $key => $value) {
-            $this->settings()->updateOrCreate([
+        // Using array spread for better performance
+        $settingEntries = array_map(
+            fn (string $key, mixed $value) => [
                 'key' => $key,
-            ], [
                 'value' => $value,
                 'group' => $group,
-            ]);
+            ],
+            array_keys($settings),
+            [...array_values($settings)]
+        );
+
+        foreach ($settingEntries as $entry) {
+            $this->settings()->updateOrCreate([
+                'key' => $entry['key'],
+            ], $entry);
             
             // Clear cache for this specific setting
             if (config('core.cache.enabled', true)) {
-                Cache::forget($this->getSettingCacheKey($key));
+                $this->getCacheInstance()->forget($this->getSettingCacheKey($entry['key']));
             }
         }
 
@@ -327,10 +366,43 @@ trait HasSettings
     }
 
     /**
-     * @throws \Illuminate\Validation\ValidationException
+     * Validate settings with enhanced error handling
+     * @throws ValidationException
      */
     protected function validate(array $settings): array
     {
-        return Validator::make(Arr::wrap($settings), Arr::wrap($this->getRules()))->validate();
+        return Validator::make(Arr::wrap($settings), Arr::wrap($this->rules))->validate();
+    }
+
+    /**
+     * Get settings count with type safety
+     */
+    public function getSettingsCount(): int
+    {
+        return $this->settings()->count();
+    }
+
+    /**
+     * Check if model has any settings
+     */
+    public function hasSettingsAttached(): bool
+    {
+        return $this->getSettingsCount() > 0;
+    }
+
+    /**
+     * Get all settings as collection with caching
+     */
+    public function getAllSettingsCollection(): Collection
+    {
+        return $this->_settingsCache ??= $this->settings->keyBy('key');
+    }
+
+    /**
+     * Check if cache is enabled for settings
+     */
+    public function isCacheEnabled(): bool
+    {
+        return config('core.cache.enabled', true);
     }
 }

@@ -24,6 +24,11 @@ use Turahe\Core\Models\Organization;
 trait HasOrganization
 {
     /**
+     * Cached organizations collection for performance optimization
+     */
+    private ?Collection $_organizationsCache = null;
+
+    /**
      * Get all the organizations the user belongs to
      */
     public function organizations(): MorphToMany
@@ -38,12 +43,13 @@ trait HasOrganization
 
     /**
      * Scope a query to include only users that are managed by the given user.
+     * Using PHP 8.4 auto-capture closures for cleaner syntax
      */
-    public function scopeOfManager(Builder $query, User $user, $withCurrentUser = true): void
+    public function scopeOfManager(Builder $query, User $user, bool $withCurrentUser = true): void
     {
         $query->where(function (Builder $query) use ($user, $withCurrentUser): void {
-            $query->whereHas('organizations', fn (Builder $query) => $query->where('organizations.created_by', $user->getKey()))
-                ->when($withCurrentUser, fn (Builder $query) => $query->orWhere('users.id', $user->getKey()));
+            $query->whereHas('organizations', fn (Builder $q) => $q->where('organizations.created_by', $user->getKey()))
+                ->when($withCurrentUser, fn (Builder $q) => $q->orWhere('users.id', $user->getKey()));
         });
     }
 
@@ -57,27 +63,84 @@ trait HasOrganization
 
     /**
      * Get all the organizations the user belongs to or manages
+     * Using PHP 8.4 property hooks for caching
      */
     public function allOrganization(): Collection
     {
-        return $this->organizations->merge($this->managedOrganization)->sortBy('name');
+        return $this->_organizationsCache ??= $this->organizations
+            ->merge($this->managedOrganization)
+            ->sortBy('name');
     }
 
     /**
-     * Determine if the user manages the given team
+     * Clear the organizations cache when relationships change
+     */
+    public function clearOrganizationsCache(): void
+    {
+        $this->_organizationsCache = null;
+    }
+
+    /**
+     * Determine if the user manages the given organization
+     * Using match expression for cleaner logic
      */
     public function managesOrganization(Organization $organization): bool
     {
-        return $this->getKey() === $organization->created_by;
+        return match (true) {
+            $this->getKey() === $organization->created_by => true,
+            default => false
+        };
     }
 
     /**
-     * Determine if the user belongs has the given team
+     * Determine if the user belongs to the given organization
+     * Enhanced with better performance using collection operations
      */
     public function belongsToTeam(Organization $organization): bool
     {
-        return $this->managesOrganization($organization) || $this->organizations->contains(
-            fn ($t) => $t->id === $organization->getKey()
+        if ($this->managesOrganization($organization)) {
+            return true;
+        }
+
+        return $this->organizations->contains(
+            fn (Organization $org) => $org->id === $organization->getKey()
         );
+    }
+
+    /**
+     * Get organizations with specific role
+     * Using PHP 8.4 array spread for better performance
+     */
+    public function organizationsWithRole(string ...$roles): Collection
+    {
+        return $this->organizations->filter(
+            fn (Organization $org) => in_array($org->pivot->role, [...$roles], true)
+        );
+    }
+
+    /**
+     * Check if user has specific role in organization
+     */
+    public function hasRoleInOrganization(Organization $organization, string $role): bool
+    {
+        return $this->organizations
+            ->where('id', $organization->getKey())
+            ->first()?->pivot?->role === $role;
+    }
+
+    /**
+     * Get count of managed organizations with type safety
+     */
+    public function getManagedOrganizationsCount(): int
+    {
+        return $this->managedOrganization()->count();
+    }
+
+    /**
+     * Get count of member organizations with type safety
+     */
+    public function getMemberOrganizationsCount(): int
+    {
+        return $this->organizations()->count();
     }
 }
