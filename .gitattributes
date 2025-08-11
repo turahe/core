@@ -1,0 +1,120 @@
+# Git Attributes for Turahe Core Package
+# This file ensures proper handling of different file types and prevents sensitive data from being committed
+
+# Environment and Configuration Files
+*.env export-ignore
+.env.* export-ignore
+.env.example export-ignore
+docker/database.env export-ignore
+
+# Docker and Development Files
+docker-compose.override.yml export-ignore
+docker-compose.local.yml export-ignore
+docker-compose.dev.yml export-ignore
+docker-compose.prod.yml export-ignore
+
+# IDE and Editor Files
+.vscode/ export-ignore
+.idea/ export-ignore
+*.swp export-ignore
+*.swo export-ignore
+*~ export-ignore
+.DS_Store export-ignore
+Thumbs.db export-ignore
+
+# Logs and Temporary Files
+*.log export-ignore
+logs/ export-ignore
+tmp/ export-ignore
+temp/ export-ignore
+cache/ export-ignore
+
+# Build and Dependency Files
+node_modules/ export-ignore
+vendor/ export-ignore
+build/ export-ignore
+dist/ export-ignore
+coverage/ export-ignore
+
+# Test Artifacts
+.phpunit.result.cache export-ignore
+.phpunit.cache/ export-ignore
+tests/coverage/ export-ignore
+tests/reports/ export-ignore
+
+# Database Files
+*.sqlite export-ignore
+*.sqlite3 export-ignore
+*.db export-ignore
+database/*.sql export-ignore
+
+# Backup and Archive Files
+*.bak export-ignore
+*.backup export-ignore
+*.old export-ignore
+*.orig export-ignore
+*.zip export-ignore
+*.tar.gz export-ignore
+
+# Documentation Build Files
+docs/build/ export-ignore
+docs/_build/ export-ignore
+docs/site/ export-ignore
+
+# Local Configuration
+config/local.php export-ignore
+config/testing.php export-ignore
+config/staging.php export-ignore
+config/production.php export-ignore
+
+# Composer Lock (keep for reproducible builds)
+composer.lock -export-ignore
+
+# Package Files
+*.phar export-ignore
+*.phar.gz export-ignore
+
+# Security and Keys
+*.key export-ignore
+*.pem export-ignore
+*.crt export-ignore
+*.p12 export-ignore
+*.pfx export-ignore
+secrets/ export-ignore
+keys/ export-ignore
+
+# Cache and Session Files
+storage/framework/cache/ export-ignore
+storage/framework/sessions/ export-ignore
+storage/framework/views/ export-ignore
+storage/logs/ export-ignore
+
+# Application Specific
+app/storage/ export-ignore
+bootstrap/cache/ export-ignore
+
+# Git Hooks (keep for development)
+.git/hooks/ -export-ignore
+
+# Documentation (keep for public)
+README.md -export-ignore
+CHANGELOG.md -export-ignore
+LICENSE -export-ignore
+docs/ -export-ignore
+
+# Source Code (keep for public)
+src/ -export-ignore
+tests/ -export-ignore
+database/migrations/ -export-ignore
+
+# Docker Scripts (keep for public)
+docker/run-*.ps1 -export-ignore
+docker/run-*.sh -export-ignore
+docker/run-*.bat -export-ignore
+docker/README-*.md -export-ignore
+docker/test/Dockerfile -export-ignore
+
+# Configuration Files (keep for public)
+composer.json -export-ignore
+phpunit.xml.dist -export-ignore
+docker-compose.yml -export-ignore

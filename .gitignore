@@ -1,101 +1,172 @@
-# Composer
-composer.lock
-vendor/
-composer.phar
+# Turahe Core Package - Git Ignore File
+# This file prevents sensitive and unnecessary files from being tracked
 
-# PHP
-.phpunit.result.cache
-.phpunit.cache
-.php-cs-fixer.cache
-.php-cs-fixer.php
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-*.log
-
-# Laravel
+# Environment and Configuration Files
 .env
 .env.*
 !.env.example
-bootstrap/cache/
-storage/
-storage/logs/
+docker/database.env
+
+# Docker and Development Files
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.dev.yml
+docker-compose.prod.yml
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and Temporary Files
+*.log
+logs/
+tmp/
+temp/
+cache/
+
+# Build and Dependency Files
+node_modules/
+vendor/
+build/
+dist/
+coverage/
+
+# Test Artifacts
+.phpunit.result.cache
+.phpunit.cache/
+tests/coverage/
+tests/reports/
+
+# Database Files
+*.sqlite
+*.sqlite3
+*.db
+database/*.sql
+
+# Backup and Archive Files
+*.bak
+*.backup
+*.old
+*.orig
+*.zip
+*.tar.gz
+
+# Documentation Build Files
+docs/build/
+docs/_build/
+docs/site/
+
+# Local Configuration
+config/local.php
+config/testing.php
+config/staging.php
+config/production.php
+
+# Package Files
+*.phar
+*.phar.gz
+
+# Security and Keys
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets/
+keys/
+
+# Cache and Session Files
 storage/framework/cache/
 storage/framework/sessions/
 storage/framework/views/
+storage/logs/
+
+# Application Specific
+app/storage/
+bootstrap/cache/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+*.lnk
+
+# Linux
+*~
+
+# Composer
+composer.phar
+composer.phar.gz
+
+# PHP
+*.php~
+*.php.bak
+*.php.orig
+
+# Laravel Specific
+.env.testing
+.env.staging
+.env.production
+storage/logs/*.log
+storage/framework/cache/data/
+storage/framework/sessions/
+storage/framework/views/
+storage/app/public/
 
 # Testing
-.phpunit.xml
-.phpunit.xml.dist
+.phpunit.cache/
+.phpunit.result.cache
 coverage/
 tests/coverage/
-*.coverage
-*.coverage.xml
+tests/reports/
 
-# Docker
-docker-compose.override.yml
-.dockerignore
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Cache and temporary files
-*.cache
+# Temporary Files
 *.tmp
 *.temp
-cache/
-tmp/
-temp/
+*.cache
+*.bak
+*.backup
+*.old
+*.orig
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
 
 # Database
 *.sqlite
 *.sqlite3
 *.db
+*.sql
 
-# Logs
-*.log
-logs/
-
-# Node.js (if using frontend assets)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-
-# Build artifacts
-dist/
-build/
-*.tar.gz
-*.zip
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Local configuration
-config/local.php
-config/testing.php
-
-# Test database files
-database/database.sqlite
-database/testing.sqlite
-
-# Redis dump files
-dump.rdb
-*.rdb
-
-# Temporary test files
-docker/test/test-*.php
-docker/test/quick-test.php
-docker/test/simple-test.php
-docker/test/test-connections.php
-docker/test/test-config.php
-docker/test/test-settings-cache.php
+# Security
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets/
+keys/
+.env.local
+.env.production
+.env.staging
