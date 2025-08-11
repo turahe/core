@@ -14,7 +14,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(config('core.tables.oauth_accounts'), function (Blueprint $table): void {
-            $table->ulid('id')->primary();
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->id();
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->ulid('id')->primary();
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->uuid('id')->primary();
+            }
 
             $table->string('type');
             $table->foreignIdFor(config('auth.providers.users.model', \App\Models\User::class), 'user_id');

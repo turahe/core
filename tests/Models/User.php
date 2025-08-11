@@ -2,14 +2,14 @@
 
 namespace Turahe\Core\Tests\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\Core\Concerns\HasSettings;
 use Turahe\Core\Concerns\HasOrganization;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
+    use HasConfigurablePrimaryKey;
     use HasSettings;
-    use HasUlids;
     use HasOrganization;
 
     protected $table = 'users';

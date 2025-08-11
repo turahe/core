@@ -24,7 +24,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(config('core.tables.taxonomies'), function (Blueprint $table): void {
-            $table->ulid('id')->primary();
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->id();
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->ulid('id')->primary();
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->uuid('id')->primary();
+            }
+
             $table->string('name')->index();
             $table->string('slug')->index()->unique();
             $table->string('code')->index()->nullable();
@@ -33,7 +42,15 @@ return new class extends Migration
             $table->unsignedBigInteger('record_left')->index()->nullable();
             $table->unsignedBigInteger('record_right')->index()->nullable();
             $table->unsignedBigInteger('record_ordering')->index()->nullable();
-            $table->foreignUlid('parent_id')->index()->nullable();
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->foreign('parent_id')->references('id')->on(config('core.tables.taxonomies'))->onDelete('cascade');
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->foreignUlid('parent_id')->index()->nullable();
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->foreignUuid('parent_id')->index()->nullable();
+            }
 
             $table->userstamps();
             $table->softUserstamps();
@@ -46,8 +63,23 @@ return new class extends Migration
         });
 
         Schema::create(config('core.tables.model_has_taxonomies'), function (Blueprint $table): void {
-            $table->ulidMorphs('model');
-            $table->ulid('taxonomy_id')->index();
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->bigInteger('taxonomy_id')->index();
+                $table->foreign('taxonomy_id')->references('id')->on(config('core.tables.taxonomies'))->onDelete('cascade');
+                $table->morphs('model');
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->ulid('taxonomy_id')->index();
+                $table->foreign('taxonomy_id')->references('id')->on(config('core.tables.taxonomies'))->onDelete('cascade');
+                $table->ulidMorphs('model');
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->uuid('taxonomy_id')->index();
+                $table->foreign('taxonomy_id')->references('id')->on(config('core.tables.taxonomies'))->onDelete('cascade');
+                $table->uuidMorphs('model');
+            }
+
+            
             $table->integer('created_at')->index()->nullable();
             $table->integer('updated_at')->index()->nullable();
 

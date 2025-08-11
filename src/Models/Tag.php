@@ -6,7 +6,6 @@ namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as DbCollection;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -14,12 +13,13 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\UserStamps\Concerns\HasUserStamps;
 
 class Tag extends Model implements Sortable
 {
+    use HasConfigurablePrimaryKey;
     use HasSlug;
-    use HasUlids;
     use HasUserStamps;
     use SoftDeletes;
     use SortableTrait;

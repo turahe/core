@@ -4,9 +4,54 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
+    <php>
+        <!-- Database Configuration for Testing -->
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="3306"/>
+        <env name="DB_DATABASE" value="turahe_core_testing"/>
+        <env name="DB_USERNAME" value="turahe"/>
+        <env name="DB_PASSWORD" value="turahe123"/>
+        
+        <!-- Redis Configuration for Testing -->
+        <env name="REDIS_HOST" value="127.0.0.1"/>
+        <env name="REDIS_PASSWORD" value=""/>
+        <env name="REDIS_PORT" value="6379"/>
+        <env name="REDIS_DB" value="1"/>
+        
+        <!-- Application Configuration -->
+        <env name="APP_NAME" value="Turahe Core"/>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdABdH77UY2zi8="/>
+        <env name="APP_DEBUG" value="true"/>
+        <env name="APP_URL" value="http://localhost"/>
+        
+        <!-- Core Package Configuration -->
+        <env name="CORE_TABLE_USE_TIMESTAMPS" value="false"/>
+        
+        <!-- User Stamps Configuration -->
+        <env name="USERSTAMPS_USERS_TABLE_COLUMN_TYPE" value="ulid"/>
+        
+        <!-- Cache Configuration -->
+        <env name="CACHE_DRIVER" value="redis"/>
+        <env name="SESSION_DRIVER" value="file"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        
+        <!-- Logging Configuration -->
+        <env name="LOG_CHANNEL" value="stack"/>
+        <env name="LOG_DEPRECATIONS_CHANNEL" value="null"/>
+        <env name="LOG_LEVEL" value="debug"/>
+    </php>
+
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
+        </testsuite>
+        <testsuite name="unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="feature">
+            <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
 

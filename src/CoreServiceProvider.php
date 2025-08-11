@@ -2,7 +2,6 @@
 
 namespace Turahe\Core;
 
-use Illuminate\Support\Facades\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
@@ -35,8 +34,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/core.php', 'core');
 
         // Register facades/aliases for Google and MsGraph
-        AliasLoader::getInstance()->alias('Google', \Turahe\Core\Facades\Google::class);
-        AliasLoader::getInstance()->alias('MsGraph', \Turahe\Core\Facades\MsGraph::class);
+        if (class_exists(\Illuminate\Support\Facades\AliasLoader::class)) {
+            \Illuminate\Support\Facades\AliasLoader::getInstance()->alias('Google', \Turahe\Core\Facades\Google::class);
+            \Illuminate\Support\Facades\AliasLoader::getInstance()->alias('MsGraph', \Turahe\Core\Facades\MsGraph::class);
+        }
 
         if ($this->app instanceof \Illuminate\Foundation\Application) {
             $databasePath = __DIR__.'/../database/migrations';

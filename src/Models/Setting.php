@@ -15,14 +15,14 @@ declare(strict_types=1);
 namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\UserStamps\Concerns\HasUserStamps;
 
 class Setting extends Model
 {
-    use HasUlids;
+    use HasConfigurablePrimaryKey;
     use HasUserStamps;
     use SoftDeletes;
 

@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -27,6 +26,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\Core\Concerns\HasSettings;
 use Turahe\Core\Concerns\HasTaxonomies;
 use Turahe\Core\Enums\OrganizationType;
@@ -34,10 +34,10 @@ use Turahe\UserStamps\Concerns\HasUserStamps;
 
 class Organization extends Model implements Sortable
 {
+    use HasConfigurablePrimaryKey;
     use HasSettings;
     use HasSlug;
     use HasTaxonomies;
-    use HasUlids;
     use HasUserStamps;
     use NodeTrait;
     use Prunable;

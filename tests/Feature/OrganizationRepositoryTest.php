@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Turahe\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Feature;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,7 +12,7 @@ use Turahe\Core\Repositories\OrganizationRepository;
 use Turahe\Core\Tests\Feature\Factories\OrganizationFactory;
 use Turahe\Core\Tests\TestCase;
 
-class OrganizationTest extends TestCase
+class OrganizationRepositoryTest extends TestCase
 {
     public function test_can_list_all_organizations(): void
     {

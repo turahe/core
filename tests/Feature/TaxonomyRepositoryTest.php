@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Turahe\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Feature;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
@@ -11,7 +11,7 @@ use Turahe\Core\Repositories\TaxonomyRepository;
 use Turahe\Core\Tests\Feature\Factories\TaxonomyFactory;
 use Turahe\Core\Tests\TestCase;
 
-class TaxonomyTest extends TestCase
+class TaxonomyRepositoryTest extends TestCase
 {
     public function test_can_list_all_taxonomies(): void
     {

@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,12 +23,13 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\UserStamps\Concerns\HasUserStamps;
 
 class Taxonomy extends Model implements Sortable
 {
+    use HasConfigurablePrimaryKey;
     use HasSlug;
-    use HasUlids;
     use HasUserStamps;
     use NodeTrait;
     use Prunable;

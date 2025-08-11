@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Turahe\Core\Tests\Unit\Concerns;
+namespace Turahe\Core\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Turahe\Core\Tests\Unit;
+namespace Turahe\Core\Tests\Feature;
 
 use Illuminate\Support\Facades\Crypt;
 use Turahe\Core\Models\OAuthAccount;
 use Turahe\Core\OAuth\AccessTokenProvider;
 use Turahe\Core\Tests\TestCase;
 
-class OAuthAccountTest extends TestCase
+class OAuthAccountRepositoryTest extends TestCase
 {
     public function test_can_encrypts_the_oauth_account_access_token(): void
     {

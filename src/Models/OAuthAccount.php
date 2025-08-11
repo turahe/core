@@ -6,12 +6,14 @@ namespace Turahe\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
 use Turahe\Core\Facades\Google;
 use Turahe\Core\OAuth\AccessTokenProvider;
 use Turahe\Core\OAuth\Events\OAuthAccountDeleting;
 
 class OAuthAccount extends Model
 {
+    use HasConfigurablePrimaryKey;
     /**
      * The table associated with the model.
      *

@@ -11,7 +11,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(config('core.tables.tags'), function (Blueprint $table): void {
-            $table->ulid('id')->primary();
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->id();
+                $table->morphs('model');
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->ulid('id')->primary();
+                $table->nullableUlidMorphs('model');
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->uuid('id')->primary();
+                $table->nullableUuidMorphs('model');
+            }
 
             $table->string('name');
             $table->string('slug')->index()->unique();
@@ -26,9 +37,18 @@ return new class extends Migration
         });
 
         Schema::create(config('core.tables.taggables'), function (Blueprint $table): void {
-            $table->foreignUlid('tag_id')->constrained()->cascadeOnDelete();
-
-            $table->ulidMorphs('taggable');
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->foreign('tag_id')->references('id')->on(config('core.tables.tags'))->onDelete('cascade');
+                $table->morphs('taggable');
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->foreignUlid('tag_id')->constrained()->cascadeOnDelete();
+                $table->ulidMorphs('taggable');
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->foreignUuid('tag_id')->constrained()->cascadeOnDelete();
+                $table->uuidMorphs('taggable');
+            }
 
             $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
         });
