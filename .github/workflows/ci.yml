@@ -54,6 +54,11 @@ jobs:
           coverage: xdebug
           tools: composer:v2
 
+      - name: Install Redis client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y redis-tools
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
@@ -209,6 +214,11 @@ jobs:
           php-version: 8.4
           extensions: intl, iconv, mbstring, xml, ctype, json, pdo_mysql, pdo_pgsql
           tools: composer:v2
+
+      - name: Install Redis client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y redis-tools
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
