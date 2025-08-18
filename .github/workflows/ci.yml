@@ -11,6 +11,18 @@ jobs:
     name: Tests (PHP 8.4 - Laravel 12)
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: turahe_core_testing
+          MYSQL_USER: turahe
+          MYSQL_PASSWORD: turahe123
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_sqlite
+          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_mysql
           coverage: xdebug
           tools: composer:v2
 
@@ -28,10 +40,30 @@ jobs:
 
       - name: Setup test environment
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          cp .env.example .env.testing
+          echo "DB_CONNECTION=mysql" >> .env.testing
+          echo "DB_HOST=127.0.0.1" >> .env.testing
+          echo "DB_PORT=3306" >> .env.testing
+          echo "DB_DATABASE=turahe_core_testing" >> .env.testing
+          echo "DB_USERNAME=turahe" >> .env.testing
+          echo "DB_PASSWORD=turahe123" >> .env.testing
+          echo "APP_KEY=base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=" >> .env.testing
+
+      - name: Wait for MySQL
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P3306 -u"turahe" -p"turahe123" --silent; do
+            sleep 1
+          done
 
       - name: Execute tests
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: turahe_core_testing
+          DB_USERNAME: turahe
+          DB_PASSWORD: turahe123
+          APP_KEY: base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
@@ -82,6 +114,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: turahe_core_testing
+          MYSQL_USER: turahe
+          MYSQL_PASSWORD: turahe123
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -90,16 +134,31 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json
+          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_mysql
           tools: composer:v2
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
+      - name: Wait for MySQL
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P3306 -u"turahe" -p"turahe123" --silent; do
+            sleep 1
+          done
+
       - name: Create test Laravel project
         run: |
           composer create-project laravel/laravel test-project --prefer-dist --no-interaction
           cd test-project
+
+      - name: Configure test project database
+        run: |
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=turahe_core_testing" >> .env
+          echo "DB_USERNAME=turahe" >> .env
+          echo "DB_PASSWORD=turahe123" >> .env
 
       - name: Install package in test project
         run: |
