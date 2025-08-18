@@ -24,9 +24,7 @@ jobs:
           tools: composer:v2
 
       - name: Install dependencies
-        run: |
-          composer require "laravel/framework:12.*" "orchestra/testbench:12.*" --no-interaction --no-update
-          composer update --prefer-stable --prefer-dist --no-interaction
+        run: composer install --prefer-dist --no-interaction
 
       - name: Setup test environment
         run: |
