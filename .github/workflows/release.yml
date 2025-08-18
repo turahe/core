@@ -2,19 +2,13 @@ name: Release
 
 on:
   push:
-    branches: [ main ]
-    tags: [ 'v*' ]
+    tags:
+      - 'v*'
 
 jobs:
   test:
     name: Test Release
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
-
-    strategy:
-      matrix:
-        php: [8.2, 8.4]
-        laravel: [10.*]
 
     steps:
       - name: Checkout code
@@ -23,7 +17,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.4
           extensions: intl, iconv, mbstring, xml, ctype, json, pdo_sqlite
           tools: composer:v2
 
@@ -38,11 +32,15 @@ jobs:
       - name: Execute tests
         run: vendor/bin/phpunit
 
+      - name: Validate package
+        run: |
+          composer validate --strict
+          vendor/bin/pint --test
+
   build:
-    name: Build Package
+    name: Build & Release
     runs-on: ubuntu-latest
     needs: test
-    if: startsWith(github.ref, 'refs/tags/')
 
     steps:
       - name: Checkout code
@@ -58,15 +56,6 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
-      - name: Validate composer.json
-        run: composer validate --strict
-
-      - name: Check code style
-        run: vendor/bin/pint --test
-
-      - name: Run tests
-        run: vendor/bin/phpunit
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -79,12 +68,11 @@ jobs:
           prerelease: false
 
       - name: Generate changelog
-        id: changelog
         run: |
           echo "## What's Changed" > CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "### 🚀 Features" >> CHANGELOG.md
-          echo "- Comprehensive test coverage with 196 tests" >> CHANGELOG.md
+          echo "- Comprehensive test coverage" >> CHANGELOG.md
           echo "- Image processing with ImgProxy integration" >> CHANGELOG.md
           echo "- OAuth integration for Google and Microsoft" >> CHANGELOG.md
           echo "- Taxonomy and tagging system" >> CHANGELOG.md
@@ -93,9 +81,8 @@ jobs:
           echo "- Utility helper functions" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "### 🧪 Testing" >> CHANGELOG.md
-          echo "- 196 tests with 418 assertions" >> CHANGELOG.md
-          echo "- Full coverage of all components" >> CHANGELOG.md
-          echo "- Multiple PHP and Laravel version support" >> CHANGELOG.md
+          echo "- Full test coverage of all components" >> CHANGELOG.md
+          echo "- PHP 8.4 + Laravel 12 support" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "### 📦 Installation" >> CHANGELOG.md
           echo "```bash" >> CHANGELOG.md
@@ -110,30 +97,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./CHANGELOG.md
           asset_name: CHANGELOG.md
-          asset_content_type: text/markdown
-
-  publish:
-    name: Publish to Packagist
-    runs-on: ubuntu-latest
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/')
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json
-          tools: composer:v2
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-interaction
-
-      - name: Publish to Packagist
-        run: |
-          echo "Package would be published to Packagist here"
-          echo "Tag: ${{ github.ref }}"
-          echo "Version: ${GITHUB_REF#refs/tags/}" 
+          asset_content_type: text/markdown 
