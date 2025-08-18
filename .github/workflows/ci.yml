@@ -59,16 +59,16 @@ jobs:
 
       - name: Setup test environment
         run: |
-          cp .env.example .env.testing
+          # Create .env.testing file directly
           if [ "${{ matrix.database }}" = "mysql" ]; then
-            echo "DB_CONNECTION=mysql" >> .env.testing
+            echo "DB_CONNECTION=mysql" > .env.testing
             echo "DB_HOST=127.0.0.1" >> .env.testing
             echo "DB_PORT=3306" >> .env.testing
             echo "DB_DATABASE=turahe_core_testing" >> .env.testing
             echo "DB_USERNAME=turahe" >> .env.testing
             echo "DB_PASSWORD=turahe123" >> .env.testing
           else
-            echo "DB_CONNECTION=pgsql" >> .env.testing
+            echo "DB_CONNECTION=pgsql" > .env.testing
             echo "DB_HOST=127.0.0.1" >> .env.testing
             echo "DB_PORT=5432" >> .env.testing
             echo "DB_DATABASE=turahe_core_testing" >> .env.testing
@@ -81,6 +81,8 @@ jobs:
           echo "REDIS_DB=1" >> .env.testing
           echo "REDIS_PASSWORD=null" >> .env.testing
           echo "CACHE_DRIVER=redis" >> .env.testing
+          echo "APP_ENV=testing" >> .env.testing
+          echo "APP_DEBUG=true" >> .env.testing
 
       - name: Wait for MySQL
         if: matrix.database == 'mysql'
