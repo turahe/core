@@ -34,15 +34,12 @@ return new class extends Migration
             $table->unsignedBigInteger('record_ordering')->index()->nullable();
             if (config('userstamps.users_table_column_type') === 'bigincrements') {
                 $table->unsignedBigInteger('parent_id')->nullable()->index();
-                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'ulid') {
                 $table->ulid('parent_id')->nullable()->index();
-                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'uuid') {
                 $table->uuid('parent_id')->nullable()->index();
-                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
 
             /**
@@ -70,6 +67,17 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            // Add foreign key constraints for parent_id (self-referencing)
+            if (config('userstamps.users_table_column_type') === 'bigincrements') {
+                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
+            }
+            if (config('userstamps.users_table_column_type') === 'ulid') {
+                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
+            }
+            if (config('userstamps.users_table_column_type') === 'uuid') {
+                $table->foreign('parent_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
+            }
+
             // Add foreign key constraints for userstamps
             if (config('userstamps.users_table_column_type') === 'bigincrements') {
                 $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
@@ -93,16 +101,19 @@ return new class extends Migration
 
         Schema::create(config('core.tables.model_has_organization'), function (Blueprint $table): void {
             if (config('userstamps.users_table_column_type') === 'bigincrements') {
-                $table->foreign('organization_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
+                $table->unsignedBigInteger('organization_id');
                 $table->morphs('model');
+                $table->foreign('organization_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'ulid') {
-                $table->foreignUlid('organization_id')->constrained()->cascadeOnDelete();
+                $table->ulid('organization_id');
                 $table->ulidMorphs('model');
+                $table->foreign('organization_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'uuid') {
-                $table->foreignUuid('organization_id')->constrained()->cascadeOnDelete();
+                $table->uuid('organization_id');
                 $table->uuidMorphs('model');
+                $table->foreign('organization_id')->references('id')->on(config('core.tables.organizations'))->onDelete('cascade');
             }
 
             $table->enum('role', ['OWNER', 'MEMBER', 'ADMIN'])->default('OWNER');
