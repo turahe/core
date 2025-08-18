@@ -13,6 +13,14 @@
         <env name="DB_USERNAME" value="turahe"/>
         <env name="DB_PASSWORD" value="turahe123"/>
         
+        <!-- PostgreSQL Configuration (alternative) -->
+        <env name="DB_CONNECTION_PGSQL" value="pgsql"/>
+        <env name="DB_HOST_PGSQL" value="127.0.0.1"/>
+        <env name="DB_PORT_PGSQL" value="5432"/>
+        <env name="DB_DATABASE_PGSQL" value="turahe_core_testing"/>
+        <env name="DB_USERNAME_PGSQL" value="turahe"/>
+        <env name="DB_PASSWORD_PGSQL" value="postgres"/>
+        
         <!-- Redis Configuration for Testing -->
         <env name="REDIS_HOST" value="127.0.0.1"/>
         <env name="REDIS_PASSWORD" value=""/>
@@ -22,7 +30,7 @@
         <!-- Application Configuration -->
         <env name="APP_NAME" value="Turahe Core"/>
         <env name="APP_ENV" value="testing"/>
-        <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdABdH77UY2zi8="/>
+        <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8="/>
         <env name="APP_DEBUG" value="true"/>
         <env name="APP_URL" value="http://localhost"/>
         
