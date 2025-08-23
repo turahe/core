@@ -14,10 +14,40 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Turahe\Core\Models\Tag;
 
+/**
+ * HasTags Trait
+ * 
+ * Provides comprehensive tagging functionality for Eloquent models.
+ * This trait allows models to be tagged with multiple tags and provides
+ * powerful querying capabilities for tag-based filtering and searching.
+ * 
+ * Features:
+ * - Many-to-many polymorphic relationship with tags
+ * - Automatic tag synchronization and cleanup
+ * - Advanced query scopes for tag filtering
+ * - Tag type categorization
+ * - Bulk tag operations
+ * - Queue-based tag assignment for new models
+ * 
+ * @package Turahe\Core\Concerns
+ */
 trait HasTags
 {
+    /**
+     * Array to store tags that should be attached after model creation
+     * 
+     * When tags are set on a model that doesn't exist yet, they are queued
+     * and attached automatically after the model is created.
+     */
     protected array $queuedTags = [];
 
+    /**
+     * Boot the HasTags trait
+     * 
+     * Sets up model event listeners for automatic tag management:
+     * - Attaches queued tags after model creation
+     * - Detaches all tags when model is deleted
+     */
     public static function bootHasTags(): void
     {
         static::created(function (Model $taggableModel): void {
@@ -37,6 +67,14 @@ trait HasTags
         });
     }
 
+    /**
+     * Get the morphToMany relationship with tags
+     * 
+     * Returns a many-to-many polymorphic relationship with tags through
+     * the taggables pivot table. Tags are automatically ordered.
+     * 
+     * @return MorphToMany Relationship to tags with ordering
+     */
     public function tags(): MorphToMany
     {
         return $this
@@ -45,6 +83,14 @@ trait HasTags
             ->ordered();
     }
 
+    /**
+     * Set tags attribute with automatic synchronization
+     * 
+     * If the model doesn't exist yet, tags are queued for later attachment.
+     * If the model exists, tags are immediately synchronized.
+     * 
+     * @param string|array|ArrayAccess|Tag $tags Tags to set
+     */
     public function setTagsAttribute(string|array|ArrayAccess|Tag $tags): void
     {
         if (! $this->exists) {
@@ -56,54 +102,78 @@ trait HasTags
         $this->syncTags($tags);
     }
 
+    /**
+     * Scope to include models that have ALL of the specified tags
+     * 
+     * This scope ensures that models must have every single tag in the provided list.
+     * Useful for finding models that match a complete set of criteria.
+     * 
+     * @param Builder $query The query builder instance
+     * @param string|array|ArrayAccess|Tag $tags Tags that must all be present
+     * @param string|null $type Optional tag type filter
+     * @return Builder Modified query builder
+     */
     public function scopeWithAllTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
     {
         $tags = static::convertToTags($tags, $type);
 
-        collect($tags)->each(function ($tag) use ($query): void {
+        // Optimize by avoiding collect() and using direct iteration
+        foreach ($tags as $tag) {
             $query->whereHas('tags', function (Builder $query) use ($tag): void {
                 $query->where('tags.id', $tag->id ?? 0);
             });
-        });
+        }
 
         return $query;
     }
 
+    /**
+     * Scope to include models that have ANY of the specified tags
+     * 
+     * This scope finds models that have at least one of the provided tags.
+     * Useful for broad searches where partial matches are acceptable.
+     * 
+     * @param Builder $query The query builder instance
+     * @param string|array|ArrayAccess|Tag $tags Tags to search for (any match)
+     * @param string|null $type Optional tag type filter
+     * @return Builder Modified query builder
+     */
     public function scopeWithAnyTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
     {
         $tags = static::convertToTags($tags, $type);
 
-        return $query
-            ->whereHas('tags', function (Builder $query) use ($tags): void {
-                $tagIds = collect($tags)->pluck('id');
+        // Optimize by extracting IDs directly without collect()
+        $tagIds = [];
+        foreach ($tags as $tag) {
+            $tagIds[] = $tag->id ?? 0;
+        }
 
-                $query->whereIn('tags.id', $tagIds);
-            });
+        return $query->whereHas('tags', function (Builder $query) use ($tagIds): void {
+            $query->whereIn('tags.id', $tagIds);
+        });
     }
 
-    public function scopeWithoutTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
-    {
-        $tags = static::convertToTags($tags, $type);
-
-        return $query
-            ->whereDoesntHave('tags', function (Builder $query) use ($tags): void {
-                $tagIds = collect($tags)->pluck('id');
-
-                $query->whereIn('tags.id', $tagIds);
-            });
-    }
-
+    /**
+     * Scope to exclude models that have ANY of the specified tags
+     * 
+     * This scope finds models that do not have any of the provided tags.
+     * Useful for filtering out models with unwanted tags.
+     * 
+     * @param Builder $query The query builder instance
+     * @param string|array|ArrayAccess|Tag $tags Tags to exclude
+     * @param string|null $type Optional tag type filter
+     * @return Builder Modified query builder
+     */
     public function scopeWithAllTagsOfAnyType(Builder $query, $tags): Builder
     {
         $tags = static::convertToTagsOfAnyType($tags);
 
-        collect($tags)
-            ->each(function ($tag) use ($query): void {
-                $query->whereHas(
-                    'tags',
-                    fn (Builder $query) => $query->where('tags.id', $tag ? $tag->id : 0)
-                );
+        // Optimize by avoiding collect() and using direct iteration
+        foreach ($tags as $tag) {
+            $query->whereHas('tags', function (Builder $query) use ($tag): void {
+                $query->where('tags.id', $tag ? $tag->id : 0);
             });
+        }
 
         return $query;
     }
@@ -112,13 +182,33 @@ trait HasTags
     {
         $tags = static::convertToTagsOfAnyType($tags);
 
-        $tagIds = collect($tags)->pluck('id');
+        // Optimize by extracting IDs directly without collect()
+        $tagIds = [];
+        foreach ($tags as $tag) {
+            $tagIds[] = $tag ? $tag->id : 0;
+        }
 
-        return $query->whereHas(
-            'tags',
-            fn (Builder $query) => $query->whereIn('tags.id', $tagIds)
-        );
+        return $query->whereHas('tags', function (Builder $query) use ($tagIds): void {
+            $query->whereIn('tags.id', $tagIds);
+        });
     }
+
+    public function scopeWithoutTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
+    {
+        $tags = static::convertToTags($tags, $type);
+
+        // Optimize by extracting IDs directly without collect()
+        $tagIds = [];
+        foreach ($tags as $tag) {
+            $tagIds[] = $tag->id ?? 0;
+        }
+
+        return $query->whereDoesntHave('tags', function (Builder $query) use ($tagIds): void {
+            $query->whereIn('tags.id', $tagIds);
+        });
+    }
+
+
 
     public function tagsWithType(?string $type = null): Collection
     {
@@ -130,10 +220,15 @@ trait HasTags
      */
     public function attachTags(array|ArrayAccess|Tag $tags, ?string $type = null): static
     {
+        // Optimize by avoiding collect() and using direct array operations
+        $tagModels = Tag::findOrCreate($tags, $type);
+        $tagIds = [];
+        
+        foreach ($tagModels as $tag) {
+            $tagIds[] = $tag->id;
+        }
 
-        $tags = collect(Tag::findOrCreate($tags, $type));
-
-        $this->tags()->syncWithoutDetaching($tags->pluck('id')->toArray());
+        $this->tags()->syncWithoutDetaching($tagIds);
 
         return $this;
     }
@@ -153,9 +248,12 @@ trait HasTags
     {
         $tags = static::convertToTags($tags, $type);
 
-        collect($tags)
-            ->filter()
-            ->each(fn (Tag $tag) => $this->tags()->detach($tag));
+        // Optimize by avoiding collect() and using direct iteration
+        foreach ($tags as $tag) {
+            if ($tag) {
+                $this->tags()->detach($tag);
+            }
+        }
 
         return $this;
     }
@@ -177,60 +275,95 @@ trait HasTags
             $tags = Arr::wrap($tags);
         }
 
-        $tags = collect(Tag::findOrCreate($tags));
+        // Optimize by avoiding collect() and using direct array operations
+        $tagModels = Tag::findOrCreate($tags);
+        $tagIds = [];
+        
+        foreach ($tagModels as $tag) {
+            $tagIds[] = $tag->id;
+        }
 
-        $this->tags()->sync($tags->pluck('id')->toArray());
+        $this->tags()->sync($tagIds);
 
         return $this;
     }
 
     /**
-     * @return $this
+     * Synchronize tags with type filtering
+     * 
+     * @param array|ArrayAccess $tags Tags to synchronize
+     * @param string|null $type Optional tag type filter
+     * @return static Returns self for method chaining
      */
     public function syncTagsWithType(array|ArrayAccess $tags, ?string $type = null): static
     {
+        // Optimize by avoiding collect() and using direct array operations
+        $tagModels = Tag::findOrCreate($tags, $type);
+        $tagIds = [];
+        
+        foreach ($tagModels as $tag) {
+            $tagIds[] = $tag->id;
+        }
 
-        $tags = collect(Tag::findOrCreate($tags, $type));
-
-        $this->syncTagIds($tags->pluck('id')->toArray(), $type);
+        $this->syncTagIds($tagIds, $type);
 
         return $this;
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * Convert various input types to Tag models
+     * 
+     * @param mixed $values Input values to convert
+     * @param string|null $type Optional tag type filter
+     * @return array Array of Tag models
+     * @throws InvalidArgumentException When type mismatch occurs
      */
-    protected static function convertToTags($values, $type = null)
+    protected static function convertToTags($values, $type = null): array
     {
         if ($values instanceof Tag) {
             $values = [$values];
         }
 
-        return collect($values)->map(function ($value) use ($type) {
+        // Optimize by avoiding collect() and using direct array operations
+        $result = [];
+        foreach ($values as $value) {
             if ($value instanceof Tag) {
                 if (isset($type) && $value->type !== $type) {
                     throw new InvalidArgumentException("Type was set to {$type} but tag is of type {$value->type}");
                 }
-
-                return $value;
+                $result[] = $value;
+            } else {
+                $result[] = Tag::findFromString($value, $type);
             }
+        }
 
-            return Tag::findFromString($value, $type);
-        });
+        return $result;
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * Convert various input types to Tag models without type restrictions
+     * 
+     * @param mixed $values Input values to convert
+     * @return array Array of Tag models
      */
-    protected static function convertToTagsOfAnyType($values)
+    protected static function convertToTagsOfAnyType($values): array
     {
-        return collect($values)->map(function ($value) {
+        // Optimize by avoiding collect() and using direct array operations
+        $result = [];
+        foreach ($values as $value) {
             if ($value instanceof Tag) {
-                return $value;
+                $result[] = $value;
+            } else {
+                $foundTags = Tag::findFromStringOfAnyType($value);
+                if (is_array($foundTags)) {
+                    $result = array_merge($result, $foundTags);
+                } else {
+                    $result[] = $foundTags;
+                }
             }
+        }
 
-            return Tag::findFromStringOfAnyType($value);
-        })->flatten();
+        return $result;
     }
 
     protected function syncTagIds($ids, ?string $type = null, $detaching = true): void
@@ -266,9 +399,10 @@ trait HasTags
         // Attach any new ids
         $attach = array_unique(array_diff($ids, $current));
         if (count($attach) > 0) {
-            collect($attach)->each(function ($id): void {
+            // Optimize by avoiding collect() and using direct iteration
+            foreach ($attach as $id) {
                 $this->tags()->attach($id, []);
-            });
+            }
             $isUpdated = true;
         }
 

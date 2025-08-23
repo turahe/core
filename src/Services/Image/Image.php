@@ -7,64 +7,73 @@ namespace Turahe\Core\Services\Image;
 use Exception;
 use Illuminate\Support\Str;
 
+/**
+ * Image Service Class
+ * 
+ * Provides image processing and manipulation capabilities for the Turahe Core package.
+ * This class handles image resizing, cropping, format conversion, and preset management
+ * for integration with image proxy services.
+ * 
+ * Features:
+ * - Configurable image resizing with multiple algorithms
+ * - Gravity-based cropping and positioning
+ * - Image format conversion
+ * - Preset-based image processing
+ * - Enlarge/scale control
+ * - URL generation for image proxy services
+ * 
+ * @package Turahe\Core\Services\Image
+ */
 class Image
 {
+    /** Default resize algorithm - fits image within dimensions while maintaining aspect ratio */
     const DEFAULT_RESIZE = 'fit';
 
-    /**
-     * north (top edge)
-     */
+    /** Default gravity position - north (top edge) for cropping */
     const DEFAULT_GRAVITY = 'no';
 
+    /** Maximum allowed enlargement factor */
     const MAX_ENLARGE = 5;
 
+    /** Minimum allowed enlargement factor */
     const MIN_ENLARGE = 0;
 
-    /**
-     * @var string
-     */
+    /** The resize algorithm to use (fit, fill, etc.) */
     protected $resize;
 
-    /**
-     * @var int
-     */
+    /** The target width for the image */
     protected $width;
 
-    /**
-     * @var int
-     */
+    /** The target height for the image */
     protected $height;
 
-    /**
-     * @var string
-     */
+    /** The gravity position for cropping (no, so, ea, we, etc.) */
     protected $gravity;
 
-    /**
-     * @var int
-     */
+    /** The enlargement factor (0-5) */
     protected $enlarge;
 
-    /**
-     * @var string
-     */
+    /** The target file extension for format conversion */
     protected $extension;
 
-    /**
-     * @var mixed
-     */
+    /** The original image URL or path */
     protected $url;
 
-    /**
-     * @var string
-     */
+    /** The preset name for predefined image processing */
     protected $preset;
 
     /**
-     * Init most common resize settings. Later you can update defaults
-     *
-     * @param  null  $extension
-     * @return Image
+     * Initialize image with custom dimensions and settings
+     * 
+     * Sets up the most common resize settings with sensible defaults.
+     * The image will be resized to fit within the specified dimensions
+     * while maintaining aspect ratio.
+     * 
+     * @param string $path The image path or URL
+     * @param int $width The target width
+     * @param int $height The target height
+     * @param string|null $extension Optional target file extension
+     * @return Image Returns self for method chaining
      */
     public function make(string $path, int $width, int $height, $extension = null)
     {
@@ -80,6 +89,18 @@ class Image
         return $this;
     }
 
+    /**
+     * Initialize image with a predefined preset
+     * 
+     * Sets up the image using a predefined preset configuration instead
+     * of custom dimensions. This is useful for consistent image processing
+     * across an application.
+     * 
+     * @param string $path The image path or URL
+     * @param string $preset The preset name to use
+     * @param string|null $extension Optional target file extension
+     * @return Image Returns self for method chaining
+     */
     public function makePreset(string $path, string $preset, $extension = null)
     {
         $this->setOriginalPictureUrl($path)
@@ -89,11 +110,22 @@ class Image
         return $this;
     }
 
+    /**
+     * Get the current preset name
+     * 
+     * @return string|null The current preset name or null if not set
+     */
     public function getPreset()
     {
         return $this->preset;
     }
 
+    /**
+     * Set the preset name for predefined image processing
+     * 
+     * @param string $preset The preset name to use
+     * @return Image Returns self for method chaining
+     */
     public function setPreset($preset)
     {
         $this->preset = $preset;
@@ -102,15 +134,21 @@ class Image
     }
 
     /**
-     * @return mixed
+     * Set the resize algorithm for image processing
+     * 
+     * @param string|null $resize The resize algorithm to use
+     * @return Image Returns self for method chaining
      */
-    public function setResize(?string $argument1 = null)
+    public function setResize(?string $resize = null): self
     {
-        $argument1 = Str::lower($argument1);
+        // Cache config values to avoid repeated calls
+        static $resizeValues = null;
+        if ($resizeValues === null) {
+            $resizeValues = config('core.imgproxy.resize_values');
+        }
 
-        $this->resize = (! in_array($argument1, config('core.imgproxy.resize_values'), true))
-            ? self::DEFAULT_RESIZE
-            : $argument1;
+        $resize = Str::lower($resize);
+        $this->resize = in_array($resize, $resizeValues, true) ? $resize : self::DEFAULT_RESIZE;
 
         return $this;
     }
@@ -120,13 +158,22 @@ class Image
         return $this->resize;
     }
 
-    public function setWidth(int $argument1 = 1)
+    /**
+     * Set the target width for image processing
+     * 
+     * @param int $width The target width
+     * @return Image Returns self for method chaining
+     */
+    public function setWidth(int $width = 1): self
     {
-        $argument1 = abs($argument1) ?: 1;
-        if ($argument1 > config('core.imgproxy.max_dim_px')) {
-            $argument1 = config('core.imgproxy.max_dim_px');
+        // Cache config value to avoid repeated calls
+        static $maxDimension = null;
+        if ($maxDimension === null) {
+            $maxDimension = config('core.imgproxy.max_dim_px');
         }
-        $this->width = $argument1;
+
+        $width = abs($width) ?: 1;
+        $this->width = min($width, $maxDimension);
 
         return $this;
     }
@@ -136,13 +183,22 @@ class Image
         return $this->width;
     }
 
-    public function setHeight(int $argument1 = 1)
+    /**
+     * Set the target height for image processing
+     * 
+     * @param int $height The target height
+     * @return Image Returns self for method chaining
+     */
+    public function setHeight(int $height = 1): self
     {
-        $argument1 = abs($argument1) ?: 1;
-        if ($argument1 > config('core.imgproxy.max_dim_px')) {
-            $argument1 = config('core.imgproxy.max_dim_px');
+        // Cache config value to avoid repeated calls
+        static $maxDimension = null;
+        if ($maxDimension === null) {
+            $maxDimension = config('core.imgproxy.max_dim_px');
         }
-        $this->height = $argument1;
+
+        $height = abs($height) ?: 1;
+        $this->height = min($height, $maxDimension);
 
         return $this;
     }
@@ -153,14 +209,21 @@ class Image
     }
 
     /**
-     * @return mixed
+     * Set the gravity position for image cropping
+     * 
+     * @param string|null $gravity The gravity position
+     * @return Image Returns self for method chaining
      */
-    public function setGravity(?string $argument1 = null)
+    public function setGravity(?string $gravity = null): self
     {
-        $argument1 = Str::lower($argument1);
-        $this->gravity = (! in_array($argument1, config('core.imgproxy.gravity_values')))
-            ? self::DEFAULT_GRAVITY
-            : $argument1;
+        // Cache config values to avoid repeated calls
+        static $gravityValues = null;
+        if ($gravityValues === null) {
+            $gravityValues = config('core.imgproxy.gravity_values');
+        }
+
+        $gravity = Str::lower($gravity);
+        $this->gravity = in_array($gravity, $gravityValues) ? $gravity : self::DEFAULT_GRAVITY;
 
         return $this;
     }
@@ -171,15 +234,15 @@ class Image
     }
 
     /**
-     * @return mixed
+     * Set the enlargement factor for image processing
+     * 
+     * @param int $enlarge The enlargement factor
+     * @return Image Returns self for method chaining
      */
-    public function setEnlarge(int $argument1 = 0)
+    public function setEnlarge(int $enlarge = 0): self
     {
-        $argument1 = abs($argument1);
-        if ($argument1 > self::MAX_ENLARGE) {
-            $argument1 = self::MAX_ENLARGE;
-        }
-        $this->enlarge = $argument1;
+        $enlarge = abs($enlarge);
+        $this->enlarge = min($enlarge, self::MAX_ENLARGE);
 
         return $this;
     }
@@ -189,22 +252,37 @@ class Image
         return $this->enlarge;
     }
 
-    public function setExtension($argument1)
+    /**
+     * Set the target file extension for image processing
+     * 
+     * @param string|false|null $extension The target file extension
+     * @return Image Returns self for method chaining
+     * @throws Exception When invalid extension is provided
+     */
+    public function setExtension($extension): self
     {
-        if (is_null($argument1)) {
-            $argument1 = config('core.imgproxy.default_extension');
+        // Cache config values to avoid repeated calls
+        static $defaultExtension = null;
+        static $formats = null;
+        
+        if ($defaultExtension === null) {
+            $defaultExtension = config('core.imgproxy.default_extension');
+            $formats = config('core.imgproxy.formats');
         }
-        if ($argument1 !== false) {
-            $argument1 = Str::lower($argument1);
 
-            if (! in_array($argument1, config('core.imgproxy.formats'))) {
-                throw new Exception($argument1);
+        if ($extension === null) {
+            $extension = $defaultExtension;
+        }
+        
+        if ($extension !== false) {
+            $extension = Str::lower($extension);
+            
+            if (!in_array($extension, $formats)) {
+                throw new Exception("Invalid extension: {$extension}");
             }
         }
-        if (! $argument1) {
-            $argument1 = '';
-        }
-        $this->extension = $argument1;
+        
+        $this->extension = $extension ?: '';
 
         return $this;
     }

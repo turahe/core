@@ -32,6 +32,24 @@ use Turahe\Core\Concerns\HasTaxonomies;
 use Turahe\Core\Enums\OrganizationType;
 use Turahe\UserStamps\Concerns\HasUserStamps;
 
+/**
+ * Organization Model
+ * 
+ * Represents an organization entity with hierarchical structure, settings,
+ * taxonomies, and user management capabilities.
+ * 
+ * Features:
+ * - Hierarchical organization structure using nested sets
+ * - Configurable primary key (ULID, UUID, or auto-increment)
+ * - Flexible settings management
+ * - Taxonomy categorization
+ * - Slug generation for SEO-friendly URLs
+ * - Soft deletes and pruning
+ * - User stamps for audit trails
+ * - Sortable ordering
+ * 
+ * @package Turahe\Core\Models
+ */
 class Organization extends Model implements Sortable
 {
     use HasConfigurablePrimaryKey;
@@ -60,34 +78,44 @@ class Organization extends Model implements Sortable
     }
 
     /**
-     * @return string
+     * Get the left boundary column name for nested sets
+     * 
+     * @return string The left boundary column name
      */
-    public function getLftName()
+    public function getLftName(): string
     {
         return 'record_left';
     }
 
     /**
-     * @return string
+     * Get the right boundary column name for nested sets
+     * 
+     * @return string The right boundary column name
      */
-    public function getRgtName()
+    public function getRgtName(): string
     {
         return 'record_right';
     }
 
     /**
-     * @return string
+     * Get the parent ID column name for nested sets
+     * 
+     * @return string The parent ID column name
      */
-    public function getParentIdName()
+    public function getParentIdName(): string
     {
         return 'parent_id';
     }
 
     /**
-     * Specify parent id attribute mutator
-     *
-     *
-     * @throws \Exception
+     * Set the parent organization for nested set hierarchy
+     * 
+     * This method allows setting the parent organization using the parent
+     * attribute, which internally calls setParentIdAttribute for proper
+     * nested set management.
+     * 
+     * @param mixed $value The parent organization or ID
+     * @throws \Exception When parent setting fails
      */
     public function setParentAttribute($value): void
     {
