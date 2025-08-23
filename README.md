@@ -79,8 +79,7 @@ For comprehensive documentation, guides, and technical details, visit the [docs/
 
 - **[📖 Documentation Index](docs/README.md)** - Complete documentation overview
 - **[🧪 Testing Guide](docs/TESTING_SUMMARY.md)** - Testing setup and guidelines
-- **[🧪 Testing Guide](docs/TESTING_SUMMARY.md)** - Testing setup and guidelines
-- **[🔧 Scripts & Tools](scripts/README.md)** - Utility scripts and automation
+- **[🔧 Scripts & Tools](scripts/)** - Utility scripts and automation
 
 ## ⚙️ Configuration
 
@@ -329,6 +328,7 @@ vendor/bin/phpunit --coverage-html coverage-report
 - **GitHub Actions CI** fully functional with SQLite-only setup
 - **UserStamps integration** working with ULID primary keys
 - **Eloquent relationships** properly tested and validated
+- **Code formatting** follows Laravel Pint standards
 
 ### Test Suites
 - **Unit Tests**: Core functionality, models, repositories, services
@@ -336,6 +336,12 @@ vendor/bin/phpunit --coverage-html coverage-report
 - **Migration Tests**: All database schema variations (ULID, UUID, BigIncrements)
 - **Repository Tests**: CRUD operations and custom methods
 - **Trait Tests**: HasOrganization, HasSettings, HasTags, HasTaxonomies
+
+### Code Quality
+- **Laravel Pint**: Automatic code formatting with Laravel preset
+- **Consistent Style**: All code follows Laravel coding standards
+- **PHPDoc**: Comprehensive documentation with proper formatting
+- **Clean Code**: Proper spacing, line endings, and structure
 
 ## 🧪 Local Development
 
@@ -358,6 +364,12 @@ vendor/bin/phpunit --coverage-html coverage-report
 - **Xdebug**: Required for coverage reports
 - **Composer**: Dependency management
 - **No .env file needed**: All configuration is hardcoded in TestCase.php
+
+### Development Tools
+- **Laravel Pint**: Code formatting and style enforcement
+- **Coverage Scripts**: Automated test coverage generation
+- **Git Hooks**: Pre-commit formatting checks (optional)
+- **IDE Support**: Full IDE integration with proper formatting
 
 ## 📊 CI/CD
 
