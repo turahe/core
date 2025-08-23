@@ -361,15 +361,12 @@ vendor/bin/phpunit --coverage-html coverage-report
 
 ## 📊 CI/CD
 
-The package includes comprehensive GitHub Actions workflows:
+The package includes streamlined GitHub Actions workflows focused on testing:
 
 - **CI Tests**: PHP 8.4 + Laravel 12 testing with SQLite in-memory
-- **Code Quality**: Laravel Pint, PHP syntax checking, Composer validation
-- **Security**: Composer audit for vulnerability scanning
-- **Package Testing**: Installation and integration testing in fresh Laravel projects
 - **Coverage**: Xdebug coverage reports uploaded to Codecov
 - **Dependabot**: Automated dependency updates with testing
-- **Releases**: Automated releases with changelog generation
+- **Releases**: Test validation before release
 
 ## 🤝 Contributing
 
