@@ -17,4 +17,4 @@ class DatabaseSeeder extends Seeder
             OrganizationSeeder::class,
         ]);
     }
-} 
+}

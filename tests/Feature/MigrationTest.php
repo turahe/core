@@ -304,15 +304,15 @@ class MigrationTest extends TestCase
     public function test_migrations_can_be_rolled_back_and_rerun(): void
     {
         $this->setUserstampsConfig('ulid');
-        
+
         // Run migrations
         $this->artisan('migrate');
         $this->assertTrue(Schema::hasTable(config('core.tables.settings')));
-        
+
         // Rollback migrations
         $this->artisan('migrate:rollback');
         $this->assertFalse(Schema::hasTable(config('core.tables.settings')));
-        
+
         // Run migrations again
         $this->artisan('migrate');
         $this->assertTrue(Schema::hasTable(config('core.tables.settings')));

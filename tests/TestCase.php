@@ -41,31 +41,29 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'prefix' => '',
             'foreign_key_constraints' => true,
         ]);
-        
+
         // Use array cache for all testing
         $app['config']->set('cache.default', 'array');
         $app['config']->set('cache.stores.array', [
             'driver' => 'array',
             'serialize' => false,
         ]);
-        
+
         // Set session driver to array for testing
         $app['config']->set('session.driver', 'array');
-        
+
         // Set queue connection to sync for testing
         $app['config']->set('queue.default', 'sync');
-        
+
         // Set core configuration from config/core.php
         $app['config']->set('core.table.use_timestamps', false);
-        
+
         // Set userstamps configuration
         $app['config']->set('userstamps.users_table_column_type', 'ulid');
-        
+
         $app['config']->set('app.key', 'base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=');
         $app['config']->set('app.cipher', 'AES-256-CBC');
     }
-
-
 
     protected function setUpDatabase()
     {

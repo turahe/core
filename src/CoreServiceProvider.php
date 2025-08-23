@@ -6,18 +6,17 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Core Service Provider for Turahe Core Package
- * 
+ *
  * This service provider handles the registration and bootstrapping of core services,
  * including repository bindings, OAuth clients, facades, and configuration management.
- * 
- * @package Turahe\Core
+ *
  * @author Turahe Team
  */
 class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     * 
+     *
      * Binds repository interfaces to their concrete implementations and registers
      * OAuth service clients as singletons for dependency injection.
      */
@@ -37,10 +36,10 @@ class CoreServiceProvider extends ServiceProvider
         // These services are registered as singletons to maintain state and connection
         // across multiple requests and avoid recreating OAuth clients unnecessarily
         $this->app->singleton('google', function ($app) {
-            return new \Turahe\Core\Google\Client();
+            return new \Turahe\Core\Google\Client;
         });
         $this->app->singleton('msgraph', function ($app) {
-            return new \Turahe\Core\Microsoft\Client();
+            return new \Turahe\Core\Microsoft\Client;
         });
 
         // Register additional core services as singletons for better performance
@@ -50,7 +49,7 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Boot the application events.
-     * 
+     *
      * This method is called after all other service providers have been registered,
      * allowing us to safely use other services and perform bootstrapping tasks.
      */

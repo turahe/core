@@ -11,7 +11,7 @@ use League\Fractal\TransformerAbstract;
 
 /**
  * Base Paginator Class
- * 
+ *
  * Handles pagination transformations using Fractal.
  * Optimized with better type safety and error handling.
  */
@@ -19,10 +19,10 @@ class BasePaginator
 {
     /**
      * Transform a paginated collection using Fractal
-     * 
-     * @param LengthAwarePaginator $paginator The paginated collection
-     * @param TransformerAbstract $transformer The transformer to use
-     * @param string $resourceKey The resource key
+     *
+     * @param  LengthAwarePaginator  $paginator  The paginated collection
+     * @param  TransformerAbstract  $transformer  The transformer to use
+     * @param  string  $resourceKey  The resource key
      * @return Collection The transformed collection resource
      */
     public function paginate(LengthAwarePaginator $paginator, TransformerAbstract $transformer, string $resourceKey): Collection
@@ -34,17 +34,17 @@ class BasePaginator
 
             return $resource;
         } catch (\Exception $e) {
-            \Log::error('Pagination transformation failed: ' . $e->getMessage());
+            \Log::error('Pagination transformation failed: '.$e->getMessage());
             throw $e;
         }
     }
 
     /**
      * Create a simple collection resource without pagination
-     * 
-     * @param iterable $collection The collection to transform
-     * @param TransformerAbstract $transformer The transformer to use
-     * @param string $resourceKey The resource key
+     *
+     * @param  iterable  $collection  The collection to transform
+     * @param  TransformerAbstract  $transformer  The transformer to use
+     * @param  string  $resourceKey  The resource key
      * @return Collection The transformed collection resource
      */
     public function simpleCollection(iterable $collection, TransformerAbstract $transformer, string $resourceKey): Collection

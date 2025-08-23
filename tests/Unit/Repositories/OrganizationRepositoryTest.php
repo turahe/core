@@ -14,13 +14,14 @@ use Turahe\Core\Tests\TestCase;
 class OrganizationRepositoryTest extends TestCase
 {
     private OrganizationRepository $repository;
+
     private Organization $organization;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
-        $this->organization = new Organization();
+
+        $this->organization = new Organization;
         $this->repository = new OrganizationRepository($this->organization);
     }
 
@@ -30,17 +31,17 @@ class OrganizationRepositoryTest extends TestCase
         Organization::create([
             'name' => 'Organization 1',
             'slug' => 'org-1',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         Organization::create([
             'name' => 'Organization 2',
             'slug' => 'org-2',
-            'type' => 'ORGANIZATION'
+            'type' => 'ORGANIZATION',
         ]);
-        
+
         $result = $this->repository->getOrganizations('created_at', 'desc');
-        
+
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertGreaterThan(0, $result->count());
     }
@@ -50,17 +51,17 @@ class OrganizationRepositoryTest extends TestCase
         $org1 = Organization::create([
             'name' => 'Organization 1',
             'slug' => 'org-1',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $org2 = Organization::create([
             'name' => 'Organization 2',
             'slug' => 'org-2',
-            'type' => 'ORGANIZATION'
+            'type' => 'ORGANIZATION',
         ]);
-        
+
         $result = $this->repository->getOrganizations('created_at', 'desc', [$org1->id]);
-        
+
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertEquals(1, $result->count());
         $this->assertFalse($result->contains($org1->id));
@@ -72,11 +73,11 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Test Organization',
             'slug' => 'test-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $result = $this->repository->getOrganization($org->id);
-        
+
         $this->assertInstanceOf(Organization::class, $result);
         $this->assertEquals($org->id, $result->id);
         $this->assertEquals('Test Organization', $result->name);
@@ -85,7 +86,7 @@ class OrganizationRepositoryTest extends TestCase
     public function test_get_organization_by_id_throws_exception_for_nonexistent(): void
     {
         $this->expectException(ModelNotFoundException::class);
-        
+
         $this->repository->getOrganization('nonexistent-id');
     }
 
@@ -94,11 +95,11 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Unique Organization',
             'slug' => 'unique-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $result = $this->repository->getOrganizationByName('Unique Organization');
-        
+
         $this->assertInstanceOf(Organization::class, $result);
         $this->assertEquals('Unique Organization', $result->name);
         $this->assertEquals($org->id, $result->id);
@@ -107,7 +108,7 @@ class OrganizationRepositoryTest extends TestCase
     public function test_get_organization_by_name_throws_exception_for_nonexistent(): void
     {
         $this->expectException(ModelNotFoundException::class);
-        
+
         $this->repository->getOrganizationByName('Nonexistent Organization');
     }
 
@@ -116,11 +117,11 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Slug Organization',
             'slug' => 'slug-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $result = $this->repository->getOrganizationBySlug('slug-org');
-        
+
         $this->assertInstanceOf(Organization::class, $result);
         $this->assertEquals('slug-org', $result->slug);
         $this->assertEquals($org->id, $result->id);
@@ -129,7 +130,7 @@ class OrganizationRepositoryTest extends TestCase
     public function test_get_organization_by_slug_throws_exception_for_nonexistent(): void
     {
         $this->expectException(ModelNotFoundException::class);
-        
+
         $this->repository->getOrganizationBySlug('nonexistent-slug');
     }
 
@@ -138,11 +139,11 @@ class OrganizationRepositoryTest extends TestCase
         $attributes = [
             'name' => 'New Organization',
             'slug' => 'new-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ];
-        
+
         $result = $this->repository->createOrganization($attributes);
-        
+
         $this->assertInstanceOf(Organization::class, $result);
         $this->assertEquals('New Organization', $result->name);
         $this->assertEquals('new-org', $result->slug);
@@ -150,7 +151,7 @@ class OrganizationRepositoryTest extends TestCase
         $this->assertDatabaseHas('organizations', [
             'name' => 'New Organization',
             'slug' => 'new-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
     }
 
@@ -159,23 +160,23 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Original Name',
             'slug' => 'original-slug',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $this->repository = new OrganizationRepository($org);
-        
+
         $attributes = [
             'name' => 'Updated Name',
-            'type' => 'ORGANIZATION'
+            'type' => 'ORGANIZATION',
         ];
-        
+
         $result = $this->repository->updateOrganization($attributes);
-        
+
         $this->assertTrue($result);
         $this->assertDatabaseHas('organizations', [
             'id' => $org->id,
             'name' => 'Updated Name',
-            'type' => 'ORGANIZATION'
+            'type' => 'ORGANIZATION',
         ]);
     }
 
@@ -184,13 +185,13 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'To Delete',
             'slug' => 'to-delete',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $this->repository = new OrganizationRepository($org);
-        
+
         $result = $this->repository->deleteOrganization();
-        
+
         $this->assertTrue($result);
         $this->assertDatabaseMissing('organizations', ['id' => $org->id]);
     }
@@ -200,13 +201,13 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'To Trash',
             'slug' => 'to-trash',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         $this->repository = new OrganizationRepository($org);
-        
+
         $result = $this->repository->trashOrganization();
-        
+
         $this->assertTrue($result);
         $this->assertSoftDeleted('organizations', ['id' => $org->id]);
     }
@@ -216,20 +217,20 @@ class OrganizationRepositoryTest extends TestCase
         Organization::create([
             'name' => 'A Organization',
             'slug' => 'a-org',
-            'type' => 'COMPANY'
+            'type' => 'COMPANY',
         ]);
-        
+
         Organization::create([
             'name' => 'B Organization',
             'slug' => 'b-org',
-            'type' => 'ORGANIZATION'
+            'type' => 'ORGANIZATION',
         ]);
-        
+
         $result = $this->repository->getOrganizations('name', 'asc');
-        
+
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertGreaterThan(0, $result->count());
-        
+
         // Verify ordering (first item should start with 'A')
         $firstOrg = $result->first();
         $this->assertStringStartsWith('A', $firstOrg->name);

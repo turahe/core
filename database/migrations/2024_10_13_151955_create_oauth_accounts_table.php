@@ -31,7 +31,7 @@ return new class extends Migration
             }
 
             $table->string('type');
-            
+
             $table->string('oauth_user_id');
             $table->string('email')->nullable();
             $table->boolean('requires_auth')->default(false);

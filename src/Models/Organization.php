@@ -34,10 +34,10 @@ use Turahe\UserStamps\Concerns\HasUserStamps;
 
 /**
  * Organization Model
- * 
+ *
  * Represents an organization entity with hierarchical structure, settings,
  * taxonomies, and user management capabilities.
- * 
+ *
  * Features:
  * - Hierarchical organization structure using nested sets
  * - Configurable primary key (ULID, UUID, or auto-increment)
@@ -47,8 +47,6 @@ use Turahe\UserStamps\Concerns\HasUserStamps;
  * - Soft deletes and pruning
  * - User stamps for audit trails
  * - Sortable ordering
- * 
- * @package Turahe\Core\Models
  */
 class Organization extends Model implements Sortable
 {
@@ -80,7 +78,7 @@ class Organization extends Model implements Sortable
 
     /**
      * Get the left boundary column name for nested sets
-     * 
+     *
      * @return string The left boundary column name
      */
     public function getLftName(): string
@@ -90,7 +88,7 @@ class Organization extends Model implements Sortable
 
     /**
      * Get the right boundary column name for nested sets
-     * 
+     *
      * @return string The right boundary column name
      */
     public function getRgtName(): string
@@ -100,7 +98,7 @@ class Organization extends Model implements Sortable
 
     /**
      * Get the parent ID column name for nested sets
-     * 
+     *
      * @return string The parent ID column name
      */
     public function getParentIdName(): string
@@ -110,12 +108,13 @@ class Organization extends Model implements Sortable
 
     /**
      * Set the parent organization for nested set hierarchy
-     * 
+     *
      * This method allows setting the parent organization using the parent
      * attribute, which internally calls setParentIdAttribute for proper
      * nested set management.
-     * 
-     * @param mixed $value The parent organization or ID
+     *
+     * @param  mixed  $value  The parent organization or ID
+     *
      * @throws \Exception When parent setting fails
      */
     public function setParentAttribute($value): void

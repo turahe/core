@@ -3,14 +3,14 @@
 namespace Turahe\Core\Tests\Models;
 
 use Turahe\Core\Concerns\HasConfigurablePrimaryKey;
-use Turahe\Core\Concerns\HasSettings;
 use Turahe\Core\Concerns\HasOrganization;
+use Turahe\Core\Concerns\HasSettings;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
     use HasConfigurablePrimaryKey;
-    use HasSettings;
     use HasOrganization;
+    use HasSettings;
 
     protected $table = 'users';
 

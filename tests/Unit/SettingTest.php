@@ -10,11 +10,10 @@ use Turahe\Core\Tests\TestCase;
 
 class SettingTest extends TestCase
 {
-    
     public function test_setting_uses_configurable_primary_key(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         // Test that the model has the configurable primary key trait methods
         $this->assertTrue(method_exists($setting, 'shouldUseUniqueIds'));
         $this->assertTrue(method_exists($setting, 'getConfiguredKeyType'));
@@ -25,8 +24,8 @@ class SettingTest extends TestCase
 
     public function test_setting_primary_key_configuration_defaults_to_ulid(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         // Default configuration should be ULID
         $this->assertTrue($setting->shouldUseUniqueIds());
         $this->assertEquals('string', $setting->getConfiguredKeyType());
@@ -38,9 +37,9 @@ class SettingTest extends TestCase
     {
         // Set configuration to bigincrements
         config(['userstamps.users_table_column_type' => 'bigincrements']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertFalse($setting->shouldUseUniqueIds());
         $this->assertEquals('int', $setting->getConfiguredKeyType());
         $this->assertTrue($setting->shouldUseIncrementing());
@@ -51,9 +50,9 @@ class SettingTest extends TestCase
     {
         // Set configuration to ulid
         config(['userstamps.users_table_column_type' => 'ulid']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertTrue($setting->shouldUseUniqueIds());
         $this->assertEquals('string', $setting->getConfiguredKeyType());
         $this->assertFalse($setting->shouldUseIncrementing());
@@ -64,9 +63,9 @@ class SettingTest extends TestCase
     {
         // Set configuration to uuid
         config(['userstamps.users_table_column_type' => 'uuid']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertTrue($setting->shouldUseUniqueIds());
         $this->assertEquals('string', $setting->getConfiguredKeyType());
         $this->assertFalse($setting->shouldUseIncrementing());
@@ -75,8 +74,8 @@ class SettingTest extends TestCase
 
     public function test_setting_uses_user_stamps(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         $this->assertTrue(method_exists($setting, 'author'));
         $this->assertTrue(method_exists($setting, 'editor'));
         $this->assertTrue(method_exists($setting, 'destroyer'));
@@ -84,8 +83,8 @@ class SettingTest extends TestCase
 
     public function test_setting_uses_soft_deletes(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         $this->assertTrue(method_exists($setting, 'trashed'));
         $this->assertTrue(method_exists($setting, 'restore'));
         $this->assertTrue(method_exists($setting, 'forceDelete'));
@@ -93,15 +92,15 @@ class SettingTest extends TestCase
 
     public function test_setting_table_is_configurable(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         $this->assertEquals(config('core.tables.settings'), $setting->getTable());
     }
 
     public function test_setting_has_fillable_attributes(): void
     {
-        $setting = new Setting();
-        
+        $setting = new Setting;
+
         $expectedFillable = [
             'model_id',
             'model_type',
@@ -109,7 +108,7 @@ class SettingTest extends TestCase
             'value',
             'group',
         ];
-        
+
         $this->assertEquals($expectedFillable, $setting->getFillable());
     }
 
@@ -136,9 +135,9 @@ class SettingTest extends TestCase
     public function test_setting_generates_unique_ids_when_configured_for_ulid(): void
     {
         config(['userstamps.users_table_column_type' => 'ulid']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertTrue(method_exists($setting, 'newUniqueId'));
         $this->assertNotEmpty($setting->newUniqueId());
         $this->assertEquals(['id'], $setting->uniqueIds());
@@ -147,9 +146,9 @@ class SettingTest extends TestCase
     public function test_setting_generates_unique_ids_when_configured_for_uuid(): void
     {
         config(['userstamps.users_table_column_type' => 'uuid']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertTrue(method_exists($setting, 'newUniqueId'));
         $this->assertNotEmpty($setting->newUniqueId());
         $this->assertEquals(['id'], $setting->uniqueIds());
@@ -158,9 +157,9 @@ class SettingTest extends TestCase
     public function test_setting_does_not_generate_unique_ids_when_configured_for_bigincrements(): void
     {
         config(['userstamps.users_table_column_type' => 'bigincrements']);
-        
-        $setting = new Setting();
-        
+
+        $setting = new Setting;
+
         $this->assertTrue(method_exists($setting, 'newUniqueId'));
         $this->assertEmpty($setting->uniqueIds());
     }

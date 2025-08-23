@@ -354,6 +354,6 @@ class OrganizationSeeder extends Seeder
         ]);
 
         $this->command->info('Organizations seeded successfully!');
-        $this->command->info('Created ' . Organization::count() . ' organizations with hierarchical structure.');
+        $this->command->info('Created '.Organization::count().' organizations with hierarchical structure.');
     }
-} 
+}

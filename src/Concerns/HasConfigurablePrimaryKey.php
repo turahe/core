@@ -9,12 +9,12 @@ use Illuminate\Support\Str;
 /**
  * Trait that provides configurable primary key behavior
  * based on the userstamps.users_table_column_type configuration.
- * 
+ *
  * Supported types:
  * - 'bigincrements': Uses auto-incrementing big integers
  * - 'ulid': Uses ULIDs (Universally Unique Lexicographically Sortable Identifier)
  * - 'uuid': Uses UUIDs (Universally Unique Identifier)
- * 
+ *
  * This trait dynamically provides the appropriate primary key behavior
  * based on the configuration without requiring specific traits.
  */
@@ -26,7 +26,7 @@ trait HasConfigurablePrimaryKey
     public function getConfiguredKeyType(): string
     {
         $columnType = config('userstamps.users_table_column_type', 'ulid');
-        
+
         return match ($columnType) {
             'bigincrements' => 'int',
             'ulid', 'uuid' => 'string',
@@ -40,7 +40,7 @@ trait HasConfigurablePrimaryKey
     public function shouldUseIncrementing(): bool
     {
         $columnType = config('userstamps.users_table_column_type', 'ulid');
-        
+
         return $columnType === 'bigincrements';
     }
 
@@ -50,7 +50,7 @@ trait HasConfigurablePrimaryKey
     public function shouldUseUniqueIds(): bool
     {
         $columnType = config('userstamps.users_table_column_type', 'ulid');
-        
+
         return in_array($columnType, ['ulid', 'uuid']);
     }
 
@@ -116,7 +116,7 @@ trait HasConfigurablePrimaryKey
     public function newUniqueId(): string
     {
         $columnType = config('userstamps.users_table_column_type', 'ulid');
-        
+
         return match ($columnType) {
             'ulid' => (string) Str::ulid(),
             'uuid' => (string) Str::uuid(),
@@ -132,7 +132,7 @@ trait HasConfigurablePrimaryKey
         if ($this->shouldUseUniqueIds()) {
             return ['id'];
         }
-        
+
         return [];
     }
 
@@ -142,7 +142,7 @@ trait HasConfigurablePrimaryKey
     protected static function bootHasConfigurablePrimaryKey(): void
     {
         $columnType = config('userstamps.users_table_column_type', 'ulid');
-        
+
         if ($columnType === 'ulid') {
             static::creating(function ($model) {
                 if (empty($model->getKey())) {

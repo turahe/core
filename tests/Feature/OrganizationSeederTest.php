@@ -7,8 +7,8 @@ namespace Turahe\Core\Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Turahe\Core\Enums\OrganizationType;
 use Turahe\Core\Models\Organization;
-use Turahe\Core\Tests\TestCase;
 use Turahe\Core\Tests\Models\User;
+use Turahe\Core\Tests\TestCase;
 
 class OrganizationSeederTest extends TestCase
 {
@@ -106,7 +106,7 @@ class OrganizationSeederTest extends TestCase
         // Debug: Check the actual values
         $department->refresh();
         $branch->refresh();
-        
+
         $this->assertEquals($mainCompany->id, $department->parent_id, "Department parent_id should be {$mainCompany->id}, but got {$department->parent_id}");
         $this->assertEquals($mainCompany->id, $branch->parent_id, "Branch parent_id should be {$mainCompany->id}, but got {$branch->parent_id}");
     }
@@ -302,7 +302,7 @@ class OrganizationSeederTest extends TestCase
 
         // Check that all organization types are represented
         $types = Organization::distinct()->pluck('type')->toArray();
-        
+
         $expectedTypes = [
             OrganizationType::Company,
             OrganizationType::CompanyHolding,
@@ -369,4 +369,4 @@ class OrganizationSeederTest extends TestCase
         $this->assertTrue($userOrganizations->contains($organization1));
         $this->assertTrue($userOrganizations->contains($organization2));
     }
-} 
+}

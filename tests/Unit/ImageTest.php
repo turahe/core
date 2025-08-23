@@ -15,13 +15,13 @@ class ImageTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->image = new Image();
-        
+        $this->image = new Image;
+
         // Use the actual config values from config/core.php
         // No need to override config as it's already loaded from the config file
     }
 
-    public function testMakeMethodSetsAllProperties(): void
+    public function test_make_method_sets_all_properties(): void
     {
         $result = $this->image->make('/path/to/image.jpg', 300, 200, 'png');
 
@@ -35,7 +35,7 @@ class ImageTest extends TestCase
         $this->assertEquals('png', $this->image->getExtension());
     }
 
-    public function testMakeMethodWithNullExtension(): void
+    public function test_make_method_with_null_extension(): void
     {
         $result = $this->image->make('/path/to/image.jpg', 300, 200);
 
@@ -43,7 +43,7 @@ class ImageTest extends TestCase
         $this->assertEquals('jpg', $this->image->getExtension()); // Uses default from config
     }
 
-    public function testMakePresetMethodSetsPreset(): void
+    public function test_make_preset_method_sets_preset(): void
     {
         $result = $this->image->makePreset('/path/to/image.jpg', 'thumbnail', 'webp');
 
@@ -53,7 +53,7 @@ class ImageTest extends TestCase
         $this->assertEquals('webp', $this->image->getExtension());
     }
 
-    public function testMakePresetMethodWithNullExtension(): void
+    public function test_make_preset_method_with_null_extension(): void
     {
         $result = $this->image->makePreset('/path/to/image.jpg', 'thumbnail');
 
@@ -61,14 +61,14 @@ class ImageTest extends TestCase
         $this->assertEquals('jpg', $this->image->getExtension()); // Uses default from config
     }
 
-    public function testGetPresetReturnsPreset(): void
+    public function test_get_preset_returns_preset(): void
     {
         $this->image->setPreset('custom-preset');
-        
+
         $this->assertEquals('custom-preset', $this->image->getPreset());
     }
 
-    public function testSetPresetReturnsSelf(): void
+    public function test_set_preset_returns_self(): void
     {
         $result = $this->image->setPreset('test-preset');
 
@@ -76,7 +76,7 @@ class ImageTest extends TestCase
         $this->assertEquals('test-preset', $this->image->getPreset());
     }
 
-    public function testSetResizeWithValidValue(): void
+    public function test_set_resize_with_valid_value(): void
     {
         $result = $this->image->setResize('fill');
 
@@ -84,7 +84,7 @@ class ImageTest extends TestCase
         $this->assertEquals('fill', $this->image->getResize());
     }
 
-    public function testSetResizeWithInvalidValueUsesDefault(): void
+    public function test_set_resize_with_invalid_value_uses_default(): void
     {
         $result = $this->image->setResize('invalid-resize');
 
@@ -92,7 +92,7 @@ class ImageTest extends TestCase
         $this->assertEquals('fit', $this->image->getResize()); // Default value
     }
 
-    public function testSetResizeWithNullUsesDefault(): void
+    public function test_set_resize_with_null_uses_default(): void
     {
         $result = $this->image->setResize(null);
 
@@ -100,7 +100,7 @@ class ImageTest extends TestCase
         $this->assertEquals('fit', $this->image->getResize()); // Default value
     }
 
-    public function testSetResizeIsCaseInsensitive(): void
+    public function test_set_resize_is_case_insensitive(): void
     {
         $result = $this->image->setResize('FILL');
 
@@ -108,14 +108,14 @@ class ImageTest extends TestCase
         $this->assertEquals('fill', $this->image->getResize());
     }
 
-    public function testGetResizeReturnsResize(): void
+    public function test_get_resize_returns_resize(): void
     {
         $this->image->setResize('crop');
-        
+
         $this->assertEquals('crop', $this->image->getResize());
     }
 
-    public function testSetWidthWithValidValue(): void
+    public function test_set_width_with_valid_value(): void
     {
         $result = $this->image->setWidth(500);
 
@@ -123,7 +123,7 @@ class ImageTest extends TestCase
         $this->assertEquals(500, $this->image->getWidth());
     }
 
-    public function testSetWidthWithZeroUsesOne(): void
+    public function test_set_width_with_zero_uses_one(): void
     {
         $result = $this->image->setWidth(0);
 
@@ -131,7 +131,7 @@ class ImageTest extends TestCase
         $this->assertEquals(1, $this->image->getWidth());
     }
 
-    public function testSetWidthWithNegativeValueUsesAbsolute(): void
+    public function test_set_width_with_negative_value_uses_absolute(): void
     {
         $result = $this->image->setWidth(-300);
 
@@ -139,7 +139,7 @@ class ImageTest extends TestCase
         $this->assertEquals(300, $this->image->getWidth());
     }
 
-    public function testSetWidthExceedsMaxDimension(): void
+    public function test_set_width_exceeds_max_dimension(): void
     {
         $result = $this->image->setWidth(15000); // Exceeds max_dim_px (10000)
 
@@ -147,14 +147,14 @@ class ImageTest extends TestCase
         $this->assertEquals(10000, $this->image->getWidth()); // Capped at max from config
     }
 
-    public function testGetWidthReturnsWidth(): void
+    public function test_get_width_returns_width(): void
     {
         $this->image->setWidth(800);
-        
+
         $this->assertEquals(800, $this->image->getWidth());
     }
 
-    public function testSetHeightWithValidValue(): void
+    public function test_set_height_with_valid_value(): void
     {
         $result = $this->image->setHeight(400);
 
@@ -162,7 +162,7 @@ class ImageTest extends TestCase
         $this->assertEquals(400, $this->image->getHeight());
     }
 
-    public function testSetHeightWithZeroUsesOne(): void
+    public function test_set_height_with_zero_uses_one(): void
     {
         $result = $this->image->setHeight(0);
 
@@ -170,7 +170,7 @@ class ImageTest extends TestCase
         $this->assertEquals(1, $this->image->getHeight());
     }
 
-    public function testSetHeightWithNegativeValueUsesAbsolute(): void
+    public function test_set_height_with_negative_value_uses_absolute(): void
     {
         $result = $this->image->setHeight(-200);
 
@@ -178,7 +178,7 @@ class ImageTest extends TestCase
         $this->assertEquals(200, $this->image->getHeight());
     }
 
-    public function testSetHeightExceedsMaxDimension(): void
+    public function test_set_height_exceeds_max_dimension(): void
     {
         $result = $this->image->setHeight(15000); // Exceeds max_dim_px (10000)
 
@@ -186,14 +186,14 @@ class ImageTest extends TestCase
         $this->assertEquals(10000, $this->image->getHeight()); // Capped at max from config
     }
 
-    public function testGetHeightReturnsHeight(): void
+    public function test_get_height_returns_height(): void
     {
         $this->image->setHeight(600);
-        
+
         $this->assertEquals(600, $this->image->getHeight());
     }
 
-    public function testSetGravityWithValidValue(): void
+    public function test_set_gravity_with_valid_value(): void
     {
         $result = $this->image->setGravity('center');
 
@@ -201,7 +201,7 @@ class ImageTest extends TestCase
         $this->assertEquals('center', $this->image->getGravity());
     }
 
-    public function testSetGravityWithInvalidValueUsesDefault(): void
+    public function test_set_gravity_with_invalid_value_uses_default(): void
     {
         $result = $this->image->setGravity('invalid-gravity');
 
@@ -209,7 +209,7 @@ class ImageTest extends TestCase
         $this->assertEquals('no', $this->image->getGravity()); // Default value
     }
 
-    public function testSetGravityWithNullUsesDefault(): void
+    public function test_set_gravity_with_null_uses_default(): void
     {
         $result = $this->image->setGravity(null);
 
@@ -217,7 +217,7 @@ class ImageTest extends TestCase
         $this->assertEquals('no', $this->image->getGravity()); // Default value
     }
 
-    public function testSetGravityIsCaseInsensitive(): void
+    public function test_set_gravity_is_case_insensitive(): void
     {
         $result = $this->image->setGravity('CENTER');
 
@@ -225,14 +225,14 @@ class ImageTest extends TestCase
         $this->assertEquals('center', $this->image->getGravity());
     }
 
-    public function testGetGravityReturnsGravity(): void
+    public function test_get_gravity_returns_gravity(): void
     {
         $this->image->setGravity('top');
-        
+
         $this->assertEquals('top', $this->image->getGravity());
     }
 
-    public function testSetEnlargeWithValidValue(): void
+    public function test_set_enlarge_with_valid_value(): void
     {
         $result = $this->image->setEnlarge(3);
 
@@ -240,7 +240,7 @@ class ImageTest extends TestCase
         $this->assertEquals(3, $this->image->getEnlarge());
     }
 
-    public function testSetEnlargeWithZero(): void
+    public function test_set_enlarge_with_zero(): void
     {
         $result = $this->image->setEnlarge(0);
 
@@ -248,7 +248,7 @@ class ImageTest extends TestCase
         $this->assertEquals(0, $this->image->getEnlarge());
     }
 
-    public function testSetEnlargeWithNegativeValueUsesAbsolute(): void
+    public function test_set_enlarge_with_negative_value_uses_absolute(): void
     {
         $result = $this->image->setEnlarge(-2);
 
@@ -256,7 +256,7 @@ class ImageTest extends TestCase
         $this->assertEquals(2, $this->image->getEnlarge());
     }
 
-    public function testSetEnlargeExceedsMaxEnlarge(): void
+    public function test_set_enlarge_exceeds_max_enlarge(): void
     {
         $result = $this->image->setEnlarge(10); // Exceeds MAX_ENLARGE (5)
 
@@ -264,14 +264,14 @@ class ImageTest extends TestCase
         $this->assertEquals(5, $this->image->getEnlarge()); // Capped at max
     }
 
-    public function testGetEnlargeReturnsEnlarge(): void
+    public function test_get_enlarge_returns_enlarge(): void
     {
         $this->image->setEnlarge(4);
-        
+
         $this->assertEquals(4, $this->image->getEnlarge());
     }
 
-    public function testSetExtensionWithValidValue(): void
+    public function test_set_extension_with_valid_value(): void
     {
         $result = $this->image->setExtension('png');
 
@@ -279,7 +279,7 @@ class ImageTest extends TestCase
         $this->assertEquals('png', $this->image->getExtension());
     }
 
-    public function testSetExtensionWithNullUsesDefault(): void
+    public function test_set_extension_with_null_uses_default(): void
     {
         $result = $this->image->setExtension(null);
 
@@ -287,7 +287,7 @@ class ImageTest extends TestCase
         $this->assertEquals('jpg', $this->image->getExtension()); // Uses default from config
     }
 
-    public function testSetExtensionWithFalse(): void
+    public function test_set_extension_with_false(): void
     {
         $result = $this->image->setExtension(false);
 
@@ -295,14 +295,14 @@ class ImageTest extends TestCase
         $this->assertEquals('', $this->image->getExtension()); // Empty string when false
     }
 
-    public function testSetExtensionWithInvalidFormatThrowsException(): void
+    public function test_set_extension_with_invalid_format_throws_exception(): void
     {
         $this->expectException(Exception::class);
-        
+
         $this->image->setExtension('invalid');
     }
 
-    public function testSetExtensionIsCaseInsensitive(): void
+    public function test_set_extension_is_case_insensitive(): void
     {
         $result = $this->image->setExtension('PNG');
 
@@ -310,14 +310,14 @@ class ImageTest extends TestCase
         $this->assertEquals('png', $this->image->getExtension());
     }
 
-    public function testGetExtensionReturnsExtension(): void
+    public function test_get_extension_returns_extension(): void
     {
         $this->image->setExtension('webp');
-        
+
         $this->assertEquals('webp', $this->image->getExtension());
     }
 
-    public function testSetOriginalPictureUrlSetsUrl(): void
+    public function test_set_original_picture_url_sets_url(): void
     {
         $result = $this->image->setOriginalPictureUrl('https://example.com/image.jpg');
 
@@ -325,14 +325,14 @@ class ImageTest extends TestCase
         $this->assertEquals('https://example.com/image.jpg', $this->image->getOriginalPictureUrl());
     }
 
-    public function testGetOriginalPictureUrlReturnsUrl(): void
+    public function test_get_original_picture_url_returns_url(): void
     {
         $this->image->setOriginalPictureUrl('/local/path/image.png');
-        
+
         $this->assertEquals('/local/path/image.png', $this->image->getOriginalPictureUrl());
     }
 
-    public function testConstantsAreDefined(): void
+    public function test_constants_are_defined(): void
     {
         $this->assertEquals('fit', Image::DEFAULT_RESIZE);
         $this->assertEquals('no', Image::DEFAULT_GRAVITY);
@@ -340,7 +340,7 @@ class ImageTest extends TestCase
         $this->assertEquals(0, Image::MIN_ENLARGE);
     }
 
-    public function testChainingMethods(): void
+    public function test_chaining_methods(): void
     {
         $result = $this->image
             ->setWidth(800)
@@ -361,7 +361,7 @@ class ImageTest extends TestCase
         $this->assertEquals('/path/to/image.jpg', $this->image->getOriginalPictureUrl());
     }
 
-    public function testMakeMethodWithAllParameters(): void
+    public function test_make_method_with_all_parameters(): void
     {
         $result = $this->image->make(
             'https://example.com/photo.jpg',
@@ -380,7 +380,7 @@ class ImageTest extends TestCase
         $this->assertEquals('webp', $this->image->getExtension());
     }
 
-    public function testMakePresetMethodWithAllParameters(): void
+    public function test_make_preset_method_with_all_parameters(): void
     {
         $result = $this->image->makePreset(
             'https://example.com/photo.jpg',
@@ -393,4 +393,4 @@ class ImageTest extends TestCase
         $this->assertEquals('large-thumbnail', $this->image->getPreset());
         $this->assertEquals('png', $this->image->getExtension());
     }
-} 
+}

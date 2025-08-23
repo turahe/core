@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Repositories;
 
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Turahe\Core\Contracts\TagRepositoryInterface;
 use Turahe\Core\Models\Tag;

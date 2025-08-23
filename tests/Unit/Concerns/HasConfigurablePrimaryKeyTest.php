@@ -12,8 +12,8 @@ class HasConfigurablePrimaryKeyTest extends TestCase
 {
     public function test_trait_provides_configuration_methods(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         $this->assertTrue(method_exists($model, 'getConfiguredKeyType'));
         $this->assertTrue(method_exists($model, 'shouldUseIncrementing'));
         $this->assertTrue(method_exists($model, 'shouldUseUniqueIds'));
@@ -29,8 +29,8 @@ class HasConfigurablePrimaryKeyTest extends TestCase
 
     public function test_default_configuration_is_ulid(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         $this->assertEquals('ulid', $model->getPrimaryKeyType());
         $this->assertTrue($model->shouldUseUniqueIds());
         $this->assertFalse($model->shouldUseIncrementing());
@@ -45,9 +45,9 @@ class HasConfigurablePrimaryKeyTest extends TestCase
     public function test_bigincrements_configuration(): void
     {
         config(['userstamps.users_table_column_type' => 'bigincrements']);
-        
-        $model = new TestModel();
-        
+
+        $model = new TestModel;
+
         $this->assertEquals('bigincrements', $model->getPrimaryKeyType());
         $this->assertFalse($model->shouldUseUniqueIds());
         $this->assertTrue($model->shouldUseIncrementing());
@@ -62,9 +62,9 @@ class HasConfigurablePrimaryKeyTest extends TestCase
     public function test_ulid_configuration(): void
     {
         config(['userstamps.users_table_column_type' => 'ulid']);
-        
-        $model = new TestModel();
-        
+
+        $model = new TestModel;
+
         $this->assertEquals('ulid', $model->getPrimaryKeyType());
         $this->assertTrue($model->shouldUseUniqueIds());
         $this->assertFalse($model->shouldUseIncrementing());
@@ -79,9 +79,9 @@ class HasConfigurablePrimaryKeyTest extends TestCase
     public function test_uuid_configuration(): void
     {
         config(['userstamps.users_table_column_type' => 'uuid']);
-        
-        $model = new TestModel();
-        
+
+        $model = new TestModel;
+
         $this->assertEquals('uuid', $model->getPrimaryKeyType());
         $this->assertTrue($model->shouldUseUniqueIds());
         $this->assertFalse($model->shouldUseIncrementing());
@@ -96,9 +96,9 @@ class HasConfigurablePrimaryKeyTest extends TestCase
     public function test_invalid_configuration_returns_configured_value(): void
     {
         config(['userstamps.users_table_column_type' => 'invalid']);
-        
-        $model = new TestModel();
-        
+
+        $model = new TestModel;
+
         $this->assertEquals('invalid', $model->getPrimaryKeyType());
         // Invalid configuration should not use unique IDs since it's not 'ulid' or 'uuid'
         $this->assertFalse($model->shouldUseUniqueIds());
@@ -114,31 +114,31 @@ class HasConfigurablePrimaryKeyTest extends TestCase
 
     public function test_primary_key_name_is_always_id(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         $this->assertEquals('id', $model->getKeyName());
-        
+
         // Test with different configurations
         config(['userstamps.users_table_column_type' => 'bigincrements']);
         $this->assertEquals('id', $model->getKeyName());
-        
+
         config(['userstamps.users_table_column_type' => 'uuid']);
         $this->assertEquals('id', $model->getKeyName());
     }
 
     public function test_configuration_changes_are_reflected_dynamically(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         // Start with default (ulid)
         $this->assertTrue($model->shouldUseUniqueIds());
         $this->assertFalse($model->shouldUseIncrementing());
-        
+
         // Change to bigincrements
         config(['userstamps.users_table_column_type' => 'bigincrements']);
         $this->assertFalse($model->shouldUseUniqueIds());
         $this->assertTrue($model->shouldUseIncrementing());
-        
+
         // Change to uuid
         config(['userstamps.users_table_column_type' => 'uuid']);
         $this->assertTrue($model->shouldUseUniqueIds());
@@ -147,20 +147,20 @@ class HasConfigurablePrimaryKeyTest extends TestCase
 
     public function test_new_unique_id_generation(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         // Test ULID generation
         config(['userstamps.users_table_column_type' => 'ulid']);
         $ulid = $model->newUniqueId();
         $this->assertNotEmpty($ulid);
         $this->assertEquals(26, strlen($ulid)); // ULID is 26 characters
-        
+
         // Test UUID generation
         config(['userstamps.users_table_column_type' => 'uuid']);
         $uuid = $model->newUniqueId();
         $this->assertNotEmpty($uuid);
         $this->assertEquals(36, strlen($uuid)); // UUID is 36 characters
-        
+
         // Test bigincrements (should still generate ULID as fallback)
         config(['userstamps.users_table_column_type' => 'bigincrements']);
         $fallback = $model->newUniqueId();
@@ -170,16 +170,16 @@ class HasConfigurablePrimaryKeyTest extends TestCase
 
     public function test_unique_ids_array(): void
     {
-        $model = new TestModel();
-        
+        $model = new TestModel;
+
         // Test ULID configuration
         config(['userstamps.users_table_column_type' => 'ulid']);
         $this->assertEquals(['id'], $model->uniqueIds());
-        
+
         // Test UUID configuration
         config(['userstamps.users_table_column_type' => 'uuid']);
         $this->assertEquals(['id'], $model->uniqueIds());
-        
+
         // Test bigincrements configuration
         config(['userstamps.users_table_column_type' => 'bigincrements']);
         $this->assertEquals([], $model->uniqueIds());

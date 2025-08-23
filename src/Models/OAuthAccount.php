@@ -14,6 +14,7 @@ use Turahe\Core\OAuth\Events\OAuthAccountDeleting;
 class OAuthAccount extends Model
 {
     use HasConfigurablePrimaryKey;
+
     /**
      * The table associated with the model.
      *

@@ -84,7 +84,7 @@ return [
 
         // Allowed gravity values for cropping and positioning
         'gravity_values' => env('IMGPROXY_GRAVITY_VALUES', [
-            'no', 'sm', 'md', 'lg', 'xl', 'xxl', 'center', 'top', 'bottom', 'left', 'right'
+            'no', 'sm', 'md', 'lg', 'xl', 'xxl', 'center', 'top', 'bottom', 'left', 'right',
         ]),
 
         // Default file extension for processed images

@@ -77,7 +77,7 @@ class OrganizationTypeTest extends TestCase
     {
         $businessEntities1 = OrganizationType::getBusinessEntities();
         $businessEntities2 = OrganizationType::getBusinessEntities();
-        
+
         $physicalLocations1 = OrganizationType::getPhysicalLocations();
         $physicalLocations2 = OrganizationType::getPhysicalLocations();
 

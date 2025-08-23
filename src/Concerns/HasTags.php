@@ -16,11 +16,11 @@ use Turahe\Core\Models\Tag;
 
 /**
  * HasTags Trait
- * 
+ *
  * Provides comprehensive tagging functionality for Eloquent models.
  * This trait allows models to be tagged with multiple tags and provides
  * powerful querying capabilities for tag-based filtering and searching.
- * 
+ *
  * Features:
  * - Many-to-many polymorphic relationship with tags
  * - Automatic tag synchronization and cleanup
@@ -28,14 +28,12 @@ use Turahe\Core\Models\Tag;
  * - Tag type categorization
  * - Bulk tag operations
  * - Queue-based tag assignment for new models
- * 
- * @package Turahe\Core\Concerns
  */
 trait HasTags
 {
     /**
      * Array to store tags that should be attached after model creation
-     * 
+     *
      * When tags are set on a model that doesn't exist yet, they are queued
      * and attached automatically after the model is created.
      */
@@ -43,7 +41,7 @@ trait HasTags
 
     /**
      * Boot the HasTags trait
-     * 
+     *
      * Sets up model event listeners for automatic tag management:
      * - Attaches queued tags after model creation
      * - Detaches all tags when model is deleted
@@ -69,10 +67,10 @@ trait HasTags
 
     /**
      * Get the morphToMany relationship with tags
-     * 
+     *
      * Returns a many-to-many polymorphic relationship with tags through
      * the taggables pivot table. Tags are automatically ordered.
-     * 
+     *
      * @return MorphToMany Relationship to tags with ordering
      */
     public function tags(): MorphToMany
@@ -85,11 +83,11 @@ trait HasTags
 
     /**
      * Set tags attribute with automatic synchronization
-     * 
+     *
      * If the model doesn't exist yet, tags are queued for later attachment.
      * If the model exists, tags are immediately synchronized.
-     * 
-     * @param string|array|ArrayAccess|Tag $tags Tags to set
+     *
+     * @param  string|array|ArrayAccess|Tag  $tags  Tags to set
      */
     public function setTagsAttribute(string|array|ArrayAccess|Tag $tags): void
     {
@@ -104,13 +102,13 @@ trait HasTags
 
     /**
      * Scope to include models that have ALL of the specified tags
-     * 
+     *
      * This scope ensures that models must have every single tag in the provided list.
      * Useful for finding models that match a complete set of criteria.
-     * 
-     * @param Builder $query The query builder instance
-     * @param string|array|ArrayAccess|Tag $tags Tags that must all be present
-     * @param string|null $type Optional tag type filter
+     *
+     * @param  Builder  $query  The query builder instance
+     * @param  string|array|ArrayAccess|Tag  $tags  Tags that must all be present
+     * @param  string|null  $type  Optional tag type filter
      * @return Builder Modified query builder
      */
     public function scopeWithAllTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
@@ -129,13 +127,13 @@ trait HasTags
 
     /**
      * Scope to include models that have ANY of the specified tags
-     * 
+     *
      * This scope finds models that have at least one of the provided tags.
      * Useful for broad searches where partial matches are acceptable.
-     * 
-     * @param Builder $query The query builder instance
-     * @param string|array|ArrayAccess|Tag $tags Tags to search for (any match)
-     * @param string|null $type Optional tag type filter
+     *
+     * @param  Builder  $query  The query builder instance
+     * @param  string|array|ArrayAccess|Tag  $tags  Tags to search for (any match)
+     * @param  string|null  $type  Optional tag type filter
      * @return Builder Modified query builder
      */
     public function scopeWithAnyTags(Builder $query, string|array|ArrayAccess|Tag $tags, ?string $type = null): Builder
@@ -155,13 +153,13 @@ trait HasTags
 
     /**
      * Scope to exclude models that have ANY of the specified tags
-     * 
+     *
      * This scope finds models that do not have any of the provided tags.
      * Useful for filtering out models with unwanted tags.
-     * 
-     * @param Builder $query The query builder instance
-     * @param string|array|ArrayAccess|Tag $tags Tags to exclude
-     * @param string|null $type Optional tag type filter
+     *
+     * @param  Builder  $query  The query builder instance
+     * @param  string|array|ArrayAccess|Tag  $tags  Tags to exclude
+     * @param  string|null  $type  Optional tag type filter
      * @return Builder Modified query builder
      */
     public function scopeWithAllTagsOfAnyType(Builder $query, $tags): Builder
@@ -208,8 +206,6 @@ trait HasTags
         });
     }
 
-
-
     public function tagsWithType(?string $type = null): Collection
     {
         return $this->tags->filter(fn (Tag $tag) => $tag->type === $type);
@@ -223,7 +219,7 @@ trait HasTags
         // Optimize by avoiding collect() and using direct array operations
         $tagModels = Tag::findOrCreate($tags, $type);
         $tagIds = [];
-        
+
         foreach ($tagModels as $tag) {
             $tagIds[] = $tag->id;
         }
@@ -278,7 +274,7 @@ trait HasTags
         // Optimize by avoiding collect() and using direct array operations
         $tagModels = Tag::findOrCreate($tags);
         $tagIds = [];
-        
+
         foreach ($tagModels as $tag) {
             $tagIds[] = $tag->id;
         }
@@ -290,9 +286,9 @@ trait HasTags
 
     /**
      * Synchronize tags with type filtering
-     * 
-     * @param array|ArrayAccess $tags Tags to synchronize
-     * @param string|null $type Optional tag type filter
+     *
+     * @param  array|ArrayAccess  $tags  Tags to synchronize
+     * @param  string|null  $type  Optional tag type filter
      * @return static Returns self for method chaining
      */
     public function syncTagsWithType(array|ArrayAccess $tags, ?string $type = null): static
@@ -300,7 +296,7 @@ trait HasTags
         // Optimize by avoiding collect() and using direct array operations
         $tagModels = Tag::findOrCreate($tags, $type);
         $tagIds = [];
-        
+
         foreach ($tagModels as $tag) {
             $tagIds[] = $tag->id;
         }
@@ -312,10 +308,11 @@ trait HasTags
 
     /**
      * Convert various input types to Tag models
-     * 
-     * @param mixed $values Input values to convert
-     * @param string|null $type Optional tag type filter
+     *
+     * @param  mixed  $values  Input values to convert
+     * @param  string|null  $type  Optional tag type filter
      * @return array Array of Tag models
+     *
      * @throws InvalidArgumentException When type mismatch occurs
      */
     protected static function convertToTags($values, $type = null): array
@@ -342,8 +339,8 @@ trait HasTags
 
     /**
      * Convert various input types to Tag models without type restrictions
-     * 
-     * @param mixed $values Input values to convert
+     *
+     * @param  mixed  $values  Input values to convert
      * @return array Array of Tag models
      */
     protected static function convertToTagsOfAnyType($values): array

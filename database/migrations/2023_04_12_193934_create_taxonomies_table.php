@@ -79,7 +79,6 @@ return new class extends Migration
                 $table->uuidMorphs('model');
             }
 
-            
             $table->integer('created_at')->index()->nullable();
             $table->integer('updated_at')->index()->nullable();
 

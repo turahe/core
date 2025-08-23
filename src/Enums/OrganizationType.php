@@ -6,106 +6,104 @@ namespace Turahe\Core\Enums;
 
 /**
  * Organization Type Enum
- * 
+ *
  * Defines the various types of organizations that can be represented
  * in the system. This enum provides a standardized way to categorize
  * different organizational structures and relationships.
- * 
+ *
  * Features:
  * - Categorized organization types for better organization
  * - Helper methods for type checking and grouping
  * - Optimized for performance with static caching
  * - Comprehensive documentation for each case
- * 
- * @package Turahe\Core\Enums
  */
 enum OrganizationType: string
 {
     // ========================================
     // BUSINESS ENTITIES
     // ========================================
-    
+
     /** Company or corporation entity */
     case Company = 'COMPANY';
-    
+
     /** External supplier or vendor organization */
     case Supplier = 'SUPPLIER';
-    
+
     /** Parent company that owns other companies */
     case CompanyHolding = 'COMPANY_HOLDING';
-    
+
     /** Company owned by a holding company */
     case CompanySubsidiary = 'COMPANY_SUBSIDIARY';
-    
+
     /** Business partner organization */
     case Partner = 'PARTNER';
-    
+
     /** Franchise business partner */
     case Franchisee = 'FRANCHISEE';
 
     // ========================================
     // PHYSICAL LOCATIONS
     // ========================================
-    
+
     /** Regional or local branch of a larger organization */
     case Branch = 'BRANCH';
-    
+
     /** Branch office location */
     case BranchOffice = 'BRANCH_OFFICE';
-    
+
     /** Retail or service outlet location */
     case Outlet = 'OUTLET';
-    
+
     /** Branch outlet location */
     case BranchOutlet = 'BRANCH_OUTLET';
-    
+
     /** Retail store location */
     case Store = 'STORE';
-    
+
     /** Branch store location */
     case BranchStore = 'BRANCH_STORE';
-    
+
     /** Regional organizational unit */
     case Regional = 'REGIONAL';
 
     // ========================================
     // ORGANIZATIONAL UNITS
     // ========================================
-    
+
     /** Organizational department within a company */
     case Department = 'DEPARTMENT';
-    
+
     /** Sub-department within a larger department */
     case SubDepartment = 'SUB_DEPARTMENT';
-    
+
     /** Organizational division within a company */
     case Division = 'DIVISION';
-    
+
     /** Sub-division within a larger division */
     case SubDivision = 'SUB_DIVISION';
-    
+
     /** Job title or position designation */
     case Designation = 'DESIGNATION';
 
     // ========================================
     // INSTITUTIONAL TYPES
     // ========================================
-    
+
     /** Educational or governmental institution */
     case Institution = 'INSTITUTION';
-    
+
     /** Community or social group organization */
     case Community = 'COMMUNITY';
-    
+
     /** Non-profit foundation organization */
     case Foundation = 'FOUNDATION';
-    
+
     /** Generic organization type */
     case Organization = 'ORGANIZATION';
 
     /**
      * Get all business entity types
-     * 
+     *
      * @return array<self>
      */
     public static function getBusinessEntities(): array
@@ -121,12 +119,13 @@ enum OrganizationType: string
                 self::Franchisee,
             ];
         }
+
         return $types;
     }
 
     /**
      * Get all physical location types
-     * 
+     *
      * @return array<self>
      */
     public static function getPhysicalLocations(): array
@@ -143,12 +142,13 @@ enum OrganizationType: string
                 self::Regional,
             ];
         }
+
         return $types;
     }
 
     /**
      * Get all organizational unit types
-     * 
+     *
      * @return array<self>
      */
     public static function getOrganizationalUnits(): array
@@ -163,12 +163,13 @@ enum OrganizationType: string
                 self::Designation,
             ];
         }
+
         return $types;
     }
 
     /**
      * Get all institutional types
-     * 
+     *
      * @return array<self>
      */
     public static function getInstitutionalTypes(): array
@@ -182,13 +183,12 @@ enum OrganizationType: string
                 self::Organization,
             ];
         }
+
         return $types;
     }
 
     /**
      * Check if this type is a business entity
-     * 
-     * @return bool
      */
     public function isBusinessEntity(): bool
     {
@@ -197,8 +197,6 @@ enum OrganizationType: string
 
     /**
      * Check if this type is a physical location
-     * 
-     * @return bool
      */
     public function isPhysicalLocation(): bool
     {
@@ -207,8 +205,6 @@ enum OrganizationType: string
 
     /**
      * Check if this type is an organizational unit
-     * 
-     * @return bool
      */
     public function isOrganizationalUnit(): bool
     {
@@ -217,8 +213,6 @@ enum OrganizationType: string
 
     /**
      * Check if this type is institutional
-     * 
-     * @return bool
      */
     public function isInstitutional(): bool
     {
@@ -227,8 +221,6 @@ enum OrganizationType: string
 
     /**
      * Check if this type is a branch-related type
-     * 
-     * @return bool
      */
     public function isBranchType(): bool
     {
@@ -242,8 +234,6 @@ enum OrganizationType: string
 
     /**
      * Check if this type is a sub-type (sub-department, sub-division)
-     * 
-     * @return bool
      */
     public function isSubType(): bool
     {
@@ -255,8 +245,6 @@ enum OrganizationType: string
 
     /**
      * Get the display name for this organization type
-     * 
-     * @return string
      */
     public function getDisplayName(): string
     {
@@ -288,8 +276,6 @@ enum OrganizationType: string
 
     /**
      * Get the description for this organization type
-     * 
-     * @return string
      */
     public function getDescription(): string
     {

@@ -68,6 +68,6 @@ class OrganizationTestSeeder extends Seeder
         ]);
 
         $this->command->info('Test organizations seeded successfully!');
-        $this->command->info('Created ' . Organization::count() . ' test organizations.');
+        $this->command->info('Created '.Organization::count().' test organizations.');
     }
-} 
+}

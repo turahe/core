@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Turahe\Core\Tests\Unit;
 
 use InvalidArgumentException;
-use Turahe\Core\Services\Image\ImageSignature;
 use Turahe\Core\Services\Image\Image;
+use Turahe\Core\Services\Image\ImageSignature;
 use Turahe\Core\Tests\TestCase;
 
 class ImageSignatureTest extends TestCase
@@ -17,10 +17,11 @@ class ImageSignatureTest extends TestCase
             ->disableOriginalConstructor()
             ->onlyMethods($methods)
             ->getMock();
+
         return $mock;
     }
 
-    public function testTakeReturnsSignaturePath()
+    public function test_take_returns_signature_path()
     {
         // Arrange
         $img = $this->mockImage([
@@ -43,59 +44,59 @@ class ImageSignatureTest extends TestCase
 
         $signature = new ImageSignature($img);
         $result = $signature->take();
-        
+
         $this->assertStringStartsWith('/', $result);
         $this->assertStringContainsString('.jpg', $result);
     }
 
-    public function testGetKeyThrowsExceptionOnEmptyKey()
+    public function test_get_key_throws_exception_on_empty_key()
     {
         $img = $this->mockImage();
         config(['core.imgproxy.key' => null]);
-        
+
         $signature = new ImageSignature($img);
         $this->expectException(InvalidArgumentException::class);
         $signature->getKey();
     }
 
-    public function testGetSaltThrowsExceptionOnEmptySalt()
+    public function test_get_salt_throws_exception_on_empty_salt()
     {
         $img = $this->mockImage();
         config(['core.imgproxy.salt' => null]);
-        
+
         $signature = new ImageSignature($img);
         $this->expectException(InvalidArgumentException::class);
         $signature->getSalt();
     }
 
-    public function testGetKeyThrowsExceptionOnShortKey()
+    public function test_get_key_throws_exception_on_short_key()
     {
         $img = $this->mockImage();
         config(['core.imgproxy.key' => 'short']);
-        
+
         $signature = new ImageSignature($img);
         $this->expectException(InvalidArgumentException::class);
         $signature->getKey();
     }
 
-    public function testGetSaltThrowsExceptionOnShortSalt()
+    public function test_get_salt_throws_exception_on_short_salt()
     {
         $img = $this->mockImage();
         config(['core.imgproxy.salt' => 'short']);
-        
+
         $signature = new ImageSignature($img);
         $this->expectException(InvalidArgumentException::class);
         $signature->getSalt();
     }
 
-    public function testGetEncodedUrlReturnsEncodedUrl()
+    public function test_get_encoded_url_returns_encoded_url()
     {
         $img = $this->mockImage(['getOriginalPictureUrl']);
         $img->method('getOriginalPictureUrl')->willReturn('http://example.com/image.jpg');
-        
+
         $signature = new ImageSignature($img);
         $result = $signature->getEncodedUrl();
-        
+
         $this->assertIsString($result);
         $this->assertNotEmpty($result);
         // Should be base64url encoded (no +, /, or = characters)
@@ -104,25 +105,25 @@ class ImageSignatureTest extends TestCase
         $this->assertStringNotContainsString('=', $result);
     }
 
-    public function testGetPathWithPreset()
+    public function test_get_path_with_preset()
     {
         $img = $this->mockImage(['getPreset', 'getExtension', 'getOriginalPictureUrl']);
         $img->method('getPreset')->willReturn('thumbnail');
         $img->method('getExtension')->willReturn('.jpg');
         $img->method('getOriginalPictureUrl')->willReturn('http://example.com/image.jpg');
-        
+
         $signature = new ImageSignature($img);
         $result = $signature->getPath();
-        
+
         $this->assertStringStartsWith('/thumbnail/', $result);
         $this->assertStringEndsWith('.jpg', $result);
     }
 
-    public function testGetPathWithoutPreset()
+    public function test_get_path_without_preset()
     {
         $img = $this->mockImage([
             'getPreset', 'getExtension', 'getOriginalPictureUrl',
-            'getResize', 'getWidth', 'getHeight', 'getEnlarge', 'getGravity'
+            'getResize', 'getWidth', 'getHeight', 'getEnlarge', 'getGravity',
         ]);
         $img->method('getPreset')->willReturn(null);
         $img->method('getExtension')->willReturn('.jpg');
@@ -132,11 +133,11 @@ class ImageSignatureTest extends TestCase
         $img->method('getHeight')->willReturn(100);
         $img->method('getEnlarge')->willReturn(0);
         $img->method('getGravity')->willReturn('no');
-        
+
         $signature = new ImageSignature($img);
         $result = $signature->getPath();
-        
+
         $this->assertStringStartsWith('/rs:fit:100:100:0/g:no/', $result);
         $this->assertStringEndsWith('.jpg', $result);
     }
-} 
+}

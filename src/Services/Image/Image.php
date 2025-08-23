@@ -9,11 +9,11 @@ use Illuminate\Support\Str;
 
 /**
  * Image Service Class
- * 
+ *
  * Provides image processing and manipulation capabilities for the Turahe Core package.
  * This class handles image resizing, cropping, format conversion, and preset management
  * for integration with image proxy services.
- * 
+ *
  * Features:
  * - Configurable image resizing with multiple algorithms
  * - Gravity-based cropping and positioning
@@ -21,8 +21,6 @@ use Illuminate\Support\Str;
  * - Preset-based image processing
  * - Enlarge/scale control
  * - URL generation for image proxy services
- * 
- * @package Turahe\Core\Services\Image
  */
 class Image
 {
@@ -64,15 +62,15 @@ class Image
 
     /**
      * Initialize image with custom dimensions and settings
-     * 
+     *
      * Sets up the most common resize settings with sensible defaults.
      * The image will be resized to fit within the specified dimensions
      * while maintaining aspect ratio.
-     * 
-     * @param string $path The image path or URL
-     * @param int $width The target width
-     * @param int $height The target height
-     * @param string|null $extension Optional target file extension
+     *
+     * @param  string  $path  The image path or URL
+     * @param  int  $width  The target width
+     * @param  int  $height  The target height
+     * @param  string|null  $extension  Optional target file extension
      * @return Image Returns self for method chaining
      */
     public function make(string $path, int $width, int $height, $extension = null)
@@ -91,14 +89,14 @@ class Image
 
     /**
      * Initialize image with a predefined preset
-     * 
+     *
      * Sets up the image using a predefined preset configuration instead
      * of custom dimensions. This is useful for consistent image processing
      * across an application.
-     * 
-     * @param string $path The image path or URL
-     * @param string $preset The preset name to use
-     * @param string|null $extension Optional target file extension
+     *
+     * @param  string  $path  The image path or URL
+     * @param  string  $preset  The preset name to use
+     * @param  string|null  $extension  Optional target file extension
      * @return Image Returns self for method chaining
      */
     public function makePreset(string $path, string $preset, $extension = null)
@@ -112,7 +110,7 @@ class Image
 
     /**
      * Get the current preset name
-     * 
+     *
      * @return string|null The current preset name or null if not set
      */
     public function getPreset()
@@ -122,8 +120,8 @@ class Image
 
     /**
      * Set the preset name for predefined image processing
-     * 
-     * @param string $preset The preset name to use
+     *
+     * @param  string  $preset  The preset name to use
      * @return Image Returns self for method chaining
      */
     public function setPreset($preset)
@@ -135,8 +133,8 @@ class Image
 
     /**
      * Set the resize algorithm for image processing
-     * 
-     * @param string|null $resize The resize algorithm to use
+     *
+     * @param  string|null  $resize  The resize algorithm to use
      * @return Image Returns self for method chaining
      */
     public function setResize(?string $resize = null): self
@@ -160,8 +158,8 @@ class Image
 
     /**
      * Set the target width for image processing
-     * 
-     * @param int $width The target width
+     *
+     * @param  int  $width  The target width
      * @return Image Returns self for method chaining
      */
     public function setWidth(int $width = 1): self
@@ -185,8 +183,8 @@ class Image
 
     /**
      * Set the target height for image processing
-     * 
-     * @param int $height The target height
+     *
+     * @param  int  $height  The target height
      * @return Image Returns self for method chaining
      */
     public function setHeight(int $height = 1): self
@@ -210,8 +208,8 @@ class Image
 
     /**
      * Set the gravity position for image cropping
-     * 
-     * @param string|null $gravity The gravity position
+     *
+     * @param  string|null  $gravity  The gravity position
      * @return Image Returns self for method chaining
      */
     public function setGravity(?string $gravity = null): self
@@ -235,8 +233,8 @@ class Image
 
     /**
      * Set the enlargement factor for image processing
-     * 
-     * @param int $enlarge The enlargement factor
+     *
+     * @param  int  $enlarge  The enlargement factor
      * @return Image Returns self for method chaining
      */
     public function setEnlarge(int $enlarge = 0): self
@@ -254,9 +252,10 @@ class Image
 
     /**
      * Set the target file extension for image processing
-     * 
-     * @param string|false|null $extension The target file extension
+     *
+     * @param  string|false|null  $extension  The target file extension
      * @return Image Returns self for method chaining
+     *
      * @throws Exception When invalid extension is provided
      */
     public function setExtension($extension): self
@@ -264,7 +263,7 @@ class Image
         // Cache config values to avoid repeated calls
         static $defaultExtension = null;
         static $formats = null;
-        
+
         if ($defaultExtension === null) {
             $defaultExtension = config('core.imgproxy.default_extension');
             $formats = config('core.imgproxy.formats');
@@ -273,15 +272,15 @@ class Image
         if ($extension === null) {
             $extension = $defaultExtension;
         }
-        
+
         if ($extension !== false) {
             $extension = Str::lower($extension);
-            
-            if (!in_array($extension, $formats)) {
+
+            if (! in_array($extension, $formats)) {
                 throw new Exception("Invalid extension: {$extension}");
             }
         }
-        
+
         $this->extension = $extension ?: '';
 
         return $this;
