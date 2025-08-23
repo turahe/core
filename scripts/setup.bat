@@ -3,26 +3,11 @@ REM Turahe Core Local Setup Script for Windows
 
 echo 🚀 Setting up Turahe Core local environment...
 
-REM Create .env file if it doesn't exist
-if not exist .env (
-    echo 📝 Creating .env file for testing...
-    (
-        echo APP_ENV=testing
-        echo APP_KEY=base64:12345678901234567890123456789012=
-        echo DB_CONNECTION=sqlite
-        echo DB_DATABASE=database/database.sqlite
-        echo CACHE_DRIVER=array
-        echo SESSION_DRIVER=array
-        echo QUEUE_CONNECTION=sync
-        echo CORE_TABLE_USE_TIMESTAMPS=false
-        echo USERSTAMPS_USERS_TABLE_COLUMN_TYPE=ulid
-        echo REDIS_HOST=127.0.0.1
-        echo REDIS_PORT=6379
-        echo REDIS_DB=0
-    ) > .env
-    echo ✅ .env file created
-) else (
+REM Check if .env file exists
+if exist .env (
     echo ℹ️  .env file already exists
+) else (
+    echo ℹ️  No .env file found - using phpunit.xml configuration
 )
 
 REM Setup SQLite database for testing
@@ -42,14 +27,14 @@ echo.
 echo 🎉 Setup complete!
 echo.
 echo 📊 Database Information:
-echo    Type: SQLite
-echo    File: database/database.sqlite
+echo    Type: SQLite (in-memory)
+echo    Configuration: phpunit.xml
 echo    Testing: In-memory SQLite
 echo.
 echo 🧪 Testing Information:
 echo    Framework: PHPUnit
-echo    Database: SQLite in-memory
-echo    Cache: Array driver
+echo    Configuration: phpunit.xml
+echo    Cache: Array driver (in-memory)
 echo.
 echo 🔧 Useful Commands:
 echo    Run tests: vendor\bin\phpunit

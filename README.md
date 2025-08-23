@@ -365,11 +365,7 @@ cd core
 # Install dependencies
 composer install
 
-# Setup testing environment
-cp .env.example .env
-php artisan key:generate
-
-# Run tests
+# Run tests (no .env file needed)
 vendor/bin/phpunit
 ```
 

@@ -112,11 +112,12 @@ After running tests with coverage, reports are generated in the `coverage/` dire
 
 ## 🔧 Configuration
 
-All scripts use the project's `phpunit.xml` configuration file. The testing environment is configured for:
+All scripts use the project's `phpunit.xml` configuration file. No `.env` file is required for testing. The testing environment is configured for:
 - **Database**: SQLite in-memory for fast testing
 - **Cache**: Array driver for testing (no external cache service)
 - **Session**: Array driver for testing (no file system dependency)
 - **Queue**: Sync driver for testing (no external queue service)
+- **Environment**: All settings defined in phpunit.xml
 
 ## 🐛 Troubleshooting
 
