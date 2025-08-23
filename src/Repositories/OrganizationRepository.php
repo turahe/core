@@ -15,75 +15,45 @@ class OrganizationRepository extends BaseRepository implements OrganizationRepos
     public function __construct(Organization $model)
     {
         parent::__construct($model);
-        $this->model = $model;
-
     }
 
     public function getOrganizations(string $order = 'created_at', string $sort = 'desc', $except = []): Collection
     {
-        return $this->model->orderBy($order, $sort)->get()->except($except);
+        return $this->getAll($order, $sort)->except($except);
     }
 
     public function getOrganization(string $id): Organization
     {
-        try {
-            return $this->model->findOrFail($id);
-        } catch (ModelNotFoundException $exception) {
-            throw new ModelNotFoundException($exception->getMessage());
-        }
+        return $this->model->findOrFail($id);
     }
 
     public function getOrganizationByName(string $name): Organization
     {
-        try {
-            return $this->model->where('name', $name)->firstOrFail();
-        } catch (ModelNotFoundException $exception) {
-            throw new ModelNotFoundException($exception->getMessage());
-        }
+        return $this->model->where('name', $name)->firstOrFail();
     }
 
     public function getOrganizationBySlug(string $slug): Organization
     {
-        try {
-            return $this->model->where('slug', $slug)->firstOrFail();
-        } catch (ModelNotFoundException $exception) {
-            throw new ModelNotFoundException($exception->getMessage());
-        }
+        return $this->model->where('slug', $slug)->firstOrFail();
     }
 
     public function createOrganization(array $attributes): Organization
     {
-        try {
-            return $this->model->create($attributes);
-        } catch (ModelNotFoundException $exception) {
-            throw new \Exception($exception->getMessage());
-        }
+        return $this->model->create($attributes);
     }
 
     public function updateOrganization(array $attributes): bool
     {
-        try {
-            return $this->model->update($attributes);
-        } catch (QueryException $exception) {
-            throw new \Exception($exception->getMessage());
-        }
+        return $this->model->update($attributes);
     }
 
     public function deleteOrganization(): bool
     {
-        try {
-            return $this->model->forceDelete();
-        } catch (QueryException $exception) {
-            throw new \Exception($exception->getMessage());
-        }
+        return $this->model->forceDelete();
     }
 
     public function trashOrganization(): bool
     {
-        try {
-            return $this->model->delete();
-        } catch (QueryException $exception) {
-            throw new \Exception($exception->getMessage());
-        }
+        return $this->model->delete();
     }
 }

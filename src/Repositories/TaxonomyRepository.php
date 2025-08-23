@@ -17,8 +17,6 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
     public function __construct(Taxonomy $model)
     {
         parent::__construct($model);
-        $this->model = $model;
-
     }
 
     public function getTaxonomiesBuilder(string $order = 'created_at', string $sort = 'desc'): Builder
@@ -28,48 +26,24 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
 
     public function getTaxonomies(string $order = 'created_at', string $sort = 'desc', $except = []): Collection
     {
-        return $this->getTaxonomiesBuilder($order, $sort)->get()->except($except);
+        return $this->getAll($order, $sort)->except($except);
     }
 
-    /**
-     * @throws Exception
-     */
     public function getTaxonomy(string $id): Taxonomy
     {
-        try {
-            return $this->model->findOrFail($id);
-        } catch (ModelNotFoundException $exception) {
-            throw new ModelNotFoundException($exception->getMessage());
-        }
+        return $this->model->findOrFail($id);
     }
 
-    /**
-     * @throws Exception
-     */
     public function getTaxonomyByName(string $name): Taxonomy
     {
-        try {
-            return $this->model->where('name', $name)->firstOrFail();
-        } catch (ModelNotFoundException $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return $this->model->where('name', $name)->firstOrFail();
     }
 
-    /**
-     * @throws Exception
-     */
     public function getTaxonomyBySlug(string $slug): Taxonomy
     {
-        try {
-            return $this->model->where('slug', $slug)->firstOrFail();
-        } catch (ModelNotFoundException $exception) {
-            throw new ModelNotFoundException($exception->getMessage());
-        }
+        return $this->model->where('slug', $slug)->firstOrFail();
     }
 
-    /**
-     * @throws Exception
-     */
     public function createTaxonomy(string $name, ?string $code = null, Taxonomy|string|int|null $parent = null, ?string $description = null): Taxonomy
     {
         if ($parent instanceof Taxonomy) {
@@ -82,11 +56,7 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
             'description' => $description,
         ];
 
-        try {
-            return $this->model->create($data);
-        } catch (QueryException $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return $this->model->create($data);
     }
 
     /**
@@ -111,11 +81,6 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
         return $terms;
     }
 
-    /**
-     * @return mixed
-     *
-     * @throws Exception
-     */
     public function updateTaxonomy(string $name, ?string $code, Taxonomy|string|int|null $parent = null, $description = null): bool
     {
         if ($parent instanceof Taxonomy) {
@@ -128,33 +93,16 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
             'description' => $description,
         ];
 
-        try {
-            return $this->model->update(array_filter($data));
-        } catch (QueryException $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return $this->model->update(array_filter($data));
     }
 
-    /**
-     * @return mixed
-     *
-     * @throws Exception
-     */
     public function deleteTaxonomy(): bool
     {
-        try {
-            return $this->model->forceDelete();
-        } catch (QueryException $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return $this->model->forceDelete();
     }
 
     public function trashTaxonomy(): bool
     {
-        try {
-            return $this->model->delete();
-        } catch (QueryException $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return $this->model->delete();
     }
 }
