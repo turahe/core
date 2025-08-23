@@ -91,7 +91,12 @@ For comprehensive documentation, guides, and technical details, visit the [docs/
 DB_CONNECTION=sqlite
 DB_DATABASE=database/database.sqlite
 
-# Redis Configuration (Optional)
+# Cache Configuration (Array driver for testing)
+CACHE_DRIVER=array
+SESSION_DRIVER=array
+QUEUE_CONNECTION=sync
+
+# Redis Configuration (Optional, for production)
 REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null
 REDIS_PORT=6379
@@ -330,6 +335,7 @@ vendor/bin/phpunit --coverage-html coverage-report
 ### Testing Environment
 - **PHP 8.4+**: Required for development
 - **SQLite**: In-memory database for testing
+- **Array Cache**: In-memory cache driver for testing
 - **Xdebug**: Required for coverage reports
 - **Composer**: Dependency management
 

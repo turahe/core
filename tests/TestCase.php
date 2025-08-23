@@ -44,6 +44,16 @@ class TestCase extends \Orchestra\Testbench\TestCase
         
         // Use array cache for all testing
         $app['config']->set('cache.default', 'array');
+        $app['config']->set('cache.stores.array', [
+            'driver' => 'array',
+            'serialize' => false,
+        ]);
+        
+        // Set session driver to array for testing
+        $app['config']->set('session.driver', 'array');
+        
+        // Set queue connection to sync for testing
+        $app['config']->set('queue.default', 'sync');
         
         // Set core configuration from config/core.php
         $app['config']->set('core.table.use_timestamps', env('CORE_TABLE_USE_TIMESTAMPS', false));

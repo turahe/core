@@ -9,16 +9,10 @@
         <env name="DB_CONNECTION" value="sqlite"/>
         <env name="DB_DATABASE" value=":memory:"/>
         
-        <!-- Redis Configuration for Testing -->
-        <env name="REDIS_HOST" value="127.0.0.1"/>
-        <env name="REDIS_PASSWORD" value=""/>
-        <env name="REDIS_PORT" value="6379"/>
-        <env name="REDIS_DB" value="1"/>
-        
         <!-- Application Configuration -->
         <env name="APP_NAME" value="Turahe Core"/>
         <env name="APP_ENV" value="testing"/>
-        <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8="/>
+        <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2RI8="/>
         <env name="APP_DEBUG" value="true"/>
         <env name="APP_URL" value="http://localhost"/>
         
@@ -28,9 +22,9 @@
         <!-- User Stamps Configuration -->
         <env name="USERSTAMPS_USERS_TABLE_COLUMN_TYPE" value="ulid"/>
         
-        <!-- Cache Configuration -->
-        <env name="CACHE_DRIVER" value="redis"/>
-        <env name="SESSION_DRIVER" value="file"/>
+        <!-- Cache Configuration - Array Driver for Testing -->
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         
         <!-- Logging Configuration -->

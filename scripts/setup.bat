@@ -16,6 +16,9 @@ if not exist .env (
         echo QUEUE_CONNECTION=sync
         echo CORE_TABLE_USE_TIMESTAMPS=false
         echo USERSTAMPS_USERS_TABLE_COLUMN_TYPE=ulid
+        echo REDIS_HOST=127.0.0.1
+        echo REDIS_PORT=6379
+        echo REDIS_DB=0
     ) > .env
     echo ✅ .env file created
 ) else (

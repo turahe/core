@@ -94,6 +94,7 @@ scripts\setup.bat
 - Composer installed
 - PHPUnit available via Composer
 - SQLite support (for in-memory testing)
+- Array cache driver (no external cache service required)
 
 ### Coverage Analysis
 - Xdebug extension enabled
@@ -113,9 +114,9 @@ After running tests with coverage, reports are generated in the `coverage/` dire
 
 All scripts use the project's `phpunit.xml` configuration file. The testing environment is configured for:
 - **Database**: SQLite in-memory for fast testing
-- **Cache**: Array driver for testing
-- **Session**: File driver for testing
-- **Queue**: Sync driver for testing
+- **Cache**: Array driver for testing (no external cache service)
+- **Session**: Array driver for testing (no file system dependency)
+- **Queue**: Sync driver for testing (no external queue service)
 
 ## 🐛 Troubleshooting
 
@@ -150,3 +151,6 @@ When updating scripts:
 - **No network issues**: All dependencies local
 - **Simpler setup**: No Docker installation required
 - **Better IDE integration**: Direct file access
+- **No external services**: Array cache, in-memory database, sync queues
+- **Instant startup**: No service initialization delays
+- **Consistent behavior**: Same environment across all platforms
