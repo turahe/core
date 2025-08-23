@@ -24,27 +24,26 @@ RUN docker-php-ext-install \
     pcntl \
     bcmath \
     gd \
-    zip \
-    intl
+    zip
 
 # Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
 
+# Install Xdebug for coverage testing
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Set build arguments for Laravel and Testbench versions
-ARG LARAVEL_VERSION=^12.0
-ARG TESTBENCH_VERSION=^10.0
 
 # Set working directory
 WORKDIR /app
 
-# Copy composer files
+# Copy composer files first for better caching
 COPY composer.json composer.lock* ./
 
-# Install dependencies (including dev dependencies for testing)
-RUN composer install --ignore-platform-reqs
+# Install dependencies with retry mechanism and better timeout
+RUN composer install --ignore-platform-reqs --no-interaction --prefer-dist --optimize-autoloader \
+    --timeout=600 --retry=3
 
 # Copy application code
 COPY . .
@@ -62,6 +61,8 @@ ENV CACHE_DRIVER=array
 ENV SESSION_DRIVER=array
 ENV QUEUE_CONNECTION=sync
 ENV APP_ENV=testing
+ENV XDEBUG_MODE=coverage
+ENV XDEBUG_CONFIG="client_host=host.docker.internal"
 
 # Set permissions
 RUN chmod -R 755 /app

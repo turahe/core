@@ -74,6 +74,15 @@ php artisan vendor:publish --provider="Turahe\Core\CoreServiceProvider"
 php artisan migrate
 ```
 
+## 📚 Documentation
+
+For comprehensive documentation, guides, and technical details, visit the [docs/](docs/) directory:
+
+- **[📖 Documentation Index](docs/README.md)** - Complete documentation overview
+- **[🧪 Testing Guide](docs/TESTING_SUMMARY.md)** - Testing setup and guidelines
+- **[🐳 Docker Setup](docs/docker.md)** - Docker configuration and deployment
+- **[🔧 Scripts & Tools](scripts/README.md)** - Utility scripts and automation
+
 ## ⚙️ Configuration
 
 ### Environment Variables
