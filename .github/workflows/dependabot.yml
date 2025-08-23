@@ -22,7 +22,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_sqlite
+          extensions: intl, iconv, mbstring, xml, ctype, json
           tools: composer:v2
 
       - name: Install dependencies
@@ -30,8 +30,8 @@ jobs:
 
       - name: Setup test environment
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          # SQLite in-memory database - no file needed
+          echo "Test environment ready for SQLite in-memory"
 
       - name: Execute tests
         run: vendor/bin/phpunit

@@ -5,6 +5,9 @@ REM This script runs PHPUnit with comprehensive coverage reporting
 echo 🧪 Running PHPUnit with Coverage Analysis...
 echo =============================================
 
+REM Set Xdebug mode for coverage
+set XDEBUG_MODE=coverage
+
 REM Ensure coverage directory exists
 if not exist coverage mkdir coverage
 

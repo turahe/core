@@ -1,12 +1,11 @@
 # Turahe Core
 
-[![PHP Composer](https://github.com/turahe/core/actions/workflows/php.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/php.yml)
-[![CI with Docker](https://github.com/turahe/core/actions/workflows/ci-docker.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/ci-docker.yml)
+[![CI](https://github.com/turahe/core/actions/workflows/ci.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue.svg)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/Laravel-10%2B-red.svg)](https://laravel.com)
-[![Packagist](https://img.shields.io/packagist/v/turahe/core.svg)](https://packagist.org/packages/turahe/core)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/turahe/core.svg)](https://packagist.org/packages/turahe/core)
+[![PHP Version](https://img.shields.io/badge/PHP-8.4%2B-blue.svg)](https://php.net)
+[![Laravel Version](https://img.shields.io/badge/Laravel-12%2B-red.svg)](https://laravel.com)
+[![Packagist](https://img.shields.io/badge/Packagist-turahe%2Fcore-blue.svg)](https://packagist.org/packages/turahe/core)
+[![Packagist Downloads](https://img.shields.io/badge/Downloads-0-blue.svg)](https://packagist.org/packages/turahe/core)
 
 A comprehensive Laravel package providing core functionality for modern web applications including image processing, OAuth integration, taxonomy management, organization handling, and utility helpers.
 
@@ -54,10 +53,10 @@ A comprehensive Laravel package providing core functionality for modern web appl
 ## 📦 Installation
 
 ### Requirements
-- PHP 8.3 or higher
-- Laravel 10
+- PHP 8.4 or higher
+- Laravel 12
 - SQLite (for testing)
-- Redis (optional, for caching)
+- Redis (optional, for production caching)
 
 ### Via Composer
 ```bash
@@ -91,7 +90,7 @@ For comprehensive documentation, guides, and technical details, visit the [docs/
 DB_CONNECTION=sqlite
 DB_DATABASE=database/database.sqlite
 
-# Cache Configuration (Array driver for testing)
+# Cache Configuration (Array driver for testing, Redis for production)
 CACHE_DRIVER=array
 SESSION_DRIVER=array
 QUEUE_CONNECTION=sync
@@ -315,8 +314,28 @@ vendor/bin/phpunit --coverage-html coverage-report
 
 ### Test Coverage
 - **Unit Tests**: 196 tests with 418 assertions
-- **Feature Tests**: Database integration and trait testing
+- **Feature Tests**: 250 tests with 799 assertions
+- **Total Tests**: 446 tests with 1,217 assertions
 - **Coverage**: Comprehensive coverage of all package features
+- **Database**: SQLite in-memory for fast, isolated testing
+
+## 🧪 Testing & Quality
+
+### Current Status ✅
+- **All 446 tests passing** with comprehensive coverage
+- **SQLite in-memory database** for fast, isolated testing
+- **No environment variables needed** - all configuration is hardcoded
+- **Xdebug coverage** working correctly
+- **GitHub Actions CI** fully functional with SQLite-only setup
+- **UserStamps integration** working with ULID primary keys
+- **Eloquent relationships** properly tested and validated
+
+### Test Suites
+- **Unit Tests**: Core functionality, models, repositories, services
+- **Feature Tests**: Database integration, traits, migrations
+- **Migration Tests**: All database schema variations (ULID, UUID, BigIncrements)
+- **Repository Tests**: CRUD operations and custom methods
+- **Trait Tests**: HasOrganization, HasSettings, HasTags, HasTaxonomies
 
 ## 🧪 Local Development
 
@@ -334,19 +353,23 @@ vendor/bin/phpunit --coverage-html coverage-report
 
 ### Testing Environment
 - **PHP 8.4+**: Required for development
-- **SQLite**: In-memory database for testing
+- **SQLite**: In-memory database for testing (no file setup needed)
 - **Array Cache**: In-memory cache driver for testing
 - **Xdebug**: Required for coverage reports
 - **Composer**: Dependency management
+- **No .env file needed**: All configuration is hardcoded in TestCase.php
 
 ## 📊 CI/CD
 
 The package includes comprehensive GitHub Actions workflows:
 
-- **PHP Tests**: Multi-version PHP/Laravel matrix testing
-- **Code Quality**: PHPStan, Psalm, Laravel Pint
-- **Security**: Security checker and vulnerability scanning
-- **Package Testing**: Installation and integration testing
+- **CI Tests**: PHP 8.4 + Laravel 12 testing with SQLite in-memory
+- **Code Quality**: Laravel Pint, PHP syntax checking, Composer validation
+- **Security**: Composer audit for vulnerability scanning
+- **Package Testing**: Installation and integration testing in fresh Laravel projects
+- **Coverage**: Xdebug coverage reports uploaded to Codecov
+- **Dependabot**: Automated dependency updates with testing
+- **Releases**: Automated releases with changelog generation
 
 ## 🤝 Contributing
 
@@ -365,8 +388,12 @@ cd core
 # Install dependencies
 composer install
 
-# Run tests (no .env file needed)
+# Run tests (no .env file needed - uses SQLite in-memory)
 vendor/bin/phpunit
+
+# Run tests with coverage
+scripts/coverage.bat  # Windows
+scripts/coverage.sh   # Linux/macOS
 ```
 
 ## 📝 License

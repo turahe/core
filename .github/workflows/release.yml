@@ -18,7 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_sqlite
+          extensions: intl, iconv, mbstring, xml, ctype, json
           tools: composer:v2
 
       - name: Install dependencies
@@ -26,8 +26,8 @@ jobs:
 
       - name: Setup test environment
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          # SQLite in-memory database - no file needed
+          echo "Test environment ready for SQLite in-memory"
 
       - name: Execute tests
         run: vendor/bin/phpunit
@@ -83,6 +83,7 @@ jobs:
           echo "### 🧪 Testing" >> CHANGELOG.md
           echo "- Full test coverage of all components" >> CHANGELOG.md
           echo "- PHP 8.4 + Laravel 12 support" >> CHANGELOG.md
+          echo "- SQLite in-memory database for fast testing" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "### 📦 Installation" >> CHANGELOG.md
           echo "```bash" >> CHANGELOG.md

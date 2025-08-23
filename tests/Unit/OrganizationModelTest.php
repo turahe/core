@@ -80,6 +80,7 @@ class OrganizationModelTest extends TestCase
             'code',
             'type',
             'slug',
+            'parent_id',
         ];
         
         $this->assertEquals($expectedFillable, $organization->getFillable());

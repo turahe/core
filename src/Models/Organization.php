@@ -67,6 +67,7 @@ class Organization extends Model implements Sortable
         'code',
         'type',
         'slug',
+        'parent_id',
     ];
 
     protected $table;

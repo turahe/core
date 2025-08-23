@@ -16,15 +16,18 @@ return new class extends Migration
         Schema::create(config('core.tables.oauth_accounts'), function (Blueprint $table): void {
             if (config('userstamps.users_table_column_type') === 'bigincrements') {
                 $table->id();
-                $table->foreignIdFor(config('auth.providers.users.model', \App\Models\User::class), 'user_id');
+                $table->foreignId('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'ulid') {
                 $table->ulid('id')->primary();
-                $table->foreignUlidFor(config('auth.providers.users.model', \App\Models\User::class), 'user_id');
+                $table->ulid('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             }
             if (config('userstamps.users_table_column_type') === 'uuid') {
                 $table->uuid('id')->primary();
-                $table->foreignUuidFor(config('auth.providers.users.model', \App\Models\User::class), 'user_id');
+                $table->uuid('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             }
 
             $table->string('type');

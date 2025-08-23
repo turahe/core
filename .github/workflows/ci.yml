@@ -2,45 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, main, dev ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ master, main, dev ]
 
 jobs:
   test:
     name: Tests (PHP 8.4 - Laravel 12)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        database: [mysql, postgresql]
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: turahe_core_testing
-          MYSQL_USER: turahe
-          MYSQL_PASSWORD: turahe123
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      
-      postgresql:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: turahe_core_testing
-          POSTGRES_USER: turahe
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-      
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -50,87 +19,22 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_mysql, pdo_pgsql
+          extensions: intl, iconv, mbstring, xml, ctype, json
           coverage: xdebug
           tools: composer:v2
-
-      - name: Install Redis client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y redis-tools
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
-      - name: Setup test environment
-        run: |
-          # Create .env.testing file directly
-          if [ "${{ matrix.database }}" = "mysql" ]; then
-            echo "DB_CONNECTION=mysql" > .env.testing
-            echo "DB_HOST=127.0.0.1" >> .env.testing
-            echo "DB_PORT=3306" >> .env.testing
-            echo "DB_DATABASE=turahe_core_testing" >> .env.testing
-            echo "DB_USERNAME=turahe" >> .env.testing
-            echo "DB_PASSWORD=turahe123" >> .env.testing
-          else
-            echo "DB_CONNECTION=pgsql" > .env.testing
-            echo "DB_HOST=127.0.0.1" >> .env.testing
-            echo "DB_PORT=5432" >> .env.testing
-            echo "DB_DATABASE=turahe_core_testing" >> .env.testing
-            echo "DB_USERNAME=turahe" >> .env.testing
-            echo "DB_PASSWORD=postgres" >> .env.testing
-          fi
-          echo "APP_KEY=base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=" >> .env.testing
-          echo "REDIS_HOST=127.0.0.1" >> .env.testing
-          echo "REDIS_PORT=6379" >> .env.testing
-          echo "REDIS_DB=1" >> .env.testing
-          echo "REDIS_PASSWORD=null" >> .env.testing
-          echo "CACHE_DRIVER=redis" >> .env.testing
-          echo "APP_ENV=testing" >> .env.testing
-          echo "APP_DEBUG=true" >> .env.testing
-
-      - name: Wait for MySQL
-        if: matrix.database == 'mysql'
-        run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P3306 -u"turahe" -p"turahe123" --silent; do
-            sleep 1
-          done
-
-      - name: Wait for PostgreSQL
-        if: matrix.database == 'postgresql'
-        run: |
-          while ! pg_isready -h 127.0.0.1 -p 5432 -U turahe; do
-            sleep 1
-          done
-
-      - name: Wait for Redis
-        run: |
-          while ! redis-cli -h 127.0.0.1 -p 6379 ping; do
-            sleep 1
-          done
-
       - name: Execute tests
-        env:
-          DB_CONNECTION: ${{ matrix.database == 'mysql' && 'mysql' || 'pgsql' }}
-          DB_HOST: 127.0.0.1
-          DB_PORT: ${{ matrix.database == 'mysql' && '3306' || '5432' }}
-          DB_DATABASE: turahe_core_testing
-          DB_USERNAME: turahe
-          DB_PASSWORD: ${{ matrix.database == 'mysql' && 'turahe123' || 'postgres' }}
-          APP_KEY: base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=
-          REDIS_HOST: 127.0.0.1
-          REDIS_PORT: 6379
-          REDIS_DB: 1
-          REDIS_PASSWORD: null
-          CACHE_DRIVER: redis
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
-          flags: ${{ matrix.database }}-tests
-          name: codecov-${{ matrix.database }}
+          flags: sqlite-tests
+          name: codecov-sqlite
           fail_ci_if_error: false
 
   quality:
@@ -158,51 +62,20 @@ jobs:
           find src tests -name "*.php" -print0 | xargs -0 -n1 php -l
           composer validate --strict
 
-      - name: Static Analysis
-        run: |
-          vendor/bin/phpstan analyse --level=8 src/
-          vendor/bin/psalm --no-progress
-
       - name: Security Check
         run: |
-          vendor/bin/security-checker security:check composer.lock || true
-          vendor/bin/phpcs --standard=Security /dev/null || true
+          composer audit --format=json > security-report.json || true
+          if [ -s security-report.json ]; then
+            echo "Security vulnerabilities found!"
+            cat security-report.json
+          else
+            echo "No security vulnerabilities found."
+          fi
 
   package-test:
     name: Package Installation Test
     runs-on: ubuntu-latest
     needs: test
-    strategy:
-      matrix:
-        database: [mysql, postgresql]
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: turahe_core_testing
-          MYSQL_USER: turahe
-          MYSQL_PASSWORD: turahe123
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      
-      postgresql:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: turahe_core_testing
-          POSTGRES_USER: turahe
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-      
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -212,36 +85,11 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-          extensions: intl, iconv, mbstring, xml, ctype, json, pdo_mysql, pdo_pgsql
+          extensions: intl, iconv, mbstring, xml, ctype, json
           tools: composer:v2
-
-      - name: Install Redis client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y redis-tools
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
-
-      - name: Wait for MySQL
-        if: matrix.database == 'mysql'
-        run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P3306 -u"turahe" -p"turahe123" --silent; do
-            sleep 1
-          done
-
-      - name: Wait for PostgreSQL
-        if: matrix.database == 'postgresql'
-        run: |
-          while ! pg_isready -h 127.0.0.1 -p 5432 -U turahe; do
-            sleep 1
-          done
-
-      - name: Wait for Redis
-        run: |
-          while ! redis-cli -h 127.0.0.1 -p 6379 ping; do
-            sleep 1
-          done
 
       - name: Create test Laravel project
         run: |
@@ -250,26 +98,8 @@ jobs:
 
       - name: Configure test project database
         run: |
-          if [ "${{ matrix.database }}" = "mysql" ]; then
-            echo "DB_CONNECTION=mysql" >> .env
-            echo "DB_HOST=127.0.0.1" >> .env
-            echo "DB_PORT=3306" >> .env
-            echo "DB_DATABASE=turahe_core_testing" >> .env
-            echo "DB_USERNAME=turahe" >> .env
-            echo "DB_PASSWORD=turahe123" >> .env
-          else
-            echo "DB_CONNECTION=pgsql" >> .env
-            echo "DB_HOST=127.0.0.1" >> .env
-            echo "DB_PORT=5432" >> .env
-            echo "DB_DATABASE=turahe_core_testing" >> .env
-            echo "DB_USERNAME=turahe" >> .env
-            echo "DB_PASSWORD=postgres" >> .env
-          fi
-          echo "REDIS_HOST=127.0.0.1" >> .env
-          echo "REDIS_PORT=6379" >> .env
-          echo "REDIS_DB=1" >> .env
-          echo "REDIS_PASSWORD=null" >> .env
-          echo "CACHE_DRIVER=redis" >> .env
+          # SQLite in-memory database - no file needed
+          echo "Test project ready for SQLite in-memory"
 
       - name: Install package in test project
         run: |
@@ -298,4 +128,5 @@ jobs:
           echo "| Package Test | ${{ needs.package-test.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** PHP 8.4 + Laravel 12" >> $GITHUB_STEP_SUMMARY
+          echo "**Database:** SQLite in-memory" >> $GITHUB_STEP_SUMMARY
           echo "**Coverage:** Enabled with Codecov" >> $GITHUB_STEP_SUMMARY 

@@ -227,11 +227,11 @@ class HasTagsTest extends TestCase
             'tags' => ['tagA', 'tagB', 'tagC'],
         ]);
 
-        $testModels = DummyTag::withAnyTags('tagB');
+        $testModels = DummyTag::withAnyTags(['tagB']);
 
         $this->assertEquals(['model2', 'model3'], $testModels->pluck('name')->toArray());
 
-        $testModels = DummyTag::withAllTags('tagB');
+        $testModels = DummyTag::withAllTags(['tagB']);
 
         $this->assertEquals(['model2', 'model3'], $testModels->pluck('name')->toArray());
     }
@@ -291,7 +291,7 @@ class HasTagsTest extends TestCase
     {
         $this->testModel->attachTags(['tag1', 'tag2', 'tag3']);
 
-        $this->testModel->syncTags('tag3');
+        $this->testModel->syncTags(['tag3']);
 
         $this->assertEquals(['tag3'], $this->testModel->tags->pluck('name')->toArray());
     }

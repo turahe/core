@@ -99,6 +99,16 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
+     * Get cache TTL for this repository
+     * 
+     * @return int
+     */
+    public function getCacheTtl(): int
+    {
+        return $this->cacheTtl;
+    }
+
+    /**
      * Generate cache key for repository methods
      * 
      * @param string $method Method name

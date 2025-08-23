@@ -6,6 +6,7 @@ namespace Turahe\Core\Tests\Unit\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
+use Turahe\Core\Enums\OrganizationType;
 use Turahe\Core\Models\Organization;
 use Turahe\Core\Repositories\OrganizationRepository;
 use Turahe\Core\Tests\TestCase;
@@ -29,13 +30,13 @@ class OrganizationRepositoryTest extends TestCase
         Organization::create([
             'name' => 'Organization 1',
             'slug' => 'org-1',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         Organization::create([
             'name' => 'Organization 2',
             'slug' => 'org-2',
-            'type' => 'nonprofit'
+            'type' => 'ORGANIZATION'
         ]);
         
         $result = $this->repository->getOrganizations('created_at', 'desc');
@@ -49,13 +50,13 @@ class OrganizationRepositoryTest extends TestCase
         $org1 = Organization::create([
             'name' => 'Organization 1',
             'slug' => 'org-1',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $org2 = Organization::create([
             'name' => 'Organization 2',
             'slug' => 'org-2',
-            'type' => 'nonprofit'
+            'type' => 'ORGANIZATION'
         ]);
         
         $result = $this->repository->getOrganizations('created_at', 'desc', [$org1->id]);
@@ -71,7 +72,7 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Test Organization',
             'slug' => 'test-org',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $result = $this->repository->getOrganization($org->id);
@@ -93,7 +94,7 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Unique Organization',
             'slug' => 'unique-org',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $result = $this->repository->getOrganizationByName('Unique Organization');
@@ -115,7 +116,7 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Slug Organization',
             'slug' => 'slug-org',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $result = $this->repository->getOrganizationBySlug('slug-org');
@@ -137,7 +138,7 @@ class OrganizationRepositoryTest extends TestCase
         $attributes = [
             'name' => 'New Organization',
             'slug' => 'new-org',
-            'type' => 'startup'
+            'type' => 'COMPANY'
         ];
         
         $result = $this->repository->createOrganization($attributes);
@@ -145,8 +146,12 @@ class OrganizationRepositoryTest extends TestCase
         $this->assertInstanceOf(Organization::class, $result);
         $this->assertEquals('New Organization', $result->name);
         $this->assertEquals('new-org', $result->slug);
-        $this->assertEquals('startup', $result->type);
-        $this->assertDatabaseHas('organizations', $attributes);
+        $this->assertEquals(OrganizationType::Company, $result->type);
+        $this->assertDatabaseHas('organizations', [
+            'name' => 'New Organization',
+            'slug' => 'new-org',
+            'type' => 'COMPANY'
+        ]);
     }
 
     public function test_update_organization(): void
@@ -154,14 +159,14 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'Original Name',
             'slug' => 'original-slug',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $this->repository = new OrganizationRepository($org);
         
         $attributes = [
             'name' => 'Updated Name',
-            'type' => 'nonprofit'
+            'type' => 'ORGANIZATION'
         ];
         
         $result = $this->repository->updateOrganization($attributes);
@@ -170,7 +175,7 @@ class OrganizationRepositoryTest extends TestCase
         $this->assertDatabaseHas('organizations', [
             'id' => $org->id,
             'name' => 'Updated Name',
-            'type' => 'nonprofit'
+            'type' => 'ORGANIZATION'
         ]);
     }
 
@@ -179,7 +184,7 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'To Delete',
             'slug' => 'to-delete',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $this->repository = new OrganizationRepository($org);
@@ -195,7 +200,7 @@ class OrganizationRepositoryTest extends TestCase
         $org = Organization::create([
             'name' => 'To Trash',
             'slug' => 'to-trash',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         $this->repository = new OrganizationRepository($org);
@@ -211,13 +216,13 @@ class OrganizationRepositoryTest extends TestCase
         Organization::create([
             'name' => 'A Organization',
             'slug' => 'a-org',
-            'type' => 'company'
+            'type' => 'COMPANY'
         ]);
         
         Organization::create([
             'name' => 'B Organization',
             'slug' => 'b-org',
-            'type' => 'nonprofit'
+            'type' => 'ORGANIZATION'
         ]);
         
         $result = $this->repository->getOrganizations('name', 'asc');

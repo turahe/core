@@ -304,32 +304,32 @@ class OrganizationSeederTest extends TestCase
         $types = Organization::distinct()->pluck('type')->toArray();
         
         $expectedTypes = [
-            'COMPANY',
-            'COMPANY_HOLDING',
-            'COMPANY_SUBSIDIARY',
-            'BRANCH',
-            'DEPARTMENT',
-            'SUB_DEPARTMENT',
-            'DIVISION',
-            'SUB_DIVISION',
-            'OUTLET',
-            'STORE',
-            'SUPPLIER',
-            'PARTNER',
-            'FRANCHISEE',
-            'REGIONAL',
-            'BRANCH_OFFICE',
-            'INSTITUTION',
-            'FOUNDATION',
-            'COMMUNITY',
-            'DESIGNATION',
-            'BRANCH_OUTLET',
-            'BRANCH_STORE',
-            'ORGANIZATION',
+            OrganizationType::Company,
+            OrganizationType::CompanyHolding,
+            OrganizationType::CompanySubsidiary,
+            OrganizationType::Branch,
+            OrganizationType::Department,
+            OrganizationType::SubDepartment,
+            OrganizationType::Division,
+            OrganizationType::SubDivision,
+            OrganizationType::Outlet,
+            OrganizationType::Store,
+            OrganizationType::Supplier,
+            OrganizationType::Partner,
+            OrganizationType::Franchisee,
+            OrganizationType::Regional,
+            OrganizationType::BranchOffice,
+            OrganizationType::Institution,
+            OrganizationType::Foundation,
+            OrganizationType::Community,
+            OrganizationType::Designation,
+            OrganizationType::BranchOutlet,
+            OrganizationType::BranchStore,
+            OrganizationType::Organization,
         ];
 
         foreach ($expectedTypes as $type) {
-            $this->assertContains($type, $types, "Organization type {$type} should be created");
+            $this->assertContains($type, $types, "Organization type {$type->value} should be created");
         }
     }
 
@@ -342,12 +342,14 @@ class OrganizationSeederTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        // Create organizations
+        // Set the user as authenticated so HasUserStamps works
+        $this->actingAs($testUser);
+
+        // Create organizations with the authenticated user context
         $organization1 = Organization::create([
             'name' => 'Test Organization 1',
             'code' => 'TO1',
             'type' => OrganizationType::Company,
-            'created_by' => $testUser->id,
         ]);
 
         $organization2 = Organization::create([
@@ -355,12 +357,11 @@ class OrganizationSeederTest extends TestCase
             'code' => 'TO2',
             'type' => OrganizationType::Department,
             'parent_id' => $organization1->id,
-            'created_by' => $testUser->id,
         ]);
 
-        // Check that all organizations have the correct created_by
-        $this->assertEquals($testUser->id, $organization1->created_by);
-        $this->assertEquals($testUser->id, $organization2->created_by);
+        // Verify created_by was set automatically by HasUserStamps
+        $this->assertEquals($testUser->id, $organization1->created_by, "Organization 1 created_by should be {$testUser->id}, but got {$organization1->created_by}");
+        $this->assertEquals($testUser->id, $organization2->created_by, "Organization 2 created_by should be {$testUser->id}, but got {$organization2->created_by}");
 
         // Check that the user can access their created organizations
         $userOrganizations = Organization::where('created_by', $testUser->id)->get();

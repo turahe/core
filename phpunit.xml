@@ -13,6 +13,7 @@
         <env name="APP_NAME" value="Turahe Core"/>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_KEY" value="base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2RI8="/>
+        <env name="APP_CIPHER" value="AES-256-CBC"/>
         <env name="APP_DEBUG" value="true"/>
         <env name="APP_URL" value="http://localhost"/>
         

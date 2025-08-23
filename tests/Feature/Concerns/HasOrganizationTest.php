@@ -17,8 +17,8 @@ class HasOrganizationTest extends TestCase
 {
     use RefreshDatabase;
 
-    private TestUser $user;
-    private TestUser $manager;
+    private User $user;
+    private User $manager;
     private Organization $organization1;
     private Organization $organization2;
 
@@ -26,18 +26,25 @@ class HasOrganizationTest extends TestCase
     {
         parent::setUp();
         
-        $this->user = TestUser::create([
+        $this->user = User::create([
             'name' => 'Test User',
             'email' => 'user@example.com',
             'password' => bcrypt('password')
         ]);
-        $this->manager = TestUser::create([
+        $this->manager = User::create([
             'name' => 'Test Manager',
             'email' => 'manager@example.com',
             'password' => bcrypt('password')
         ]);
-        $this->organization1 = OrganizationFactory::new()->create(['created_by' => $this->manager->id]);
-        $this->organization2 = OrganizationFactory::new()->create(['created_by' => $this->manager->id]);
+        
+        // Set the manager as the authenticated user so HasUserStamps works
+        $this->actingAs($this->manager);
+        
+        $this->organization1 = OrganizationFactory::new()->create();
+        $this->organization2 = OrganizationFactory::new()->create();
+        
+        // The HasUserStamps trait will automatically set created_by when creating organizations
+        // No need to manually update the created_by field
     }
 
     public function test_organizations_relationship_returns_morph_to_many(): void
@@ -94,30 +101,50 @@ class HasOrganizationTest extends TestCase
 
     public function test_managed_organization_returns_organizations_user_manages(): void
     {
+        // Create organizations through the manager user so created_by is set correctly
+        $org1 = OrganizationFactory::new()->create();
+        $org2 = OrganizationFactory::new()->create();
+        
+        // The HasUserStamps trait should automatically set created_by to the current user
+        // But in tests, we need to ensure the manager is the one creating them
+        $org1->update(['created_by' => $this->manager->id]);
+        $org2->update(['created_by' => $this->manager->id]);
+        
         $managedOrgs = $this->manager->managedOrganization;
         
-        $this->assertCount(2, $managedOrgs);
-        $this->assertTrue($managedOrgs->contains($this->organization1));
-        $this->assertTrue($managedOrgs->contains($this->organization2));
+        // Filter to only include the organizations we created in this test
+        $testManagedOrgs = $managedOrgs->whereIn('id', [$org1->id, $org2->id]);
+        
+        $this->assertCount(2, $testManagedOrgs);
+        $this->assertTrue($testManagedOrgs->contains($org1));
+        $this->assertTrue($testManagedOrgs->contains($org2));
     }
 
     public function test_all_organization_returns_merged_collection(): void
     {
-        // User manages organization1 and belongs to organization2
-        $this->organization1->update(['created_by' => $this->user->id]);
+        // Switch to user context to create an organization they manage
+        $this->actingAs($this->user);
+        $userOrg = OrganizationFactory::new()->create();
+        
+        // User belongs to organization2 (created by manager)
         $this->user->organizations()->attach($this->organization2->id, ['role' => 'MEMBER']);
         
         $allOrgs = $this->user->allOrganization();
         
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $allOrgs);
         $this->assertCount(2, $allOrgs);
-        $this->assertTrue($allOrgs->contains($this->organization1));
+        $this->assertTrue($allOrgs->contains($userOrg));
         $this->assertTrue($allOrgs->contains($this->organization2));
     }
 
     public function test_all_organization_sorts_by_name(): void
     {
-        $orgA = OrganizationFactory::new()->create(['name' => 'Alpha Org', 'created_by' => $this->user->id]);
+        // Switch to user context to create an organization they manage
+        $this->actingAs($this->user);
+        $orgA = OrganizationFactory::new()->create(['name' => 'Alpha Org']);
+        
+        // Switch back to manager context for setup
+        $this->actingAs($this->manager);
         $orgB = OrganizationFactory::new()->create(['name' => 'Beta Org']);
         $orgC = OrganizationFactory::new()->create(['name' => 'Charlie Org']);
         
@@ -126,18 +153,27 @@ class HasOrganizationTest extends TestCase
             $orgC->id => ['role' => 'ADMIN']
         ]);
         
+        // Debug: Check what organizations the user manages and belongs to
+        $managedOrgs = $this->user->managedOrganization;
+        $belongedOrgs = $this->user->organizations;
+        
+        $this->assertCount(1, $managedOrgs);
+        $this->assertCount(2, $belongedOrgs);
+        
         $allOrgs = $this->user->allOrganization();
         
-        $this->assertEquals('Alpha Org', $allOrgs->first()->name);
-        $this->assertEquals('Beta Org', $allOrgs->get(1)->name);
-        $this->assertEquals('Charlie Org', $allOrgs->last()->name);
+        // Debug: Check the actual order
+        $names = $allOrgs->pluck('name')->toArray();
+        $this->assertEquals(['Alpha Org', 'Beta Org', 'Charlie Org'], $names);
     }
 
     public function test_manages_organization_returns_true_when_user_manages_org(): void
     {
-        $this->organization1->update(['created_by' => $this->user->id]);
+        // Switch to user context to create an organization they manage
+        $this->actingAs($this->user);
+        $userOrg = OrganizationFactory::new()->create();
         
-        $this->assertTrue($this->user->managesOrganization($this->organization1));
+        $this->assertTrue($this->user->managesOrganization($userOrg));
     }
 
     public function test_manages_organization_returns_false_when_user_does_not_manage_org(): void
@@ -147,9 +183,11 @@ class HasOrganizationTest extends TestCase
 
     public function test_belongs_to_team_returns_true_when_user_manages_organization(): void
     {
-        $this->organization1->update(['created_by' => $this->user->id]);
+        // Switch to user context to create an organization they manage
+        $this->actingAs($this->user);
+        $userOrg = OrganizationFactory::new()->create();
         
-        $this->assertTrue($this->user->belongsToTeam($this->organization1));
+        $this->assertTrue($this->user->belongsToTeam($userOrg));
     }
 
     public function test_belongs_to_team_returns_true_when_user_belongs_to_organization(): void
@@ -167,49 +205,50 @@ class HasOrganizationTest extends TestCase
     public function test_scope_of_manager_includes_managed_users(): void
     {
         // Manager manages organization1, user belongs to organization1
+        $this->organization1->update(['created_by' => $this->manager->id]);
         $this->user->organizations()->attach($this->organization1->id, ['role' => 'MEMBER']);
         
-        $managedUsers = TestUser::ofManager($this->manager)->get();
+        $managedUsers = User::ofManager($this->manager)->get();
         
         $this->assertTrue($managedUsers->contains($this->user));
     }
 
     public function test_scope_of_manager_includes_manager_when_with_current_user_true(): void
     {
-        $managedUsers = TestUser::ofManager($this->manager, true)->get();
+        $managedUsers = User::ofManager($this->manager, true)->get();
         
         $this->assertTrue($managedUsers->contains($this->manager));
     }
 
     public function test_scope_of_manager_excludes_manager_when_with_current_user_false(): void
     {
-        $managedUsers = TestUser::ofManager($this->manager, false)->get();
+        $managedUsers = User::ofManager($this->manager, false)->get();
         
         $this->assertFalse($managedUsers->contains($this->manager));
     }
 
     public function test_scope_of_manager_returns_empty_when_manager_has_no_organizations(): void
     {
-        $newManager = TestUser::create([
+        $newManager = User::create([
             'name' => 'New Manager',
             'email' => 'newmanager@example.com',
             'password' => bcrypt('password')
         ]);
         
-        $managedUsers = TestUser::ofManager($newManager, false)->get();
+        $managedUsers = User::ofManager($newManager, false)->get();
         
         $this->assertCount(0, $managedUsers);
     }
 
     public function test_scope_of_manager_returns_only_manager_when_with_current_user_true_and_no_managed_users(): void
     {
-        $newManager = TestUser::create([
+        $newManager = User::create([
             'name' => 'New Manager',
             'email' => 'newmanager2@example.com',
             'password' => bcrypt('password')
         ]);
         
-        $managedUsers = TestUser::ofManager($newManager, true)->get();
+        $managedUsers = User::ofManager($newManager, true)->get();
         
         $this->assertCount(1, $managedUsers);
         $this->assertTrue($managedUsers->contains($newManager));
@@ -266,16 +305,9 @@ class HasOrganizationTest extends TestCase
     {
         $relationship = $this->manager->managedOrganization();
         
-        // The HasOrganization trait uses hasMany(Organization::class) which defaults to 'user_id'
-        // but the Organization model uses userstamps, so this is a mismatch in the trait
-        $this->assertEquals('user_id', $relationship->getForeignKeyName());
+        // The HasOrganization trait uses hasMany(Organization::class, 'created_by') 
+        // because the Organization model uses userstamps with 'created_by' field
+        $this->assertEquals('created_by', $relationship->getForeignKeyName());
     }
 }
 
-/**
- * Test User model that uses the HasOrganization trait
- */
-class TestUser extends User
-{
-    use HasOrganization;
-} 

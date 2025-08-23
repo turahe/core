@@ -56,13 +56,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $app['config']->set('queue.default', 'sync');
         
         // Set core configuration from config/core.php
-        $app['config']->set('core.table.use_timestamps', env('CORE_TABLE_USE_TIMESTAMPS', false));
+        $app['config']->set('core.table.use_timestamps', false);
         
         // Set userstamps configuration
         $app['config']->set('userstamps.users_table_column_type', 'ulid');
         
-        $app['config']->set('app.key', env('APP_KEY', 'base64:12345678901234567890123456789012='));
-        $app['config']->set('app.cipher', env('APP_CIPHER', 'AES-128-CBC'));
+        $app['config']->set('app.key', 'base64:MFOsOH9RomiI2LRdgP4hIeoQJ5nyBhdABdH77UY2zi8=');
+        $app['config']->set('app.cipher', 'AES-256-CBC');
     }
 
 
