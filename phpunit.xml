@@ -5,21 +5,9 @@
          colors="true"
 >
     <php>
-        <!-- Database Configuration for Testing -->
-        <env name="DB_CONNECTION" value="mysql"/>
-        <env name="DB_HOST" value="127.0.0.1"/>
-        <env name="DB_PORT" value="3306"/>
-        <env name="DB_DATABASE" value="turahe_core_testing"/>
-        <env name="DB_USERNAME" value="turahe"/>
-        <env name="DB_PASSWORD" value="turahe123"/>
-        
-        <!-- PostgreSQL Configuration (alternative) -->
-        <env name="DB_CONNECTION_PGSQL" value="pgsql"/>
-        <env name="DB_HOST_PGSQL" value="127.0.0.1"/>
-        <env name="DB_PORT_PGSQL" value="5432"/>
-        <env name="DB_DATABASE_PGSQL" value="turahe_core_testing"/>
-        <env name="DB_USERNAME_PGSQL" value="turahe"/>
-        <env name="DB_PASSWORD_PGSQL" value="postgres"/>
+        <!-- Database Configuration - SQLite Only -->
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
         
         <!-- Redis Configuration for Testing -->
         <env name="REDIS_HOST" value="127.0.0.1"/>

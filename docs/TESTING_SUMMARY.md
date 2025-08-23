@@ -95,7 +95,7 @@ I have successfully tested the Image service in the Turahe Core package. The ser
    - Difficult to test in isolation
 
 2. **Testing Challenges**
-   - Requires database setup (MySQL/Redis)
+   - Uses SQLite in-memory database (no setup required)
    - Needs Laravel framework for proper testing
    - Complex mocking requirements
 

@@ -165,7 +165,7 @@ $signedUrl = $signature->take();
 
 ### Current Issues
 1. **Laravel Dependency**: The service is tightly coupled to Laravel's config system
-2. **Database Requirements**: Tests require MySQL/Redis setup
+2. **Database Requirements**: Tests use SQLite in-memory (no setup required)
 3. **Framework Integration**: Requires full Laravel application context
 
 ### Testing Recommendations
