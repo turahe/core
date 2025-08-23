@@ -8,7 +8,7 @@ use ArrayAccess;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Turahe\Core\Models\Setting;
@@ -60,7 +60,44 @@ trait HasSettings
      */
     private function getCache(): CacheRepository
     {
-        return app(CacheRepository::class);
+        // Use static caching to avoid repeated app() calls within the same request
+        static $cache = null;
+        if ($cache === null) {
+            $cache = app(CacheRepository::class);
+        }
+        return $cache;
+    }
+
+    /**
+     * Get cache configuration values with static caching
+     * 
+     * @return array{enabled: bool, ttl: int}
+     */
+    private function getCacheConfig(): array
+    {
+        static $config = null;
+        if ($config === null) {
+            $config = [
+                'enabled' => config('core.cache.enabled', true),
+                'ttl' => config('core.cache.settings_ttl', 3600)
+            ];
+        }
+        return $config;
+    }
+
+    /**
+     * Get the validation factory instance
+     * 
+     * @return ValidationFactory
+     */
+    private function getValidator(): ValidationFactory
+    {
+        // Use static caching to avoid repeated app() calls within the same request
+        static $validator = null;
+        if ($validator === null) {
+            $validator = app(ValidationFactory::class);
+        }
+        return $validator;
     }
 
     /**
@@ -156,7 +193,8 @@ trait HasSettings
      */
     public function clearSettingsCache(): void
     {
-        if (!config('core.cache.enabled', true)) {
+        $cacheConfig = $this->getCacheConfig();
+        if (!$cacheConfig['enabled']) {
             return;
         }
 
@@ -192,7 +230,8 @@ trait HasSettings
             ]);
             
                     // Clear cache for this specific setting
-            if (config('core.cache.enabled', true)) {
+            $cacheConfig = $this->getCacheConfig();
+            if ($cacheConfig['enabled']) {
                 $this->getCache()->forget($this->getSettingCacheKey($key));
             }
         }
@@ -208,23 +247,16 @@ trait HasSettings
      */
     public function allSetting(): array
     {
-        // Cache config values to avoid repeated calls
-        static $cacheEnabled = null;
-        static $cacheTtl = null;
+        $cacheConfig = $this->getCacheConfig();
         
-        if ($cacheEnabled === null) {
-            $cacheEnabled = config('core.cache.enabled', true);
-            $cacheTtl = config('core.cache.settings_ttl', 3600);
-        }
-
-        if (!$cacheEnabled) {
+        if (!$cacheConfig['enabled']) {
             return $this->transformSettingsToArray($this->settings);
         }
 
         $cacheKey = $this->getSettingsCacheKey();
         $cache = $this->getCache();
         
-        return $cache->remember($cacheKey, $cacheTtl, function () {
+        return $cache->remember($cacheKey, $cacheConfig['ttl'], function () {
             return $this->transformSettingsToArray($this->settings);
         });
     }
@@ -275,23 +307,16 @@ trait HasSettings
     public function getSetting(?string $key = null)
     {
         if ($key) {
-            // Cache config values to avoid repeated calls
-            static $cacheEnabled = null;
-            static $cacheTtl = null;
+            $cacheConfig = $this->getCacheConfig();
             
-            if ($cacheEnabled === null) {
-                $cacheEnabled = config('core.cache.enabled', true);
-                $cacheTtl = config('core.cache.settings_ttl', 3600);
-            }
-
-            if (!$cacheEnabled) {
+            if (!$cacheConfig['enabled']) {
                 return $this->settings->where('key', $key)->first();
             }
 
             $cacheKey = $this->getSettingCacheKey($key);
             $cache = $this->getCache();
             
-            return $cache->remember($cacheKey, $cacheTtl, function () use ($key) {
+            return $cache->remember($cacheKey, $cacheConfig['ttl'], function () use ($key) {
                 return $this->settings->where('key', $key)->first();
             });
         }
@@ -306,16 +331,21 @@ trait HasSettings
      */
     public function getMultiple(?iterable $paths = null, $default = null): array
     {
+        // Optimize by avoiding unnecessary array building when no paths specified
+        if (is_null($paths)) {
+            return $this->allSetting();
+        }
+
         $array = [];
         $allFlattened = $this->allFlattened();
         $settingsArray = [];
+        
+        // Build settings array only once
         foreach ($allFlattened as $key => $value) {
             Arr::set($settingsArray, $key, $value);
         }
-        if (is_null($paths)) {
-            return $settingsArray;
-        }
 
+        // Extract only requested paths
         foreach ($paths as $path) {
             Arr::set($array, $path, Arr::get($settingsArray, $path, $default));
         }
@@ -330,7 +360,8 @@ trait HasSettings
      */
     public function set(string $path, string|array $value)
     {
-        $settings = $this->settings->toArray();
+        // Optimize by building settings array directly without intermediate conversion
+        $settings = [];
         Arr::set($settings, $path, $value);
 
         return $this->setSetting($settings);
@@ -348,11 +379,7 @@ trait HasSettings
 
     public function updateSetting(string $key, string|array $value): self
     {
-        // Cache config value to avoid repeated calls
-        static $cacheEnabled = null;
-        if ($cacheEnabled === null) {
-            $cacheEnabled = config('core.cache.enabled', true);
-        }
+        $cacheConfig = $this->getCacheConfig();
 
         if (is_array($value)) {
             $value = json_encode($value);
@@ -364,7 +391,7 @@ trait HasSettings
         ]);
 
         // Clear cache for this specific setting
-        if ($cacheEnabled) {
+        if ($cacheConfig['enabled']) {
             $this->getCache()->forget($this->getSettingCacheKey($key));
         }
         $this->clearSettingsCache();
@@ -383,7 +410,8 @@ trait HasSettings
         $result = (bool) $this->settings()->where('key', $key)->delete();
         
         // Clear cache for this specific setting
-        if (config('core.cache.enabled', true)) {
+        $cacheConfig = $this->getCacheConfig();
+        if ($cacheConfig['enabled']) {
             $this->getCache()->forget($this->getSettingCacheKey($key));
         }
         $this->clearSettingsCache();
@@ -406,7 +434,8 @@ trait HasSettings
      */
     public function setMultiple(iterable $values)
     {
-        $settings = $this->settings->toArray();
+        // Optimize by building settings array directly without intermediate conversion
+        $settings = [];
         foreach ($values as $path => $value) {
             Arr::set($settings, $path, $value);
         }
@@ -434,10 +463,14 @@ trait HasSettings
     }
 
     /**
-     * @throws \Illuminate\Validation\ValidationException
+     * Validate settings against defined rules
+     * 
+     * @param array $settings The settings to validate
+     * @return array The validated settings
+     * @throws ValidationException When validation fails
      */
     protected function validate(array $settings): array
     {
-        return Validator::make(Arr::wrap($settings), Arr::wrap($this->getRules()))->validate();
+        return $this->getValidator()->make(Arr::wrap($settings), Arr::wrap($this->getRules()))->validate();
     }
 }
