@@ -13,9 +13,9 @@ Welcome to the Turahe Core documentation. This directory contains comprehensive 
 - **[testing.md](testing.md)** - Testing setup and configuration
 - **[docker-test-setup.md](docker-test-setup.md)** - Docker-based testing environment setup
 
-### 🐳 Docker & Infrastructure
-- **[docker.md](docker.md)** - Docker setup and configuration
-- **[docker-tests.md](docker-tests.md)** - Docker testing workflows and scripts
+### 🧪 Testing & Development
+- **[TESTING_SUMMARY.md](TESTING_SUMMARY.md)** - Comprehensive testing overview and guidelines
+- **[testing.md](testing.md)** - Testing setup and configuration
 
 ### 🔧 Technical Documentation
 - **[MODELS_CONFIGURABLE_PRIMARY_KEY.md](MODELS_CONFIGURABLE_PRIMARY_KEY.md)** - Configurable primary key implementation details
@@ -32,9 +32,9 @@ Welcome to the Turahe Core documentation. This directory contains comprehensive 
 3. Check [docker-test-setup.md](docker-test-setup.md) for containerized testing
 
 ### For DevOps
-1. Review [docker.md](docker.md) for infrastructure setup
-2. Use [docker-tests.md](docker-tests.md) for CI/CD integration
-3. Check [../scripts/README.md](../scripts/README.md) for automation scripts
+1. Review [../scripts/README.md](../scripts/README.md) for automation scripts
+2. Check [TESTING_SUMMARY.md](TESTING_SUMMARY.md) for testing workflows
+3. Use [testing.md](testing.md) for environment setup
 
 ### For Contributors
 1. Read [CHANGELOG.md](CHANGELOG.md) for recent changes

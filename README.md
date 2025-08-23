@@ -80,7 +80,7 @@ For comprehensive documentation, guides, and technical details, visit the [docs/
 
 - **[📖 Documentation Index](docs/README.md)** - Complete documentation overview
 - **[🧪 Testing Guide](docs/TESTING_SUMMARY.md)** - Testing setup and guidelines
-- **[🐳 Docker Setup](docs/docker.md)** - Docker configuration and deployment
+- **[🧪 Testing Guide](docs/TESTING_SUMMARY.md)** - Testing setup and guidelines
 - **[🔧 Scripts & Tools](scripts/README.md)** - Utility scripts and automation
 
 ## ⚙️ Configuration
@@ -303,16 +303,13 @@ vendor/bin/phpunit --testsuite=Feature
 vendor/bin/phpunit --coverage-html coverage-report
 ```
 
-### Docker Testing
+### Local Testing
 ```bash
-# Start Docker services
-docker-compose up -d mysql redis
+# Run tests locally
+vendor/bin/phpunit
 
-# Run tests in Docker
-docker/test/run-tests.sh
-
-# Windows
-docker/test/run-tests.bat
+# Run with coverage
+vendor/bin/phpunit --coverage-html coverage-report
 ```
 
 ### Test Coverage
@@ -320,35 +317,31 @@ docker/test/run-tests.bat
 - **Feature Tests**: Database integration and trait testing
 - **Coverage**: Comprehensive coverage of all package features
 
-## 🐳 Docker Development
+## 🧪 Local Development
 
 ### Quick Start
 ```bash
-# Start all services
-docker-compose up -d
+# Install dependencies
+composer install
 
-# Start specific services
-docker-compose up -d mysql redis phpmyadmin
+# Run tests
+vendor/bin/phpunit
+
+# Generate coverage report
+vendor/bin/phpunit --coverage-html coverage-report
 ```
 
-### Available Services
-- **MySQL 8.0**: Database server
-- **Redis 7**: Caching and session storage
-- **phpMyAdmin**: Database management interface
-- **Redis Commander**: Redis management interface
-- **ImgProxy**: Image processing service
-
-### Database Access
-- **MySQL**: `localhost:3306` (user: `turahe`, password: `turahe123`)
-- **phpMyAdmin**: `http://localhost:8080` (user: `turahe`, password: `turahe123`)
-- **Redis Commander**: `http://localhost:8081`
+### Testing Environment
+- **PHP 8.4+**: Required for development
+- **SQLite**: In-memory database for testing
+- **Xdebug**: Required for coverage reports
+- **Composer**: Dependency management
 
 ## 📊 CI/CD
 
 The package includes comprehensive GitHub Actions workflows:
 
 - **PHP Tests**: Multi-version PHP/Laravel matrix testing
-- **Docker Tests**: Containerized testing with MySQL/Redis
 - **Code Quality**: PHPStan, Psalm, Laravel Pint
 - **Security**: Security checker and vulnerability scanning
 - **Package Testing**: Installation and integration testing
