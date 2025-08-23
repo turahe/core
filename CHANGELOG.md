@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2025-08-23
+
+### Added
+- **Repository Layer Optimization**: Comprehensive performance and maintainability improvements
+- **Caching Support**: Added configurable caching with TTL support for repository methods
+- **Error Handling**: Improved error handling and logging in BaseManager and BasePaginator
+- **Code Cleanup**: Removed redundant code and unnecessary try-catch blocks
+- **Performance Methods**: New `getAll()`, `findById()`, and `clearCache()` methods with caching support
+- **Query Optimization**: Enhanced query parameter filtering to remove null/empty values
+
+### Enhanced
+- **BaseRepository**: Added caching infrastructure, improved query building, and new utility methods
+- **BaseManager**: Static caching for Fractal Manager instances, better error handling with logging
+- **BasePaginator**: Enhanced error handling, added `simpleCollection()` method for non-paginated collections
+- **OrganizationRepository**: Cleaner code using base class methods, removed redundant assignments
+- **TagRepository**: Optimized using base class methods, improved type safety
+- **TaxonomyRepository**: Streamlined using base class methods, better code organization
+
+### Performance Improvements
+- **Static Caching**: Manager instances are now cached and reused for better performance
+- **Query Optimization**: Automatic filtering of invalid query parameters
+- **Memory Efficiency**: Reduced object creation and better resource management
+- **Cache TTL**: Configurable cache time-to-live (default: 1 hour) for repository methods
+
+### Code Quality
+- **Type Safety**: Improved parameter typing and return type declarations
+- **Documentation**: Enhanced PHPDoc blocks and inline documentation
+- **Consistency**: Standardized method implementations across all repositories
+- **Maintainability**: Reduced code duplication and improved inheritance structure
+
+### Breaking Changes
+- None - All changes are backward compatible
+
+### Migration Guide
+- **Caching**: Use `setCacheTtl(int $ttl)` to configure cache duration
+- **New Methods**: Leverage `getAll()`, `findById()`, and `clearCache()` methods
+- **Performance**: Enable caching with `getAll($orderBy, $sortBy, true)` for frequently accessed data
+
 ## [1.3.0] - 2025-08-11
 
 ### Added
