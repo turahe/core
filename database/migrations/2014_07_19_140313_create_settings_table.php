@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create(config('core.tables.settings'), function (Blueprint $table): void {
             if (config('userstamps.users_table_column_type') === 'bigincrements') {
                 $table->id();
-                $table->morphs('model');
+                $table->nullableMorphs('model');
             }
             if (config('userstamps.users_table_column_type') === 'ulid') {
                 $table->ulid('id')->primary();
