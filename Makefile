@@ -5,7 +5,7 @@ export GID := $(shell id -g)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help build up down restart logs ps install test pint shell imgproxy imgproxy-logs imgproxy-test
+.PHONY: help build up down restart logs ps install test pint phpstan shell imgproxy imgproxy-logs imgproxy-test
 
 help: ## Show available targets
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-16s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -42,6 +42,10 @@ test: ## Install dependencies when needed, then run PHPUnit
 pint: ## Format PHP with Laravel Pint
 	@if [ ! -x vendor/bin/pint ]; then $(MAKE) install; fi
 	$(COMPOSE) run --rm --no-deps app vendor/bin/pint
+
+phpstan: ## Run PHPStan inside the app container
+	@if [ ! -x vendor/bin/phpstan ]; then $(MAKE) install; fi
+	$(COMPOSE) run --rm --no-deps app vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
 shell: ## Open a shell in the app container
 	$(COMPOSE) run --rm --no-deps app bash
