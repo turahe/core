@@ -73,6 +73,57 @@ class OrganizationTypeTest extends TestCase
         $this->assertEquals('An organizational department within a company', OrganizationType::Department->getDescription());
     }
 
+    public function test_is_organizational_unit(): void
+    {
+        $this->assertTrue(OrganizationType::Department->isOrganizationalUnit());
+        $this->assertTrue(OrganizationType::Division->isOrganizationalUnit());
+        $this->assertFalse(OrganizationType::Company->isOrganizationalUnit());
+    }
+
+    public function test_is_institutional(): void
+    {
+        $this->assertTrue(OrganizationType::Foundation->isInstitutional());
+        $this->assertTrue(OrganizationType::Community->isInstitutional());
+        $this->assertFalse(OrganizationType::Store->isInstitutional());
+    }
+
+    public function test_is_branch_type(): void
+    {
+        $this->assertTrue(OrganizationType::BranchOffice->isBranchType());
+        $this->assertTrue(OrganizationType::BranchStore->isBranchType());
+        $this->assertFalse(OrganizationType::Regional->isBranchType());
+    }
+
+    public function test_is_sub_type(): void
+    {
+        $this->assertTrue(OrganizationType::SubDepartment->isSubType());
+        $this->assertTrue(OrganizationType::SubDivision->isSubType());
+        $this->assertFalse(OrganizationType::Department->isSubType());
+    }
+
+    public function test_get_organizational_units_returns_the_unit_cases(): void
+    {
+        $units = OrganizationType::getOrganizationalUnits();
+
+        $this->assertCount(5, $units);
+        $this->assertContains(OrganizationType::Department, $units);
+        $this->assertContains(OrganizationType::SubDepartment, $units);
+        $this->assertContains(OrganizationType::Division, $units);
+        $this->assertContains(OrganizationType::SubDivision, $units);
+        $this->assertContains(OrganizationType::Designation, $units);
+    }
+
+    public function test_get_institutional_types_returns_the_institutional_cases(): void
+    {
+        $types = OrganizationType::getInstitutionalTypes();
+
+        $this->assertCount(4, $types);
+        $this->assertContains(OrganizationType::Institution, $types);
+        $this->assertContains(OrganizationType::Community, $types);
+        $this->assertContains(OrganizationType::Foundation, $types);
+        $this->assertContains(OrganizationType::Organization, $types);
+    }
+
     public function test_static_caching_works(): void
     {
         $businessEntities1 = OrganizationType::getBusinessEntities();

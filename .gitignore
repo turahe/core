@@ -35,6 +35,7 @@ vendor/
 build/
 dist/
 coverage/
+coverage.xml
 
 # Test Artifacts
 .phpunit.result.cache

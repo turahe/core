@@ -2,19 +2,19 @@ name: Dependabot
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
   schedule:
     - cron: '0 2 * * 1' # Every Monday at 2 AM
 
 jobs:
   dependabot:
     name: Dependabot
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     if: github.actor == 'dependabot[bot]'
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Auto-approve Dependabot PRs
         if: success()
-        uses: hmarr/auto-approve-action@v2
+        uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 

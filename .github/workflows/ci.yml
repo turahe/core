@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     name: Tests (PHP 8.4 - Laravel ${{ matrix.laravel }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -21,7 +21,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -40,17 +42,23 @@ jobs:
       - name: PHPStan
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
+      - name: SonarQube Scan
+        if: matrix.laravel == '13'
+        uses: SonarSource/sonarqube-scan-action@v8.4.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v7
         with:
-          file: ./coverage.xml
+          files: ./coverage.xml
           flags: sqlite-tests
           name: codecov-laravel-${{ matrix.laravel }}
           fail_ci_if_error: false
 
   summary:
     name: Test Summary
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: test
     if: always()
 
@@ -65,4 +73,5 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** PHP 8.4 + Laravel 12 and Laravel 13" >> $GITHUB_STEP_SUMMARY
           echo "**Database:** SQLite in-memory" >> $GITHUB_STEP_SUMMARY
-          echo "**Coverage:** Enabled with Codecov" >> $GITHUB_STEP_SUMMARY
+          echo "**Coverage:** Codecov and SonarQube" >> $GITHUB_STEP_SUMMARY
+          echo "**Analysis:** PHPStan" >> $GITHUB_STEP_SUMMARY
