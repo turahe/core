@@ -39,6 +39,9 @@ coverage/
 # Test Artifacts
 .phpunit.result.cache
 .phpunit.cache/
+.php-cs-fixer.cache
+.phpstan.cache
+.build/
 tests/coverage/
 tests/reports/
 

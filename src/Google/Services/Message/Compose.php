@@ -57,8 +57,8 @@ class Compose extends Message
     /**
      * Make a send message request
      *
-     * @param  \Google\Service\Gmail\Message  $service
-     * @return \Google\Service\Gmail\Message
+     * @param  Gmail\Message  $service
+     * @return Gmail\Message
      *
      * @throws Exception
      */
@@ -70,11 +70,11 @@ class Compose extends Message
     /**
      * Get the message service for the Gmail request
      *
-     * @return \Google\Service\Gmail\Message
+     * @return Gmail\Message
      */
     protected function getMessageService()
     {
-        return new \Google\Service\Gmail\Message;
+        return new Gmail\Message;
     }
 
     /**

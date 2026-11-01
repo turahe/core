@@ -19,7 +19,9 @@ use Illuminate\Contracts\Support\Arrayable;
 use Microsoft\Graph\Exception\GraphException;
 use Microsoft\Graph\Graph;
 use Microsoft\Graph\Http\GraphCollectionRequest;
+use Microsoft\Graph\Http\GraphRequest;
 use Turahe\Core\Microsoft\Services\Batch\BatchRequests;
+use Turahe\Core\Microsoft\Services\Batch\Request;
 use Turahe\Core\Microsoft\Services\Batch\Request as BatchRequest;
 use Turahe\Core\OAuth\AccessTokenProvider;
 use Turahe\Core\OAuth\OAuthManager;
@@ -27,7 +29,7 @@ use Turahe\Core\OAuth\OAuthManager;
 class Client
 {
     /**
-     * @var \Microsoft\Graph\Graph
+     * @var Graph
      */
     protected $client;
 
@@ -141,7 +143,7 @@ class Client
      *
      * @param  string  $requestType  Request type ('get', 'post', 'patch', 'put', 'delete')
      * @param  string  $endpoint  Graph endpoint
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -156,7 +158,7 @@ class Client
      * Create POST request
      *
      * @param  mixed  $body
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -178,7 +180,7 @@ class Client
      *
      * @throws GraphException
      */
-    public function createPatchRequest(string $endpoint, $body = null): \Microsoft\Graph\Http\GraphRequest
+    public function createPatchRequest(string $endpoint, $body = null): GraphRequest
     {
         $request = $this->createRequest('PATCH', $endpoint);
 
@@ -193,7 +195,7 @@ class Client
      * Create PUT request
      *
      * @param  mixed  $body
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -213,7 +215,7 @@ class Client
      *
      * @throws GraphException
      */
-    public function createGetRequest(string $endpoint): \Microsoft\Graph\Http\GraphRequest
+    public function createGetRequest(string $endpoint): GraphRequest
     {
         return $this->createRequest('GET', $endpoint);
     }
@@ -221,7 +223,7 @@ class Client
     /**
      * Create DELETE request
      *
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -235,7 +237,7 @@ class Client
      *
      * @param  string  $requestType  Request type ('get', 'post', 'patch', 'put', 'delete')
      * @param  string  $endpoint  Graph endpoint
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -249,7 +251,7 @@ class Client
     /**
      * Create collection GET request
      *
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @return GraphRequest
      *
      * @throws GraphException
      */
@@ -262,7 +264,7 @@ class Client
      * Create batch request
      *
      *
-     * @return \Turahe\Core\Microsoft\Services\Batch\Request
+     * @return Request
      *
      * @throws GraphException
      */
@@ -276,8 +278,8 @@ class Client
     /**
      * Add common headers for the request
      *
-     * @param  \Microsoft\Graph\Http\GraphRequest  $request
-     * @return \Microsoft\Graph\Http\GraphRequest
+     * @param  GraphRequest  $request
+     * @return GraphRequest
      */
     protected function addHeaders($request)
     {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Concerns;
 
+use App\Models\Post;
+use App\Models\Product;
+use App\Models\Service;
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -230,7 +233,7 @@ trait HasTags
     }
 
     /**
-     * @return \App\Models\Post|\App\Models\Product|\App\Models\Service
+     * @return Post|Product|Service
      */
     public function attachTag(string|Tag $tag, ?string $type = null)
     {

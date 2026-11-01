@@ -16,6 +16,7 @@ namespace Turahe\Core\Google\Services;
 
 use Google\Client;
 use Google\Service\Calendar as GoogleCalendarService;
+use Google\Service\Calendar\CalendarListEntry;
 
 class Calendar extends Service
 {
@@ -30,7 +31,7 @@ class Calendar extends Service
     /**
      * List all available user calendars
      *
-     * @return \Google\Service\Calendar\CalendarListEntry[]
+     * @return CalendarListEntry[]
      */
     public function list()
     {
@@ -57,7 +58,7 @@ class Calendar extends Service
      * Get calendar by id
      *
      * @param  string  $id
-     * @return \Google\Service\Calendar\CalendarListEntry
+     * @return CalendarListEntry
      */
     public function get($id)
     {

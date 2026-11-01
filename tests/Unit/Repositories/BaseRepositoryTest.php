@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Tests\Unit\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use Turahe\Core\Repositories\BaseRepository;
 use Turahe\Core\Tests\Models\User;
@@ -59,7 +60,7 @@ class BaseRepositoryTest extends TestCase
 
         $result = $this->repository->getAll('name', 'asc', false);
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
         $this->assertGreaterThan(0, $result->count());
     }
 

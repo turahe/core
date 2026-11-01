@@ -3,7 +3,7 @@
 [![CI](https://github.com/turahe/core/actions/workflows/ci.yml/badge.svg)](https://github.com/turahe/core/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PHP Version](https://img.shields.io/badge/PHP-8.4%2B-blue.svg)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/Laravel-12%2B-red.svg)](https://laravel.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-12%20%7C%2013-red.svg)](https://laravel.com)
 [![Packagist](https://img.shields.io/badge/Packagist-turahe%2Fcore-blue.svg)](https://packagist.org/packages/turahe/core)
 [![Packagist Downloads](https://img.shields.io/badge/Downloads-0-blue.svg)](https://packagist.org/packages/turahe/core)
 
@@ -54,7 +54,7 @@ A comprehensive Laravel package providing core functionality for modern web appl
 
 ### Requirements
 - PHP 8.4 or higher
-- Laravel 12
+- Laravel 12 or 13
 - SQLite (for testing)
 - Redis (optional, for production caching)
 
@@ -375,7 +375,7 @@ vendor/bin/phpunit --coverage-html coverage-report
 
 The package includes streamlined GitHub Actions workflows focused on testing:
 
-- **CI Tests**: PHP 8.4 + Laravel 12 testing with SQLite in-memory
+- **CI Tests**: PHP 8.4 with Laravel 12 and Laravel 13, using SQLite in-memory
 - **Coverage**: Xdebug coverage reports uploaded to Codecov
 - **Dependabot**: Automated dependency updates with testing
 - **Releases**: Test validation before release
@@ -404,6 +404,20 @@ vendor/bin/phpunit
 scripts/coverage.bat  # Windows
 scripts/coverage.sh   # Linux/macOS
 ```
+
+### Docker and ImgProxy
+`compose.yaml` runs a PHP 8.4 development container and [ImgProxy](https://imgproxy.net) v4.0.20. Signing keys default to the values in `config/core.php`, so URLs produced by this package verify against the local server. A sample image is mounted at `/images` inside ImgProxy.
+
+```bash
+make imgproxy        # start ImgProxy
+make imgproxy-test   # health check, signed resize, signed preset, rejected bad signature
+make up              # start ImgProxy and the PHP container
+make install         # composer install inside the PHP container
+make test            # run PHPUnit inside the PHP container
+make down
+```
+
+Copy `.env.example` to `.env` when you need a different port or key pair. Those keys are for local development only.
 
 ## 📝 License
 

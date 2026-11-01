@@ -14,12 +14,13 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Google\Concerns;
 
+use Google\Service\Gmail\MessagePart;
 use Illuminate\Support\Collection;
 
 trait HasParts
 {
     /**
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $allParts;
 
@@ -28,7 +29,7 @@ trait HasParts
      *
      * Necessary to reset the $allParts variable.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function getAllParts(Collection $partsContainer)
     {
@@ -57,7 +58,7 @@ trait HasParts
         }
 
         if ($parts) {
-            /** @var \Google\Service\Gmail\MessagePart $part */
+            /** @var MessagePart $part */
             foreach ($parts as $part) {
                 if ($part) {
                     if ($returnOnFirstFound) {

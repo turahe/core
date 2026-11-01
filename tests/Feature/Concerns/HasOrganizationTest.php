@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Turahe\Core\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Turahe\Core\Concerns\HasOrganization;
 use Turahe\Core\Models\Organization;
 use Turahe\Core\Tests\Feature\Factories\OrganizationFactory;
@@ -53,7 +56,7 @@ class HasOrganizationTest extends TestCase
     {
         $relationship = $this->user->organizations();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphToMany::class, $relationship);
+        $this->assertInstanceOf(MorphToMany::class, $relationship);
         $this->assertEquals('model_has_organization', $relationship->getTable());
         $this->assertEquals('model_type', $relationship->getMorphType());
         $this->assertInstanceOf(Organization::class, $relationship->getRelated());
@@ -97,7 +100,7 @@ class HasOrganizationTest extends TestCase
     {
         $relationship = $this->manager->managedOrganization();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\HasMany::class, $relationship);
+        $this->assertInstanceOf(HasMany::class, $relationship);
         $this->assertInstanceOf(Organization::class, $relationship->getRelated());
     }
 
@@ -133,7 +136,7 @@ class HasOrganizationTest extends TestCase
 
         $allOrgs = $this->user->allOrganization();
 
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $allOrgs);
+        $this->assertInstanceOf(Collection::class, $allOrgs);
         $this->assertCount(2, $allOrgs);
         $this->assertTrue($allOrgs->contains($userOrg));
         $this->assertTrue($allOrgs->contains($this->organization2));

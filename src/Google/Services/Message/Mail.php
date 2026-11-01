@@ -25,6 +25,9 @@ use Turahe\Core\Google\Concerns\HasDecodeableBody;
 use Turahe\Core\Google\Concerns\HasHeaders;
 use Turahe\Core\Google\Concerns\HasParts;
 use Turahe\MailClient\Client\Mail\Headers\HeadersCollection;
+use Turahe\MailClient\Mail\Headers\AddressHeader;
+use Turahe\MailClient\Mail\Headers\Header;
+use Turahe\MailClient\Mail\Headers\IdHeader;
 
 class Mail
 {
@@ -42,7 +45,7 @@ class Mail
     /**
      * Hold the messages parts.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $parts;
 
@@ -112,7 +115,7 @@ class Mail
      */
     public function getReferences()
     {
-        /** @var \Turahe\MailClient\Mail\Headers\IdHeader */
+        /** @var IdHeader */
         $header = $this->getHeaders()->find('References');
 
         return $header ? $header->getIds() : null;
@@ -186,7 +189,7 @@ class Mail
     /**
      * Returns array of name and email of each recipient
      *
-     * @return \Turahe\MailClient\Mail\Headers\AddressHeader
+     * @return AddressHeader
      */
     public function getFrom()
     {
@@ -196,7 +199,7 @@ class Mail
     /**
      * Returns the subject of the email
      *
-     * @return \Turahe\MailClient\Mail\Headers\AddressHeader
+     * @return AddressHeader
      */
     public function getReplyTo()
     {
@@ -206,7 +209,7 @@ class Mail
     /**
      * Returns array of name and email of each recipient
      *
-     * @return \Turahe\MailClient\Mail\Headers\Header
+     * @return Header
      */
     public function getCC()
     {
@@ -216,7 +219,7 @@ class Mail
     /**
      * Returns array of name and email of each recipient
      *
-     * @return \Turahe\MailClient\Mail\Headers\Header
+     * @return Header
      */
     public function getBcc()
     {
@@ -226,7 +229,7 @@ class Mail
     /**
      * Returns array list of recipients
      *
-     * @return \Turahe\MailClient\Mail\Headers\Header
+     * @return Header
      */
     public function getTo()
     {
@@ -236,7 +239,7 @@ class Mail
     /**
      * Returns the original date that the email was sent
      *
-     * @return \Illuminate\Support\Carbon
+     * @return Carbon
      */
     public function getDate()
     {

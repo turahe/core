@@ -2,7 +2,18 @@
 
 namespace Turahe\Core;
 
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Turahe\Core\Contracts\ImageSignatureInterface;
+use Turahe\Core\Contracts\TagRepositoryInterface;
+use Turahe\Core\Contracts\TaxonomyRepositoryInterface;
+use Turahe\Core\Facades\Google;
+use Turahe\Core\Facades\MsGraph;
+use Turahe\Core\Google\Client;
+use Turahe\Core\Repositories\TagRepository;
+use Turahe\Core\Repositories\TaxonomyRepository;
+use Turahe\Core\Services\Image\Image;
 
 /**
  * Core Service Provider for Turahe Core Package
@@ -24,27 +35,27 @@ class CoreServiceProvider extends ServiceProvider
     {
         // Bind repository interfaces to concrete implementations
         $this->app->bind(
-            \Turahe\Core\Contracts\TaxonomyRepositoryInterface::class,
-            \Turahe\Core\Repositories\TaxonomyRepository::class
+            TaxonomyRepositoryInterface::class,
+            TaxonomyRepository::class
         );
         $this->app->bind(
-            \Turahe\Core\Contracts\TagRepositoryInterface::class,
-            \Turahe\Core\Repositories\TagRepository::class
+            TagRepositoryInterface::class,
+            TagRepository::class
         );
 
         // Register Google and Microsoft services as singletons
         // These services are registered as singletons to maintain state and connection
         // across multiple requests and avoid recreating OAuth clients unnecessarily
         $this->app->singleton('google', function ($app) {
-            return new \Turahe\Core\Google\Client;
+            return new Client;
         });
         $this->app->singleton('msgraph', function ($app) {
-            return new \Turahe\Core\Microsoft\Client;
+            return new Microsoft\Client;
         });
 
         // Register additional core services as singletons for better performance
-        $this->app->singleton(\Turahe\Core\Services\Image\Image::class);
-        $this->app->singleton(\Turahe\Core\Contracts\ImageSignatureInterface::class);
+        $this->app->singleton(Image::class);
+        $this->app->singleton(ImageSignatureInterface::class);
     }
 
     /**
@@ -61,14 +72,14 @@ class CoreServiceProvider extends ServiceProvider
 
         // Register facades/aliases for Google and MsGraph services
         // Only register if AliasLoader is available (Laravel 5.8+)
-        if (class_exists(\Illuminate\Support\Facades\AliasLoader::class)) {
-            \Illuminate\Support\Facades\AliasLoader::getInstance()->alias('Google', \Turahe\Core\Facades\Google::class);
-            \Illuminate\Support\Facades\AliasLoader::getInstance()->alias('MsGraph', \Turahe\Core\Facades\MsGraph::class);
+        if (class_exists(AliasLoader::class)) {
+            AliasLoader::getInstance()->alias('Google', Google::class);
+            AliasLoader::getInstance()->alias('MsGraph', MsGraph::class);
         }
 
         // Only load migrations and publish config for Laravel applications
         // This prevents issues when the package is used outside of Laravel
-        if ($this->app instanceof \Illuminate\Foundation\Application) {
+        if ($this->app instanceof Application) {
             // Load package migrations from the database/migrations directory
             $databasePath = __DIR__.'/../database/migrations';
             $this->loadMigrationsFrom($databasePath);

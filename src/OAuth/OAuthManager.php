@@ -14,8 +14,10 @@ declare(strict_types=1);
 
 namespace Turahe\Core\OAuth;
 
+use Illuminate\Support\HigherOrderTTurahe\Coreroxy;
 use League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
+use Random\RandomException;
 use Turahe\Core\Google\OAuth\GoogleProvider;
 use Turahe\Core\Microsoft\OAuth\MicrosoftProvider;
 use Turahe\Core\Models\OAuthAccount;
@@ -42,7 +44,7 @@ class OAuthManager
     /**
      * Generates random state
      *
-     * @throws \Random\RandomException
+     * @throws RandomException
      */
     public function generateRandomState(int $length = 32): string
     {
@@ -73,7 +75,7 @@ class OAuthManager
      *
      * @throws EmptyRefreshTokenException
      */
-    public function retrieveAccessToken(string $type, string $email): \Illuminate\Support\HigherOrderTTurahe\Coreroxy
+    public function retrieveAccessToken(string $type, string $email): Coreroxy
     {
         $account = $this->getAccount($type, $email);
 

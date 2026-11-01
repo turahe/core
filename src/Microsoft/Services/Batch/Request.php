@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Turahe\Core\Microsoft\Services\Batch;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Microsoft\Graph\Http\GraphCollectionRequest;
 
 class Request
 {
@@ -26,21 +27,21 @@ class Request
     protected $batchSize = 20;
 
     /**
-     * @var \Microsoft\Graph\Http\GraphCollectionRequest
+     * @var GraphCollectionRequest
      */
     protected $graphRequest;
 
     /**
      * Holds the batch requests
      *
-     * @var \Turahe\Core\Microsoft\Services\Batch\BatchRequests
+     * @var BatchRequests
      */
     protected $requests;
 
     /**
      * Initialize new Request instance.
      *
-     * @param  \Microsoft\Graph\Http\GraphCollectionRequest  $graphRequest
+     * @param  GraphCollectionRequest  $graphRequest
      */
     public function __construct($graphRequest, BatchRequests $requests)
     {

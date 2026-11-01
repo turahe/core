@@ -18,6 +18,7 @@ use Google\Client;
 use Google\Service\Exception;
 use Google\Service\Gmail;
 use Google\Service\Gmail\MessagePart;
+use Google\Service\Gmail\MessagePartBody;
 use Turahe\Core\Google\Concerns\HasDecodeableBody;
 use Turahe\Core\Google\Concerns\HasHeaders;
 
@@ -139,7 +140,7 @@ class Attachment
     /**
      * Retrieve the attachment from Gmail API
      *
-     * @return \Google\Service\Gmail\MessagePartBody
+     * @return MessagePartBody
      *
      * @throws Exception
      */

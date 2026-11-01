@@ -19,7 +19,7 @@ use Illuminate\Support\Collection;
 trait ProvidesMailAttachments
 {
     /**
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $attachments;
 
@@ -46,7 +46,7 @@ trait ProvidesMailAttachments
     /**
      * Get the message attachments
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAttachments()
     {

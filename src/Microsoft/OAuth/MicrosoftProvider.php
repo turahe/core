@@ -67,7 +67,7 @@ class MicrosoftProvider extends GenericProvider
      * Generate a user object from a successful user details request.
      *
      *
-     * @return \Turahe\Core\Microsoft\OAuth\MicrosoftResourceOwner
+     * @return MicrosoftResourceOwner
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
@@ -89,7 +89,7 @@ class MicrosoftProvider extends GenericProvider
      *
      * @param  array|string  $data  Parsed response data
      *
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     * @throws IdentityProviderException
      */
     protected function checkResponse(ResponseInterface $response, $data): void
     {

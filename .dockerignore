@@ -1,0 +1,11 @@
+.git
+.github
+.idea
+.vscode
+vendor
+coverage
+.phpunit.cache
+.phpunit.result.cache
+graphify-out
+*.md
+*.log

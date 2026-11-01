@@ -8,8 +8,16 @@ on:
 
 jobs:
   test:
-    name: Tests (PHP 8.4 - Laravel 12)
+    name: Tests (PHP 8.4 - Laravel ${{ matrix.laravel }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - laravel: "12"
+            testbench: "10.0"
+          - laravel: "13"
+            testbench: "11.0"
 
     steps:
       - name: Checkout code
@@ -24,17 +32,20 @@ jobs:
           tools: composer:v2
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-interaction
+        run: composer update --prefer-dist --no-interaction --with-all-dependencies --with="laravel/framework:^${{ matrix.laravel }}.0" --with="orchestra/testbench:^${{ matrix.testbench }}"
 
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
           flags: sqlite-tests
-          name: codecov-sqlite
+          name: codecov-laravel-${{ matrix.laravel }}
           fail_ci_if_error: false
 
   summary:
@@ -52,6 +63,6 @@ jobs:
           echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| Tests | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** PHP 8.4 + Laravel 12" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** PHP 8.4 + Laravel 12 and Laravel 13" >> $GITHUB_STEP_SUMMARY
           echo "**Database:** SQLite in-memory" >> $GITHUB_STEP_SUMMARY
-          echo "**Coverage:** Enabled with Codecov" >> $GITHUB_STEP_SUMMARY 
+          echo "**Coverage:** Enabled with Codecov" >> $GITHUB_STEP_SUMMARY

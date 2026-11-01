@@ -16,9 +16,11 @@ namespace Turahe\Core\Google\Services;
 
 use Google\Client;
 use Google\Service\Exception as GoogleServiceException;
+use Google\Service\Gmail;
 use Google\Service\Gmail\BatchDeleteMessagesRequest;
 use Google\Service\Gmail\BatchModifyMessagesRequest;
 use Illuminate\Support\Collection;
+use Psr\Http\Message\RequestInterface;
 use Turahe\Core\Google\Services\Message\Mail;
 use Turahe\Core\Google\Services\Message\SendMail;
 
@@ -44,7 +46,7 @@ class Message extends Service
      */
     public function __construct(Client $client)
     {
-        parent::__construct($client, \Google\Service\Gmail::class);
+        parent::__construct($client, Gmail::class);
     }
 
     /**
@@ -68,7 +70,7 @@ class Message extends Service
     /**
      * Retrieve messages
      *
-     * @return \Turahe\Core\Google\Services\MessageCollection
+     * @return MessageCollection
      */
     public function all(?string $pageToken = null)
     {
@@ -76,7 +78,7 @@ class Message extends Service
             $this->params['pageToken'] = $pageToken;
         }
 
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
         /**
@@ -122,10 +124,10 @@ class Message extends Service
      */
     public function get(string $id): Mail
     {
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
-        /** @var \Google\Service\Gmail\Message */
+        /** @var Gmail\Message */
         $message = $service->users_messages->get('me', $id);
 
         return new Mail($this->client, $message);
@@ -134,7 +136,7 @@ class Message extends Service
     /**
      * Creates a batch request to get all emails in a single call
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function batchRequest(array|Collection $messages)
     {
@@ -147,13 +149,13 @@ class Message extends Service
         }
 
         $messages->chunk($this->batchSize)->each(function ($messages) use (&$result): void {
-            /** @var \Google\Service\Gmail */
+            /** @var Gmail */
             $service = $this->service;
 
             $batch = $service->createBatch();
 
             foreach ($messages as $key => $message) {
-                /** @var \Psr\Http\Message\RequestInterface */
+                /** @var RequestInterface */
                 $request = $service->users_messages->get('me', $message->getId());
 
                 $batch->add($request, $key + 1);
@@ -185,7 +187,7 @@ class Message extends Service
      */
     public function batchModify(array $messages, array $removeLabelIds = [], array $addLabelIds = []): bool
     {
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
         $request = new BatchModifyMessagesRequest;
@@ -204,7 +206,7 @@ class Message extends Service
      */
     public function batchDelete(array $messages): void
     {
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
         $request = new BatchDeleteMessagesRequest;
@@ -346,7 +348,7 @@ class Message extends Service
     /**
      * Eager load the messages attachments
      *
-     * @param  \Illuminate\Support\Collection  $messages
+     * @param  Collection  $messages
      * @return static
      */
     public function loadAttachments(&$messages)
@@ -356,13 +358,13 @@ class Message extends Service
         $this->client->setUseBatch(true);
 
         $attachments->chunk($this->batchSize)->each(function ($attachments) use (&$messages): void {
-            /** @var \Google\Service\Gmail */
+            /** @var Gmail */
             $service = $this->service;
 
             $batch = $service->createBatch();
 
             foreach ($attachments as $data) {
-                /** @var \Psr\Http\Message\RequestInterface */
+                /** @var RequestInterface */
                 $request = $service->users_messages_attachments->get('me', $data->message_id, $data->attachment_id);
 
                 $batch->add($request, $data->attachment_key.'-'.$data->message_key);
@@ -384,7 +386,7 @@ class Message extends Service
     /**
      * Prepare the attachments data for batch request
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function prepareAttachmentsForBatch(Collection $messages)
     {
@@ -407,7 +409,7 @@ class Message extends Service
     /**
      * Handles the attachments batch response
      *
-     * @param  \Illuminate\Support\Collection  $messages
+     * @param  Collection  $messages
      */
     protected function handleAttachmentsBatchResponse(array $response, &$messages): void
     {

@@ -6,6 +6,8 @@ namespace Turahe\Core\Concerns;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -47,7 +49,7 @@ trait HasSettings
         });
     }
 
-    /** @var \Illuminate\Database\Eloquent\Model */
+    /** @var Model */
     protected $model;
 
     /**
@@ -260,7 +262,7 @@ trait HasSettings
     /**
      * Transform settings collection to array with JSON decoding
      *
-     * @param  \Illuminate\Database\Eloquent\Collection  $settings
+     * @param  Collection  $settings
      */
     protected function transformSettingsToArray($settings): array
     {
@@ -349,7 +351,7 @@ trait HasSettings
     }
 
     /**
-     * @return HasSettings|\Illuminate\Database\Eloquent\Model
+     * @return HasSettings|Model
      *
      * @throws ValidationException
      */
@@ -425,7 +427,7 @@ trait HasSettings
     }
 
     /**
-     * @return HasSettings|\Illuminate\Database\Eloquent\Model
+     * @return HasSettings|Model
      *
      * @throws ValidationException
      */

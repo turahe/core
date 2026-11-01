@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Google\Services\Message;
 
+use Google\Service\Exception;
 use Google\Service\Gmail\ModifyMessageRequest;
 
 trait ModifiesMail
@@ -21,7 +22,7 @@ trait ModifiesMail
     /**
      * Marks emails as "READ". Returns string of message if fail
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function markAsRead(): Mail
     {
@@ -31,7 +32,7 @@ trait ModifiesMail
     /**
      * Marks emails as unread.
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function markAsUnread(): Mail
     {
@@ -39,7 +40,7 @@ trait ModifiesMail
     }
 
     /**
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function markAsImportant(): Mail
     {
@@ -47,7 +48,7 @@ trait ModifiesMail
     }
 
     /**
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function markAsNotImportant(): Mail
     {
@@ -55,7 +56,7 @@ trait ModifiesMail
     }
 
     /**
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function addStar(): Mail
     {
@@ -63,7 +64,7 @@ trait ModifiesMail
     }
 
     /**
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function removeStar(): Mail
     {
@@ -73,7 +74,7 @@ trait ModifiesMail
     /**
      * Send the email to the trash
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function sendToTrash(): Mail
     {
@@ -83,7 +84,7 @@ trait ModifiesMail
     /**
      * Remove message from trash.
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function removeFromTrash(): Mail
     {
@@ -93,7 +94,7 @@ trait ModifiesMail
     /**
      * Adds labels to the email.
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function addLabel(array|string $labels): Mail
     {
@@ -110,7 +111,7 @@ trait ModifiesMail
     /**
      * Removes labels from the email.
      *
-     * @throws \Google\Service\Exception
+     * @throws Exception
      */
     public function removeLabel(array|string $labels): Mail
     {

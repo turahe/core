@@ -18,7 +18,7 @@ use Turahe\Core\Microsoft\Client;
  * @method static string getApiVersion()
  * @method static string setApiVersion(string $version)
  *
- * @see \Turahe\Core\Microsoft\Client
+ * @see Client
  */
 class MsGraph extends Facade
 {

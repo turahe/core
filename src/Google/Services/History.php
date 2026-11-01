@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Turahe\Core\Google\Services;
 
 use Google\Client;
+use Google\Service\Gmail;
 
 class History extends Service
 {
@@ -23,7 +24,7 @@ class History extends Service
      */
     public function __construct(Client $client)
     {
-        parent::__construct($client, \Google\Service\Gmail::class);
+        parent::__construct($client, Gmail::class);
     }
 
     /**
@@ -32,11 +33,11 @@ class History extends Service
      * Get the Gmail account history
      *
      * @param  array  $params  Additional params for the request
-     * @return \Google\Service\Gmail\History
+     * @return Gmail\History
      */
     public function get($params = [])
     {
-        /** @var \Google\Service\Gmail\History */
+        /** @var Gmail\History */
         $service = $this->service;
 
         return $service->users_history->listUsersHistory('me', $params);

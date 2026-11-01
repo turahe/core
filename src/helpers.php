@@ -1,6 +1,11 @@
 <?php
 
 declare(strict_types=1);
+use app\Services\Image\Image;
+use libphonenumber\NumberParseException;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
+use Turahe\Core\Contracts\ImageSignatureInterface;
 
 /**
  * Global helper functions for the Turahe Core package
@@ -129,13 +134,13 @@ if (! function_exists('imgProxy')) {
     function imgProxy(string $path, int $width, int $height, $extension = null): string
     {
         // Optimize by avoiding unnecessary object creation and method calls
-        $image = new \app\Services\Image\Image;
+        $image = new Image;
         $image->make($path, $width, $height, $extension);
 
-        app()->instance(\app\Services\Image\Image::class, $image);
+        app()->instance(Image::class, $image);
 
         return config('img-proxy.base_url').
-               app(\Turahe\Core\Contracts\ImageSignatureInterface::class)->take();
+               app(ImageSignatureInterface::class)->take();
     }
 }
 
@@ -156,13 +161,13 @@ if (! function_exists('imgProxyPreset')) {
     function imgProxyPreset(string $path, string $preset, $extension = null): string
     {
         // Optimize by avoiding unnecessary object creation and method calls
-        $image = new \Turahe\Core\Services\Image\Image;
+        $image = new Turahe\Core\Services\Image\Image;
         $image->makePreset($path, $preset, $extension);
 
-        app()->instance(\Turahe\Core\Services\Image\Image::class, $image);
+        app()->instance(Turahe\Core\Services\Image\Image::class, $image);
 
         return config('img-proxy.base_url').
-               app(\Turahe\Core\Contracts\ImageSignatureInterface::class)->take();
+               app(ImageSignatureInterface::class)->take();
     }
 }
 
@@ -195,7 +200,7 @@ if (! function_exists('parse_phone')) {
      * @param  string  $region  The region/country code for parsing (default: 'ID' for Indonesia)
      * @return bool|string The formatted phone number in E.164 format or false on failure
      *
-     * @throws \Exception When phone number parsing fails
+     * @throws Exception When phone number parsing fails
      *
      * @example parse_phone('08123456789') // Returns '+628123456789'
      * @example parse_phone('+1-555-123-4567', 'US') // Returns '+15551234567'
@@ -206,15 +211,15 @@ if (! function_exists('parse_phone')) {
         static $phoneUtil = null;
 
         if ($phoneUtil === null) {
-            $phoneUtil = libphonenumber\PhoneNumberUtil::getInstance();
+            $phoneUtil = PhoneNumberUtil::getInstance();
         }
 
         try {
             $phone = $phoneUtil->parse($number, $region);
 
-            return $phoneUtil->format($phone, libphonenumber\PhoneNumberFormat::E164);
-        } catch (libphonenumber\NumberParseException $e) {
-            throw new \Exception($e->getMessage());
+            return $phoneUtil->format($phone, PhoneNumberFormat::E164);
+        } catch (NumberParseException $e) {
+            throw new Exception($e->getMessage());
         }
     }
 }

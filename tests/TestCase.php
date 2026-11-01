@@ -2,9 +2,14 @@
 
 namespace Turahe\Core\Tests;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\EloquentSortable\EloquentSortableServiceProvider;
+use Spatie\Sluggable\SluggableServiceProvider;
+use Turahe\Core\CoreServiceProvider;
 use Turahe\Core\Tests\Models\User;
+use Turahe\UserStamps\UserStampsServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -22,14 +27,15 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
-            \Turahe\UserStamps\UserStampsServiceProvider::class,
-            \Turahe\Core\CoreServiceProvider::class,
+            EloquentSortableServiceProvider::class,
+            SluggableServiceProvider::class,
+            UserStampsServiceProvider::class,
+            CoreServiceProvider::class,
         ];
     }
 
     /**
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
     protected function getEnvironmentSetUp($app)
     {

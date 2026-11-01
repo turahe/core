@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Turahe\Core\Google\Services\Message;
 
 use Google\Client;
+use Google\Service\Gmail\Message;
 
 class MailReply extends Compose
 {
@@ -49,7 +50,7 @@ class MailReply extends Compose
     /**
      * Get the message service
      *
-     * @return \Google\Service\Gmail\Message
+     * @return Message
      */
     protected function getMessageService()
     {

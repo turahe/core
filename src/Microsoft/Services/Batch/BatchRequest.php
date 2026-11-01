@@ -35,7 +35,7 @@ class BatchRequest implements Arrayable
     protected $method;
 
     /**
-     * @var array|\Microsoft\Graph\Model\Entity
+     * @var array|Entity
      */
     protected $body = [];
 

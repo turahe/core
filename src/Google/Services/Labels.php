@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace Turahe\Core\Google\Services;
 
 use Google\Client;
+use Google\Service\Gmail;
+use Google\Service\Gmail\Label;
 
 class Labels extends Service
 {
@@ -23,7 +25,7 @@ class Labels extends Service
      */
     public function __construct(Client $client)
     {
-        parent::__construct($client, \Google\Service\Gmail::class);
+        parent::__construct($client, Gmail::class);
     }
 
     /**
@@ -33,7 +35,7 @@ class Labels extends Service
      */
     public function list()
     {
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
         $labels = [];
@@ -50,11 +52,11 @@ class Labels extends Service
      * Get user label by id
      *
      * @param  string  $id
-     * @return \Google\Service\Gmail\Label
+     * @return Label
      */
     public function get($id)
     {
-        /** @var \Google\Service\Gmail */
+        /** @var Gmail */
         $service = $this->service;
 
         return $service->users_labels->get('me', $id);

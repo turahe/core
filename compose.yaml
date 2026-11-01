@@ -1,0 +1,47 @@
+# Local development stack for turahe/core.
+# ImgProxy keys match the package defaults in config/core.php so signed URLs verify.
+# Replace them before using this stack anywhere other than a local machine.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: turahe-core:dev
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    environment:
+      HOME: /tmp
+      COMPOSER_HOME: /tmp/composer
+      IMGPROXY_URL: http://imgproxy:8080
+      IMGPROXY_KEY: ${IMGPROXY_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      IMGPROXY_SALT: ${IMGPROXY_SALT:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      IMGPROXY_SIGNATURE_SIZE: ${IMGPROXY_SIGNATURE_SIZE:-32}
+    depends_on:
+      imgproxy:
+        condition: service_healthy
+
+  imgproxy:
+    image: ghcr.io/imgproxy/imgproxy:v4.0.20
+    restart: unless-stopped
+    ports:
+      - "${IMGPROXY_PORT:-8080}:8080"
+    volumes:
+      - ./docker/imgproxy/images:/images:ro
+    environment:
+      IMGPROXY_BIND: ":8080"
+      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /images
+      IMGPROXY_KEY: ${IMGPROXY_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      IMGPROXY_SALT: ${IMGPROXY_SALT:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      IMGPROXY_SIGNATURE_SIZE: ${IMGPROXY_SIGNATURE_SIZE:-32}
+      IMGPROXY_DEVELOPMENT_ERRORS_MODE: "true"
+      IMGPROXY_MAX_SRC_RESOLUTION: "50"
+      IMGPROXY_PRESETS: "thumbnail=resizing_type:fit/width:100/height:100,medium=resizing_type:fit/width:300/height:300"
+    healthcheck:
+      test: ["CMD", "imgproxy", "health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
