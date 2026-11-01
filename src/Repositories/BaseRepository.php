@@ -225,6 +225,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         $query = $model instanceof Model ? $model->newQuery() : $model;
 
+        assert($sortBy === 'asc' || $sortBy === 'desc');
+
         return $query->orderBy($orderBy, $sortBy)->paginate($perPage);
     }
 
@@ -242,9 +244,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
             $cacheKey = $this->generateCacheKey('getAll', [$orderBy, $sortBy]);
 
             return Cache::remember($cacheKey, $this->cacheTtl, function () use ($orderBy, $sortBy) {
+                assert($sortBy === 'asc' || $sortBy === 'desc');
+
                 return $this->model->orderBy($orderBy, $sortBy)->get();
             });
         }
+
+        assert($sortBy === 'asc' || $sortBy === 'desc');
 
         return $this->model->orderBy($orderBy, $sortBy)->get();
     }

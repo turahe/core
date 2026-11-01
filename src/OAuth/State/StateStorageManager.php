@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Turahe\Core\OAuth\State;
 
 use Illuminate\Support\Manager;
+use InvalidArgumentException;
 use Turahe\Core\OAuth\State\StorageDrivers\Session;
 
 class StateStorageManager extends Manager
@@ -24,7 +25,13 @@ class StateStorageManager extends Manager
      */
     public function getDefaultDriver(): string
     {
-        return $this->container['config']['core.oauth.state.storage'];
+        $driver = config('core.oauth.state.storage');
+
+        if (! is_string($driver) || $driver === '') {
+            throw new InvalidArgumentException('OAuth state storage driver is not configured.');
+        }
+
+        return $driver;
     }
 
     /**

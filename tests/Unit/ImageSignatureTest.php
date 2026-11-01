@@ -11,11 +11,22 @@ use Turahe\Core\Tests\TestCase;
 
 class ImageSignatureTest extends TestCase
 {
+    /**
+     * @param  list<non-empty-string>  $methods
+     */
     private function mockImage(array $methods = [])
     {
+        $methodNames = [];
+        foreach ($methods as $method) {
+            if (! is_string($method) || $method === '') {
+                throw new InvalidArgumentException('Mock method names must be non-empty strings.');
+            }
+            $methodNames[] = $method;
+        }
+
         $mock = $this->getMockBuilder(Image::class)
             ->disableOriginalConstructor()
-            ->onlyMethods($methods)
+            ->onlyMethods($methodNames)
             ->getMock();
 
         return $mock;

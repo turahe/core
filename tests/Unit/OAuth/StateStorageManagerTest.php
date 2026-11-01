@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Turahe\Core\Tests\Unit\OAuth;
 
+use Illuminate\Foundation\Application;
+use InvalidArgumentException;
 use Turahe\Core\OAuth\State\StateStorageManager;
 use Turahe\Core\OAuth\State\StorageDrivers\Session;
 use Turahe\Core\Tests\TestCase;
-use TypeError;
 
 class StateStorageManagerTest extends TestCase
 {
@@ -15,7 +16,10 @@ class StateStorageManagerTest extends TestCase
     {
         config(['core.oauth.state.storage' => 'session']);
 
-        $manager = new StateStorageManager($this->app);
+        $app = $this->app;
+        $this->assertInstanceOf(Application::class, $app);
+
+        $manager = new StateStorageManager($app);
 
         $this->assertSame('session', $manager->getDefaultDriver());
         $this->assertInstanceOf(Session::class, $manager->driver());
@@ -25,8 +29,12 @@ class StateStorageManagerTest extends TestCase
     {
         config(['core.oauth.state.storage' => null]);
 
-        $this->expectException(TypeError::class);
+        $app = $this->app;
+        $this->assertInstanceOf(Application::class, $app);
 
-        (new StateStorageManager($this->app))->getDefaultDriver();
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('OAuth state storage driver is not configured.');
+
+        (new StateStorageManager($app))->getDefaultDriver();
     }
 }

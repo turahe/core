@@ -19,6 +19,8 @@ class TaxonomyRepository extends BaseRepository implements TaxonomyRepositoryInt
 
     public function getTaxonomiesBuilder(string $order = 'created_at', string $sort = 'desc'): Builder
     {
+        assert($sort === 'asc' || $sort === 'desc');
+
         return $this->model->query()->orderBy($order, $sort);
     }
 
